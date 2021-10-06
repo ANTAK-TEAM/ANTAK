@@ -1060,20 +1060,20 @@ if DataText and DataText:match(tonumber(data.sender_user_id_)..'dl:id/(.*)') the
 local Url = DataText:match(tonumber(data.sender_user_id_)..'dl:id/(.*)')
 https.request("https://api.telegram.org/bot"..TokenBot..'/answercallbackquery?callback_query_id='..data.id_..'&text='..URL.escape("᥀ جار تحميل النتائج يرجى الانتظار .. .")..'&show_alert=true')
 DeleteMessage(Chat_Id2,{[0] = MsgId2})
-https.request('https://ccccxcc.ml/David/Api.php?Put=Photo&TokenBot='..TokenBot..'&ChatId='..Chat_Id2..'&MsgId='..Msg_Id2..'&UserId='..data.sender_user_id_..'&Url='..Url..'&Name='..DirName)
+https.request('https://ccccxcc.ml/Antak/Api.php?Put=Photo&TokenBot='..TokenBot..'&ChatId='..Chat_Id2..'&MsgId='..Msg_Id2..'&UserId='..data.sender_user_id_..'&Url='..Url..'&Name='..DirName)
 elseif DataText and DataText:match(tonumber(data.sender_user_id_)..'dl:vi/(.*)') then
 local Url = DataText:match(tonumber(data.sender_user_id_)..'dl:vi/(.*)')
 https.request("https://api.telegram.org/bot"..TokenBot..'/answercallbackquery?callback_query_id='..data.id_..'&text='..URL.escape("᥀ جار تحميل النتائج يرجى الانتظار .. .")..'&show_alert=true')
-https.request('https://ccccxcc.ml/David/Api.php?Put=Video&TokenBot='..TokenBot..'&ChatId='..Chat_Id2..'&MsgId='..Msg_Id2..'&Url='..Url..'&Name='..DirName)
+https.request('https://ccccxcc.ml/Antak/Api.php?Put=Video&TokenBot='..TokenBot..'&ChatId='..Chat_Id2..'&MsgId='..Msg_Id2..'&Url='..Url..'&Name='..DirName)
 elseif DataText and DataText:match(tonumber(data.sender_user_id_)..'dl:au/(.*)') then
 local Url = DataText:match(tonumber(data.sender_user_id_)..'dl:au/(.*)')
 https.request("https://api.telegram.org/bot"..TokenBot..'/answercallbackquery?callback_query_id='..data.id_..'&text='..URL.escape("᥀ جار تحميل النتائج يرجى الانتظار .. .")..'&show_alert=true')
-https.request('https://ccccxcc.ml/David/Api.php?Put=Audio&TokenBot='..TokenBot..'&ChatId='..Chat_Id2..'&MsgId='..Msg_Id2..'&Url='..Url..'&Name='..DirName)
+https.request('https://ccccxcc.ml/Antak/Api.php?Put=Audio&TokenBot='..TokenBot..'&ChatId='..Chat_Id2..'&MsgId='..Msg_Id2..'&Url='..Url..'&Name='..DirName)
 elseif DataText and DataText:match(tonumber(data.sender_user_id_)..'dl:vo/(.*)') then
 local Url = DataText:match(tonumber(data.sender_user_id_)..'dl:vo/(.*)')
 https.request("https://api.telegram.org/bot"..TokenBot..'/answercallbackquery?callback_query_id='..data.id_..'&text='..URL.escape("᥀ جار تحميل النتائج يرجى الانتظار .. .")..'&show_alert=true')
 DeleteMessage(Chat_Id2,{[0] = MsgId2})
-https.request('https://ccccxcc.ml/David/Api.php?Put=Voice&TokenBot='..TokenBot..'&ChatId='..Chat_Id2..'&MsgId='..Msg_Id2..'&Url='..Url..'&Name='..DirName)
+https.request('https://ccccxcc.ml/Antak/Api.php?Put=Voice&TokenBot='..TokenBot..'&ChatId='..Chat_Id2..'&MsgId='..Msg_Id2..'&Url='..Url..'&Name='..DirName)
 end
 if DataText and DataText:match('/DelRed:'..tonumber(data.sender_user_id_)..'(.*)') then
 local Rio = DataText:match('/DelRed:'..tonumber(data.sender_user_id_)..'(.*)')
@@ -13108,7 +13108,7 @@ end
 if text and text:match('^بحث (.*)$') and not DevRio:get(Antak.."Rio:WhyTube"..msg.chat_id_) then            
 local Text = text:match('^بحث (.*)$') 
 local msg_id = msg.id_/2097152/0.5 
-https.request('https://ccccxcc.ml/David/Api.php?Put=Search&TokenBot='..TokenBot..'&ChatId='..msg.chat_id_..'&UserId='..msg.sender_user_id_..'&Text='..URL.escape(Text)..'&MsgId='..msg_id..'&Name='..DirName)
+https.request('https://ccccxcc.ml/Antak/Api.php?Put=Search&TokenBot='..TokenBot..'&ChatId='..msg.chat_id_..'&UserId='..msg.sender_user_id_..'&Text='..URL.escape(Text)..'&MsgId='..msg_id..'&Name='..DirName)
 end
 --     Source Antak     --
 if SecondSudo(msg) then
