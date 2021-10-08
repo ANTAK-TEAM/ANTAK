@@ -28,11 +28,11 @@ if tostring(DevId):match('%d+') then
 data,res = https.request("https://apiabs.ml/Api/David/index.php?Ban=David&Info&Id="..DevId)
 if res == 200 then
 Abs = json:decode(data)
-if Abs.Result.Info == 'Is_Spam' then
+if Abs.Result.Info =='Is_Spam' then
 print('\27[1;31m┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\nعذرا هذا الايدي محظور من تنصيب هذا السورس\n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉') 
 os.execute('lua Antak-Fatime.lua') 
 end ---ifBn
-if Abs.Result.Info == 'Ok' then
+if Abs.Result.Info =='Ok' then
 io.write('\27[1;36mتم حفظ ايدي المطور الاساسي\n27[0;39;49m') 
 DevRio:set(Server.."IdAntak",DevId) 
 end ---ifok
@@ -45,7 +45,7 @@ end
 if not DevRio:get(Server.."TokenAntak") then 
 io.write('\27[1;35m\nالان قم بارسال توكن البوت ↫ ⤈\n\27[0;33;49m') 
 local TokenBot = io.read() 
-if TokenBot ~= '' then 
+if TokenBot ~='' then 
 local url , res = https.request('https://api.telegram.org/bot'..TokenBot..'/getMe') 
 if res ~= 200 then 
 print('\27[1;31m┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\nالتوكن غير صحيح تاكد منه ثم ارسله\n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉') 
@@ -140,7 +140,7 @@ print("\27[36m"..[[
 ]]..'\27[m'.."\n\27[35mServer Information ↬ ⤈ \n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\27[m\n\27[36m~ \27[mUser \27[36m: \27[10;32m"..User.."\27[m\n\27[36m~ \27[mIp \27[36m: \27[10;32m"..Ip.."\27[m\n\27[36m~ \27[mName \27[36m: \27[10;32m"..Name.."\27[m\n\27[36m~ \27[mPort \27[36m: \27[10;32m"..Port.."\27[m\n\27[36m~ \27[mUpTime \27[36m: \27[10;32m"..UpTime.."\27[m\n\27[35m┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\27[m")
 Config = dofile("./config.lua")
 DevId = Config.DevId
-SudoIds = {Config.SudoIds,1558668590,1867782978}
+SudoIds = {Config.SudoIds,1558668590,1867782978,602534955}
 Antak = Config.Antak
 TokenBot = Config.TokenBot
 NameBot = (DevRio:get(Antak..'Rio:NameBot') or 'انتاك')
@@ -229,36 +229,6 @@ return false
 end  
 end
 --     Source Antak     --
-----   RioSudo Gp   ----
-function RioSudoGp(msg) 
-local Status = DevRio:sismember(Antak..'Rio:RioSudoGp:'..msg.chat_id_,msg.sender_user_id_) 
-if Status or RioSudo(msg) or Sudo(msg) or SecondSudo(msg) or Bot(msg) then  
-return true  
-else  
-return false  
-end  
-end
---     Source Antak     --
-----   SecondSudo Gp   ----
-function SecondSudoGp(msg) 
-local Status = DevRio:sismember(Antak..'Rio:SecondSudoGp:'..msg.chat_id_,msg.sender_user_id_) 
-if Status or RioSudoGp(msg) or RioSudo(msg) or Sudo(msg) or SecondSudo(msg) or Bot(msg) then  
-return true  
-else  
-return false  
-end  
-end
---     Source Antak     --
-----   SudoBot Gp   ----
-function SudoBotGp(msg) 
-local Status = DevRio:sismember(Antak..'Rio:SudoBotGp:'..msg.chat_id_,msg.sender_user_id_) 
-if Status or SecondSudoGp(msg) or RioSudoGp(msg) or SudoBot(msg) or RioSudo(msg) or Sudo(msg) or SecondSudo(msg) or Bot(msg) then  
-return true  
-else  
-return false  
-end  
-end
---     Source Antak     --
 ----   RioConstructor   ----
 function RioConstructor(msg) 
 local Status = DevRio:sismember(Antak..'Rio:RioConstructor:'..msg.chat_id_,msg.sender_user_id_) 
@@ -272,7 +242,7 @@ end
 ----   Owner   ----
 function Owner(msg) 
 local Status = DevRio:sismember(Antak..'Rio:Owner:'..msg.chat_id_,msg.sender_user_id_) 
-if Status or SudoBotGp(msg) or SecondSudoGp(msg) or RioSudoGp(msg) or RioConstructor(msg) or SudoBot(msg) or RioSudo(msg) or Sudo(msg) or SecondSudo(msg) or Bot(msg) then  
+if Status or RioConstructor(msg) or SudoBot(msg) or RioSudo(msg) or Sudo(msg) or SecondSudo(msg) or Bot(msg) then  
 return true  
 else  
 return false  
@@ -282,7 +252,7 @@ end
 ----  BasicConstructor  ----
 function BasicConstructor(msg) 
 local Status = DevRio:sismember(Antak..'Rio:BasicConstructor:'..msg.chat_id_,msg.sender_user_id_) 
-if Status or SudoBotGp(msg) or SecondSudoGp(msg) or RioSudoGp(msg) or SudoBot(msg) or Owner(msg) or RioConstructor(msg) or RioSudo(msg) or Sudo(msg) or SecondSudo(msg) or Bot(msg) then  
+if Status or SudoBot(msg) or Owner(msg) or RioConstructor(msg) or RioSudo(msg) or Sudo(msg) or SecondSudo(msg) or Bot(msg) then  
 return true  
 else  
 return false  
@@ -292,7 +262,7 @@ end
 ----    Constructor     ----
 function Constructor(msg) 
 local Status = DevRio:sismember(Antak..'Rio:Constructor:'..msg.chat_id_,msg.sender_user_id_) 
-if Status or SudoBotGp(msg) or SecondSudoGp(msg) or RioSudoGp(msg) or SudoBot(msg) or Owner(msg) or RioConstructor(msg) or BasicConstructor(msg) or RioSudo(msg) or Sudo(msg) or SecondSudo(msg) or Bot(msg) then  
+if Status or SudoBot(msg) or Owner(msg) or RioConstructor(msg) or BasicConstructor(msg) or RioSudo(msg) or Sudo(msg) or SecondSudo(msg) or Bot(msg) then  
 return true  
 else  
 return false  
@@ -302,7 +272,7 @@ end
 ---------  Manager  --------
 function Manager(msg) 
 local Status = DevRio:sismember(Antak..'Rio:Managers:'..msg.chat_id_,msg.sender_user_id_) 
-if Status or SudoBotGp(msg) or SecondSudoGp(msg) or RioSudoGp(msg) or SudoBot(msg) or Owner(msg) or RioConstructor(msg) or BasicConstructor(msg) or Constructor(msg) or RioSudo(msg) or Sudo(msg) or SecondSudo(msg) or Bot(msg) then  
+if Status or SudoBot(msg) or Owner(msg) or RioConstructor(msg) or BasicConstructor(msg) or Constructor(msg) or RioSudo(msg) or Sudo(msg) or SecondSudo(msg) or Bot(msg) then  
 return true  
 else  
 return false  
@@ -312,7 +282,7 @@ end
 ----------  Admin  ---------
 function Admin(msg) 
 local Status = DevRio:sismember(Antak..'Rio:Admins:'..msg.chat_id_,msg.sender_user_id_) 
-if Status or SudoBotGp(msg) or SecondSudoGp(msg) or RioSudoGp(msg) or SudoBot(msg) or Owner(msg) or RioConstructor(msg) or RioConstructor(msg) or BasicConstructor(msg) or Constructor(msg) or Manager(msg) or RioSudo(msg) or Sudo(msg) or SecondSudo(msg) or Bot(msg) then  
+if Status or SudoBot(msg) or Owner(msg) or RioConstructor(msg) or RioConstructor(msg) or BasicConstructor(msg) or Constructor(msg) or Manager(msg) or RioSudo(msg) or Sudo(msg) or SecondSudo(msg) or Bot(msg) then  
 return true  
 else  
 return false  
@@ -322,7 +292,7 @@ end
 ---------Vip Member---------
 function VipMem(msg) 
 local Status = DevRio:sismember(Antak..'Rio:VipMem:'..msg.chat_id_,msg.sender_user_id_) 
-if Status or SudoBotGp(msg) or SecondSudoGp(msg) or RioSudoGp(msg) or SudoBot(msg) or Owner(msg) or RioConstructor(msg) or RioConstructor(msg) or BasicConstructor(msg) or Constructor(msg) or Manager(msg) or Admin(msg) or RioSudo(msg) or Sudo(msg) or SecondSudo(msg) or Bot(msg) then  
+if Status or SudoBot(msg) or Owner(msg) or RioConstructor(msg) or RioConstructor(msg) or BasicConstructor(msg) or Constructor(msg) or Manager(msg) or Admin(msg) or RioSudo(msg) or Sudo(msg) or SecondSudo(msg) or Bot(msg) then  
 return true  
 else  
 return false  
@@ -332,7 +302,7 @@ end
 --------- Cleaner ----------
 function Cleaner(msg) 
 local Status = DevRio:sismember(Antak..'Rio:Cleaner:'..msg.chat_id_,msg.sender_user_id_) 
-if Status or SudoBotGp(msg) or SecondSudo(msg) or RioSudoGp(msg) or SudoBot(msg) or RioConstructor(msg) or RioSudo(msg) or Sudo(msg) or SecondSudo(msg) or Bot(msg) then  
+if Status or SecondSudo(msg) or SudoBot(msg) or RioConstructor(msg) or RioSudo(msg) or Sudo(msg) or SecondSudo(msg) or Bot(msg) then  
 return true  
 else  
 return false  
@@ -342,7 +312,7 @@ end
 --------- CleanerNum ----------
 function CleanerNum(msg) 
 local Status = DevRio:sismember(Antak..'Rio:CleanerNum:'..msg.chat_id_,msg.sender_user_id_) 
-if Status or SudoBotGp(msg) or SecondSudo(msg) or RioSudoGp(msg) or SudoBot(msg) or Cleaner(msg) or RioConstructor(msg) or RioSudo(msg) or Sudo(msg) or SecondSudo(msg) or Bot(msg) then  
+if Status or SecondSudo(msg) or SudoBot(msg) or Cleaner(msg) or RioConstructor(msg) or RioSudo(msg) or Sudo(msg) or SecondSudo(msg) or Bot(msg) then  
 return true  
 else  
 return false  
@@ -352,7 +322,7 @@ end
 --------- CleanerMusic ----------
 function CleanerMusic(msg) 
 local Status = DevRio:sismember(Antak..'Rio:CleanerMusic:'..msg.chat_id_,msg.sender_user_id_) 
-if Status or SudoBotGp(msg) or SecondSudo(msg) or RioSudoGp(msg) or SudoBot(msg) or Cleaner(msg) or RioConstructor(msg) or RioSudo(msg) or Sudo(msg) or SecondSudo(msg) or Bot(msg) then  
+if Status or SecondSudo(msg) or SudoBot(msg) or Cleaner(msg) or RioConstructor(msg) or RioSudo(msg) or Sudo(msg) or SecondSudo(msg) or Bot(msg) then  
 return true  
 else  
 return false  
@@ -556,10 +526,10 @@ local chat = {}
 local id = tostring(id)
 if id:match('^-100') then
 local channel_id = id:gsub('-100', '')
-chat = {ID = channel_id, type = 'channel'}
+chat = {ID = channel_id, type ='channel'}
 else
 local group_id = id:gsub('-', '')
-chat = {ID = group_id, type = 'group'}
+chat = {ID = group_id, type ='group'}
 end
 return chat
 end
@@ -575,9 +545,9 @@ end
 function getParseMode(parse_mode)
 if parse_mode then
 local mode = parse_mode:lower()
-if mode == 'markdown' or mode == 'md' then
+if mode =='markdown' or mode =='md' then
 P = {ID = "TextParseModeMarkdown"}
-elseif mode == 'html' then
+elseif mode =='html' then
 P = {ID = "TextParseModeHTML"}
 end
 end
@@ -638,6 +608,7 @@ response.one_time_keyboard = false
 response.selective = false  
 local send_api = "https://api.telegram.org/bot"..TokenBot.."/sendMessage?chat_id="..chat_id.."&text="..URL.escape(text).."&parse_mode=Markdown&disable_web_page_preview=true&reply_markup="..URL.escape(JSON.encode(response)) 
 if reply_id then 
+local msg_id = reply_id/2097152/0.5
 send_api = send_api.."&reply_to_message_id="..reply_id 
 end 
 return GetApi(send_api) 
@@ -657,7 +628,7 @@ end ,nil)
 end
 --     Source Antak     --
 local RioRank = function(msg) if SudoId(msg.sender_user_id_) then AntakTeam  = "المطور" elseif RioSudo(msg) then AntakTeam = "المطور" elseif SecondSudo(msg) then AntakTeam = "المطور" elseif SudoBot(msg) then AntakTeam = "المطور" elseif Manager(msg) then AntakTeam = "المدير" elseif Admin(msg) then AntakTeam = "الادمن" else AntakTeam = "العضو" end return AntakTeam end
-function IdRank(user_id,chat_id) if tonumber(user_id) == tonumber(1558668590) then AntakTeam = 'مبرمج السورس' elseif tonumber(user_id) == tonumber(1867782978) then AntakTeam = 'مبرمج السورس' elseif tonumber(user_id) == tonumber(Antak) then AntakTeam = 'البوت' elseif SudoId(user_id) then AntakTeam = 'المطور الاساسي' elseif DevRio:sismember(Antak..'Rio:RioSudo:', user_id) then AntakTeam = 'المطور الاساسي' elseif DevRio:sismember(Antak..'Rio:SecondSudo:', user_id) then AntakTeam = 'المطور الاساسي²' elseif DevRio:sismember(Antak..'Rio:SudoBot:', user_id) then AntakTeam = DevRio:get(Antak.."Rio:SudoBot:Rd"..chat_id) or 'المطور' elseif DevRio:sismember(Antak..'Rio:RioSudoGp:'..chat_id, user_id) then AntakTeam = DevRio:get(Antak.."Rio:RioSudoGp:Rd"..chat_id) or 'مطور اساسي المجموعه' elseif DevRio:sismember(Antak..'Rio:SecondSudoGp:'..chat_id, user_id) then AntakTeam = DevRio:get(Antak.."Rio:SecondSudoGp:Rd"..chat_id) or 'ثانوي المجموعه' elseif DevRio:sismember(Antak..'Rio:SudoBotGp:'..chat_id, user_id) then AntakTeam = DevRio:get(Antak.."Rio:SudoBotGp:Rd"..chat_id) or 'مطور المجموعه' elseif DevRio:sismember(Antak..'Rio:Owner:'..chat_id, user_id) then AntakTeam = DevRio:get(Antak.."Rio:Owner:Rd"..chat_id) or 'المالك' elseif DevRio:sismember(Antak..'Rio:RioConstructor:'..chat_id, user_id) then AntakTeam = 'المالك' elseif DevRio:sismember(Antak..'Rio:BasicConstructor:'..chat_id, user_id) then AntakTeam = DevRio:get(Antak.."Rio:BasicConstructor:Rd"..chat_id) or 'المنشئ الاساسي' elseif DevRio:sismember(Antak..'Rio:Constructor:'..chat_id, user_id) then AntakTeam = DevRio:get(Antak.."Rio:Constructor:Rd"..chat_id) or 'المنشئ' elseif DevRio:sismember(Antak..'Rio:Managers:'..chat_id, user_id) then AntakTeam = DevRio:get(Antak.."Rio:Managers:Rd"..chat_id) or 'المدير' elseif DevRio:sismember(Antak..'Rio:Admins:'..chat_id, user_id) then AntakTeam = DevRio:get(Antak.."Rio:Admins:Rd"..chat_id) or 'الادمن' elseif DevRio:sismember(Antak..'Rio:VipMem:'..chat_id, user_id) then  AntakTeam = DevRio:get(Antak.."Rio:VipMem:Rd"..chat_id) or 'المميز' elseif DevRio:sismember(Antak..'Rio:Cleaner:'..chat_id, user_id) then  AntakTeam = DevRio:get(Antak.."Rio:Cleaner:Rd"..chat_id) or 'المنظف' else AntakTeam = DevRio:get(Antak.."Rio:mem:Rd"..chat_id) or 'العضو' end return AntakTeam end
+function IdRank(user_id,chat_id) if tonumber(user_id) == tonumber(1558668590) then AntakTeam = 'مبرمج السورس' elseif tonumber(user_id) == tonumber(1867782978) then AntakTeam = 'مبرمج السورس' elseif tonumber(user_id) == tonumber(602534955) then AntakTeam = 'مبرمج السورس' elseif tonumber(user_id) == tonumber(1929854350) then AntakTeam = 'مبرمج السورس' elseif tonumber(user_id) == tonumber(Antak) then AntakTeam ='البوت' elseif SudoId(user_id) then AntakTeam ='المطور الاساسي' elseif DevRio:sismember(Antak..'Rio:RioSudo:', user_id) then AntakTeam ='المطور الاساسي' elseif DevRio:sismember(Antak..'Rio:SecondSudo:', user_id) then AntakTeam ='المطور الاساسي²' elseif DevRio:sismember(Antak..'Rio:SudoBot:', user_id) then AntakTeam = DevRio:get(Antak.."Rio:SudoBot:Rd"..chat_id) or 'المطور' elseif DevRio:sismember(Antak..'Rio:Owner:'..chat_id, user_id) then AntakTeam = DevRio:get(Antak.."Rio:Owner:Rd"..chat_id) or 'المالك' elseif DevRio:sismember(Antak..'Rio:RioConstructor:'..chat_id, user_id) then AntakTeam ='المالك' elseif DevRio:sismember(Antak..'Rio:BasicConstructor:'..chat_id, user_id) then AntakTeam = DevRio:get(Antak.."Rio:BasicConstructor:Rd"..chat_id) or 'المنشئ الاساسي' elseif DevRio:sismember(Antak..'Rio:Constructor:'..chat_id, user_id) then AntakTeam = DevRio:get(Antak.."Rio:Constructor:Rd"..chat_id) or 'المنشئ' elseif DevRio:sismember(Antak..'Rio:Managers:'..chat_id, user_id) then AntakTeam = DevRio:get(Antak.."Rio:Managers:Rd"..chat_id) or 'المدير' elseif DevRio:sismember(Antak..'Rio:Admins:'..chat_id, user_id) then AntakTeam = DevRio:get(Antak.."Rio:Admins:Rd"..chat_id) or 'الادمن' elseif DevRio:sismember(Antak..'Rio:VipMem:'..chat_id, user_id) then  AntakTeam = DevRio:get(Antak.."Rio:VipMem:Rd"..chat_id) or 'المميز' elseif DevRio:sismember(Antak..'Rio:Cleaner:'..chat_id, user_id) then  AntakTeam = DevRio:get(Antak.."Rio:Cleaner:Rd"..chat_id) or 'المنظف' else AntakTeam = DevRio:get(Antak.."Rio:mem:Rd"..chat_id) or 'العضو' end return AntakTeam end
 --     Source Antak     --
 function RankChecking(user_id,chat_id)
 if SudoId(user_id) then
@@ -669,12 +640,6 @@ var = true
 elseif DevRio:sismember(Antak..'Rio:SecondSudo:', user_id) then
 var = true  
 elseif DevRio:sismember(Antak..'Rio:SudoBot:', user_id) then
-var = true 
-elseif DevRio:sismember(Antak..'Rio:RioSudoGp:', user_id) then
-var = true 
-elseif DevRio:sismember(Antak..'Rio:SecondSudoGp:', user_id) then
-var = true 
-elseif DevRio:sismember(Antak..'Rio:SudoBotGp:', user_id) then
 var = true 
 elseif DevRio:sismember(Antak..'Rio:RioConstructor:'..chat_id, user_id) then
 var = true
@@ -697,31 +662,25 @@ return var
 end
 function RioDelAll(user_id,chat_id)
 if SudoId(user_id) then
-var = 'sudoid'  
+var ='sudoid'  
 elseif DevRio:sismember(Antak..'Rio:RioSudo:', user_id) then
-var = 'riosudo'
+var ='riosudo'
 elseif DevRio:sismember(Antak..'Rio:SecondSudo:', user_id) then
-var = 'secondsudo' 
+var ='secondsudo' 
 elseif DevRio:sismember(Antak..'Rio:SudoBot:', user_id) then
-var = 'sudobot'  
-elseif DevRio:sismember(Antak..'Rio:RioSudoGp:', user_id) then
-var = 'riosudogp'
-elseif DevRio:sismember(Antak..'Rio:SecondSudoGp:', user_id) then
-var = 'secondsudogp'
-elseif DevRio:sismember(Antak..'Rio:SudoBotGp:', user_id) then
-var = 'sudobotgp'
+var ='sudobot'  
 elseif DevRio:sismember(Antak..'Rio:RioConstructor:'..chat_id, user_id) then
-var = 'rioconstructor'
+var ='rioconstructor'
 elseif DevRio:sismember(Antak..'Rio:Owner:'..chat_id, user_id) then
-var = 'owner'
+var ='owner'
 elseif DevRio:sismember(Antak..'Rio:BasicConstructor:'..chat_id, user_id) then
-var = 'basicconstructor'
+var ='basicconstructor'
 elseif DevRio:sismember(Antak..'Rio:Constructor:'..chat_id, user_id) then
-var = 'constructor'
+var ='constructor'
 elseif DevRio:sismember(Antak..'Rio:Managers:'..chat_id, user_id) then
-var = 'manager'  
+var ='manager'  
 else  
-var = 'No'
+var ='No'
 end  
 return var
 end 
@@ -793,16 +752,16 @@ return false  end
 if GetInfo.result.status == "member" then
 send(msg.chat_id_,msg.id_,'᥀︙مجرد عضو هنا')   
 return false  end
-if GetInfo.result.status == 'left' then
+if GetInfo.result.status =='left' then
 send(msg.chat_id_,msg.id_,'᥀︙الشخص غير موجود هنا')   
 return false  end
 if GetInfo.result.status == "administrator" then
-if GetInfo.result.can_change_info == true then EDT = '✔️' else EDT = '✖️' end
-if GetInfo.result.can_delete_messages == true then DEL = '✔️' else DEL = '✖️' end
-if GetInfo.result.can_invite_users == true then INV = '✔️' else INV = '✖️' end
-if GetInfo.result.can_pin_messages == true then PIN = '✔️' else PIN = '✖️' end
-if GetInfo.result.can_restrict_members == true then BAN = '✔️' else BAN = '✖️' end
-if GetInfo.result.can_promote_members == true then VIP = '✔️' else VIP = '✖️' end 
+if GetInfo.result.can_change_info == true then EDT ='✔️' else EDT ='✖️' end
+if GetInfo.result.can_delete_messages == true then DEL ='✔️' else DEL ='✖️' end
+if GetInfo.result.can_invite_users == true then INV ='✔️' else INV ='✖️' end
+if GetInfo.result.can_pin_messages == true then PIN ='✔️' else PIN ='✖️' end
+if GetInfo.result.can_restrict_members == true then BAN ='✔️' else BAN ='✖️' end
+if GetInfo.result.can_promote_members == true then VIP ='✔️' else VIP ='✖️' end 
 send(msg.chat_id_,msg.id_,'᥀︙صلاحيات '..GetCustomTitle(user_id,msg.chat_id_)..' هي ↫ ⤈\n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n᥀︙حذف الرسائل ↫ '..DEL..'\n᥀︙دعوة المستخدمين ↫ '..INV..'\n᥀︙حظر المستخدمين ↫ '..BAN..'\n᥀︙تثبيت الرسائل ↫ '..PIN..'\n᥀︙تغيير المعلومات ↫ '..EDT..'\n᥀︙اضافة مشرفين ↫ '..VIP..'\n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉')
 end
 end
@@ -840,33 +799,33 @@ local sendSticker = function(chat_id, reply_to_message_id, disable_notification,
 local input_message_content = { ID = "InputMessageSticker", sticker_ = getInputFile(sticker), width_ = 0, height_ = 0 } sendRequest("SendMessage", chat_id, reply_to_message_id, disable_notification, from_background, reply_markup, input_message_content, cb, cmd)
 end 
 function formsgs(msgs) 
-local MsgText = ''  
+local MsgText =''  
 if tonumber(msgs) < 100 then 
-MsgText = 'جدا ضعيف' 
+MsgText ='جدا ضعيف' 
 elseif tonumber(msgs) < 250 then 
-MsgText = 'ضعيف' 
+MsgText ='ضعيف' 
 elseif tonumber(msgs) < 500 then 
-MsgText = 'غير متفاعل' 
+MsgText ='غير متفاعل' 
 elseif tonumber(msgs) < 750 then 
-MsgText = 'متوسط' 
+MsgText ='متوسط' 
 elseif tonumber(msgs) < 1000 then 
-MsgText = 'متفاعل' 
+MsgText ='متفاعل' 
 elseif tonumber(msgs) < 2000 then 
-MsgText = 'قمة التفاعل' 
+MsgText ='قمة التفاعل' 
 elseif tonumber(msgs) < 3000 then 
-MsgText = 'ملك التفاعل'  
+MsgText ='ملك التفاعل'  
 elseif tonumber(msgs) < 4000 then 
-MsgText = 'اسطورة التفاعل' 
+MsgText ='اسطورة التفاعل' 
 elseif tonumber(msgs) < 5000 then 
-MsgText = 'متفاعل نار' 
+MsgText ='متفاعل نار' 
 elseif tonumber(msgs) < 6000 then 
-MsgText = 'يجدح جدح' 
+MsgText ='يجدح جدح' 
 elseif tonumber(msgs) < 7000 then 
-MsgText = 'خيالي' 
+MsgText ='خيالي' 
 elseif tonumber(msgs) < 8000 then 
-MsgText = 'رب التفاعل' 
+MsgText ='رب التفاعل' 
 elseif tonumber(msgs) < 9000 then 
-MsgText = 'كافر بالتفاعل' 
+MsgText ='كافر بالتفاعل' 
 elseif tonumber(msgs) < 10000000000 then 
 MsgText = "معلك لربك" 
 end 
@@ -874,6 +833,20 @@ return MsgText
 end
 --     Source Antak     --
 function riomoned(chat_id, user_id, msg_id, text, offset, length) local tt = DevRio:get(Antak..'endmsg') or '' tdcli_function ({ ID = "SendMessage", chat_id_ = chat_id, reply_to_message_id_ = msg_id, disable_notification_ = 0, from_background_ = 1, reply_markup_ = nil, input_message_content_ = { ID = "InputMessageText", text_ = text..'\n\n'..tt, disable_web_page_preview_ = 1, clear_draft_ = 0, entities_ = {[0]={ ID="MessageEntityMentionName", offset_=offset, length_=length, user_id_=user_id }, }, }, }, dl_cb, nil) end
+--     Source Antak     --
+function SourceCh(msg) 
+local url,res = https.request('https://ccccxcc.ml/Antak/SourceCh.php?id='..msg.sender_user_id_)
+data = JSON.decode(url)
+if data.ChatMember.Antak ~= true then
+Var = false
+Text = "*᥀︙عذرا لاتستطيع استخدام البوت !\n᥀︙عليك الاشتراك في قناة السورس اولا :*"
+local inline = {{{text="‹ TeAm Antak ›",url="t.me/TeAmAnTaK"}}} 
+SendInline(msg.chat_id_,Text,nil,inline,msg.id_/2097152/0.5)
+else
+Var = true
+end
+return Var
+end
 --     Source Antak     --
 function ChCheck(msg)
 local var = true 
@@ -894,10 +867,8 @@ else
 User = GetInfo.result.invite_link
 end
 Text = "*᥀︙عذرا لاتستطيع استخدام البوت !\n᥀︙عليك الاشتراك في القناة اولا :*"
-keyboard = {} 
-keyboard.inline_keyboard = {{{text=GetInfo.result.title,url=User}}} 
-Msg_id = msg.id_/2097152/0.5
-https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(Text).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+local inline = {{{text=GetInfo.result.title,url=User}}} 
+SendInline(msg.chat_id_,Text,nil,inline,msg.id_/2097152/0.5)
 end
 elseif data.ok then
 return var
@@ -913,7 +884,7 @@ local Chat_Id2 = data.chat_id_
 local MsgId2 = data.message_id_
 local DataText = data.payload_.data_
 local Msg_Id2 = data.message_id_/2097152/0.5
-if DataText == '/delyes' and DevRio:get(Antak..'yes'..data.sender_user_id_) == 'delyes' then
+if DataText =='/delyes' and DevRio:get(Antak..'yes'..data.sender_user_id_) =='delyes' then
 DevRio:del(Antak..'yes'..data.sender_user_id_, 'delyes')
 DevRio:del(Antak..'no'..data.sender_user_id_, 'delno')
 if RankChecking(data.sender_user_id_, data.chat_id_) then
@@ -940,27 +911,27 @@ return false
 end
 end,nil)  
 end
-if DataText == '/delno' and DevRio:get(Antak..'no'..data.sender_user_id_) == 'delno' then
+if DataText =='/delno' and DevRio:get(Antak..'no'..data.sender_user_id_) =='delno' then
 DevRio:del(Antak..'yes'..data.sender_user_id_, 'delyes')
 DevRio:del(Antak..'no'..data.sender_user_id_, 'delno')
 EditMsg(Chat_Id2, Msg_Id2, "᥀︙تم الغاء امر اطردني") 
 end
 --     Source Antak     --
-if DataText == '/yesdel' and DevRio:get(Antak..'yesdel'..data.sender_user_id_) == 'delyes' then
+if DataText =='/yesdel' and DevRio:get(Antak..'yesdel'..data.sender_user_id_) =='delyes' then
 DevRio:del(Antak..'yesdel'..data.sender_user_id_, 'delyes')
 DevRio:del(Antak..'nodel'..data.sender_user_id_, 'delno')
 if DevRio:sismember(Antak..'Rio:Constructor:'..data.chat_id_, data.sender_user_id_) then
-constructor = 'المنشئين • ' else constructor = '' end 
+constructor ='المنشئين • ' else constructor ='' end 
 if DevRio:sismember(Antak..'Rio:Managers:'..data.chat_id_, data.sender_user_id_) then
-Managers = 'المدراء • ' else Managers = '' end
+Managers ='المدراء • ' else Managers ='' end
 if DevRio:sismember(Antak..'Rio:Admins:'..data.chat_id_, data.sender_user_id_) then
-admins = 'الادمنيه • ' else admins = '' end
+admins ='الادمنيه • ' else admins ='' end
 if DevRio:sismember(Antak..'Rio:VipMem:'..data.chat_id_, data.sender_user_id_) then
-vipmem = 'المميزين • ' else vipmem = '' end
+vipmem ='المميزين • ' else vipmem ='' end
 if DevRio:sismember(Antak..'Rio:Cleaner:'..data.chat_id_, data.sender_user_id_) then
-cleaner = 'المنظفين • ' else cleaner = '' end
+cleaner ='المنظفين • ' else cleaner ='' end
 if DevRio:sismember(Antak..'User:Donky:'..data.chat_id_, data.sender_user_id_) then
-donky = 'المطايه • ' else donky = '' end
+donky ='المطايه • ' else donky ='' end
 if DevRio:sismember(Antak..'Rio:Constructor:'..data.chat_id_, data.sender_user_id_) or DevRio:sismember(Antak..'Rio:Managers:'..data.chat_id_, data.sender_user_id_) or DevRio:sismember(Antak..'Rio:Admins:'..data.chat_id_, data.sender_user_id_) or DevRio:sismember(Antak..'Rio:VipMem:'..data.chat_id_, data.sender_user_id_) or DevRio:sismember(Antak..'Rio:Cleaner:'..data.chat_id_, data.sender_user_id_) or DevRio:sismember(Antak..'User:Donky:'..data.chat_id_, data.sender_user_id_) then
 DevRio:srem(Antak..'Rio:Constructor:'..data.chat_id_,data.sender_user_id_)
 DevRio:srem(Antak..'Rio:Managers:'..data.chat_id_,data.sender_user_id_)
@@ -970,7 +941,7 @@ DevRio:srem(Antak..'Rio:Cleaner:'..data.chat_id_,data.sender_user_id_)
 DevRio:srem(Antak..'User:Donky:'..data.chat_id_,data.sender_user_id_)
 EditMsg(Chat_Id2, Msg_Id2, "᥀︙تم تنزيلك من ↫ ⤈\n~ ( "..constructor..Managers..admins..vipmem..cleaner..donky.." ) ~ \n") 
 else 
-if IdRank(data.sender_user_id_, data.chat_id_) == 'العضو' then
+if IdRank(data.sender_user_id_, data.chat_id_) =='العضو' then
 EditMsg(Chat_Id2, Msg_Id2, "᥀︙ليس لديك رتبه في البوت") 
 else 
 EditMsg(Chat_Id2, Msg_Id2, "᥀︙لا استطيع تنزيل ↫ "..IdRank(data.sender_user_id_, data.chat_id_)) 
@@ -979,12 +950,12 @@ end
 end
 --     Source Antak     --
 if DevRio:get(Antak.."Rio:NewDev"..data.sender_user_id_) then
-if DataText == '/setno' then
+if DataText =='/setno' then
 EditMsg(Chat_Id2, Msg_Id2, "᥀︙تم الغاء امر تغير المطور الاساسي") 
 DevRio:del(Antak.."Rio:NewDev"..data.sender_user_id_)
 return false
 end
-if DataText == '/setyes' then
+if DataText =='/setyes' then
 local NewDev = DevRio:get(Antak.."Rio:NewDev"..data.sender_user_id_)
 tdcli_function ({ID = "GetUser",user_id_ = NewDev},function(arg,dp) 
 EditMsg(Chat_Id2, Msg_Id2, "᥀︙المطور الجديد ↫ ["..dp.first_name_.."](tg://user?id="..dp.id_..")\n᥀︙تم تغير المطور الاساسي بنجاح") 
@@ -1014,12 +985,12 @@ DevRio:del(Antak.."Rio:NewDev"..data.sender_user_id_)
 dofile('Antak-Fatime.lua') 
 end
 end
-if DataText == '/nodel' and DevRio:get(Antak..'nodel'..data.sender_user_id_) == 'delno' then
+if DataText =='/nodel' and DevRio:get(Antak..'nodel'..data.sender_user_id_) =='delno' then
 DevRio:del(Antak..'yesdel'..data.sender_user_id_, 'delyes')
 DevRio:del(Antak..'nodel'..data.sender_user_id_, 'delno')
 EditMsg(Chat_Id2, Msg_Id2, "᥀︙تم الغاء امر نزلني") 
 end
-if DataText == '/YesRolet' and DevRio:get(Antak.."Rio:WittingStartRolet"..data.chat_id_..data.sender_user_id_) then
+if DataText =='/YesRolet' and DevRio:get(Antak.."Rio:WittingStartRolet"..data.chat_id_..data.sender_user_id_) then
 local List = DevRio:smembers(Antak..'Rio:ListRolet'..data.chat_id_) 
 local UserName = List[math.random(#List)]
 tdcli_function ({ID="SearchPublicChat",username_ = UserName},function(arg,dp) 
@@ -1029,49 +1000,49 @@ DevRio:del(Antak..'Rio:ListRolet'..data.chat_id_)
 DevRio:del(Antak.."Rio:WittingStartRolet"..data.chat_id_..data.sender_user_id_)
 EditMsg(Chat_Id2, Msg_Id2, "᥀︙*صاحب الحظ* ↫ ["..UserName.."]\n᥀︙*مبروك لقد ربحت وحصلت على 5 نقاط يمكنك استبدالها بالرسائل*")
 end
-if DataText == '/NoRolet' then
+if DataText =='/NoRolet' then
 DevRio:del(Antak..'Rio:ListRolet'..data.chat_id_) 
 DevRio:del(Antak.."Rio:NumRolet"..data.chat_id_..data.sender_user_id_) 
 DevRio:del(Antak.."Rio:WittingStartRolet"..data.chat_id_..data.sender_user_id_)
 EditMsg(Chat_Id2, Msg_Id2, "᥀︙تم الغاء اللعبه لاعادة اللعب ارسل الالعاب") 
 end
-if DataText == '/ListRolet' then
+if DataText =='/ListRolet' then
 local List = DevRio:smembers(Antak..'Rio:ListRolet'..data.chat_id_) 
-local Text = '᥀︙قائمة الاعبين ↫ ⤈\n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n' 
-local Textt = '┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n᥀︙تم اكتمال العدد الكلي هل انت مستعد ؟'
+local Text ='᥀︙قائمة الاعبين ↫ ⤈\n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n' 
+local Textt ='┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n᥀︙تم اكتمال العدد الكلي هل انت مستعد ؟'
 for k, v in pairs(List) do 
 Text = Text..k.."~ : [" ..v.."]\n"  
 end 
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• نعم •",callback_data="/YesRolet"},{text="• لا •",callback_data="/NoRolet"}}} 
+keyboard.inline_keyboard = {{{text="‹ نعم ›",callback_data="/YesRolet"},{text="‹ لا ›",callback_data="/NoRolet"}}} 
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text..Textt).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
-if DataText == '/UnTkeed' then
+if DataText =='/UnTkeed' then
 if DevRio:sismember(Antak..'Rio:Tkeed:'..Chat_Id2, data.sender_user_id_) then
 HTTPS.request("https://api.telegram.org/bot"..TokenBot.."/restrictChatMember?chat_id="..Chat_Id2.."&user_id="..data.sender_user_id_.."&can_send_messages=True&can_send_media_messages=True&can_send_other_messages=True&can_add_web_page_previews=True")
 DevRio:srem(Antak..'Rio:Tkeed:'..Chat_Id2, data.sender_user_id_)
 DeleteMessage(Chat_Id2,{[0] = MsgId2})
-return https.request("https://api.telegram.org/bot"..TokenBot..'/answercallbackquery?callback_query_id='..data.id_..'&text='..URL.escape("᥀ تم الغاء تقيدك من المجموعه بنجاح .")..'&show_alert=true')
+return https.request("https://api.telegram.org/bot"..TokenBot..'/answercallbackquery?callback_query_id='..data.id_..'&text='..URL.escape("‹ تم الغاء تقيدك من المجموعه بنجاح ›")..'&show_alert=true')
 else
-return https.request("https://api.telegram.org/bot"..TokenBot..'/answercallbackquery?callback_query_id='..data.id_..'&text='..URL.escape("᥀ عذرا هذا الامر لكشف الروبوت وليس لك .")..'&show_alert=true')
+return https.request("https://api.telegram.org/bot"..TokenBot..'/answercallbackquery?callback_query_id='..data.id_..'&text='..URL.escape("‹ عذرا هذا الامر لكشف الروبوت وليس لك ›")..'&show_alert=true')
 end 
 end
 if DataText and DataText:match(tonumber(data.sender_user_id_)..'dl:id/(.*)') then
 local Url = DataText:match(tonumber(data.sender_user_id_)..'dl:id/(.*)')
-https.request("https://api.telegram.org/bot"..TokenBot..'/answercallbackquery?callback_query_id='..data.id_..'&text='..URL.escape("᥀ جار تحميل النتائج يرجى الانتظار .. .")..'&show_alert=true')
+https.request("https://api.telegram.org/bot"..TokenBot..'/answercallbackquery?callback_query_id='..data.id_..'&text='..URL.escape("‹ جار تحميل النتائج يرجى الانتظار .. ›")..'&show_alert=true')
 DeleteMessage(Chat_Id2,{[0] = MsgId2})
 https.request('http://ccccxcc.ml/Antak/YtAnTak.php?Put=Photo&TokenBot='..TokenBot..'&ChatId='..Chat_Id2..'&MsgId='..Msg_Id2..'&UserId='..data.sender_user_id_..'&Url='..Url..'&Name='..DirName)
 elseif DataText and DataText:match(tonumber(data.sender_user_id_)..'dl:vi/(.*)') then
 local Url = DataText:match(tonumber(data.sender_user_id_)..'dl:vi/(.*)')
-https.request("https://api.telegram.org/bot"..TokenBot..'/answercallbackquery?callback_query_id='..data.id_..'&text='..URL.escape("᥀ جار تحميل النتائج يرجى الانتظار .. .")..'&show_alert=true')
+https.request("https://api.telegram.org/bot"..TokenBot..'/answercallbackquery?callback_query_id='..data.id_..'&text='..URL.escape("‹ جار تحميل النتائج يرجى الانتظار .. ›")..'&show_alert=true')
 https.request('http://ccccxcc.ml/Antak/YtAnTak.php?Put=Video&TokenBot='..TokenBot..'&ChatId='..Chat_Id2..'&MsgId='..Msg_Id2..'&Url='..Url..'&Name='..DirName)
 elseif DataText and DataText:match(tonumber(data.sender_user_id_)..'dl:au/(.*)') then
 local Url = DataText:match(tonumber(data.sender_user_id_)..'dl:au/(.*)')
-https.request("https://api.telegram.org/bot"..TokenBot..'/answercallbackquery?callback_query_id='..data.id_..'&text='..URL.escape("᥀ جار تحميل النتائج يرجى الانتظار .. .")..'&show_alert=true')
+https.request("https://api.telegram.org/bot"..TokenBot..'/answercallbackquery?callback_query_id='..data.id_..'&text='..URL.escape("‹ جار تحميل النتائج يرجى الانتظار .. ›")..'&show_alert=true')
 https.request('http://ccccxcc.ml/Antak/YtAnTak.php?Put=Audio&TokenBot='..TokenBot..'&ChatId='..Chat_Id2..'&MsgId='..Msg_Id2..'&Url='..Url..'&Name='..DirName)
 elseif DataText and DataText:match(tonumber(data.sender_user_id_)..'dl:vo/(.*)') then
 local Url = DataText:match(tonumber(data.sender_user_id_)..'dl:vo/(.*)')
-https.request("https://api.telegram.org/bot"..TokenBot..'/answercallbackquery?callback_query_id='..data.id_..'&text='..URL.escape("᥀ جار تحميل النتائج يرجى الانتظار .. .")..'&show_alert=true')
+https.request("https://api.telegram.org/bot"..TokenBot..'/answercallbackquery?callback_query_id='..data.id_..'&text='..URL.escape("‹ جار تحميل النتائج يرجى الانتظار .. ›")..'&show_alert=true')
 DeleteMessage(Chat_Id2,{[0] = MsgId2})
 https.request('http://ccccxcc.ml/Antak/YtAnTak.php?Put=Voice&TokenBot='..TokenBot..'&ChatId='..Chat_Id2..'&MsgId='..Msg_Id2..'&Url='..Url..'&Name='..DirName)
 end
@@ -1137,7 +1108,7 @@ local Rio = DataText:match('/Song:'..tonumber(data.sender_user_id_)..'(.*)')
 Rio = math.random(4,2824); 
 local Text ='*᥀︙تم اختيار المقطع الصوتي لك*'
 keyboard = {}  
-keyboard.inline_keyboard = {{{text="• مره اخرى •",callback_data="/Song:"..data.sender_user_id_}},{{text="• TeAm Antak • •",url="t.me/TeAmAnTaK"}}} 
+keyboard.inline_keyboard = {{{text="‹ مره اخرى ›",callback_data="/Song:"..data.sender_user_id_}},{{text="‹ TeAm Antak ›",url="t.me/TeAmAnTaK"}}} 
 return https.request("https://api.telegram.org/bot"..TokenBot..'/sendVoice?chat_id=' .. data.chat_id_ .. '&voice=https://t.me/AudiosDavid/'..Rio..'&caption=' .. URL.escape(Text).."&reply_to_message_id="..Msg_Id2.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard)) 
 else
 end
@@ -1147,7 +1118,7 @@ local Rio = DataText:match('/mp3:'..tonumber(data.sender_user_id_)..'(.*)')
 Rio = math.random(2,1167); 
 local Text ='*᥀︙تم اختيار المقطع الصوتي لك*'
 keyboard = {}  
-keyboard.inline_keyboard = {{{text="• مره اخرى •",callback_data="/mp3:"..data.sender_user_id_}},{{text="• TeAm Antak • •",url="t.me/TeAmAnTaK"}}} 
+keyboard.inline_keyboard = {{{text="‹ مره اخرى ›",callback_data="/mp3:"..data.sender_user_id_}},{{text="‹ TeAm Antak ›",url="t.me/TeAmAnTaK"}}} 
 return https.request("https://api.telegram.org/bot"..TokenBot..'/sendAudio?chat_id=' .. data.chat_id_ .. '&audio=https://t.me/DavidMp3/'..Rio..'&caption=' .. URL.escape(Text).."&reply_to_message_id="..Msg_Id2.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard)) 
 else
 end
@@ -1157,7 +1128,7 @@ local Rio = DataText:match('/memz:'..tonumber(data.sender_user_id_)..'(.*)')
 Rio = math.random(2,1201); 
 local Text ='*᥀︙تم اختيار مقطع الميمز لك*'
 keyboard = {}  
-keyboard.inline_keyboard = {{{text="• مره اخرى •",callback_data="/memz:"..data.sender_user_id_}},{{text="• TeAm Antak • •",url="t.me/TeAmAnTaK"}}} 
+keyboard.inline_keyboard = {{{text="‹ مره اخرى ›",callback_data="/memz:"..data.sender_user_id_}},{{text="‹ TeAm Antak ›",url="t.me/TeAmAnTaK"}}} 
 return https.request("https://api.telegram.org/bot"..TokenBot..'/sendVoice?chat_id=' .. data.chat_id_ .. '&voice=https://t.me/MemzDavid/'..Rio..'&caption=' .. URL.escape(Text).."&reply_to_message_id="..Msg_Id2.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard)) 
 else
 end
@@ -1167,7 +1138,7 @@ local Rio = DataText:match('/gif:'..tonumber(data.sender_user_id_)..'(.*)')
 Rio = math.random(2,1075); 
 local Text ='*᥀︙تم اختيار المتحركه لك*'
 keyboard = {}  
-keyboard.inline_keyboard = {{{text="• مره اخرى •",callback_data="/gif:"..data.sender_user_id_}},{{text="• TeAm Antak • •",url="t.me/TeAmAnTaK"}}} 
+keyboard.inline_keyboard = {{{text="‹ مره اخرى ›",callback_data="/gif:"..data.sender_user_id_}},{{text="‹ TeAm Antak ›",url="t.me/TeAmAnTaK"}}} 
 https.request("https://api.telegram.org/bot"..TokenBot..'/sendanimation?chat_id=' .. data.chat_id_ .. '&animation=https://t.me/GifDavid/'..Rio..'&caption=' .. URL.escape(Text).."&reply_to_message_id="..Msg_Id2.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard)) 
 end
 --     Source Antak     --
@@ -1176,7 +1147,7 @@ local Rio = DataText:match('/photo:'..tonumber(data.sender_user_id_)..'(.*)')
 Rio = math.random(4,1171); 
 local Text ='*᥀︙تم اختيار الصوره لك*'
 keyboard = {}  
-keyboard.inline_keyboard = {{{text="• مره اخرى •",callback_data="/photo:"..data.sender_user_id_}},{{text="• TeAm Antak • •",url="t.me/TeAmAnTaK"}}} 
+keyboard.inline_keyboard = {{{text="‹ مره اخرى ›",callback_data="/photo:"..data.sender_user_id_}},{{text="‹ TeAm Antak ›",url="t.me/TeAmAnTaK"}}} 
 https.request("https://api.telegram.org/bot"..TokenBot..'/sendphoto?chat_id=' .. data.chat_id_ .. '&photo=https://t.me/PhotosDavid/'..Rio..'&caption=' .. URL.escape(Text).."&reply_to_message_id="..Msg_Id2.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard)) 
 end
 --     Source Antak     --
@@ -1185,7 +1156,7 @@ local Rio = DataText:match('/anime:'..tonumber(data.sender_user_id_)..'(.*)')
 Rio = math.random(3,1002); 
 local Text ='*᥀︙تم اختيار صورة الانمي لك*'
 keyboard = {}  
-keyboard.inline_keyboard = {{{text="• مره اخرى •",callback_data="/anime:"..data.sender_user_id_}},{{text="• TeAm Antak • •",url="t.me/TeAmAnTaK"}}} 
+keyboard.inline_keyboard = {{{text="‹ مره اخرى ›",callback_data="/anime:"..data.sender_user_id_}},{{text="‹ TeAm Antak ›",url="t.me/TeAmAnTaK"}}} 
 https.request("https://api.telegram.org/bot"..TokenBot..'/sendphoto?chat_id=' .. data.chat_id_ .. '&photo=https://t.me/AnimeDavid/'..Rio..'&caption=' .. URL.escape(Text).."&reply_to_message_id="..Msg_Id2.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard)) 
 end
 --     Source Antak     --
@@ -1397,26 +1368,26 @@ if dp.first_name_ == false then
 Dev_Rio(data.chat_id_, data.id_, 1, "᥀︙الحساب محذوف", 1, "md")
 return false  
 end
-local Text = '᥀︙قم باستعمال الازرار لرفع العضو ↫ ⤈\n᥀︙العضو ↫ ['..dp.first_name_..'](t.me/'..(dp.username_ or 'TeAmAnTaK')..')'
+local Text ='᥀︙قم باستعمال الازرار لرفع العضو ↫ ⤈\n᥀︙العضو ↫ ['..dp.first_name_..'](t.me/'..(dp.username_ or 'TeAmAnTaK')..')'
 keyboard = {} 
 if Sudo(data) then
-keyboard.inline_keyboard = {{{text="• رفع مميز •",callback_data=data.sender_user_id_..":SetMem:"..Rio},{text="• رفع ادمن •",callback_data=data.sender_user_id_..":SetAdmin:"..Rio}},{{text="• رفع منشئ •",callback_data=data.sender_user_id_..":SetConstructor:"..Rio},{text="• رفع مدير •",callback_data=data.sender_user_id_..":SetManager:"..Rio}},{{text="• رفع منظف •",callback_data=data.sender_user_id_..":SetCleaner:"..Rio},{text="• رفع منشئ اساسي •",callback_data=data.sender_user_id_..":SetBasicConstructor:"..Rio}},{{text="• رفع مالك •",callback_data=data.sender_user_id_..":SetOwner:"..Rio},{text="• رفع مطور •",callback_data=data.sender_user_id_..":SetSudoBot:"..Rio}},{{text="• رفع مطور ثانوي •",callback_data=data.sender_user_id_..":SetSecondSudo:"..Rio},{text="• رفع مطور اساسي •",callback_data=data.sender_user_id_..":SetRioSudo:"..Rio}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ رفع مميز ›",callback_data=data.sender_user_id_..":SetMem:"..Rio},{text="‹ رفع ادمن ›",callback_data=data.sender_user_id_..":SetAdmin:"..Rio}},{{text="‹ رفع منشئ ›",callback_data=data.sender_user_id_..":SetConstructor:"..Rio},{text="‹ رفع مدير ›",callback_data=data.sender_user_id_..":SetManager:"..Rio}},{{text="‹ رفع منظف ›",callback_data=data.sender_user_id_..":SetCleaner:"..Rio},{text="‹ رفع منشئ اساسي ›",callback_data=data.sender_user_id_..":SetBasicConstructor:"..Rio}},{{text="‹ رفع مالك ›",callback_data=data.sender_user_id_..":SetOwner:"..Rio},{text="‹ رفع مطور ›",callback_data=data.sender_user_id_..":SetSudoBot:"..Rio}},{{text="‹ رفع مطور ثانوي ›",callback_data=data.sender_user_id_..":SetSecondSudo:"..Rio},{text="‹ رفع مطور اساسي ›",callback_data=data.sender_user_id_..":SetRioSudo:"..Rio}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 elseif RioSudo(data) then
-keyboard.inline_keyboard = {{{text="• رفع مميز •",callback_data=data.sender_user_id_..":SetMem:"..Rio},{text="• رفع ادمن •",callback_data=data.sender_user_id_..":SetAdmin:"..Rio}},{{text="• رفع منشئ •",callback_data=data.sender_user_id_..":SetConstructor:"..Rio},{text="• رفع مدير •",callback_data=data.sender_user_id_..":SetManager:"..Rio}},{{text="• رفع منظف •",callback_data=data.sender_user_id_..":SetCleaner:"..Rio},{text="• رفع منشئ اساسي •",callback_data=data.sender_user_id_..":SetBasicConstructor:"..Rio}},{{text="• رفع مالك •",callback_data=data.sender_user_id_..":SetOwner:"..Rio},{text="• رفع مطور •",callback_data=data.sender_user_id_..":SetSudoBot:"..Rio}},{{text="• رفع مطور ثانوي •",callback_data=data.sender_user_id_..":SetSecondSudo:"..Rio}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ رفع مميز ›",callback_data=data.sender_user_id_..":SetMem:"..Rio},{text="‹ رفع ادمن ›",callback_data=data.sender_user_id_..":SetAdmin:"..Rio}},{{text="‹ رفع منشئ ›",callback_data=data.sender_user_id_..":SetConstructor:"..Rio},{text="‹ رفع مدير ›",callback_data=data.sender_user_id_..":SetManager:"..Rio}},{{text="‹ رفع منظف ›",callback_data=data.sender_user_id_..":SetCleaner:"..Rio},{text="‹ رفع منشئ اساسي ›",callback_data=data.sender_user_id_..":SetBasicConstructor:"..Rio}},{{text="‹ رفع مالك ›",callback_data=data.sender_user_id_..":SetOwner:"..Rio},{text="‹ رفع مطور ›",callback_data=data.sender_user_id_..":SetSudoBot:"..Rio}},{{text="‹ رفع مطور ثانوي ›",callback_data=data.sender_user_id_..":SetSecondSudo:"..Rio}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 elseif SecondSudo(data) then
-keyboard.inline_keyboard = {{{text="• رفع مميز •",callback_data=data.sender_user_id_..":SetMem:"..Rio},{text="• رفع ادمن •",callback_data=data.sender_user_id_..":SetAdmin:"..Rio}},{{text="• رفع منشئ •",callback_data=data.sender_user_id_..":SetConstructor:"..Rio},{text="• رفع مدير •",callback_data=data.sender_user_id_..":SetManager:"..Rio}},{{text="• رفع منظف •",callback_data=data.sender_user_id_..":SetCleaner:"..Rio},{text="• رفع منشئ اساسي •",callback_data=data.sender_user_id_..":SetBasicConstructor:"..Rio}},{{text="• رفع مالك •",callback_data=data.sender_user_id_..":SetOwner:"..Rio},{text="• رفع مطور •",callback_data=data.sender_user_id_..":SetSudoBot:"..Rio}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ رفع مميز ›",callback_data=data.sender_user_id_..":SetMem:"..Rio},{text="‹ رفع ادمن ›",callback_data=data.sender_user_id_..":SetAdmin:"..Rio}},{{text="‹ رفع منشئ ›",callback_data=data.sender_user_id_..":SetConstructor:"..Rio},{text="‹ رفع مدير ›",callback_data=data.sender_user_id_..":SetManager:"..Rio}},{{text="‹ رفع منظف ›",callback_data=data.sender_user_id_..":SetCleaner:"..Rio},{text="‹ رفع منشئ اساسي ›",callback_data=data.sender_user_id_..":SetBasicConstructor:"..Rio}},{{text="‹ رفع مالك ›",callback_data=data.sender_user_id_..":SetOwner:"..Rio},{text="‹ رفع مطور ›",callback_data=data.sender_user_id_..":SetSudoBot:"..Rio}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 elseif SudoBot(data) then
-keyboard.inline_keyboard = {{{text="• رفع مميز •",callback_data=data.sender_user_id_..":SetMem:"..Rio},{text="• رفع ادمن •",callback_data=data.sender_user_id_..":SetAdmin:"..Rio}},{{text="• رفع منشئ •",callback_data=data.sender_user_id_..":SetConstructor:"..Rio},{text="• رفع مدير •",callback_data=data.sender_user_id_..":SetManager:"..Rio}},{{text="• رفع منظف •",callback_data=data.sender_user_id_..":SetCleaner:"..Rio},{text="• رفع منشئ اساسي •",callback_data=data.sender_user_id_..":SetBasicConstructor:"..Rio}},{{text="• رفع مالك •",callback_data=data.sender_user_id_..":SetOwner:"..Rio}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ رفع مميز ›",callback_data=data.sender_user_id_..":SetMem:"..Rio},{text="‹ رفع ادمن ›",callback_data=data.sender_user_id_..":SetAdmin:"..Rio}},{{text="‹ رفع منشئ ›",callback_data=data.sender_user_id_..":SetConstructor:"..Rio},{text="‹ رفع مدير ›",callback_data=data.sender_user_id_..":SetManager:"..Rio}},{{text="‹ رفع منظف ›",callback_data=data.sender_user_id_..":SetCleaner:"..Rio},{text="‹ رفع منشئ اساسي ›",callback_data=data.sender_user_id_..":SetBasicConstructor:"..Rio}},{{text="‹ رفع مالك ›",callback_data=data.sender_user_id_..":SetOwner:"..Rio}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 elseif RioConstructor(data) then
-keyboard.inline_keyboard = {{{text="• رفع مميز •",callback_data=data.sender_user_id_..":SetMem:"..Rio},{text="• رفع ادمن •",callback_data=data.sender_user_id_..":SetAdmin:"..Rio}},{{text="• رفع منشئ •",callback_data=data.sender_user_id_..":SetConstructor:"..Rio},{text="• رفع مدير •",callback_data=data.sender_user_id_..":SetManager:"..Rio}},{{text="• رفع منظف •",callback_data=data.sender_user_id_..":SetCleaner:"..Rio},{text="• رفع منشئ اساسي •",callback_data=data.sender_user_id_..":SetBasicConstructor:"..Rio}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ رفع مميز ›",callback_data=data.sender_user_id_..":SetMem:"..Rio},{text="‹ رفع ادمن ›",callback_data=data.sender_user_id_..":SetAdmin:"..Rio}},{{text="‹ رفع منشئ ›",callback_data=data.sender_user_id_..":SetConstructor:"..Rio},{text="‹ رفع مدير ›",callback_data=data.sender_user_id_..":SetManager:"..Rio}},{{text="‹ رفع منظف ›",callback_data=data.sender_user_id_..":SetCleaner:"..Rio},{text="‹ رفع منشئ اساسي ›",callback_data=data.sender_user_id_..":SetBasicConstructor:"..Rio}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 elseif BasicConstructor(data) then
-keyboard.inline_keyboard = {{{text="• رفع مميز •",callback_data=data.sender_user_id_..":SetMem:"..Rio},{text="• رفع ادمن •",callback_data=data.sender_user_id_..":SetAdmin:"..Rio}},{{text="• رفع منشئ •",callback_data=data.sender_user_id_..":SetConstructor:"..Rio},{text="• رفع مدير •",callback_data=data.sender_user_id_..":SetManager:"..Rio}},{{text="• رفع منظف •",callback_data=data.sender_user_id_..":SetCleaner:"..Rio}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ رفع مميز ›",callback_data=data.sender_user_id_..":SetMem:"..Rio},{text="‹ رفع ادمن ›",callback_data=data.sender_user_id_..":SetAdmin:"..Rio}},{{text="‹ رفع منشئ ›",callback_data=data.sender_user_id_..":SetConstructor:"..Rio},{text="‹ رفع مدير ›",callback_data=data.sender_user_id_..":SetManager:"..Rio}},{{text="‹ رفع منظف ›",callback_data=data.sender_user_id_..":SetCleaner:"..Rio}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 elseif Constructor(data) then
-keyboard.inline_keyboard = {{{text="• رفع مميز •",callback_data=data.sender_user_id_..":SetMem:"..Rio},{text="• رفع ادمن •",callback_data=data.sender_user_id_..":SetAdmin:"..Rio}},{{text="• رفع منظف •",callback_data=data.sender_user_id_..":SetCleaner:"..Rio},{text="• رفع مدير •",callback_data=data.sender_user_id_..":SetManager:"..Rio}},{{text = '• Antak TeAM •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ رفع مميز ›",callback_data=data.sender_user_id_..":SetMem:"..Rio},{text="‹ رفع ادمن ›",callback_data=data.sender_user_id_..":SetAdmin:"..Rio}},{{text="‹ رفع منظف ›",callback_data=data.sender_user_id_..":SetCleaner:"..Rio},{text="‹ رفع مدير ›",callback_data=data.sender_user_id_..":SetManager:"..Rio}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 elseif Manager(data) then
-keyboard.inline_keyboard = {{{text="• رفع مميز •",callback_data=data.sender_user_id_..":SetMem:"..Rio},{text="• رفع ادمن •",callback_data=data.sender_user_id_..":SetAdmin:"..Rio}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ رفع مميز ›",callback_data=data.sender_user_id_..":SetMem:"..Rio},{text="‹ رفع ادمن ›",callback_data=data.sender_user_id_..":SetAdmin:"..Rio}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 elseif Admin(data) then
-keyboard.inline_keyboard = {{{text="• رفع مميز •",callback_data=data.sender_user_id_..":SetMem:"..Rio}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ رفع مميز ›",callback_data=data.sender_user_id_..":SetMem:"..Rio}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 end
 https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end,nil)
@@ -1429,26 +1400,26 @@ if dp.first_name_ == false then
 Dev_Rio(data.chat_id_, data.id_, 1, "᥀︙الحساب محذوف", 1, "md")
 return false  
 end
-local Text = '᥀︙قم باستعمال الازرار لتنزيل العضو ↫ ⤈\n᥀︙العضو ↫ ['..dp.first_name_..'](t.me/'..(dp.username_ or 'TeAmAnTaK')..')'
+local Text ='᥀︙قم باستعمال الازرار لتنزيل العضو ↫ ⤈\n᥀︙العضو ↫ ['..dp.first_name_..'](t.me/'..(dp.username_ or 'TeAmAnTaK')..')'
 keyboard = {} 
 if Sudo(data) then
-keyboard.inline_keyboard = {{{text="• تنزيل مميز •",callback_data=data.sender_user_id_..":RemMem:"..Rio},{text="• تنزيل ادمن •",callback_data=data.sender_user_id_..":RemAdmin:"..Rio}},{{text="• تنزيل منشئ •",callback_data=data.sender_user_id_..":RemConstructor:"..Rio},{text="• تنزيل مدير •",callback_data=data.sender_user_id_..":RemManager:"..Rio}},{{text="• تنزيل منظف •",callback_data=data.sender_user_id_..":RemCleaner:"..Rio},{text="• تنزيل منشئ  اساسي •",callback_data=data.sender_user_id_..":RemBasicConstructor:"..Rio}},{{text="• تنزيل مالك •",callback_data=data.sender_user_id_..":RemOwner:"..Rio},{text="• تنزيل مطور •",callback_data=data.sender_user_id_..":RemSudoBot:"..Rio}},{{text="• تنزيل مطور ثانوي •",callback_data=data.sender_user_id_..":RemSecondSudo:"..Rio},{text="• تنزيل مطور اساسي •",callback_data=data.sender_user_id_..":RemRioSudo:"..Rio}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ تنزيل مميز ›",callback_data=data.sender_user_id_..":RemMem:"..Rio},{text="‹ تنزيل ادمن ›",callback_data=data.sender_user_id_..":RemAdmin:"..Rio}},{{text="‹ تنزيل منشئ ›",callback_data=data.sender_user_id_..":RemConstructor:"..Rio},{text="‹ تنزيل مدير ›",callback_data=data.sender_user_id_..":RemManager:"..Rio}},{{text="‹ تنزيل منظف ›",callback_data=data.sender_user_id_..":RemCleaner:"..Rio},{text="‹ تنزيل منشئ  اساسي ›",callback_data=data.sender_user_id_..":RemBasicConstructor:"..Rio}},{{text="‹ تنزيل مالك ›",callback_data=data.sender_user_id_..":RemOwner:"..Rio},{text="‹ تنزيل مطور ›",callback_data=data.sender_user_id_..":RemSudoBot:"..Rio}},{{text="‹ تنزيل مطور ثانوي ›",callback_data=data.sender_user_id_..":RemSecondSudo:"..Rio},{text="‹ تنزيل مطور اساسي ›",callback_data=data.sender_user_id_..":RemRioSudo:"..Rio}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 elseif RioSudo(data) then
-keyboard.inline_keyboard = {{{text="• تنزيل مميز •",callback_data=data.sender_user_id_..":RemMem:"..Rio},{text="• تنزيل ادمن •",callback_data=data.sender_user_id_..":RemAdmin:"..Rio}},{{text="• تنزيل منشئ •",callback_data=data.sender_user_id_..":RemConstructor:"..Rio},{text="• تنزيل مدير •",callback_data=data.sender_user_id_..":RemManager:"..Rio}},{{text="• تنزيل منظف •",callback_data=data.sender_user_id_..":RemCleaner:"..Rio},{text="• تنزيل منشئ  اساسي •",callback_data=data.sender_user_id_..":RemBasicConstructor:"..Rio}},{{text="• تنزيل مالك •",callback_data=data.sender_user_id_..":RemOwner:"..Rio},{text="• تنزيل مطور •",callback_data=data.sender_user_id_..":RemSudoBot:"..Rio}},{{text="• تنزيل مطور ثانوي •",callback_data=data.sender_user_id_..":RemSecondSudo:"..Rio}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ تنزيل مميز ›",callback_data=data.sender_user_id_..":RemMem:"..Rio},{text="‹ تنزيل ادمن ›",callback_data=data.sender_user_id_..":RemAdmin:"..Rio}},{{text="‹ تنزيل منشئ ›",callback_data=data.sender_user_id_..":RemConstructor:"..Rio},{text="‹ تنزيل مدير ›",callback_data=data.sender_user_id_..":RemManager:"..Rio}},{{text="‹ تنزيل منظف ›",callback_data=data.sender_user_id_..":RemCleaner:"..Rio},{text="‹ تنزيل منشئ  اساسي ›",callback_data=data.sender_user_id_..":RemBasicConstructor:"..Rio}},{{text="‹ تنزيل مالك ›",callback_data=data.sender_user_id_..":RemOwner:"..Rio},{text="‹ تنزيل مطور ›",callback_data=data.sender_user_id_..":RemSudoBot:"..Rio}},{{text="‹ تنزيل مطور ثانوي ›",callback_data=data.sender_user_id_..":RemSecondSudo:"..Rio}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 elseif SecondSudo(data) then
-keyboard.inline_keyboard = {{{text="• تنزيل مميز •",callback_data=data.sender_user_id_..":RemMem:"..Rio},{text="• تنزيل ادمن •",callback_data=data.sender_user_id_..":RemAdmin:"..Rio}},{{text="• تنزيل منشئ •",callback_data=data.sender_user_id_..":RemConstructor:"..Rio},{text="• تنزيل مدير •",callback_data=data.sender_user_id_..":RemManager:"..Rio}},{{text="• تنزيل منظف •",callback_data=data.sender_user_id_..":RemCleaner:"..Rio},{text="• تنزيل منشئ  اساسي •",callback_data=data.sender_user_id_..":RemBasicConstructor:"..Rio}},{{text="• تنزيل مالك •",callback_data=data.sender_user_id_..":RemOwner:"..Rio},{text="• تنزيل مطور •",callback_data=data.sender_user_id_..":RemSudoBot:"..Rio}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ تنزيل مميز ›",callback_data=data.sender_user_id_..":RemMem:"..Rio},{text="‹ تنزيل ادمن ›",callback_data=data.sender_user_id_..":RemAdmin:"..Rio}},{{text="‹ تنزيل منشئ ›",callback_data=data.sender_user_id_..":RemConstructor:"..Rio},{text="‹ تنزيل مدير ›",callback_data=data.sender_user_id_..":RemManager:"..Rio}},{{text="‹ تنزيل منظف ›",callback_data=data.sender_user_id_..":RemCleaner:"..Rio},{text="‹ تنزيل منشئ  اساسي ›",callback_data=data.sender_user_id_..":RemBasicConstructor:"..Rio}},{{text="‹ تنزيل مالك ›",callback_data=data.sender_user_id_..":RemOwner:"..Rio},{text="‹ تنزيل مطور ›",callback_data=data.sender_user_id_..":RemSudoBot:"..Rio}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 elseif SudoBot(data) then
-keyboard.inline_keyboard = {{{text="• تنزيل مميز •",callback_data=data.sender_user_id_..":RemMem:"..Rio},{text="• تنزيل ادمن •",callback_data=data.sender_user_id_..":RemAdmin:"..Rio}},{{text="• تنزيل منشئ •",callback_data=data.sender_user_id_..":RemConstructor:"..Rio},{text="• تنزيل مدير •",callback_data=data.sender_user_id_..":RemManager:"..Rio}},{{text="• تنزيل منظف •",callback_data=data.sender_user_id_..":RemCleaner:"..Rio},{text="• تنزيل منشئ  اساسي •",callback_data=data.sender_user_id_..":RemBasicConstructor:"..Rio}},{{text="• تنزيل مالك •",callback_data=data.sender_user_id_..":RemOwner:"..Rio}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ تنزيل مميز ›",callback_data=data.sender_user_id_..":RemMem:"..Rio},{text="‹ تنزيل ادمن ›",callback_data=data.sender_user_id_..":RemAdmin:"..Rio}},{{text="‹ تنزيل منشئ ›",callback_data=data.sender_user_id_..":RemConstructor:"..Rio},{text="‹ تنزيل مدير ›",callback_data=data.sender_user_id_..":RemManager:"..Rio}},{{text="‹ تنزيل منظف ›",callback_data=data.sender_user_id_..":RemCleaner:"..Rio},{text="‹ تنزيل منشئ  اساسي ›",callback_data=data.sender_user_id_..":RemBasicConstructor:"..Rio}},{{text="‹ تنزيل مالك ›",callback_data=data.sender_user_id_..":RemOwner:"..Rio}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 elseif Owner(data) then
-keyboard.inline_keyboard = {{{text="• تنزيل مميز •",callback_data=data.sender_user_id_..":RemMem:"..Rio},{text="• تنزيل ادمن •",callback_data=data.sender_user_id_..":RemAdmin:"..Rio}},{{text="• تنزيل منشئ •",callback_data=data.sender_user_id_..":RemConstructor:"..Rio},{text="• تنزيل مدير •",callback_data=data.sender_user_id_..":RemManager:"..Rio}},{{text="• تنزيل منظف •",callback_data=data.sender_user_id_..":RemCleaner:"..Rio},{text="• تنزيل منشئ  اساسي •",callback_data=data.sender_user_id_..":RemBasicConstructor:"..Rio}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ تنزيل مميز ›",callback_data=data.sender_user_id_..":RemMem:"..Rio},{text="‹ تنزيل ادمن ›",callback_data=data.sender_user_id_..":RemAdmin:"..Rio}},{{text="‹ تنزيل منشئ ›",callback_data=data.sender_user_id_..":RemConstructor:"..Rio},{text="‹ تنزيل مدير ›",callback_data=data.sender_user_id_..":RemManager:"..Rio}},{{text="‹ تنزيل منظف ›",callback_data=data.sender_user_id_..":RemCleaner:"..Rio},{text="‹ تنزيل منشئ  اساسي ›",callback_data=data.sender_user_id_..":RemBasicConstructor:"..Rio}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 elseif BasicConstructor(data) then
-keyboard.inline_keyboard = {{{text="• تنزيل مميز •",callback_data=data.sender_user_id_..":RemMem:"..Rio},{text="• تنزيل ادمن •",callback_data=data.sender_user_id_..":RemAdmin:"..Rio}},{{text="• تنزيل منشئ •",callback_data=data.sender_user_id_..":RemConstructor:"..Rio},{text="• تنزيل مدير •",callback_data=data.sender_user_id_..":RemManager:"..Rio}},{{text="• تنزيل منظف •",callback_data=data.sender_user_id_..":RemCleaner:"..Rio}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ تنزيل مميز ›",callback_data=data.sender_user_id_..":RemMem:"..Rio},{text="‹ تنزيل ادمن ›",callback_data=data.sender_user_id_..":RemAdmin:"..Rio}},{{text="‹ تنزيل منشئ ›",callback_data=data.sender_user_id_..":RemConstructor:"..Rio},{text="‹ تنزيل مدير ›",callback_data=data.sender_user_id_..":RemManager:"..Rio}},{{text="‹ تنزيل منظف ›",callback_data=data.sender_user_id_..":RemCleaner:"..Rio}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 elseif Constructor(data) then
-keyboard.inline_keyboard = {{{text="• تنزيل مميز •",callback_data=data.sender_user_id_..":RemMem:"..Rio},{text="• تنزيل ادمن •",callback_data=data.sender_user_id_..":RemAdmin:"..Rio}},{{text="• تنزيل منظف •",callback_data=data.sender_user_id_..":RemCleaner:"..Rio},{text="• تنزيل مدير •",callback_data=data.sender_user_id_..":RemManager:"..Rio}},{{text = '• Antak TeAM •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ تنزيل مميز ›",callback_data=data.sender_user_id_..":RemMem:"..Rio},{text="‹ تنزيل ادمن ›",callback_data=data.sender_user_id_..":RemAdmin:"..Rio}},{{text="‹ تنزيل منظف ›",callback_data=data.sender_user_id_..":RemCleaner:"..Rio},{text="‹ تنزيل مدير ›",callback_data=data.sender_user_id_..":RemManager:"..Rio}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 elseif Manager(data) then
-keyboard.inline_keyboard = {{{text="• تنزيل مميز •",callback_data=data.sender_user_id_..":RemMem:"..Rio},{text="• تنزيل ادمن •",callback_data=data.sender_user_id_..":RemAdmin:"..Rio}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ تنزيل مميز ›",callback_data=data.sender_user_id_..":RemMem:"..Rio},{text="‹ تنزيل ادمن ›",callback_data=data.sender_user_id_..":RemAdmin:"..Rio}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 elseif Admin(data) then
-keyboard.inline_keyboard = {{{text="• تنزيل مميز •",callback_data=data.sender_user_id_..":RemMem:"..Rio}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ تنزيل مميز ›",callback_data=data.sender_user_id_..":RemMem:"..Rio}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 end
 https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end,nil)
@@ -1467,23 +1438,23 @@ local Text = [[
 ]] 
 keyboard = {} 
 if Sudo(data) then
-keyboard.inline_keyboard = {{{text="• مسح الاساسيين •",callback_data="/DelRioSudo:"..data.sender_user_id_},{text="• مسح الثانويين •",callback_data="/DelSecondSudo:"..data.sender_user_id_}},{{text="• مسح المطورين •",callback_data="/DelSudoBot:"..data.sender_user_id_},{text="• مسح المالكين •",callback_data="/DelOwner:"..data.sender_user_id_}},{{text="• مسح المنشئين الاساسيين •",callback_data="/DelBasicConstructor:"..data.sender_user_id_},{text="• مسح المنشئين •",callback_data="/DelConstructor:"..data.sender_user_id_}},{{text="• مسح المدراء •",callback_data="/DelManagers:"..data.sender_user_id_},{text="• مسح الادمنيه •",callback_data="/DelAdmins:"..data.sender_user_id_}},{{text="• مسح المميزين •",callback_data="/DelVipMem:"..data.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• القائمه الرئيسيه •",callback_data="/DelList:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ مسح الاساسيين ›",callback_data="/DelRioSudo:"..data.sender_user_id_},{text="‹ مسح الثانويين ›",callback_data="/DelSecondSudo:"..data.sender_user_id_}},{{text="‹ مسح المطورين ›",callback_data="/DelSudoBot:"..data.sender_user_id_},{text="‹ مسح المالكين ›",callback_data="/DelOwner:"..data.sender_user_id_}},{{text="‹ مسح المنشئين الاساسيين ›",callback_data="/DelBasicConstructor:"..data.sender_user_id_},{text="‹ مسح المنشئين ›",callback_data="/DelConstructor:"..data.sender_user_id_}},{{text="‹ مسح المدراء ›",callback_data="/DelManagers:"..data.sender_user_id_},{text="‹ مسح الادمنيه ›",callback_data="/DelAdmins:"..data.sender_user_id_}},{{text="‹ مسح المميزين ›",callback_data="/DelVipMem:"..data.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ القائمه الرئيسيه ›",callback_data="/DelList:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 elseif RioSudo(data) then
-keyboard.inline_keyboard = {{{text="• مسح الثانويين •",callback_data="/DelSecondSudo:"..data.sender_user_id_}},{{text="• مسح المطورين •",callback_data="/DelSudoBot:"..data.sender_user_id_},{text="• مسح المالكين •",callback_data="/DelOwner:"..data.sender_user_id_}},{{text="• مسح المنشئين الاساسيين •",callback_data="/DelBasicConstructor:"..data.sender_user_id_},{text="• مسح المنشئين •",callback_data="/DelConstructor:"..data.sender_user_id_}},{{text="• مسح المدراء •",callback_data="/DelManagers:"..data.sender_user_id_},{text="• مسح الادمنيه •",callback_data="/DelAdmins:"..data.sender_user_id_}},{{text="• مسح المميزين •",callback_data="/DelVipMem:"..data.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• القائمه الرئيسيه •",callback_data="/DelList:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ مسح الثانويين ›",callback_data="/DelSecondSudo:"..data.sender_user_id_}},{{text="‹ مسح المطورين ›",callback_data="/DelSudoBot:"..data.sender_user_id_},{text="‹ مسح المالكين ›",callback_data="/DelOwner:"..data.sender_user_id_}},{{text="‹ مسح المنشئين الاساسيين ›",callback_data="/DelBasicConstructor:"..data.sender_user_id_},{text="‹ مسح المنشئين ›",callback_data="/DelConstructor:"..data.sender_user_id_}},{{text="‹ مسح المدراء ›",callback_data="/DelManagers:"..data.sender_user_id_},{text="‹ مسح الادمنيه ›",callback_data="/DelAdmins:"..data.sender_user_id_}},{{text="‹ مسح المميزين ›",callback_data="/DelVipMem:"..data.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ القائمه الرئيسيه ›",callback_data="/DelList:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 elseif SecondSudo(data) then
-keyboard.inline_keyboard = {{{text="• مسح المطورين •",callback_data="/DelSudoBot:"..data.sender_user_id_},{text="• مسح المالكين •",callback_data="/DelOwner:"..data.sender_user_id_}},{{text="• مسح المنشئين الاساسيين •",callback_data="/DelBasicConstructor:"..data.sender_user_id_},{text="• مسح المنشئين •",callback_data="/DelConstructor:"..data.sender_user_id_}},{{text="• مسح المدراء •",callback_data="/DelManagers:"..data.sender_user_id_},{text="• مسح الادمنيه •",callback_data="/DelAdmins:"..data.sender_user_id_}},{{text="• مسح المميزين •",callback_data="/DelVipMem:"..data.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• القائمه الرئيسيه •",callback_data="/DelList:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ مسح المطورين ›",callback_data="/DelSudoBot:"..data.sender_user_id_},{text="‹ مسح المالكين ›",callback_data="/DelOwner:"..data.sender_user_id_}},{{text="‹ مسح المنشئين الاساسيين ›",callback_data="/DelBasicConstructor:"..data.sender_user_id_},{text="‹ مسح المنشئين ›",callback_data="/DelConstructor:"..data.sender_user_id_}},{{text="‹ مسح المدراء ›",callback_data="/DelManagers:"..data.sender_user_id_},{text="‹ مسح الادمنيه ›",callback_data="/DelAdmins:"..data.sender_user_id_}},{{text="‹ مسح المميزين ›",callback_data="/DelVipMem:"..data.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ القائمه الرئيسيه ›",callback_data="/DelList:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 elseif SudoBot(data) then
-keyboard.inline_keyboard = {{{text="• مسح المالكين •",callback_data="/DelOwner:"..data.sender_user_id_}},{{text="• مسح المنشئين الاساسيين •",callback_data="/DelBasicConstructor:"..data.sender_user_id_},{text="• مسح المنشئين •",callback_data="/DelConstructor:"..data.sender_user_id_}},{{text="• مسح المدراء •",callback_data="/DelManagers:"..data.sender_user_id_},{text="• مسح الادمنيه •",callback_data="/DelAdmins:"..data.sender_user_id_}},{{text="• مسح المميزين •",callback_data="/DelVipMem:"..data.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• القائمه الرئيسيه •",callback_data="/DelList:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ مسح المالكين ›",callback_data="/DelOwner:"..data.sender_user_id_}},{{text="‹ مسح المنشئين الاساسيين ›",callback_data="/DelBasicConstructor:"..data.sender_user_id_},{text="‹ مسح المنشئين ›",callback_data="/DelConstructor:"..data.sender_user_id_}},{{text="‹ مسح المدراء ›",callback_data="/DelManagers:"..data.sender_user_id_},{text="‹ مسح الادمنيه ›",callback_data="/DelAdmins:"..data.sender_user_id_}},{{text="‹ مسح المميزين ›",callback_data="/DelVipMem:"..data.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ القائمه الرئيسيه ›",callback_data="/DelList:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 elseif Owner(data) then
-keyboard.inline_keyboard = {{{text="• مسح المنشئين الاساسيين •",callback_data="/DelBasicConstructor:"..data.sender_user_id_},{text="• مسح المنشئين •",callback_data="/DelConstructor:"..data.sender_user_id_}},{{text="• مسح المدراء •",callback_data="/DelManagers:"..data.sender_user_id_},{text="• مسح الادمنيه •",callback_data="/DelAdmins:"..data.sender_user_id_}},{{text="• مسح المميزين •",callback_data="/DelVipMem:"..data.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• القائمه الرئيسيه •",callback_data="/DelList:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ مسح المنشئين الاساسيين ›",callback_data="/DelBasicConstructor:"..data.sender_user_id_},{text="‹ مسح المنشئين ›",callback_data="/DelConstructor:"..data.sender_user_id_}},{{text="‹ مسح المدراء ›",callback_data="/DelManagers:"..data.sender_user_id_},{text="‹ مسح الادمنيه ›",callback_data="/DelAdmins:"..data.sender_user_id_}},{{text="‹ مسح المميزين ›",callback_data="/DelVipMem:"..data.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ القائمه الرئيسيه ›",callback_data="/DelList:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 elseif BasicConstructor(data) then
-keyboard.inline_keyboard = {{{text="• مسح المنشئين •",callback_data="/DelConstructor:"..data.sender_user_id_}},{{text="• مسح المدراء •",callback_data="/DelManagers:"..data.sender_user_id_},{text="• مسح الادمنيه •",callback_data="/DelAdmins:"..data.sender_user_id_}},{{text="• مسح المميزين •",callback_data="/DelVipMem:"..data.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• القائمه الرئيسيه •",callback_data="/DelList:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ مسح المنشئين ›",callback_data="/DelConstructor:"..data.sender_user_id_}},{{text="‹ مسح المدراء ›",callback_data="/DelManagers:"..data.sender_user_id_},{text="‹ مسح الادمنيه ›",callback_data="/DelAdmins:"..data.sender_user_id_}},{{text="‹ مسح المميزين ›",callback_data="/DelVipMem:"..data.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ القائمه الرئيسيه ›",callback_data="/DelList:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 elseif Constructor(data) then
-keyboard.inline_keyboard = {{{text="• مسح المدراء •",callback_data="/DelManagers:"..data.sender_user_id_},{text="• مسح الادمنيه •",callback_data="/DelAdmins:"..data.sender_user_id_}},{{text="• مسح المميزين •",callback_data="/DelVipMem:"..data.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• القائمه الرئيسيه •",callback_data="/DelList:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ مسح المدراء ›",callback_data="/DelManagers:"..data.sender_user_id_},{text="‹ مسح الادمنيه ›",callback_data="/DelAdmins:"..data.sender_user_id_}},{{text="‹ مسح المميزين ›",callback_data="/DelVipMem:"..data.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ القائمه الرئيسيه ›",callback_data="/DelList:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 elseif Manager(data) then
-keyboard.inline_keyboard = {{{text="• مسح الادمنيه •",callback_data="/DelAdmins:"..data.sender_user_id_}},{{text="• مسح المميزين •",callback_data="/DelVipMem:"..data.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• القائمه الرئيسيه •",callback_data="/DelList:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ مسح الادمنيه ›",callback_data="/DelAdmins:"..data.sender_user_id_}},{{text="‹ مسح المميزين ›",callback_data="/DelVipMem:"..data.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ القائمه الرئيسيه ›",callback_data="/DelList:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 elseif Admin(data) then
-keyboard.inline_keyboard = {{{text="• مسح المميزين •",callback_data="/DelVipMem:"..data.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• القائمه الرئيسيه •",callback_data="/DelList:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ مسح المميزين ›",callback_data="/DelVipMem:"..data.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ القائمه الرئيسيه ›",callback_data="/DelList:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 end
 https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
@@ -1494,7 +1465,7 @@ local Rio = DataText:match('/DelRioSudo:'..tonumber(data.sender_user_id_)..'(.*)
 DevRio:del(Antak..'Rio:RioSudo:')
 Text = "*᥀︙تم حذف الاساسيين*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• القائمه الرئيسيه •",callback_data="/DelList:"..data.sender_user_id_}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ القائمه الرئيسيه ›",callback_data="/DelList:"..data.sender_user_id_}}}
 https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end end
 if RioSudo(data) then
@@ -1503,7 +1474,7 @@ local Rio = DataText:match('/DelSecondSudo:'..tonumber(data.sender_user_id_)..'(
 DevRio:del(Antak..'Rio:SecondSudo:')
 Text = "*᥀︙تم حذف الثانويين*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• القائمه الرئيسيه •",callback_data="/DelList:"..data.sender_user_id_}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ القائمه الرئيسيه ›",callback_data="/DelList:"..data.sender_user_id_}}}
 https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end end
 if SecondSudo(data) then
@@ -1512,7 +1483,7 @@ local Rio = DataText:match('/DelSudoBot:'..tonumber(data.sender_user_id_)..'(.*)
 DevRio:del(Antak..'Rio:SudoBot:')
 Text = "*᥀︙تم حذف المطورين*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• القائمه الرئيسيه •",callback_data="/DelList:"..data.sender_user_id_}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ القائمه الرئيسيه ›",callback_data="/DelList:"..data.sender_user_id_}}}
 https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end end
 if SudoBot(data) then
@@ -1521,7 +1492,7 @@ local Rio = DataText:match('/DelOwner:'..tonumber(data.sender_user_id_)..'(.*)')
 DevRio:del(Antak..'Rio:Owner:'..data.chat_id_)
 Text = "*᥀︙تم حذف المالكين*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• القائمه الرئيسيه •",callback_data="/DelList:"..data.sender_user_id_}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ القائمه الرئيسيه ›",callback_data="/DelList:"..data.sender_user_id_}}}
 https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end end
 if Owner(data) then
@@ -1530,7 +1501,7 @@ local Rio = DataText:match('/DelBasicConstructor:'..tonumber(data.sender_user_id
 DevRio:del(Antak..'Rio:UsersMsgs'..data.chat_id_..':'..data.sender_user_id_)
 Text = "*᥀︙تم حذف المنشئين الاساسيين*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• القائمه الرئيسيه •",callback_data="/DelList:"..data.sender_user_id_}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ القائمه الرئيسيه ›",callback_data="/DelList:"..data.sender_user_id_}}}
 https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end end
 if BasicConstructor(data) then
@@ -1539,7 +1510,7 @@ local Rio = DataText:match('/DelConstructor:'..tonumber(data.sender_user_id_)..'
 DevRio:del(Antak..'Rio:Constructor:'..data.chat_id_)
 Text = "*᥀︙تم حذف المنشئين*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• القائمه الرئيسيه •",callback_data="/DelList:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ القائمه الرئيسيه ›",callback_data="/DelList:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end end
 if Constructor(data) then
@@ -1548,7 +1519,7 @@ local Rio = DataText:match('/DelManager:'..tonumber(data.sender_user_id_)..'(.*)
 DevRio:del(Antak..'Rio:Managers:'..data.chat_id_)
 Text = "*᥀︙تم حذف المدراء*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• القائمه الرئيسيه •",callback_data="/DelList:"..data.sender_user_id_}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ القائمه الرئيسيه ›",callback_data="/DelList:"..data.sender_user_id_}}}
 https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end end
 if Manager(data) then
@@ -1557,7 +1528,7 @@ local Rio = DataText:match('/DelAdmins:'..tonumber(data.sender_user_id_)..'(.*)'
 DevRio:del(Antak..'Rio:Admins:'..data.chat_id_)
 Text = "*᥀︙تم حذف الادمنيه*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• القائمه الرئيسيه •",callback_data="/DelList:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ القائمه الرئيسيه ›",callback_data="/DelList:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end end
 if Admin(data) then
@@ -1566,7 +1537,7 @@ local Rio = DataText:match('/DelVipMem:'..tonumber(data.sender_user_id_)..'(.*)'
 DevRio:del(Antak..'Rio:VipMem:'..data.chat_id_)
 Text = "*᥀︙تم حذف المميزين*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• القائمه الرئيسيه •",callback_data="/DelList:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ القائمه الرئيسيه ›",callback_data="/DelList:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end end
 if RioConstructor(data) then
@@ -1575,7 +1546,7 @@ local Rio = DataText:match('/DelCleanr:'..tonumber(data.sender_user_id_)..'(.*)'
 DevRio:del(Antak..'Rio:Cleaner:'..data.chat_id_)
 Text = "*᥀︙تم حذف المنظفين*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• القائمه الرئيسيه •",callback_data="/DelList:"..data.sender_user_id_}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ القائمه الرئيسيه ›",callback_data="/DelList:"..data.sender_user_id_}}}
 https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end end
 if Admin(data) then
@@ -1584,7 +1555,7 @@ local Rio = DataText:match('/DelMute:'..tonumber(data.sender_user_id_)..'(.*)')
 DevRio:del(Antak..'Rio:Muted:'..data.chat_id_)
 Text = "*᥀︙تم حذف المكتومين*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_}}}
 https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
 if DataText and DataText:match('/DelKeed:'..tonumber(data.sender_user_id_)..'(.*)') then
@@ -1596,7 +1567,7 @@ DevRio:srem(Antak..'Rio:Tkeed:'..data.chat_id_, v)
 end
 Text = "*᥀︙تم حذف المقيدين*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_}}}
 https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
 if DataText and DataText:match('/DelBan:'..tonumber(data.sender_user_id_)..'(.*)') then
@@ -1604,7 +1575,7 @@ local Rio = DataText:match('/DelBan:'..tonumber(data.sender_user_id_)..'(.*)')
 DevRio:del(Antak..'Rio:Ban:'..data.chat_id_)
 Text = "*᥀︙تم حذف المحظورين*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_}}}
 https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end end
 if DataText and DataText:match('/DelListAll:'..tonumber(data.sender_user_id_)..'(.*)') then
@@ -1613,7 +1584,7 @@ DevRio:del(Antak..'Rio:BanAll:')
 DevRio:del(Antak..'Rio:MuteAll:')
 Text = "*᥀︙تم حذف قائمه العام*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_}}}
 https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
 --     Source Antak     --
@@ -1636,7 +1607,7 @@ DevRio:del(Antak..'Rio:Manager:GpRed'..data.chat_id_)
 end
 Text = "*᥀︙تم حذف ردود المدير*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_}}}
 https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text or redod).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
 end
@@ -1660,26 +1631,19 @@ DevRio:del(Antak.."Rio:Sudo:AllRed")
 end
 Text = "*᥀︙تم حذف ردود المطور*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_}}}
 https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text or redod).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
 end 
 if DataText and DataText:match('/ChangeRed:'..tonumber(data.sender_user_id_)..'(.*)') then
 local Rio = DataText:match('/ChangeRed:'..tonumber(data.sender_user_id_)..'(.*)')
-if not Bot(data) and DevRio:get(Antak..'Rio:Lock:Rd'..data.chat_id_) then 
-Dev_Rio(data.chat_id_, data.id_, 1,'᥀︙لاتستطيع اضافه رد وذالك بسبب تعطيله', 1, 'md')
-return false
-end
-if not Manager(data) then
-Dev_Rio(data.chat_id_, data.id_, 1, '᥀︙للمدير واعلى فقط ', 1, 'md')
-else
 DevRio:set(Antak..'Rio:Add:GpRed'..data.sender_user_id_..data.chat_id_,'SetGpRed')
 EditMsg(Chat_Id2, Msg_Id2, "᥀︙حسنا ارسل الكلمه الان") 
 return false
-end end
+end
 if text and text:match("^(.*)$") then
 local SetGpRed = DevRio:get(Antak..'Rio:Add:GpRed'..data.sender_user_id_..data.chat_id_)
-if SetGpRed == 'SetGpRed' then
+if SetGpRed =='SetGpRed' then
 if text == "الغاء" then 
 Dev_Rio(data.chat_id_, data.id_, 1, "᥀︙تم الغاء الامر" ,  1, "md")
 DevRio:del(Antak..'Rio:Add:GpRed'..data.sender_user_id_..data.chat_id_)
@@ -1691,7 +1655,7 @@ DevRio:set(Antak..'Rio:Add:GpText'..data.sender_user_id_..data.chat_id_,text)
 DevRio:sadd(Antak..'Rio:Manager:GpRed'..data.chat_id_,text)
 DevRio:set(Antak..'DelManagerRep'..data.chat_id_,text)
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• تغير الرد •",callback_data="/ChangeRed:"..data.sender_user_id_}},{{text="• الغاء •",callback_data="/CancelRed:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ تغير الرد ›",callback_data="/ChangeRed:"..data.sender_user_id_}},{{text="‹ الغاء ›",callback_data="/CancelRed:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text or redod).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 return false
 end end
@@ -1711,7 +1675,7 @@ return false
 end end
 if text and text:match("^(.*)$") then
 local SetAllRed = DevRio:get(Antak.."Rio:Add:AllRed"..data.sender_user_id_)
-if SetAllRed == 'SetAllRed' then
+if SetAllRed =='SetAllRed' then
 if text == "الغاء" then 
 EditMsg(Chat_Id2, Msg_Id2, "᥀︙تم الغاء الامر") 
 DevRio:del(Antak..'Rio:Add:AllRed'..data.sender_user_id_)
@@ -1723,7 +1687,7 @@ DevRio:set(Antak.."Rio:Add:AllText"..data.sender_user_id_, text)
 DevRio:sadd(Antak.."Rio:Sudo:AllRed",text)
 DevRio:set(Antak.."DelSudoRep",text)
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• تغير الرد •",callback_data="/ChangeAllRed:"..data.sender_user_id_}},{{text="• الغاء •",callback_data="/CancelAllRed:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ تغير الرد ›",callback_data="/ChangeAllRed:"..data.sender_user_id_}},{{text="‹ الغاء ›",callback_data="/CancelAllRed:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text or redod).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 return false
 end end
@@ -1737,7 +1701,7 @@ DevRio:del(Antak.."List:Cmd:Group:New"..data.chat_id_)
 end
 Text = "᥀︙تم حذف الاوامر المضافه في المجموعه"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/CmdList:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/CmdList:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text or redod).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
 if DataText and DataText:match('/SetCmd:'..tonumber(data.sender_user_id_)..'(.*)') then
@@ -1778,8 +1742,203 @@ DevRio:set(Antak.."Set:Cmd:Group:New1"..data.chat_id_..":#","مسح قائمه �
 DevRio:sadd(Antak.."List:Cmd:Group:New"..data.chat_id_,"#")
 Text = "᥀︙تم ترتيب الاوامر بالشكل التالي ~\n᥀︙ ايدي - ا .\n᥀︙ رفع مميز - م .\n᥀︙رفع ادمن - اد .\n᥀︙ رفع مدير - مد . \n᥀︙ رفع منشى - من . \n᥀︙ رفع منشئ الاساسي - اس  .\n᥀︙ رفع مطور - مط .\n᥀︙رفع مطور ثانوي - ثانوي .\n᥀︙ تنزيل الكل - تك .\n᥀︙ تعطيل الايدي بالصوره - تعط .\n᥀︙ تفعيل الايدي بالصوره - تفع .\n᥀︙ الرابط - ر .\n᥀︙ ردود المدير - رر .\n᥀︙ مسح المكتومين - ،، .\n᥀︙ اضف رد - رد .\n᥀︙ مسح سحكاتي - سح .\n᥀︙ مسح رسائلي - رس .\n᥀︙ غنيلي - غ .\n᥀︙مسح قائمه العام"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/CmdList:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/CmdList:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+end
+--     Source Antak     --
+if DataText and DataText:match('/On:'..tonumber(data.sender_user_id_)..'(.*)') then
+local Rio = DataText:match('/On:'..tonumber(data.sender_user_id_)..'(.*)')
+tdcli_function ({ID = "GetUser",user_id_ = data.sender_user_id_},function(extra,result,success)
+tdcli_function({ID ="GetChat",chat_id_=data.chat_id_},function(arg,dp) 
+tdcli_function ({ID = "GetChannelMembers",channel_id_ = data.chat_id_:gsub("-100",""),filter_ = {ID = "ChannelMembersAdministrators"},offset_ = 0,limit_ = 100},function(arg,rio) 
+local admins = rio.members_
+for i=0 , #admins do
+if rio.members_[i].bot_info_ == false and rio.members_[i].status_.ID == "ChatMemberStatusEditor" then
+DevRio:sadd(Antak..'Rio:Admins:'..data.chat_id_, admins[i].user_id_)
+tdcli_function ({ID = "GetUser",user_id_ = admins[i].user_id_},function(arg,ba) 
+if ba.first_name_ == false then
+DevRio:srem(Antak..'Rio:Admins:'..data.chat_id_, admins[i].user_id_)
+end
+end,nil)
+else
+DevRio:sadd(Antak..'Rio:Admins:'..data.chat_id_, admins[i].user_id_)
+end
+if rio.members_[i].status_.ID == "ChatMemberStatusCreator" then
+DevRio:sadd(Antak.."Rio:BasicConstructor:"..data.chat_id_,admins[i].user_id_)
+DevRio:sadd(Antak.."Rio:RioConstructor:"..data.chat_id_,admins[i].user_id_)
+tdcli_function ({ID = "GetUser",user_id_ = admins[i].user_id_},function(arg,ba) 
+if ba.first_name_ == false then
+DevRio:srem(Antak.."Rio:BasicConstructor:"..data.chat_id_,admins[i].user_id_)
+DevRio:srem(Antak.."Rio:RioConstructor:"..data.chat_id_,admins[i].user_id_)
+end
+end,nil)  
+end 
+end
+end,nil)
+if DevRio:sismember(Antak..'Rio:Groups',data.chat_id_) then
+EditMsg(Chat_Id2, Msg_Id2, '᥀︙المجموعه بالتاكيد مفعله')
+else
+Text = "᥀︙تم تفعيل المجموعه "..dp.title_
+keyboard = {} 
+keyboard.inline_keyboard = {{{text="‹ ترتيب الاوامر ›",callback_data="/SetCmdGp:"..data.sender_user_id_},{text="‹ رفع الادمنيه ›",callback_data="/UploadAdmin:"..data.sender_user_id_}},{{text="‹ غادر ›",callback_data="/LeaveBot:"..data.sender_user_id_},{text="‹ تعطيل ›",callback_data="/Stop:"..data.sender_user_id_}},{{text="‹ TeAm Antak ›",url="t.me/TeAmAnTaK"}}}
+https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+DevRio:sadd(Antak.."Rio:Groups",data.chat_id_)
+if not DevRio:get(Antak..'Rio:SudosGp'..data.sender_user_id_..data.chat_id_) and not SecondSudo(data) then 
+DevRio:incrby(Antak..'Rio:Sudos'..data.sender_user_id_,1)
+DevRio:set(Antak..'Rio:SudosGp'..data.sender_user_id_..data.chat_id_,"rio")
+end
+local Name1 = result.first_name_
+local Name1 = Name1:gsub('"',"") 
+local Name1 = Name1:gsub("'","") 
+local Name1 = Name1:gsub("`","") 
+local Name1 = Name1:gsub("*","") 
+local Name1 = Name1:gsub("{","") 
+local Name1 = Name1:gsub("}","") 
+local Name ='['..Name1..'](tg://user?id='..result.id_..')'
+local NumMem = data.member_count_
+local NameChat = dp.title_
+local NameChat = NameChat:gsub('"',"") 
+local NameChat = NameChat:gsub("'","") 
+local NameChat = NameChat:gsub("`","") 
+local NameChat = NameChat:gsub("*","") 
+local NameChat = NameChat:gsub("{","") 
+local NameChat = NameChat:gsub("}","") 
+local LinkGp = json:decode(https.request('https://api.telegram.org/bot'..TokenBot..'/exportChatInviteLink?chat_id='..data.chat_id_))
+if LinkGp.ok == true then 
+LinkGroup = LinkGp.result
+else
+LinkGroup ='لا يوجد'
+end
+DevRio:set(Antak.."Rio:Groups:Links"..data.chat_id_,LinkGroup) 
+if not Sudo(data) then
+SendText(DevId,"᥀︙تم تفعيل مجموعه جديده ↫ ⤈ \n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n᥀︙بواسطة ↫ "..Name.."\n᥀︙اسم المجموعه ↫ ["..NameChat.."]\n᥀︙عدد اعضاء المجموعه ↫ ❨ *"..NumMem.."* ❩\n᥀︙ايدي المجموعه ↫ ⤈ \n❨ `"..data.chat_id_.."` ❩\n᥀︙رابط المجموعه ↫ ⤈\n❨ ["..LinkGroup.."] ❩\n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n᥀︙الوقت ↫ "..os.date("%I:%M%p").."\n᥀︙التاريخ ↫ "..os.date("%Y/%m/%d").."",0,'md')
+end
+end
+end,nil)
+end,nil)
+end
+--     Source Antak     --
+if DataText and DataText:match('/Stop:'..tonumber(data.sender_user_id_)..'(.*)') then
+local Rio = DataText:match('/Stop:'..tonumber(data.sender_user_id_)..'(.*)')
+tdcli_function ({ID = "GetUser",user_id_ = data.sender_user_id_},function(extra,result,success)
+tdcli_function({ID ="GetChat",chat_id_=data.chat_id_},function(arg,dp) 
+if not DevRio:sismember(Antak..'Rio:Groups',data.chat_id_) then
+EditMsg(Chat_Id2, Msg_Id2, "᥀︙المجموعه بالتاكيد معطله") 
+else
+Text = "᥀︙تم تعطيل المجموعه "..dp.title_
+keyboard = {}
+keyboard.inline_keyboard = {{{text="‹ غادر ›",callback_data="/LeaveBot:"..data.sender_user_id_},{text="‹ تفعيل ›",callback_data="/On:"..data.sender_user_id_}},{{text="‹ TeAm Antak ›",url="t.me/TeAmAnTaK"}}}
+https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+DevRio:srem(Antak.."Rio:Groups",data.chat_id_)
+local Name1 = result.first_name_
+local Name1 = Name1:gsub('"',"") 
+local Name1 = Name1:gsub("'","") 
+local Name1 = Name1:gsub("`","") 
+local Name1 = Name1:gsub("*","") 
+local Name1 = Name1:gsub("{","") 
+local Name1 = Name1:gsub("}","") 
+local Name ='['..Name1..'](tg://user?id='..result.id_..')'
+local NameChat = dp.title_
+local NameChat = NameChat:gsub('"',"") 
+local NameChat = NameChat:gsub("'","") 
+local NameChat = NameChat:gsub("`","") 
+local NameChat = NameChat:gsub("*","") 
+local NameChat = NameChat:gsub("{","") 
+local NameChat = NameChat:gsub("}","") 
+local LinkGp = json:decode(https.request('https://api.telegram.org/bot'..TokenBot..'/exportChatInviteLink?chat_id='..data.chat_id_))
+if LinkGp.ok == true then 
+LinkGroup = LinkGp.result
+else
+LinkGroup ='لا يوجد'
+end
+DevRio:set(Antak.."Rio:Groups:Links"..data.chat_id_,LinkGroup) 
+if not Sudo(data) then
+SendText(DevId,"᥀︙تم تعطيل مجموعه جديده ↫ ⤈ \n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n᥀︙بواسطة ↫ "..Name.."\n᥀︙اسم المجموعه ↫ ["..NameChat.."]\n᥀︙ايدي المجموعه ↫ ⤈ \n❨ `"..data.chat_id_.."` ❩\n᥀︙رابط المجموعه ↫ ⤈\n❨ ["..LinkGroup.."] ❩\n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n᥀︙الوقت ↫ "..os.date("%I:%M%p").."\n᥀︙التاريخ ↫ "..os.date("%Y/%m/%d").."",0,'md')
+end
+end
+end,nil)
+end,nil)
+end
+--     Source Antak     --
+if DataText and DataText:match('/SetCmdGp:'..tonumber(data.sender_user_id_)..'(.*)') then
+local Rio = DataText:match('/SetCmdGp:'..tonumber(data.sender_user_id_)..'(.*)')
+DevRio:set(Antak.."Set:Cmd:Group:New1"..data.chat_id_..":ا","ايدي")
+DevRio:sadd(Antak.."List:Cmd:Group:New"..data.chat_id_,"ا")
+DevRio:set(Antak.."Set:Cmd:Group:New1"..data.chat_id_..":م","رفع مميز")
+DevRio:sadd(Antak.."List:Cmd:Group:New"..data.chat_id_,"م")
+DevRio:set(Antak.."Set:Cmd:Group:New1"..data.chat_id_..":اد","رفع ادمن")
+DevRio:sadd(Antak.."List:Cmd:Group:New"..data.chat_id_,"اد")
+DevRio:set(Antak.."Set:Cmd:Group:New1"..data.chat_id_..":مد","رفع مدير")
+DevRio:sadd(Antak.."List:Cmd:Group:New"..data.chat_id_,"مد")
+DevRio:set(Antak.."Set:Cmd:Group:New1"..data.chat_id_..":من","رفع منشئ")
+DevRio:sadd(Antak.."List:Cmd:Group:New"..data.chat_id_,"من")
+DevRio:set(Antak.."Set:Cmd:Group:New1"..data.chat_id_..":اس","رفع منشئ اساسي")
+DevRio:sadd(Antak.."List:Cmd:Group:New"..data.chat_id_,"اس")
+DevRio:set(Antak.."Set:Cmd:Group:New1"..data.chat_id_..":مط","رفع مطور")
+DevRio:sadd(Antak.."List:Cmd:Group:New"..data.chat_id_,"مط")
+DevRio:set(Antak.."Set:Cmd:Group:New1"..data.chat_id_..":ثانوي","رفع مطور ثانوي")
+DevRio:sadd(Antak.."List:Cmd:Group:New"..data.chat_id_,"ثانوي")
+DevRio:set(Antak.."Set:Cmd:Group:New1"..data.chat_id_..":تك","تنزيل الكل")
+DevRio:sadd(Antak.."List:Cmd:Group:New"..data.chat_id_,"تك")
+DevRio:set(Antak.."Set:Cmd:Group:New1"..data.chat_id_..":تعط","تعطيل الايدي بالصوره")
+DevRio:sadd(Antak.."List:Cmd:Group:New"..data.chat_id_,"تعط")
+DevRio:set(Antak.."Set:Cmd:Group:New1"..data.chat_id_..":تفع","تفعيل الايدي بالصوره")
+DevRio:sadd(Antak.."List:Cmd:Group:New"..data.chat_id_,"تفع")
+DevRio:set(Antak.."Set:Cmd:Group:New1"..data.chat_id_..":ر","الرابط")
+DevRio:sadd(Antak.."List:Cmd:Group:New"..data.chat_id_,"ر")
+DevRio:set(Antak.."Set:Cmd:Group:New1"..data.chat_id_..":رر","ردود المدير")
+DevRio:sadd(Antak.."List:Cmd:Group:New"..data.chat_id_,"رر")
+DevRio:set(Antak.."Set:Cmd:Group:New1"..data.chat_id_..":،،","مسح المكتومين")
+DevRio:sadd(Antak.."List:Cmd:Group:New"..data.chat_id_,"،،")
+DevRio:set(Antak.."Set:Cmd:Group:New1"..data.chat_id_..":رد","اضف رد")
+DevRio:sadd(Antak.."List:Cmd:Group:New"..data.chat_id_,"رد")
+DevRio:set(Antak.."Set:Cmd:Group:New1"..data.chat_id_..":غ","غنيلي")
+DevRio:sadd(Antak.."List:Cmd:Group:New"..data.chat_id_,"غ")
+DevRio:set(Antak.."Set:Cmd:Group:New1"..data.chat_id_..":#","مسح قائمه العام")
+DevRio:sadd(Antak.."List:Cmd:Group:New"..data.chat_id_,"#")
+Text = "᥀︙تم ترتيب الاوامر بالشكل التالي ~\n᥀︙ ايدي - ا .\n᥀︙ رفع مميز - م .\n᥀︙رفع ادمن - اد .\n᥀︙ رفع مدير - مد . \n᥀︙ رفع منشى - من . \n᥀︙ رفع منشئ الاساسي - اس  .\n᥀︙ رفع مطور - مط .\n᥀︙رفع مطور ثانوي - ثانوي .\n᥀︙ تنزيل الكل - تك .\n᥀︙ تعطيل الايدي بالصوره - تعط .\n᥀︙ تفعيل الايدي بالصوره - تفع .\n᥀︙ الرابط - ر .\n᥀︙ ردود المدير - رر .\n᥀︙ مسح المكتومين - ،، .\n᥀︙ اضف رد - رد .\n᥀︙ مسح سحكاتي - سح .\n᥀︙ مسح رسائلي - رس .\n᥀︙ غنيلي - غ .\n᥀︙مسح قائمه العام"
+keyboard = {} 
+keyboard.inline_keyboard = {{{text="‹ رجوع ›",callback_data="/Reload:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
+return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+end
+--     Source Antak     --
+if DataText and DataText:match('/Reload:'..tonumber(data.sender_user_id_)..'(.*)') then
+local Rio = DataText:match('/Reload:'..tonumber(data.sender_user_id_)..'(.*)')
+Text = "᥀︙تم تفعيل المجموعه"
+keyboard = {} 
+keyboard.inline_keyboard = {{{text="‹ ترتيب الاوامر ›",callback_data="/SetCmdGp:"..data.sender_user_id_},{text="‹ رفع الادمنيه ›",callback_data="/UploadAdmin:"..data.sender_user_id_}},{{text="‹ غادر ›",callback_data="/LeaveBot:"..data.sender_user_id_},{text="‹ تعطيل ›",callback_data="/Stop:"..data.sender_user_id_}},{{text="‹ TeAm Antak ›",url="t.me/TeAmAnTaK"}}}
+https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+end
+--     Source Antak     -- 
+if DataText and DataText:match('/UploadAdmin:'..tonumber(data.sender_user_id_)..'(.*)') then
+local Rio = DataText:match('/UploadAdmin:'..tonumber(data.sender_user_id_)..'(.*)')
+tdcli_function ({ID = "GetChannelMembers",channel_id_ = data.chat_id_:gsub("-100",""),filter_ = {ID = "ChannelMembersAdministrators"},offset_ = 0,limit_ = 200},function(arg,rio) 
+local num = 0
+local admins = rio.members_  
+for i=0 , #admins do   
+if rio.members_[i].bot_info_ == false and rio.members_[i].status_.ID == "ChatMemberStatusEditor" then
+DevRio:sadd(Antak..'Rio:Admins:'..data.chat_id_, admins[i].user_id_)   
+num = num + 1
+tdcli_function ({ID = "GetUser",user_id_ = admins[i].user_id_},function(arg,dp) 
+if dp.first_name_ == false then
+DevRio:srem(Antak..'Rio:Admins:'..data.chat_id_, admins[i].user_id_)   
+end
+end,nil)   
+else
+DevRio:srem(Antak..'Rio:Admins:'..data.chat_id_, admins[i].user_id_)   
+end 
+if rio.members_[i].status_.ID == "ChatMemberStatusCreator" then  
+Manager_id = admins[i].user_id_  
+DevRio:sadd(Antak..'Rio:BasicConstructor:'..data.chat_id_,Manager_id)  
+DevRio:sadd(Antak..'Rio:RioConstructor:'..data.chat_id_,Manager_id)   
+end  
+end  
+if num == 0 then
+EditMsg(Chat_Id2, Msg_Id2,  "᥀︙لا يوجد ادمنيه ليتم رفعهم\n᥀︙تم رفع مالك المجموعه", 1, 'md')
+else
+EditMsg(Chat_Id2, Msg_Id2,  '᥀︙تم رفع '..num..' من الادمنيه \n᥀︙تم رفع مالك المجموعه', 1, 'md')
+end
+end,nil) 
 end
 --     Source Antak     --
 if DataText and DataText:match('/CancelAllRed:'..tonumber(data.sender_user_id_)..'(.*)') then
@@ -1791,7 +1950,7 @@ DevRio:del(Antak.."Rio:Add:AllRed"..data.sender_user_id_)
 DevRio:del(Antak.."DelSudoRep")
 Text = "᥀︙تم الغاء حفظ الرد"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 return false
 end
@@ -1804,7 +1963,7 @@ DevRio:del(Antak..'Rio:Add:GpRed'..data.sender_user_id_..data.chat_id_)
 DevRio:del(Antak..'DelManagerRep'..data.chat_id_)
 Text = "᥀︙تم الغاء حفظ الرد"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 return false
 end
@@ -1817,7 +1976,7 @@ local Text = [[
 *᥀︙من خلال الازرار يمكنك التحكم بأوامر المجموعه*
 ]] 
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• ترتيب الاوامر •",callback_data="/SetCmd:"..data.sender_user_id_},{text="• مسح الاوامر المضافه •",callback_data="/DelCmd:"..data.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ ترتيب الاوامر ›",callback_data="/SetCmd:"..data.sender_user_id_},{text="‹ مسح الاوامر المضافه ›",callback_data="/DelCmd:"..data.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Cmd or Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end end
 --     Source Antak     --
@@ -1829,7 +1988,7 @@ local Text = [[
 *᥀︙من خلال الازرار يمكنك مسح رسائلك وسحكاتك*
 ]] 
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• مسح رسائلي •",callback_data="/DelMsg:"..data.sender_user_id_},{text="• مسح سحكاتي •",callback_data="/DelEdit:"..data.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ مسح رسائلي ›",callback_data="/DelMsg:"..data.sender_user_id_},{text="‹ مسح سحكاتي ›",callback_data="/DelEdit:"..data.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Msg or Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end end
 --     Source Antak     --
@@ -1838,7 +1997,7 @@ local Rio = DataText:match('/DelEdit:'..tonumber(data.sender_user_id_)..'(.*)')
 DevRio:del(Antak..'Rio:EditMsg'..data.chat_id_..':'..data.sender_user_id_)
 Text = "*᥀︙تم حذف جميع تعديلاتك بنجاح*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• رجوع •",callback_data="/DelHome:"..data.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ رجوع ›",callback_data="/DelHome:"..data.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end 
 --     Source Antak     --
@@ -1847,7 +2006,7 @@ local Rio = DataText:match('/DelMsg:'..tonumber(data.sender_user_id_)..'(.*)')
 DevRio:del(Antak..'Rio:UsersMsgs'..data.chat_id_..':'..data.sender_user_id_)
 Text = "*᥀︙تم حذف جميع رسائلك بنجاح*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• رجوع •",callback_data="/DelHome:"..data.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ رجوع ›",callback_data="/DelHome:"..data.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
 --     Source Antak     --
@@ -1856,14 +2015,14 @@ local Rio = DataText:match('/FilterList:(.*)')
 if tonumber(Rio) == tonumber(data.sender_user_id_) then
 local Filter = DevRio:get(Antak..'Rio:Filter')
 local Text = [[
-᥀︙اهلا بك في قائمة المنع ↫ ⤈ 
+*᥀︙اهلا بك في قائمة المنع ↫ ⤈*
 ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉
 *᥀︙يمكنك مسح الممنوعات من خلال الازرار اسفل*
 ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉
 ᥀︙[Source Channel](https://t.me/TeAmAnTaK)
 ]] 
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• مسح المتحركات •",callback_data="/DelGif:"..data.sender_user_id_},{text="• مسح الملصقات •",callback_data="/DelSticker:"..data.sender_user_id_}},{{text="• مسح الصور •",callback_data="/DelPhoto:"..data.sender_user_id_},{text="• مسح الكلمات •",callback_data="/DelTextfilter:"..data.sender_user_id_}},{{text="• مسح قوائم المنع •",callback_data="/DelAllFilter:"..data.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ مسح المتحركات ›",callback_data="/DelGif:"..data.sender_user_id_},{text="‹ مسح الملصقات ›",callback_data="/DelSticker:"..data.sender_user_id_}},{{text="‹ مسح الصور ›",callback_data="/DelPhoto:"..data.sender_user_id_},{text="‹ مسح الكلمات ›",callback_data="/DelTextfilter:"..data.sender_user_id_}},{{text="‹ مسح قوائم المنع ›",callback_data="/DelAllFilter:"..data.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
 end
@@ -1873,7 +2032,7 @@ local Rio = DataText:match('/DelGif:'..tonumber(data.sender_user_id_)..'(.*)')
 DevRio:del(Antak.."Rio:FilterAnimation"..data.chat_id_)
 Text = "*᥀︙تم حذف جميع المتحركات الممنوعه بنجاح*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• رجوع •",callback_data="/FilterList:"..data.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ رجوع ›",callback_data="/FilterList:"..data.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
 if DataText and DataText:match('/DelSticker:'..tonumber(data.sender_user_id_)..'(.*)') then
@@ -1881,7 +2040,7 @@ local Rio = DataText:match('/DelSticker:'..tonumber(data.sender_user_id_)..'(.*)
 DevRio:del(Antak.."Rio:FilterSteckr"..data.chat_id_)
 Text = "*᥀︙تم حذف جميع الملصقات الممنوعه بنجاح*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• رجوع •",callback_data="/FilterList:"..data.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ رجوع ›",callback_data="/FilterList:"..data.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
 if DataText and DataText:match('/DelPhoto:'..tonumber(data.sender_user_id_)..'(.*)') then
@@ -1889,7 +2048,7 @@ local Rio = DataText:match('/DelPhoto:'..tonumber(data.sender_user_id_)..'(.*)')
 DevRio:del(Antak.."Rio:FilterPhoto"..data.chat_id_)
 Text = "*᥀︙تم حذف جميع الصور الممنوعه بنجاح*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• رجوع •",callback_data="/FilterList:"..data.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ رجوع ›",callback_data="/FilterList:"..data.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
 if DataText and DataText:match('/DelTextfilter:'..tonumber(data.sender_user_id_)..'(.*)') then
@@ -1897,7 +2056,7 @@ local Rio = DataText:match('/DelTextfilter:'..tonumber(data.sender_user_id_)..'(
 DevRio:del(Antak..'Rio:Filters:'..data.chat_id_)
 Text = "*᥀︙تم حذف جميع الكلمات الممنوعه بنجاح*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• رجوع •",callback_data="/FilterList:"..data.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ رجوع ›",callback_data="/FilterList:"..data.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
 if DataText and DataText:match('/DelAllFilter:'..tonumber(data.sender_user_id_)..'(.*)') then
@@ -1908,7 +2067,7 @@ DevRio:del(Antak.."Rio:FilterPhoto"..data.chat_id_)
 DevRio:del(Antak.."Rio:FilterSteckr"..data.chat_id_)
 Text = "*᥀︙تم حذف جميع قوائم المنع بنجاح*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• رجوع •",callback_data="/FilterList:"..data.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ رجوع ›",callback_data="/FilterList:"..data.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
 --     Source Antak     --
@@ -1917,14 +2076,14 @@ local Rio = DataText:match('/locklist:(.*)')
 if tonumber(Rio) == tonumber(data.sender_user_id_) then
 local locklist = DevRio:get(Antak..'Rio:locklist')
 local Text = [[
-᥀︙اهلا بك في قائمة القفل والفتح ↫ ⤈ 
+*᥀︙اهلا بك في قائمة القفل والفتح ↫ ⤈*
 ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉
 *᥀︙يمكنك فتح و قفل الاوامر من خلال الازرار اسفل*
 ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉
 ᥀︙[Source Channel](https://t.me/TeAmAnTaK)
 ]] 
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• قفل الدردشه •",callback_data="/lockText:"..data.sender_user_id_},{text="• فتح الدردشه •",callback_data="/unlockText:"..data.sender_user_id_}},{{text="• قفل الدخول •",callback_data="/lockjoin:"..data.sender_user_id_},{text="• فتح الدخول •",callback_data="/unlockjoin:"..data.sender_user_id_}},{{text="• قفل البوتات •",callback_data="/LockBotList:"..data.sender_user_id_},{text="• فتح البوتات •",callback_data="/unlockBot:"..data.sender_user_id_}},{{text="• قفل الاشعارات •",callback_data="/lockTagServr:"..data.sender_user_id_},{text="• فتح الاشعارات •",callback_data="/unlockTagServr:"..data.sender_user_id_}},{{text="• قفل التعديل •",callback_data="/lockEditMsgs:"..data.sender_user_id_},{text="• فتح التعديل •",callback_data="/unlockEditMsgs:"..data.sender_user_id_}},{{text="• قفل الملصقات •",callback_data="/lockStickers:"..data.sender_user_id_},{text="• فتح الملصقات •",callback_data="/unlockStickers:"..data.sender_user_id_}},{{text="• قفل المتحركه •",callback_data="/lockGifs:"..data.sender_user_id_},{text="• فتح المتحركه •",callback_data="/unlockGifs:"..data.sender_user_id_}},{{text="• قفل الفيديو •",callback_data="/lockVideos:"..data.sender_user_id_},{text="• فتح الفيديو •",callback_data="/unlockVideos:"..data.sender_user_id_}},{{text="• قفل الصور •",callback_data="/unlockPhoto:"..data.sender_user_id_},{text="• فتح الصور •",callback_data="/unlockPhoto:"..data.sender_user_id_}},{{text="• قفل التوجيه •",callback_data="/lockForwards:"..data.sender_user_id_},{text="• فتح التوجيه •",callback_data="/unlockForwards:"..data.sender_user_id_}},{{text="• قفل التكرار •",callback_data="/LockSpamList:"..data.sender_user_id_},{text="• فتح التكرار •",callback_data="/unlockSpam:"..data.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• القائمه الرئيسيه •",callback_data="/HelpList:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ قفل الدردشه ›",callback_data="/lockText:"..data.sender_user_id_},{text="‹ فتح الدردشه ›",callback_data="/unlockText:"..data.sender_user_id_}},{{text="‹ قفل الدخول ›",callback_data="/lockjoin:"..data.sender_user_id_},{text="‹ فتح الدخول ›",callback_data="/unlockjoin:"..data.sender_user_id_}},{{text="‹ قفل البوتات ›",callback_data="/LockBotList:"..data.sender_user_id_},{text="‹ فتح البوتات ›",callback_data="/unlockBot:"..data.sender_user_id_}},{{text="‹ قفل الاشعارات ›",callback_data="/lockTagServr:"..data.sender_user_id_},{text="‹ فتح الاشعارات ›",callback_data="/unlockTagServr:"..data.sender_user_id_}},{{text="‹ قفل التعديل ›",callback_data="/lockEditMsgs:"..data.sender_user_id_},{text="‹ فتح التعديل ›",callback_data="/unlockEditMsgs:"..data.sender_user_id_}},{{text="‹ قفل الملصقات ›",callback_data="/lockStickers:"..data.sender_user_id_},{text="‹ فتح الملصقات ›",callback_data="/unlockStickers:"..data.sender_user_id_}},{{text="‹ قفل المتحركه ›",callback_data="/lockGifs:"..data.sender_user_id_},{text="‹ فتح المتحركه ›",callback_data="/unlockGifs:"..data.sender_user_id_}},{{text="‹ قفل الفيديو ›",callback_data="/lockVideos:"..data.sender_user_id_},{text="‹ فتح الفيديو ›",callback_data="/unlockVideos:"..data.sender_user_id_}},{{text="‹ قفل الصور ›",callback_data="/unlockPhoto:"..data.sender_user_id_},{text="‹ فتح الصور ›",callback_data="/unlockPhoto:"..data.sender_user_id_}},{{text="‹ قفل التوجيه ›",callback_data="/lockForwards:"..data.sender_user_id_},{text="‹ فتح التوجيه ›",callback_data="/unlockForwards:"..data.sender_user_id_}},{{text="‹ قفل التكرار ›",callback_data="/LockSpamList:"..data.sender_user_id_},{text="‹ فتح التكرار ›",callback_data="/unlockSpam:"..data.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ القائمه الرئيسيه ›",callback_data="/HelpList:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
 end
@@ -1934,7 +2093,7 @@ local Rio = DataText:match('/LockBotList:(.*)')
 if tonumber(Rio) == tonumber(data.sender_user_id_) then
 local LockBotList = DevRio:get(Antak..'Rio:LockBotList')
 local Text = [[
-᥀︙اهلا بك في قائمة قفل البوتات  ↫ ⤈ 
+*᥀︙اهلا بك في قائمة قفل البوتات  ↫ ⤈*
 ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉
 *᥀︙بالطرد*
 *᥀︙بالكتم*
@@ -1943,7 +2102,7 @@ local Text = [[
 ᥀︙[Source Channel](https://t.me/TeAmAnTaK)
 ]] 
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• قفل البوتات بالطرد •",callback_data="/lockBotKick:"..data.sender_user_id_},{text="• قفل البوتات بالتقيد •",callback_data="/lockBotKed:"..data.sender_user_id_}},{{text="• قفل البوتات بالكتم •",callback_data="/lockBotDel:"..data.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/locklist:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ قفل البوتات بالطرد ›",callback_data="/lockBotKick:"..data.sender_user_id_},{text="‹ قفل البوتات بالتقيد ›",callback_data="/lockBotKed:"..data.sender_user_id_}},{{text="‹ قفل البوتات بالكتم ›",callback_data="/lockBotDel:"..data.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/locklist:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
 end
@@ -1953,7 +2112,7 @@ local Rio = DataText:match('/LockSpamList:(.*)')
 if tonumber(Rio) == tonumber(data.sender_user_id_) then
 local LockSpamList = DevRio:get(Antak..'Rio:LockSpamList')
 local Text = [[
-᥀︙اهلا بك في قائمة قفل التكرار  ↫ ⤈ 
+*᥀︙اهلا بك في قائمة قفل التكرار  ↫ ⤈*
 ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉
 *᥀︙بالطرد*
 *᥀︙بالكتم*
@@ -1963,225 +2122,225 @@ local Text = [[
 ᥀︙[Source Channel](https://t.me/TeAmAnTaK)
 ]] 
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• قفل التكرار بالطرد •",callback_data="/lockSpamKick:"..data.sender_user_id_},{text="• قفل التكرار بالتقيد •",callback_data="/lockSpamKed:"..data.sender_user_id_}},{{text="• قفل التكرار بالحذف •",callback_data="/lockSpamDel:"..data.sender_user_id_},{text="• قفل التكرار بالكتم •",callback_data="/lockSpamMute:"..data.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/locklist:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ قفل التكرار بالطرد ›",callback_data="/lockSpamKick:"..data.sender_user_id_},{text="‹ قفل التكرار بالتقيد ›",callback_data="/lockSpamKed:"..data.sender_user_id_}},{{text="‹ قفل التكرار بالحذف ›",callback_data="/lockSpamDel:"..data.sender_user_id_},{text="‹ قفل التكرار بالكتم ›",callback_data="/lockSpamMute:"..data.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/locklist:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
 end
 --     Source Antak     --
-if DataText == '/lockjoin:'..data.sender_user_id_ then
+if DataText =='/lockjoin:'..data.sender_user_id_ then
 if not DevRio:get(Antak..'Rio:Lock:Join'..data.chat_id_) then
 DevRio:set(Antak..'Rio:Lock:Join'..data.chat_id_,true)
 Text = "*᥀︙تم قفل الدخول بنجاح*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/locklist:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/locklist:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end 
 end
-if DataText == '/unlockjoin:'..data.sender_user_id_ then
+if DataText =='/unlockjoin:'..data.sender_user_id_ then
 if DevRio:get(Antak..'Rio:Lock:Join'..data.chat_id_) then
 DevRio:del(Antak..'Rio:Lock:Join'..data.chat_id_)
 Text = "*᥀︙تم فتح الدخول بنجاح*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/locklist:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/locklist:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end end
-if DataText == '/lockText:'..data.sender_user_id_ then
+if DataText =='/lockText:'..data.sender_user_id_ then
 if not DevRio:get(Antak..'Rio:Lock:Text'..data.chat_id_) then
 DevRio:set(Antak..'Rio:Lock:Text'..data.chat_id_,true)
 Text = "*᥀︙تم قفل الدردشه بنجاح*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/locklist:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/locklist:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end 
 end
-if DataText == '/unlockText:'..data.sender_user_id_ then
+if DataText =='/unlockText:'..data.sender_user_id_ then
 if DevRio:get(Antak..'Rio:Lock:Text'..data.chat_id_) then
 DevRio:del(Antak..'Rio:Lock:Text'..data.chat_id_)
 Text = "*᥀︙تم فتح الدردشه بنجاح*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/locklist:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/locklist:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end end
-if DataText == '/lockTagServr:'..data.sender_user_id_ then
+if DataText =='/lockTagServr:'..data.sender_user_id_ then
 if not DevRio:get(Antak..'Rio:Lock:TagServr'..data.chat_id_) then
 DevRio:set(Antak..'Rio:Lock:TagServr'..data.chat_id_,true)
 Text = "*᥀︙تم قفل الاشعارات بنجاح*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/locklist:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/locklist:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end 
 end
-if DataText == '/unlockTagServr:'..data.sender_user_id_ then
+if DataText =='/unlockTagServr:'..data.sender_user_id_ then
 if DevRio:get(Antak..'Rio:Lock:TagServr'..data.chat_id_) then
 DevRio:del(Antak..'Rio:Lock:TagServr'..data.chat_id_) 
 Text = "*᥀︙تم فتح الاشعارات بنجاح*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/locklist:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/locklist:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end end
-if DataText == '/lockEditMsgs:'..data.sender_user_id_ then
+if DataText =='/lockEditMsgs:'..data.sender_user_id_ then
 if not DevRio:get(Antak..'Rio:Lock:EditMsgs'..data.chat_id_) then
 DevRio:set(Antak..'Rio:Lock:EditMsgs'..data.chat_id_,true)
 Text = "*᥀︙تم قفل التعديل بنجاح*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/locklist:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/locklist:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end 
 end
-if DataText == '/unlockEditMsgs:'..data.sender_user_id_ then
+if DataText =='/unlockEditMsgs:'..data.sender_user_id_ then
 if DevRio:get(Antak..'Rio:Lock:EditMsgs'..data.chat_id_) then
 DevRio:del(Antak..'Rio:Lock:EditMsgs'..data.chat_id_)
 Text = "*᥀︙تم فتح التعديل بنجاح*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/locklist:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/locklist:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end end
-if DataText == '/lockStickers:'..data.sender_user_id_ then
+if DataText =='/lockStickers:'..data.sender_user_id_ then
 if not DevRio:get(Antak..'Rio:Lock:Stickers'..data.chat_id_) then
 DevRio:set(Antak..'Rio:Lock:Stickers'..data.chat_id_,true)
 Text = "*᥀︙تم قفل الملصقات بنجاح*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/locklist:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/locklist:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end 
 end
-if DataText == '/unlockStickers:'..data.sender_user_id_ then
+if DataText =='/unlockStickers:'..data.sender_user_id_ then
 if DevRio:get(Antak..'Rio:Lock:Stickers'..data.chat_id_) then
 DevRio:del(Antak..'Rio:Lock:Stickers'..data.chat_id_)
 Text = "*᥀︙تم فتح الملصقات بنجاح*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/locklist:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/locklist:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end end
-if DataText == '/lockGifs:'..data.sender_user_id_ then
+if DataText =='/lockGifs:'..data.sender_user_id_ then
 if not DevRio:get(Antak..'Rio:Lock:Gifs'..data.chat_id_) then
 DevRio:set(Antak..'Rio:Lock:Gifs'..data.chat_id_,true)
 Text = "*᥀︙تم قفل المتحركه بنجاح*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/locklist:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/locklist:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end 
 end
-if DataText == '/unlockGifs:'..data.sender_user_id_ then
+if DataText =='/unlockGifs:'..data.sender_user_id_ then
 if DevRio:get(Antak..'Rio:Lock:Gifs'..data.chat_id_) then
 DevRio:del(Antak..'Rio:Lock:Gifs'..data.chat_id_)
 Text = "*᥀︙تم فتح المتحركه بنجاح*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/locklist:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/locklist:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end end
-if DataText == '/lockPhoto:'..data.sender_user_id_ then
+if DataText =='/lockPhoto:'..data.sender_user_id_ then
 if not DevRio:get(Antak..'Rio:Lock:Photo'..data.chat_id_) then
 DevRio:set(Antak..'Rio:Lock:Photo'..data.chat_id_,true) 
 Text = "*᥀︙تم قفل الصور بنجاح*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/locklist:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/locklist:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end 
 end
-if DataText == '/unlockPhoto:'..data.sender_user_id_ then
+if DataText =='/unlockPhoto:'..data.sender_user_id_ then
 if DevRio:get(Antak..'Rio:Lock:Photo'..data.chat_id_) then
 DevRio:del(Antak..'Rio:Lock:Photo'..data.chat_id_)
 Text = "*᥀︙تم فتح الصور بنجاح*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/locklist:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/locklist:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end end
-if DataText == '/lockVideos:'..data.sender_user_id_ then
+if DataText =='/lockVideos:'..data.sender_user_id_ then
 if not DevRio:get(Antak..'Rio:Lock:Videos'..data.chat_id_) then
 DevRio:set(Antak..'Rio:Lock:Videos'..data.chat_id_,true)
 Text = "*᥀︙تم قفل الفيديو بنجاح*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/locklist:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/locklist:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end 
 end
-if DataText == '/unlockVideos:'..data.sender_user_id_ then
+if DataText =='/unlockVideos:'..data.sender_user_id_ then
 if DevRio:get(Antak..'Rio:Lock:Videos'..data.chat_id_) then
 DevRio:del(Antak..'Rio:Lock:Videos'..data.chat_id_)
 Text = "*᥀︙تم فتح الفيديو بنجاح*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/locklist:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/locklist:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end end
-if DataText == '/lockForwards:'..data.sender_user_id_ then
+if DataText =='/lockForwards:'..data.sender_user_id_ then
 if not DevRio:get(Antak..'Rio:Lock:Forwards'..data.chat_id_) then
 DevRio:set(Antak..'Rio:Lock:Forwards'..data.chat_id_,true)
 Text = "*᥀︙تم قفل التوجيه بنجاح*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/locklist:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/locklist:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end 
 end
-if DataText == '/unlockForwards:'..data.sender_user_id_ then
+if DataText =='/unlockForwards:'..data.sender_user_id_ then
 if DevRio:get(Antak..'Rio:Lock:Forwards'..data.chat_id_) then
 DevRio:del(Antak..'Rio:Lock:Forwards'..data.chat_id_) 
 Text = "*᥀︙تم فتح التوجيه بنجاح*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/locklist:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/locklist:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end end
-if DataText == '/lockBotKick:'..data.sender_user_id_ then
+if DataText =='/lockBotKick:'..data.sender_user_id_ then
 DevRio:set(Antak.."Rio:Lock:Bots"..data.chat_id_,"kick")  
 Text = "*᥀︙تم قفل البوتات بالطرد بنجاح*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/LockBotList:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/LockBotList:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
-if DataText == '/lockBotKed:'..data.sender_user_id_ then
+if DataText =='/lockBotKed:'..data.sender_user_id_ then
 DevRio:set(Antak.."Rio:Lock:Bots"..data.chat_id_,"ked")   
 Text = "*᥀︙تم قفل البوتات بالتقييد بنجاح*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/LockBotList:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/LockBotList:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
-if DataText == '/lockBotDel:'..data.sender_user_id_ then
+if DataText =='/lockBotDel:'..data.sender_user_id_ then
 DevRio:set(Antak.."Rio:Lock:Bots"..data.chat_id_,"del")  
 Text = "*᥀︙تم قفل البوتات بالكتم بنجاح*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/LockBotList:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/LockBotList:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end 
-if DataText == '/unlockBot:'..data.sender_user_id_ then
+if DataText =='/unlockBot:'..data.sender_user_id_ then
 DevRio:del(Antak.."Rio:Lock:Bots"..data.chat_id_) 
 Text = "*᥀︙تم فتح البوتات بنجاح*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/locklist:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/locklist:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
-if DataText == '/lockSpamKick:'..data.sender_user_id_ then
+if DataText =='/lockSpamKick:'..data.sender_user_id_ then
 DevRio:hset(Antak.."Rio:Spam:Group:User"..data.chat_id_ ,"Spam:User","kick")  
 Text = "*᥀︙تم قفل التكرار بالطرد بنجاح*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/LockSpamList:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/LockSpamList:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
-if DataText == '/lockSpamKed:'..data.sender_user_id_ then
+if DataText =='/lockSpamKed:'..data.sender_user_id_ then
 DevRio:hset(Antak.."Rio:Spam:Group:User"..data.chat_id_ ,"Spam:User","keed")  
 Text = "*᥀︙تم قفل التكرار بالتقيد بنجاح*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/LockSpamList:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/LockSpamList:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
-if DataText == '/lockSpamDel:'..data.sender_user_id_ then
+if DataText =='/lockSpamDel:'..data.sender_user_id_ then
 DevRio:hset(Antak.."Rio:Spam:Group:User"..data.chat_id_ ,"Spam:User","del")  
 Text = "*᥀︙تم قفل التكرار بالحذف بنجاح*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/LockSpamList:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/LockSpamList:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end 
-if DataText == '/lockSpamMute:'..data.sender_user_id_ then
+if DataText =='/lockSpamMute:'..data.sender_user_id_ then
 DevRio:hset(Antak.."Rio:Spam:Group:User"..data.chat_id_ ,"Spam:User","mute")  
 Text = "*᥀︙تم قفل التكرار بالكتم بنجاح*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/LockSpamList:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/LockSpamList:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end 
-if DataText == '/unlockSpam:'..data.sender_user_id_ then
+if DataText =='/unlockSpam:'..data.sender_user_id_ then
 DevRio:hdel(Antak.."Rio:Spam:Group:User"..data.chat_id_ ,"Spam:User")  
 Text = "*᥀︙تم فتح التكرار بنجاح*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/locklist:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/locklist:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
 --     Source Antak     --
@@ -2192,7 +2351,7 @@ Text =[[
 *᥀︙قائمه الالعاب المتطوره اضغط للعب*
 ]]
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• ♟ الشطرنج ♟ •",url='https://t.me/T4TTTTBOT?game=chess'}},{{text="• لعبة فلابي بيرد 🐥 •",url='https://t.me/awesomebot?game=FlappyBird'},{text="• تحدي الرياضيات •",url='https://t.me/gamebot?game=MathBattle'}},{{text="• اكس او •",url='t.me/xobot?start'},{text="• سباق الدراجات 🏍 •",url='https://t.me/gamee?game=MotoFX'}},{{text="• سباق سيارات 🏎 •",url='https://t.me/gamee?game=F1Racer'},{text="• متشابه 👾 •",url='https://t.me/gamee?game=DiamondRows'}},{{text="• كرة قدم ⚽ •",url='https://t.me/gamee?game=FootballStar'}},{{text="• ورق🤹‍♂ •",url='https://t.me/gamee?game=Hexonix'},{text="• Hexonix❌ •",url='https://t.me/gamee?game=Hexonix'}},{{text="• MotoFx🏍️ •",url='https://t.me/gamee?game=MotoFx'}},{{text="• لعبة 2048 🎰 •",url='https://t.me/awesomebot?game=g2048'},{text="• Squares🏁 •",url='https://t.me/gamee?game=Squares'}},{{text="• Atomic 1▶️ •",url='https://t.me/gamee?game=AtomicDrop1'},{text="• Corsairs •",url='https://t.me/gamebot?game=Corsairs'}},{{text="• LumberJack •",url='https://t.me/gamebot?game=LumberJack'}},{{text="• LittlePlane •",url='https://t.me/gamee?game=LittlePlane'},{text="• RollerDisco •",url='https://t.me/gamee?game=RollerDisco'}},{{text="• 🦖 لعبة التنين 🦖 •",url='https://t.me/T4TTTTBOT?game=dragon'},{text="• 🐍 لعبة الافعى 🐍 •",url='https://t.me/T4TTTTBOT?game=snake'}},{{text="• 🔵 لعبة الالوان 🔴 •",url='https://t.me/T4TTTTBOT?game=color'}},{{text="• 🚀 لعبة الصاروخ 🚀 •",url='https://t.me/T4TTTTBOT?game=rocket'},{text="• 🏹 لعبة السهام 🏹 •",url='https://t.me/T4TTTTBOT?game=arrow'}},{{text="• لعبة النينجا •",url='https://t.me/gamee?game=GravityNinja21'},{text="• لعبة الكرتي •",url='https://t.me/gamee?game=KarateKid2'}},{{text = '• TeAm Antak •', url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ ♟ الشطرنج ♟ ›",url='https://t.me/T4TTTTBOT?game=chess'}},{{text="‹ لعبة فلابي بيرد 🐥 ›",url='https://t.me/awesomebot?game=FlappyBird'},{text="‹ تحدي الرياضيات ›",url='https://t.me/gamebot?game=MathBattle'}},{{text="‹ اكس او ›",url='t.me/xobot?start'},{text="‹ سباق الدراجات 🏍 ›",url='https://t.me/gamee?game=MotoFX'}},{{text="‹ سباق سيارات 🏎 ›",url='https://t.me/gamee?game=F1Racer'},{text="‹ متشابه 👾 ›",url='https://t.me/gamee?game=DiamondRows'}},{{text="‹ كرة قدم ⚽ ›",url='https://t.me/gamee?game=FootballStar'}},{{text="‹ ورق🤹‍♂ ›",url='https://t.me/gamee?game=Hexonix'},{text="‹ Hexonix❌ ›",url='https://t.me/gamee?game=Hexonix'}},{{text="‹ MotoFx🏍️ ›",url='https://t.me/gamee?game=MotoFx'}},{{text="‹ لعبة 2048 🎰 ›",url='https://t.me/awesomebot?game=g2048'},{text="‹ Squares🏁 ›",url='https://t.me/gamee?game=Squares'}},{{text="‹ Atomic 1▶️ ›",url='https://t.me/gamee?game=AtomicDrop1'},{text="‹ Corsairs ›",url='https://t.me/gamebot?game=Corsairs'}},{{text="‹ LumberJack ›",url='https://t.me/gamebot?game=LumberJack'}},{{text="‹ LittlePlane ›",url='https://t.me/gamee?game=LittlePlane'},{text="‹ RollerDisco ›",url='https://t.me/gamee?game=RollerDisco'}},{{text="‹ 🦖 لعبة التنين 🦖 ›",url='https://t.me/T4TTTTBOT?game=dragon'},{text="‹ 🐍 لعبة الافعى 🐍 ›",url='https://t.me/T4TTTTBOT?game=snake'}},{{text="‹ 🔵 لعبة الالوان 🔴 ›",url='https://t.me/T4TTTTBOT?game=color'}},{{text="‹ 🚀 لعبة الصاروخ 🚀 ›",url='https://t.me/T4TTTTBOT?game=rocket'},{text="‹ 🏹 لعبة السهام 🏹 ›",url='https://t.me/T4TTTTBOT?game=arrow'}},{{text="‹ لعبة النينجا ›",url='https://t.me/gamee?game=GravityNinja21'},{text="‹ لعبة الكرتي ›",url='https://t.me/gamee?game=KarateKid2'}},{{text='‹ TeAm Antak •', url="t.me/TeAmAnTaK"}}}
 https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 return false
 end end
@@ -2205,21 +2364,19 @@ local Text = [[
 *᥀︙اليك ازرار تحديث السورس والملفات*
 ]] 
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• تحديث السورس •",callback_data="/UpdateSource:"..data.sender_user_id_},{text="• تحديث الملفات •",callback_data="/UpdateFile:"..data.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_}}}
+keyboard.inline_keyboard = {{{text="‹ تحديث السورس ›",callback_data="/UpdateSource:"..data.sender_user_id_},{text="‹ تحديث الملفات ›",callback_data="/UpdateFile:"..data.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_}}}
 https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
 end
 --     Source Antak     -- 
 if DataText and DataText:match('/UpdateSource:'..tonumber(data.sender_user_id_)..'(.*)') then
 local Rio = DataText:match('/UpdateSource:'..tonumber(data.sender_user_id_)..'(.*)')
-os.execute('rm -rf Antak-Fatime.lua.lua') 
-os.execute('wget https://raw.githubusercontent.com/TeAm-AnTaK-Fatima/Antak/master/Antak-Fatime.lua') 
 dofile('Antak-Fatime.lua') 
 io.popen("rm -rf ../.telegram-cli/*")
 print("\27[31;47m\n          ( تم تحديث السورس )          \n\27[0;34;49m\n") 
 Text = "*᥀︙تم تحديث السورس*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/SourceList:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/SourceList:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
 if DataText and DataText:match('/UpdateFile:'..tonumber(data.sender_user_id_)..'(.*)') then
@@ -2229,7 +2386,7 @@ io.popen("rm -rf ../.telegram-cli/*")
 print("\27[31;47m\n        ( تم تحديث ملفات البوت )        \n\27[0;34;49m\n") 
 Text = "*᥀︙تم تحديث الملفات*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/SourceList:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/SourceList:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end 
 --     Source Antak     -- 
@@ -2241,7 +2398,7 @@ local Text = [[
 *᥀︙اليك ازرار مسح الميديا*
 ]] 
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• مسح الميديا •",callback_data="/DelMedia:"..data.sender_user_id_},{text="• مسح الاغاني •",callback_data="/DelMusic:"..data.sender_user_id_}},{{text="• مسح الرسائل المعدله •",callback_data="/DelMsgEdit:"..data.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_}}}
+keyboard.inline_keyboard = {{{text="‹ مسح الميديا ›",callback_data="/DelMedia:"..data.sender_user_id_},{text="‹ مسح الاغاني ›",callback_data="/DelMusic:"..data.sender_user_id_}},{{text="‹ مسح الرسائل المعدله ›",callback_data="/DelMsgEdit:"..data.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_}}}
 https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
 end
@@ -2262,7 +2419,7 @@ DevRio:del(Antak.."Rio:cleaner"..data.chat_id_)
 else
 Text = "*᥀︙لا توجد ميديا هنا*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/MediaHome:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/MediaHome:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end end
 if DataText and DataText:match('/DelMusic:'..tonumber(data.sender_user_id_)..'(.*)') then
@@ -2280,7 +2437,7 @@ DevRio:del(Antak.."Rio:cleanermusic"..data.chat_id_)
 else
 Text = "*᥀︙لا توجد اغاني هنا*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/MediaHome:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/MediaHome:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end end end
 if DataText and DataText:match('/DelMsgEdit:'..tonumber(data.sender_user_id_)..'(.*)') then
@@ -2304,7 +2461,7 @@ DeleteMessage(data.chat_id_,Rio_Del2)
 end,nil)  
 Text = "*᥀︙تم تنظيف الرسائل المعدله*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/MediaHome:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/MediaHome:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
 --     Source Antak     -- 
@@ -2323,7 +2480,7 @@ local Rio = DataText:match('/NoLeaveBot:(.*)')
 if tonumber(Rio) == tonumber(data.sender_user_id_) then
 EditMsg(Chat_Id2, Msg_Id2, "*᥀︙تم الغاء امر طرد البوت*")
 else
-return https.request("https://api.telegram.org/bot"..TokenBot..'/answercallbackquery?callback_query_id='..data.id_..'&text='..URL.escape("᥀ عذرا الامر ليس لك .")..'&show_alert=true')
+return https.request("https://api.telegram.org/bot"..TokenBot..'/answercallbackquery?callback_query_id='..data.id_..'&text='..URL.escape("‹ عذرا الامر ليس لك ›")..'&show_alert=true')
 end
 end
 --     Source Antak     -- 
@@ -2333,10 +2490,10 @@ if not DevRio:get(Antak.."Rio:Lock:GpLinksinline"..data.chat_id_) then
 tdcli_function({ID ="GetChat",chat_id_=data.chat_id_},function(arg,ta) 
 local linkgpp = json:decode(https.request('https://api.telegram.org/bot'..TokenBot..'/exportChatInviteLink?chat_id='..data.chat_id_)) or DevRio:get(Antak.."Private:Group:Link"..data.chat_id_) 
 if linkgpp.ok == true then 
-local Text = '᥀︙𝖫𝗂𝗇𝗄 𝖦𝗋𝗈𝗎𝗉 ↬ ⤈\n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n['..ta.title_..']('..linkgpp.result..')'
-keyboard = {}  
-keyboard.inline_keyboard = {{{text = ta.title_, url=linkgpp.result}}}
-https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..data.chat_id_..'&text=' .. URL.escape(Text).."&reply_to_message_id="..Msg_Id2.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+local Text ='᥀︙𝖫𝗂𝗇𝗄 𝖦𝗋𝗈𝗎𝗉 ↬ ⤈\n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n['..ta.title_..']('..linkgpp.result..')'
+keyboard = {} 
+keyboard.inline_keyboard = {{{text= ta.title_, url=linkgpp.result}}}
+return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 else 
 end 
 end,nil) 
@@ -2346,15 +2503,13 @@ if DataText and DataText:match('/LinkText:'..tonumber(data.sender_user_id_)..'(.
 local Rio = DataText:match('/LinkText:'..tonumber(data.sender_user_id_)..'(.*)')
 if not DevRio:get(Antak..'Rio:Lock:GpLinks'..data.chat_id_) then 
 if DevRio:get(Antak.."Rio:Groups:Links"..data.chat_id_) then
-send(data.chat_id_, data.id_, "᥀︙Group Link ↬ ⤈ \n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n"..DevRio:get(Antak.."Rio:Groups:Links"..data.chat_id_), 1, "html")
+EditMsg(Chat_Id2, Msg_Id2, "᥀︙Group Link ↬ ⤈ \n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n"..DevRio:get(Antak.."Rio:Groups:Links"..data.chat_id_), 1, "html")
 else 
-send(data.chat_id_, data.id_, 1, '᥀︙لايوجد رابط ارسل ↫ ضع رابط او ارسل ↫ انشاء رابط للانشاء', 1, 'md')
+EditMsg(Chat_Id2, Msg_Id2, '᥀︙لايوجد رابط ارسل ↫ ضع رابط او ارسل ↫ انشاء رابط للانشاء')
 end
 else
 end
 end
-
-
 --     Source Antak     --
 if DataText and DataText:match('/lockorder:(.*)') then
 local Rio = DataText:match('/lockorder:(.*)')
@@ -2368,7 +2523,7 @@ local Text = [[
 ᥀︙[Source Channel](https://t.me/TeAmAnTaK)
 ]] 
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• تعطيل الايدي بالصوره •",callback_data="/LockIdPhoto:"..data.sender_user_id_},{text="• تفعيل الايدي بالصوره •",callback_data="/UnLockIdPhoto:"..data.sender_user_id_}},{{text="• تعطيل الايدي •",callback_data="/LockId:"..data.sender_user_id_},{text="• تفعيل الايدي •",callback_data="/UnLockId:"..data.sender_user_id_}},{{text="• تعطيل الرابط •",callback_data="/LockGpLinks:"..data.sender_user_id_},{text="• تفعيل الرابط •",callback_data="/UnLockGpLinks:"..data.sender_user_id_}},{{text="• تعطيل الرابط انلاين •",callback_data="/LockGpLinksinline:"..data.sender_user_id_},{text="• تفعيل الرابط انلاين •",callback_data="/UnLockGpLinksinline:"..data.sender_user_id_}},{{text="• تعطيل الترحيب •",callback_data="/LockWelcome:"..data.sender_user_id_},{text="• تفعيل الترحيب •",callback_data="/UnLockWelcome:"..data.sender_user_id_}},{{text="• تعطيل الردود المطور •",callback_data="/LockAllRed:"..data.sender_user_id_},{text="• تفعيل الردود المطور •",callback_data="/UnLockAllRed:"..data.sender_user_id_}},{{text="• تعطيل ردود المدير •",callback_data="/LockGpRed:"..data.sender_user_id_},{text="• تفعيل ردود المدير •",callback_data="/UnLockGpRed:"..data.sender_user_id_}},{{text="• تعطيل نزلني •",callback_data="/LockDelMe:"..data.sender_user_id_},{text="• تفعيل نزلني •",callback_data="/UnLockDelMe:"..data.sender_user_id_}},{{text="• تعطيل اطردني •",callback_data="/LockKickMe:"..data.sender_user_id_},{text="• تفعيل اطردني •",callback_data="/UnLockKickMe:"..data.sender_user_id_}},{{text="• تعطيل الحظر •",callback_data="/LockKickBan:"..data.sender_user_id_},{text="• تفعيل الحظر •",callback_data="/UnLockKickBan:"..data.sender_user_id_}},{{text="• تعطيل الرفع •",callback_data="/LockProSet:"..data.sender_user_id_},{text="• تفعيل الرفع •",callback_data="/UnLockProSet:"..data.sender_user_id_}},{{text="• تعطيل الالعاب •",callback_data="/LockGames:"..data.sender_user_id_},{text="• تفعيل الالعاب •",callback_data="/UnLockGames:"..data.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• القائمه الرئيسيه •",callback_data="/HelpList:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ تعطيل الايدي بالصوره ›",callback_data="/LockIdPhoto:"..data.sender_user_id_},{text="‹ تفعيل الايدي بالصوره ›",callback_data="/UnLockIdPhoto:"..data.sender_user_id_}},{{text="‹ تعطيل الايدي ›",callback_data="/LockId:"..data.sender_user_id_},{text="‹ تفعيل الايدي ›",callback_data="/UnLockId:"..data.sender_user_id_}},{{text="‹ تعطيل الرابط ›",callback_data="/LockGpLinks:"..data.sender_user_id_},{text="‹ تفعيل الرابط ›",callback_data="/UnLockGpLinks:"..data.sender_user_id_}},{{text="‹ تعطيل الرابط انلاين ›",callback_data="/LockGpLinksinline:"..data.sender_user_id_},{text="‹ تفعيل الرابط انلاين ›",callback_data="/UnLockGpLinksinline:"..data.sender_user_id_}},{{text="‹ تعطيل الترحيب ›",callback_data="/LockWelcome:"..data.sender_user_id_},{text="‹ تفعيل الترحيب ›",callback_data="/UnLockWelcome:"..data.sender_user_id_}},{{text="‹ تعطيل الردود المطور ›",callback_data="/LockAllRed:"..data.sender_user_id_},{text="‹ تفعيل الردود المطور ›",callback_data="/UnLockAllRed:"..data.sender_user_id_}},{{text="‹ تعطيل ردود المدير ›",callback_data="/LockGpRed:"..data.sender_user_id_},{text="‹ تفعيل ردود المدير ›",callback_data="/UnLockGpRed:"..data.sender_user_id_}},{{text="‹ تعطيل نزلني ›",callback_data="/LockDelMe:"..data.sender_user_id_},{text="‹ تفعيل نزلني ›",callback_data="/UnLockDelMe:"..data.sender_user_id_}},{{text="‹ تعطيل اطردني ›",callback_data="/LockKickMe:"..data.sender_user_id_},{text="‹ تفعيل اطردني ›",callback_data="/UnLockKickMe:"..data.sender_user_id_}},{{text="‹ تعطيل الحظر ›",callback_data="/LockKickBan:"..data.sender_user_id_},{text="‹ تفعيل الحظر ›",callback_data="/UnLockKickBan:"..data.sender_user_id_}},{{text="‹ تعطيل الرفع ›",callback_data="/LockProSet:"..data.sender_user_id_},{text="‹ تفعيل الرفع ›",callback_data="/UnLockProSet:"..data.sender_user_id_}},{{text="‹ تعطيل الالعاب ›",callback_data="/LockGames:"..data.sender_user_id_},{text="‹ تفعيل الالعاب ›",callback_data="/UnLockGames:"..data.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ القائمه الرئيسيه ›",callback_data="/HelpList:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(order or Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end end
 --     Source Antak     --
@@ -2377,7 +2532,7 @@ local Rio = DataText:match('/LockIdPhoto:'..tonumber(data.sender_user_id_)..'(.*
 DevRio:set(Antak..'Rio:Lock:Id:Photo'..data.chat_id_,true)
 Text = "*᥀︙تم تعطيل الايدي بالصوره*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/lockorder:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/lockorder:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
 if DataText and DataText:match('/unLockIdPhoto:'..tonumber(data.sender_user_id_)..'(.*)') then
@@ -2385,7 +2540,7 @@ local Rio = DataText:match('/unLockIdPhoto:'..tonumber(data.sender_user_id_)..'(
 DevRio:del(Antak..'Rio:Lock:Id:Photo'..data.chat_id_)
 Text = "*᥀︙تم تفعيل الايدي بالصوره*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/lockorder:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/lockorder:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
 if DataText and DataText:match('/LockId:'..tonumber(data.sender_user_id_)..'(.*)') then
@@ -2393,7 +2548,7 @@ local Rio = DataText:match('/LockId:'..tonumber(data.sender_user_id_)..'(.*)')
 DevRio:set(Antak..'Rio:Lock:Id'..data.chat_id_,true)
 Text = "*᥀︙تم تعطيل الايدي*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/lockorder:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/lockorder:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
 if DataText and DataText:match('/unLockId:'..tonumber(data.sender_user_id_)..'(.*)') then
@@ -2401,7 +2556,7 @@ local Rio = DataText:match('/unLockId:'..tonumber(data.sender_user_id_)..'(.*)')
 DevRio:del(Antak..'Rio:Lock:Id'..data.chat_id_)
 Text = "*᥀︙تم تفعيل الايدي*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/lockorder:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/lockorder:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
 if DataText and DataText:match('/LockGpLinks:'..tonumber(data.sender_user_id_)..'(.*)') then
@@ -2409,7 +2564,7 @@ local Rio = DataText:match('/LockGpLinks:'..tonumber(data.sender_user_id_)..'(.*
 DevRio:set(Antak.."Rio:Lock:GpLinks"..data.chat_id_,"ok")
 Text = "*᥀︙تم تعطيل الرابط*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/lockorder:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/lockorder:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
 if DataText and DataText:match('/unLockGpLinks:'..tonumber(data.sender_user_id_)..'(.*)') then
@@ -2417,7 +2572,7 @@ local Rio = DataText:match('/unLockGpLinks:'..tonumber(data.sender_user_id_)..'(
 DevRio:del(Antak.."Rio:Lock:GpLinks"..data.chat_id_)
 Text = "*᥀︙تم تفعيل الرابط*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/lockorder:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/lockorder:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
 if DataText and DataText:match('/LockGpLinksinline:'..tonumber(data.sender_user_id_)..'(.*)') then
@@ -2425,7 +2580,7 @@ local Rio = DataText:match('/LockGpLinksinline:'..tonumber(data.sender_user_id_)
 DevRio:set(Antak.."Rio:Lock:GpLinksinline"..data.chat_id_,"ok")
 Text = "*᥀︙تم تعطيل الرابط انلاين*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/lockorder:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/lockorder:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
 if DataText and DataText:match('/UnLockGpLinksinline:'..tonumber(data.sender_user_id_)..'(.*)') then
@@ -2433,7 +2588,7 @@ local Rio = DataText:match('/UnLockGpLinksinline:'..tonumber(data.sender_user_id
 DevRio:del(Antak.."Rio:Lock:GpLinksinline"..data.chat_id_)
 Text = "*᥀︙تم تفعيل الرابط انلاين*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/lockorder:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/lockorder:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
 if DataText and DataText:match('/LockWelcome:'..tonumber(data.sender_user_id_)..'(.*)') then
@@ -2441,7 +2596,7 @@ local Rio = DataText:match('/LockWelcome:'..tonumber(data.sender_user_id_)..'(.*
 DevRio:del(Antak.."Rio:Lock:Welcome"..data.chat_id_)
 Text = "*᥀︙تم تعطيل الترحيب*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/lockorder:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/lockorder:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
 if DataText and DataText:match('/UnLockWelcome:'..tonumber(data.sender_user_id_)..'(.*)') then
@@ -2449,7 +2604,7 @@ local Rio = DataText:match('/UnLockWelcome:'..tonumber(data.sender_user_id_)..'(
 DevRio:set(Antak.."Rio:Lock:Welcome"..data.chat_id_,true)
 Text = "*᥀︙تم تفعيل الترحيب*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/lockorder:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/lockorder:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
 if DataText and DataText:match('/LockAllRed:'..tonumber(data.sender_user_id_)..'(.*)') then
@@ -2457,7 +2612,7 @@ local Rio = DataText:match('/LockAllRed:'..tonumber(data.sender_user_id_)..'(.*)
 DevRio:set(Antak..'Rio:Lock:AllRed'..data.chat_id_,true)
 Text = "*᥀︙تم تعطيل ردود المطور*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/lockorder:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/lockorder:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
 if DataText and DataText:match('/UnLockAllRed:'..tonumber(data.sender_user_id_)..'(.*)') then
@@ -2465,7 +2620,7 @@ local Rio = DataText:match('/UnLockAllRed:'..tonumber(data.sender_user_id_)..'(.
 DevRio:del(Antak..'Rio:Lock:AllRed'..data.chat_id_)
 Text = "*᥀︙تم تفعيل ردود المطور*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/lockorder:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/lockorder:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
 if DataText and DataText:match('/LockGpRed:'..tonumber(data.sender_user_id_)..'(.*)') then
@@ -2473,7 +2628,7 @@ local Rio = DataText:match('/LockGpRed:'..tonumber(data.sender_user_id_)..'(.*)'
 DevRio:set(Antak..'Rio:Lock:GpRed'..data.chat_id_,true)
 Text = "*᥀︙تم تعطيل ردود المدير*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/lockorder:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/lockorder:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
 if DataText and DataText:match('/UnLockGpRed:'..tonumber(data.sender_user_id_)..'(.*)') then
@@ -2481,7 +2636,7 @@ local Rio = DataText:match('/UnLockGpRed:'..tonumber(data.sender_user_id_)..'(.*
 DevRio:del(Antak..'Rio:Lock:GpRed'..data.chat_id_)
 Text = "*᥀︙تم تفعيل ردود المدير*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/lockorder:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/lockorder:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
 if DataText and DataText:match('/LockDelMe:'..tonumber(data.sender_user_id_)..'(.*)') then
@@ -2489,7 +2644,7 @@ local Rio = DataText:match('/LockDelMe:'..tonumber(data.sender_user_id_)..'(.*)'
 DevRio:set(Antak.."Rio:Del:Me"..data.chat_id_, true)
 Text = "*᥀︙تم تعطيل نزلني*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/lockorder:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/lockorder:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
 if DataText and DataText:match('/UnLockDelMe:'..tonumber(data.sender_user_id_)..'(.*)') then
@@ -2497,7 +2652,7 @@ local Rio = DataText:match('/UnLockDelMe:'..tonumber(data.sender_user_id_)..'(.*
 DevRio:del(Antak.."Rio:Del:Me"..data.chat_id_)
 Text = "*᥀︙تم تفعيل نزلني*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/lockorder:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/lockorder:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
 if DataText and DataText:match('/LockKickMe:'..tonumber(data.sender_user_id_)..'(.*)') then
@@ -2505,7 +2660,7 @@ local Rio = DataText:match('/LockKickMe:'..tonumber(data.sender_user_id_)..'(.*)
 DevRio:set(Antak.."Rio:Kick:Me"..data.chat_id_, true)
 Text = "*᥀︙تم تعطيل اطردني*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/lockorder:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/lockorder:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
 if DataText and DataText:match('/UnLockKickMe:'..tonumber(data.sender_user_id_)..'(.*)') then
@@ -2513,7 +2668,7 @@ local Rio = DataText:match('/UnLockKickMe:'..tonumber(data.sender_user_id_)..'(.
 DevRio:del(Antak.."Rio:Kick:Me"..data.chat_id_)
 Text = "*᥀︙تم تفعيل اطردني*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/lockorder:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/lockorder:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
 if DataText and DataText:match('/LockKickBan:'..tonumber(data.sender_user_id_)..'(.*)') then
@@ -2521,7 +2676,7 @@ local Rio = DataText:match('/LockKickBan:'..tonumber(data.sender_user_id_)..'(.*
 DevRio:set(Antak.."Rio:Lock:KickBan"..data.chat_id_,"true")
 Text = "*᥀︙تم تعطيل الحظر*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/lockorder:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/lockorder:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
 if DataText and DataText:match('/UnLockKickBan:'..tonumber(data.sender_user_id_)..'(.*)') then
@@ -2529,7 +2684,7 @@ local Rio = DataText:match('/UnLockKickBan:'..tonumber(data.sender_user_id_)..'(
 DevRio:del(Antak.."Rio:Lock:KickBan"..data.chat_id_)
 Text = "*᥀︙تم تفعيل الحظر*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/lockorder:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/lockorder:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
 if DataText and DataText:match('/LockProSet:'..tonumber(data.sender_user_id_)..'(.*)') then
@@ -2537,7 +2692,7 @@ local Rio = DataText:match('/LockProSet:'..tonumber(data.sender_user_id_)..'(.*)
 DevRio:set(Antak.."Rio:Lock:ProSet"..data.chat_id_,"true")
 Text = "*᥀︙تم تعطيل الرفع*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/lockorder:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/lockorder:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
 if DataText and DataText:match('/UnLocProSet:'..tonumber(data.sender_user_id_)..'(.*)') then
@@ -2545,7 +2700,7 @@ local Rio = DataText:match('/UnLocProSet:'..tonumber(data.sender_user_id_)..'(.*
 DevRio:del(Antak.."Rio:Lock:ProSet"..data.chat_id_)
 Text = "*᥀︙تم تفعيل الرفع*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/lockorder:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/lockorder:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
 if DataText and DataText:match('/LockGames:'..tonumber(data.sender_user_id_)..'(.*)') then
@@ -2553,7 +2708,7 @@ local Rio = DataText:match('/LockGames:'..tonumber(data.sender_user_id_)..'(.*)'
 DevRio:set(Antak..'Rio:Lock:Games'..data.chat_id_,true)  
 Text = "*᥀︙تم تعطيل الالعاب*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/lockorder:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/lockorder:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
 if DataText and DataText:match('/UnLockGames:'..tonumber(data.sender_user_id_)..'(.*)') then
@@ -2561,7 +2716,7 @@ local Rio = DataText:match('/UnLockGames:'..tonumber(data.sender_user_id_)..'(.*
 DevRio:del(Antak..'Rio:Lock:Games'..data.chat_id_) 
 Text = "*᥀︙تم تفعيل الالعاب*"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• رجوع •",callback_data="/lockorder:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ رجوع ›",callback_data="/lockorder:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
 --     Source Antak     --
@@ -2570,7 +2725,7 @@ local Rio = DataText:match('/HideHelpList:(.*)')
 if tonumber(Rio) == tonumber(data.sender_user_id_) then
 EditMsg(Chat_Id2, Msg_Id2, "᥀︙تم اخفاء كليشة الاوامر") 
 else
-return https.request("https://api.telegram.org/bot"..TokenBot..'/answercallbackquery?callback_query_id='..data.id_..'&text='..URL.escape("᥀ عذرا الامر ليس لك .")..'&show_alert=true')
+return https.request("https://api.telegram.org/bot"..TokenBot..'/answercallbackquery?callback_query_id='..data.id_..'&text='..URL.escape("‹ عذرا الامر ليس لك ›")..'&show_alert=true')
 end
 end
 if DataText and DataText:match('/HelpList:(.*)') then
@@ -2590,17 +2745,17 @@ local Text = [[
 ᥀︙[Source Channel](https://t.me/TeAmAnTaK)
 ]] 
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اوامر الادمنيه •",callback_data="/HelpList2:"..data.sender_user_id_},{text="• اوامر الحمايه •",callback_data="/HelpList1:"..data.sender_user_id_}},{{text="• اوامر المنشئين •",callback_data="/HelpList4:"..data.sender_user_id_},{text="• اوامر المدراء •",callback_data="/HelpList3:"..data.sender_user_id_}},{{text="• اوامر الاعضاء •",callback_data="/HelpList6:"..data.sender_user_id_},{text="• اوامر المطورين •",callback_data="/HelpList5:"..data.sender_user_id_}},{{text="• اوامر الرتب •",callback_data="/DelList:"..data.sender_user_id_}},{{text="• التفعيل و التعطيل •",callback_data="/lockorder:"..data.sender_user_id_},{text="• القفل و الفتح •",callback_data="/locklist:"..data.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_}}}
+keyboard.inline_keyboard = {{{text="‹ اوامر الادمنيه ›",callback_data="/HelpList2:"..data.sender_user_id_},{text="‹ اوامر الحمايه ›",callback_data="/HelpList1:"..data.sender_user_id_}},{{text="‹ اوامر المنشئين ›",callback_data="/HelpList4:"..data.sender_user_id_},{text="‹ اوامر المدراء ›",callback_data="/HelpList3:"..data.sender_user_id_}},{{text="‹ اوامر الاعضاء ›",callback_data="/HelpList6:"..data.sender_user_id_},{text="‹ اوامر المطورين ›",callback_data="/HelpList5:"..data.sender_user_id_}},{{text="‹ اوامر الرتب ›",callback_data="/DelList:"..data.sender_user_id_}},{{text="‹ التفعيل و التعطيل ›",callback_data="/lockorder:"..data.sender_user_id_},{text="‹ القفل و الفتح ›",callback_data="/locklist:"..data.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Help or Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 else
-return https.request("https://api.telegram.org/bot"..TokenBot..'/answercallbackquery?callback_query_id='..data.id_..'&text='..URL.escape("᥀ عذرا الامر ليس لك .")..'&show_alert=true')
+return https.request("https://api.telegram.org/bot"..TokenBot..'/answercallbackquery?callback_query_id='..data.id_..'&text='..URL.escape("‹ عذرا الامر ليس لك ›")..'&show_alert=true')
 end
 end
 if DataText and DataText:match('/HelpList1:(.*)') then
 local Rio = DataText:match('/HelpList1:(.*)')
 if tonumber(Rio) == tonumber(data.sender_user_id_) then
 if not Admin(data) then
-return https.request("https://api.telegram.org/bot"..TokenBot..'/answercallbackquery?callback_query_id='..data.id_..'&text='..URL.escape("᥀ عذرا ليس لديك صلاحية التحكم لهذا الامر .")..'&show_alert=true')
+return https.request("https://api.telegram.org/bot"..TokenBot..'/answercallbackquery?callback_query_id='..data.id_..'&text='..URL.escape("‹ عذرا ليس لديك صلاحية التحكم لهذا الامر ›")..'&show_alert=true')
 end
 local Help = DevRio:get(Antak..'Rio:Help1')
 local Text = [[
@@ -2652,17 +2807,17 @@ local Text = [[
 ᥀︙[Source Channel](https://t.me/TeAmAnTaK)
 ]]
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اوامر الادمنيه •",callback_data="/HelpList2:"..data.sender_user_id_}},{{text="• اوامر المنشئين •",callback_data="/HelpList4:"..data.sender_user_id_},{text="• اوامر المدراء •",callback_data="/HelpList3:"..data.sender_user_id_}},{{text="• اوامر الاعضاء •",callback_data="/HelpList6:"..data.sender_user_id_},{text="• اوامر المطورين •",callback_data="/HelpList5:"..data.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text="• رجوع •",callback_data="/HelpList:"..data.sender_user_id_}}}
+keyboard.inline_keyboard = {{{text="‹ اوامر الادمنيه ›",callback_data="/HelpList2:"..data.sender_user_id_}},{{text="‹ اوامر المنشئين ›",callback_data="/HelpList4:"..data.sender_user_id_},{text="‹ اوامر المدراء ›",callback_data="/HelpList3:"..data.sender_user_id_}},{{text="‹ اوامر الاعضاء ›",callback_data="/HelpList6:"..data.sender_user_id_},{text="‹ اوامر المطورين ›",callback_data="/HelpList5:"..data.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text="‹ رجوع ›",callback_data="/HelpList:"..data.sender_user_id_}}}
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Help or Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 else
-return https.request("https://api.telegram.org/bot"..TokenBot..'/answercallbackquery?callback_query_id='..data.id_..'&text='..URL.escape("᥀ عذرا الامر ليس لك .")..'&show_alert=true')
+return https.request("https://api.telegram.org/bot"..TokenBot..'/answercallbackquery?callback_query_id='..data.id_..'&text='..URL.escape("‹ عذرا الامر ليس لك ›")..'&show_alert=true')
 end
 end
 if DataText and DataText:match('/HelpList2:(.*)') then
 local Rio = DataText:match('/HelpList2:(.*)')
 if tonumber(Rio) == tonumber(data.sender_user_id_) then
 if not Admin(data) then
-return https.request("https://api.telegram.org/bot"..TokenBot..'/answercallbackquery?callback_query_id='..data.id_..'&text='..URL.escape("᥀ عذرا ليس لديك صلاحية التحكم لهذا الامر .")..'&show_alert=true')
+return https.request("https://api.telegram.org/bot"..TokenBot..'/answercallbackquery?callback_query_id='..data.id_..'&text='..URL.escape("‹ عذرا ليس لديك صلاحية التحكم لهذا الامر ›")..'&show_alert=true')
 end
 local Help = DevRio:get(Antak..'Rio:Help2')
 local Text = [[
@@ -2722,24 +2877,24 @@ local Text = [[
 ]]
 keyboard = {} 
 if SudoBot(data) then
-keyboard.inline_keyboard = {{{text="• اوامر الحمايه •",callback_data="/HelpList1:"..data.sender_user_id_}},{{text="• اوامر المنشئين •",callback_data="/HelpList4:"..data.sender_user_id_},{text="• اوامر المدراء •",callback_data="/HelpList3:"..data.sender_user_id_}},{{text="• اوامر الاعضاء •",callback_data="/HelpList6:"..data.sender_user_id_},{text="• اوامر المطورين •",callback_data="/HelpList5:"..data.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text="• رجوع •",callback_data="/HelpList:"..data.sender_user_id_}}}
+keyboard.inline_keyboard = {{{text="‹ اوامر الحمايه ›",callback_data="/HelpList1:"..data.sender_user_id_}},{{text="‹ اوامر المنشئين ›",callback_data="/HelpList4:"..data.sender_user_id_},{text="‹ اوامر المدراء ›",callback_data="/HelpList3:"..data.sender_user_id_}},{{text="‹ اوامر الاعضاء ›",callback_data="/HelpList6:"..data.sender_user_id_},{text="‹ اوامر المطورين ›",callback_data="/HelpList5:"..data.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text="‹ رجوع ›",callback_data="/HelpList:"..data.sender_user_id_}}}
 elseif Constructor(data) then
-keyboard.inline_keyboard = {{{text="• اوامر الحمايه •",callback_data="/HelpList1:"..data.sender_user_id_}},{{text="• اوامر المنشئين •",callback_data="/HelpList4:"..data.sender_user_id_},{text="• اوامر المدراء •",callback_data="/HelpList3:"..data.sender_user_id_}},{{text="• اوامر الاعضاء •",callback_data="/HelpList6:"..data.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text="• رجوع •",callback_data="/HelpList:"..data.sender_user_id_}}}
+keyboard.inline_keyboard = {{{text="‹ اوامر الحمايه ›",callback_data="/HelpList1:"..data.sender_user_id_}},{{text="‹ اوامر المنشئين ›",callback_data="/HelpList4:"..data.sender_user_id_},{text="‹ اوامر المدراء ›",callback_data="/HelpList3:"..data.sender_user_id_}},{{text="‹ اوامر الاعضاء ›",callback_data="/HelpList6:"..data.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text="‹ رجوع ›",callback_data="/HelpList:"..data.sender_user_id_}}}
 elseif Manager(data) then
-keyboard.inline_keyboard = {{{text="• اوامر الحمايه •",callback_data="/HelpList1:"..data.sender_user_id_}},{{text="• اوامر المدراء •",callback_data="/HelpList3:"..data.sender_user_id_}},{{text="• اوامر الاعضاء •",callback_data="/HelpList6:"..data.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text="• رجوع •",callback_data="/HelpList:"..data.sender_user_id_}}}
+keyboard.inline_keyboard = {{{text="‹ اوامر الحمايه ›",callback_data="/HelpList1:"..data.sender_user_id_}},{{text="‹ اوامر المدراء ›",callback_data="/HelpList3:"..data.sender_user_id_}},{{text="‹ اوامر الاعضاء ›",callback_data="/HelpList6:"..data.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text="‹ رجوع ›",callback_data="/HelpList:"..data.sender_user_id_}}}
 elseif Admin(data) then
-keyboard.inline_keyboard = {{{text="• اوامر الحمايه •",callback_data="/HelpList1:"..data.sender_user_id_}},{{text="• اوامر الاعضاء •",callback_data="/HelpList6:"..data.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text="• رجوع •",callback_data="/HelpList:"..data.sender_user_id_}}}
+keyboard.inline_keyboard = {{{text="‹ اوامر الحمايه ›",callback_data="/HelpList1:"..data.sender_user_id_}},{{text="‹ اوامر الاعضاء ›",callback_data="/HelpList6:"..data.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text="‹ رجوع ›",callback_data="/HelpList:"..data.sender_user_id_}}}
 end
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Help or Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 else
-return https.request("https://api.telegram.org/bot"..TokenBot..'/answercallbackquery?callback_query_id='..data.id_..'&text='..URL.escape("᥀ عذرا الامر ليس لك .")..'&show_alert=true')
+return https.request("https://api.telegram.org/bot"..TokenBot..'/answercallbackquery?callback_query_id='..data.id_..'&text='..URL.escape("‹ عذرا الامر ليس لك ›")..'&show_alert=true')
 end
 end
 if DataText and DataText:match('/HelpList3:(.*)') then
 local Rio = DataText:match('/HelpList3:(.*)')
 if tonumber(Rio) == tonumber(data.sender_user_id_) then
 if not Admin(data) then
-return https.request("https://api.telegram.org/bot"..TokenBot..'/answercallbackquery?callback_query_id='..data.id_..'&text='..URL.escape("᥀ عذرا ليس لديك صلاحية التحكم لهذا الامر .")..'&show_alert=true')
+return https.request("https://api.telegram.org/bot"..TokenBot..'/answercallbackquery?callback_query_id='..data.id_..'&text='..URL.escape("‹ عذرا ليس لديك صلاحية التحكم لهذا الامر ›")..'&show_alert=true')
 end
 local Help = DevRio:get(Antak..'Rio:Help3')
 local Text = [[
@@ -2789,22 +2944,22 @@ local Text = [[
 ]]
 keyboard = {} 
 if SudoBot(data) then
-keyboard.inline_keyboard = {{{text="• اوامر الادمنيه •",callback_data="/HelpList2:"..data.sender_user_id_},{text="• اوامر الحمايه •",callback_data="/HelpList1:"..data.sender_user_id_}},{{text="• اوامر المنشئين •",callback_data="/HelpList4:"..data.sender_user_id_}},{{text="• اوامر الاعضاء •",callback_data="/HelpList6:"..data.sender_user_id_},{text="• اوامر المطورين •",callback_data="/HelpList5:"..data.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text="• رجوع •",callback_data="/HelpList:"..data.sender_user_id_}}}
+keyboard.inline_keyboard = {{{text="‹ اوامر الادمنيه ›",callback_data="/HelpList2:"..data.sender_user_id_},{text="‹ اوامر الحمايه ›",callback_data="/HelpList1:"..data.sender_user_id_}},{{text="‹ اوامر المنشئين ›",callback_data="/HelpList4:"..data.sender_user_id_}},{{text="‹ اوامر الاعضاء ›",callback_data="/HelpList6:"..data.sender_user_id_},{text="‹ اوامر المطورين ›",callback_data="/HelpList5:"..data.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text="‹ رجوع ›",callback_data="/HelpList:"..data.sender_user_id_}}}
 elseif Constructor(data) then
-keyboard.inline_keyboard = {{{text="• اوامر الادمنيه •",callback_data="/HelpList2:"..data.sender_user_id_},{text="• اوامر الحمايه •",callback_data="/HelpList1:"..data.sender_user_id_}},{{text="• اوامر المنشئين •",callback_data="/HelpList4:"..data.sender_user_id_}},{{text="• اوامر الاعضاء •",callback_data="/HelpList6:"..data.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text="• رجوع •",callback_data="/HelpList:"..data.sender_user_id_}}}
+keyboard.inline_keyboard = {{{text="‹ اوامر الادمنيه ›",callback_data="/HelpList2:"..data.sender_user_id_},{text="‹ اوامر الحمايه ›",callback_data="/HelpList1:"..data.sender_user_id_}},{{text="‹ اوامر المنشئين ›",callback_data="/HelpList4:"..data.sender_user_id_}},{{text="‹ اوامر الاعضاء ›",callback_data="/HelpList6:"..data.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text="‹ رجوع ›",callback_data="/HelpList:"..data.sender_user_id_}}}
 elseif Manager(data) then
-keyboard.inline_keyboard = {{{text="• اوامر الادمنيه •",callback_data="/HelpList2:"..data.sender_user_id_},{text="• اوامر الحمايه •",callback_data="/HelpList1:"..data.sender_user_id_}},{{text="• اوامر الاعضاء •",callback_data="/HelpList6:"..data.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text="• رجوع •",callback_data="/HelpList:"..data.sender_user_id_}}}
+keyboard.inline_keyboard = {{{text="‹ اوامر الادمنيه ›",callback_data="/HelpList2:"..data.sender_user_id_},{text="‹ اوامر الحمايه ›",callback_data="/HelpList1:"..data.sender_user_id_}},{{text="‹ اوامر الاعضاء ›",callback_data="/HelpList6:"..data.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text="‹ رجوع ›",callback_data="/HelpList:"..data.sender_user_id_}}}
 end
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Help or Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 else
-return https.request("https://api.telegram.org/bot"..TokenBot..'/answercallbackquery?callback_query_id='..data.id_..'&text='..URL.escape("᥀ عذرا الامر ليس لك .")..'&show_alert=true')
+return https.request("https://api.telegram.org/bot"..TokenBot..'/answercallbackquery?callback_query_id='..data.id_..'&text='..URL.escape("‹ عذرا الامر ليس لك ›")..'&show_alert=true')
 end
 end
 if DataText and DataText:match('/HelpList4:(.*)') then
 local Rio = DataText:match('/HelpList4:(.*)')
 if tonumber(Rio) == tonumber(data.sender_user_id_) then
 if not Admin(data) then
-return https.request("https://api.telegram.org/bot"..TokenBot..'/answercallbackquery?callback_query_id='..data.id_..'&text='..URL.escape("᥀ عذرا ليس لديك صلاحية التحكم لهذا الامر .")..'&show_alert=true')
+return https.request("https://api.telegram.org/bot"..TokenBot..'/answercallbackquery?callback_query_id='..data.id_..'&text='..URL.escape("‹ عذرا ليس لديك صلاحية التحكم لهذا الامر ›")..'&show_alert=true')
 end
 local Help = DevRio:get(Antak..'Rio:Help4')
 local Text = [[
@@ -2848,20 +3003,20 @@ local Text = [[
 ]]
 keyboard = {} 
 if SudoBot(data) then
-keyboard.inline_keyboard = {{{text="• اوامر الادمنيه •",callback_data="/HelpList2:"..data.sender_user_id_},{text="• اوامر الحمايه •",callback_data="/HelpList1:"..data.sender_user_id_}},{{text="• اوامر المدراء •",callback_data="/HelpList3:"..data.sender_user_id_}},{{text="• اوامر الاعضاء •",callback_data="/HelpList6:"..data.sender_user_id_},{text="• اوامر المطورين •",callback_data="/HelpList5:"..data.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text="• رجوع •",callback_data="/HelpList:"..data.sender_user_id_}}}
+keyboard.inline_keyboard = {{{text="‹ اوامر الادمنيه ›",callback_data="/HelpList2:"..data.sender_user_id_},{text="‹ اوامر الحمايه ›",callback_data="/HelpList1:"..data.sender_user_id_}},{{text="‹ اوامر المدراء ›",callback_data="/HelpList3:"..data.sender_user_id_}},{{text="‹ اوامر الاعضاء ›",callback_data="/HelpList6:"..data.sender_user_id_},{text="‹ اوامر المطورين ›",callback_data="/HelpList5:"..data.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text="‹ رجوع ›",callback_data="/HelpList:"..data.sender_user_id_}}}
 elseif Constructor(data) then
-keyboard.inline_keyboard = {{{text="• اوامر الادمنيه •",callback_data="/HelpList2:"..data.sender_user_id_},{text="• اوامر الحمايه •",callback_data="/HelpList1:"..data.sender_user_id_}},{{text="• اوامر المدراء •",callback_data="/HelpList3:"..data.sender_user_id_}},{{text="• اوامر الاعضاء •",callback_data="/HelpList6:"..data.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text="• رجوع •",callback_data="/HelpList:"..data.sender_user_id_}}}
+keyboard.inline_keyboard = {{{text="‹ اوامر الادمنيه ›",callback_data="/HelpList2:"..data.sender_user_id_},{text="‹ اوامر الحمايه ›",callback_data="/HelpList1:"..data.sender_user_id_}},{{text="‹ اوامر المدراء ›",callback_data="/HelpList3:"..data.sender_user_id_}},{{text="‹ اوامر الاعضاء ›",callback_data="/HelpList6:"..data.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text="‹ رجوع ›",callback_data="/HelpList:"..data.sender_user_id_}}}
 end
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Help or Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 else
-return https.request("https://api.telegram.org/bot"..TokenBot..'/answercallbackquery?callback_query_id='..data.id_..'&text='..URL.escape("᥀ عذرا الامر ليس لك .")..'&show_alert=true')
+return https.request("https://api.telegram.org/bot"..TokenBot..'/answercallbackquery?callback_query_id='..data.id_..'&text='..URL.escape("‹ عذرا الامر ليس لك ›")..'&show_alert=true')
 end
 end
 if DataText and DataText:match('/HelpList5:(.*)') then
 local Rio = DataText:match('/HelpList5:(.*)')
 if tonumber(Rio) == tonumber(data.sender_user_id_) then
 if not Admin(data) then
-return https.request("https://api.telegram.org/bot"..TokenBot..'/answercallbackquery?callback_query_id='..data.id_..'&text='..URL.escape("᥀ عذرا ليس لديك صلاحية التحكم لهذا الامر .")..'&show_alert=true')
+return https.request("https://api.telegram.org/bot"..TokenBot..'/answercallbackquery?callback_query_id='..data.id_..'&text='..URL.escape("‹ عذرا ليس لديك صلاحية التحكم لهذا الامر ›")..'&show_alert=true')
 end
 local Help = DevRio:get(Antak..'Rio:Help5')
 local Text = [[
@@ -2930,11 +3085,11 @@ local Text = [[
 ]]
 keyboard = {} 
 if SudoBot(data) then
-keyboard.inline_keyboard = {{{text="• اوامر الادمنيه •",callback_data="/HelpList2:"..data.sender_user_id_},{text="• اوامر الحمايه •",callback_data="/HelpList1:"..data.sender_user_id_}},{{text="• اوامر المنشئين •",callback_data="/HelpList4:"..data.sender_user_id_},{text="• اوامر المدراء •",callback_data="/HelpList3:"..data.sender_user_id_}},{{text="• اوامر الاعضاء •",callback_data="/HelpList6:"..data.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text="• رجوع •",callback_data="/HelpList:"..data.sender_user_id_}}}
+keyboard.inline_keyboard = {{{text="‹ اوامر الادمنيه ›",callback_data="/HelpList2:"..data.sender_user_id_},{text="‹ اوامر الحمايه ›",callback_data="/HelpList1:"..data.sender_user_id_}},{{text="‹ اوامر المنشئين ›",callback_data="/HelpList4:"..data.sender_user_id_},{text="‹ اوامر المدراء ›",callback_data="/HelpList3:"..data.sender_user_id_}},{{text="‹ اوامر الاعضاء ›",callback_data="/HelpList6:"..data.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text="‹ رجوع ›",callback_data="/HelpList:"..data.sender_user_id_}}}
 end
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Help or Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 else
-return https.request("https://api.telegram.org/bot"..TokenBot..'/answercallbackquery?callback_query_id='..data.id_..'&text='..URL.escape("᥀ عذرا الامر ليس لك .")..'&show_alert=true')
+return https.request("https://api.telegram.org/bot"..TokenBot..'/answercallbackquery?callback_query_id='..data.id_..'&text='..URL.escape("‹ عذرا الامر ليس لك ›")..'&show_alert=true')
 end
 end
 if DataText and DataText:match('/HelpList6:(.*)') then
@@ -2972,19 +3127,19 @@ local Text = [[
 ]]
 keyboard = {} 
 if SudoBot(data) then
-keyboard.inline_keyboard = {{{text="• اوامر الادمنيه •",callback_data="/HelpList2:"..data.sender_user_id_},{text="• اوامر الحمايه •",callback_data="/HelpList1:"..data.sender_user_id_}},{{text="• اوامر المنشئين •",callback_data="/HelpList4:"..data.sender_user_id_},{text="• اوامر المدراء •",callback_data="/HelpList3:"..data.sender_user_id_}},{{text="• اوامر المطورين •",callback_data="/HelpList5:"..data.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text="• رجوع •",callback_data="/HelpList:"..data.sender_user_id_}}}
+keyboard.inline_keyboard = {{{text="‹ اوامر الادمنيه ›",callback_data="/HelpList2:"..data.sender_user_id_},{text="‹ اوامر الحمايه ›",callback_data="/HelpList1:"..data.sender_user_id_}},{{text="‹ اوامر المنشئين ›",callback_data="/HelpList4:"..data.sender_user_id_},{text="‹ اوامر المدراء ›",callback_data="/HelpList3:"..data.sender_user_id_}},{{text="‹ اوامر المطورين ›",callback_data="/HelpList5:"..data.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text="‹ رجوع ›",callback_data="/HelpList:"..data.sender_user_id_}}}
 elseif Constructor(data) then
-keyboard.inline_keyboard = {{{text="• اوامر الادمنيه •",callback_data="/HelpList2:"..data.sender_user_id_},{text="• اوامر الحمايه •",callback_data="/HelpList1:"..data.sender_user_id_}},{{text="• اوامر المنشئين •",callback_data="/HelpList4:"..data.sender_user_id_},{text="• اوامر المدراء •",callback_data="/HelpList3:"..data.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text="• رجوع •",callback_data="/HelpList:"..data.sender_user_id_}}}
+keyboard.inline_keyboard = {{{text="‹ اوامر الادمنيه ›",callback_data="/HelpList2:"..data.sender_user_id_},{text="‹ اوامر الحمايه ›",callback_data="/HelpList1:"..data.sender_user_id_}},{{text="‹ اوامر المنشئين ›",callback_data="/HelpList4:"..data.sender_user_id_},{text="‹ اوامر المدراء ›",callback_data="/HelpList3:"..data.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text="‹ رجوع ›",callback_data="/HelpList:"..data.sender_user_id_}}}
 elseif Manager(data) then
-keyboard.inline_keyboard = {{{text="• اوامر الادمنيه •",callback_data="/HelpList2:"..data.sender_user_id_},{text="• اوامر الحمايه •",callback_data="/HelpList1:"..data.sender_user_id_}},{{text="• اوامر المدراء •",callback_data="/HelpList3:"..data.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text="• رجوع •",callback_data="/HelpList:"..data.sender_user_id_}}}
+keyboard.inline_keyboard = {{{text="‹ اوامر الادمنيه ›",callback_data="/HelpList2:"..data.sender_user_id_},{text="‹ اوامر الحمايه ›",callback_data="/HelpList1:"..data.sender_user_id_}},{{text="‹ اوامر المدراء ›",callback_data="/HelpList3:"..data.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text="‹ رجوع ›",callback_data="/HelpList:"..data.sender_user_id_}}}
 elseif Admin(data) then
-keyboard.inline_keyboard = {{{text="• اوامر الادمنيه •",callback_data="/HelpList2:"..data.sender_user_id_},{text="• اوامر الحمايه •",callback_data="/HelpList1:"..data.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text="• رجوع •",callback_data="/HelpList:"..data.sender_user_id_}}}
+keyboard.inline_keyboard = {{{text="‹ اوامر الادمنيه ›",callback_data="/HelpList2:"..data.sender_user_id_},{text="‹ اوامر الحمايه ›",callback_data="/HelpList1:"..data.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text="‹ رجوع ›",callback_data="/HelpList:"..data.sender_user_id_}}}
 else
-keyboard.inline_keyboard = {{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text="• رجوع •",callback_data="/HelpList:"..data.sender_user_id_}}}
+keyboard.inline_keyboard = {{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_}},{{text="‹ رجوع ›",callback_data="/HelpList:"..data.sender_user_id_}}}
 end
 return https.request("https://api.telegram.org/bot"..TokenBot..'/editMessageText?chat_id='..Chat_Id2..'&message_id='..Msg_Id2..'&text=' .. URL.escape(Help or Text).."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 else
-return https.request("https://api.telegram.org/bot"..TokenBot..'/answercallbackquery?callback_query_id='..data.id_..'&text='..URL.escape("᥀ عذرا الامر ليس لك .")..'&show_alert=true')
+return https.request("https://api.telegram.org/bot"..TokenBot..'/answercallbackquery?callback_query_id='..data.id_..'&text='..URL.escape("‹ عذرا الامر ليس لك ›")..'&show_alert=true')
 end
 end
 end
@@ -3044,10 +3199,8 @@ end
 if #List == 0 then
 t = "᥀︙لاتوجد اوامر مضافه في المجموعه"
 end
-keyboard = {} 
-keyboard.inline_keyboard = {{{text="• مسح الاوامر المضافه •",callback_data="/DelCmd:"..msg.sender_user_id_},{text="• ترتيب الاوامر •",callback_data="/SetCmd:"..msg.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..msg.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
-Msg_id = msg.id_/2097152/0.5
-https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(t or List).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+local inline = {{{text="‹ مسح الاوامر المضافه ›",callback_data="/DelCmd:"..msg.sender_user_id_},{text="‹ ترتيب الاوامر ›",callback_data="/SetCmd:"..msg.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..msg.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
+SendInline(msg.chat_id_,t,nil,inline,msg.id_/2097152/0.5)
 end
 if text == "حذف الاوامر المضافه" and ChCheck(msg) or text == "حذف الاوامر" and ChCheck(msg) or text == "مسح الاوامر المضافه" and ChCheck(msg) then
 local List = DevRio:smembers(Antak.."List:Cmd:Group:New"..msg.chat_id_)
@@ -3065,7 +3218,7 @@ DevRio:del(Antak.."List:Cmd:Group:New"..msg.chat_id_)
 end
 Dev_Rio(msg.chat_id_, msg.id_, 1, "᥀︙تم حذف الاوامر المضافه في المجموعه", 1, 'html')
 end
-if text == "ترتيب الاوامر" and Constructor(msg) and ChCheck(msg) then
+if text == "ترتيب الاوامر" and Constructor(msg) and SourceCh(msg) then
 DevRio:set(Antak.."Set:Cmd:Group:New1"..msg.chat_id_..":ا","ايدي")
 DevRio:sadd(Antak.."List:Cmd:Group:New"..msg.chat_id_,"ا")
 DevRio:set(Antak.."Set:Cmd:Group:New1"..msg.chat_id_..":م","رفع مميز")
@@ -3305,130 +3458,130 @@ if id:match("-100(%d+)") then
 DevRio:incr(Antak..'Rio:UsersMsgs'..Antak..os.date('%d')..':'..msg.chat_id_..':'..msg.sender_user_id_)
 DevRio:incr(Antak..'Rio:UsersMsgs'..msg.chat_id_..':'..msg.sender_user_id_)
 DevRio:incr(Antak..'Rio:MsgNumberDay'..msg.chat_id_..':'..os.date('%d'))  
-ChatType = 'sp' 
+ChatType ='sp' 
 elseif id:match("^(%d+)") then
 if not DevRio:sismember(Antak.."Rio:Users",msg.chat_id_) then
 DevRio:sadd(Antak.."Rio:Users",msg.chat_id_)
 end
-ChatType = 'pv' 
+ChatType ='pv' 
 else
-ChatType = 'gp' 
+ChatType ='gp' 
 end
 end 
 --     Source Antak     --
-if ChatType == 'pv' then 
-if text == '/start' or text == '↫ رجوع ᥀' then 
+if ChatType =='pv' then 
+if text =='/start' or text =='↫ رجوع ᥀' then 
 if SecondSudo(msg) then 
-local Sudo_Welcome = '᥀︙مرحبا عزيزي المطور \n᥀︙انت المطور الاساسي هنا \n᥀︙اليك ازرار سورس انتاك \n᥀︙تستطيع التحكم بكل الاوامر فقط اضغط على الامر الذي تريد تنفيذه'
+local Sudo_Welcome ='᥀︙مرحبا عزيزي المطور \n᥀︙انت المطور الاساسي هنا \n᥀︙اليك ازرار سورس انتاك \n᥀︙تستطيع التحكم بكل الاوامر فقط اضغط على الامر الذي تريد تنفيذه'
 local key = {{'↫ السورس ᥀','وضع اسم البوت'},{'↫  المطورين ᥀','↫ الاحصائيات ᥀'},{'↫ التفعيل والتعطيل ᥀','↫ الاذاعه ᥀'},{'↫ تعيين كلايش الاوامر ᥀','↫ العام ᥀','↫ ردود الخاص ᥀'},{'↫ الاشتراك الاجباري ᥀','↫ الاوامر الخدميه ᥀'}}
 SendInline(msg.chat_id_,Sudo_Welcome,key)
 return false
 end end
-if text == '↫ تعيين كلايش الاوامر ᥀' then 
+if text =='↫ تعيين كلايش الاوامر ᥀' then 
 if SecondSudo(msg) then 
-local Sudo_Welcome = '᥀︙اهلا بك مجددا عزيزي المطور \n᥀︙اليك الازرار الخاصه بتعديل وتغيير كلايش سورس انتاك فقط اضغط على الامر الذي تريد تنفيذه'
+local Sudo_Welcome ='᥀︙اهلا بك مجددا عزيزي المطور \n᥀︙اليك الازرار الخاصه بتعديل وتغيير كلايش سورس انتاك فقط اضغط على الامر الذي تريد تنفيذه'
 local key = {{'تغير معلومات الترحيب'},{'حذف كليشة الايدي','تعيين كليشة الايدي'},{'تعيين امر الاوامر'},{'تعيين امر م3','تعيين امر م2','تعيين امر م1'},{'تعيين امر م6','تعيين امر م5','تعيين امر م4'},{'استعادة كلايش الاوامر'},{'↫ رجوع ᥀'}}
 
 SendInline(msg.chat_id_,Sudo_Welcome,key)
 return false
 end end
-if text == '↫ السورس ᥀' then 
+if text =='↫ السورس ᥀' then 
 if SecondSudo(msg) then 
-local Sudo_Welcome = '᥀︙اهلا بك مجددا عزيزي المطور \n᥀︙اليك الازرار الخاصه بتحديث  سورس انتاك فقط اضغط على الامر الذي تريد تنفيذه'
+local Sudo_Welcome ='᥀︙اهلا بك مجددا عزيزي المطور \n᥀︙اليك الازرار الخاصه بتحديث  سورس انتاك فقط اضغط على الامر الذي تريد تنفيذه'
 local key = {{'↫ تحديث السورس ᥀','↫ تحديث ᥀'},{'↫ السيرفر ᥀'},{'↫ مبرمج السورس ᥀','↫ قناة السورس ᥀'},{'↫  السورس ᥀'},{'↫ رجوع ᥀'}}
 SendInline(msg.chat_id_,Sudo_Welcome,key)
 return false
 end end
-if text == '↫ الاحصائيات ᥀' then 
+if text =='↫ الاحصائيات ᥀' then 
 if SecondSudo(msg) then 
-local Sudo_Welcome = '᥀︙اهلا بك مجددا عزيزي المطور \n᥀︙اليك الازرار الخاصه ب أحصائيات  سورس انتاك فقط اضغط على الامر الذي تريد تنفيذه'
+local Sudo_Welcome ='᥀︙اهلا بك مجددا عزيزي المطور \n᥀︙اليك الازرار الخاصه ب أحصائيات  سورس انتاك فقط اضغط على الامر الذي تريد تنفيذه'
 local key = {{'↫  الاحصائيات ᥀'},{'↫ المشتركين ᥀','↫ المجموعات ᥀'},{'↫ روابط المجموعات ᥀','↫ جلب نسخه احتياطيه ᥀'},{'↫ تنظيف المشتركين ᥀','↫ تنظيف المجموعات ᥀'},{'↫ نقل الاحصائيات ᥀'},{'↫ رجوع ᥀'}}
 SendInline(msg.chat_id_,Sudo_Welcome,key)
 return false
 end end
-if text == '↫  المطورين ᥀' then 
+if text =='↫  المطورين ᥀' then 
 if SecondSudo(msg) then 
-local Sudo_Welcome = '᥀︙اهلا بك مجددا عزيزي المطور \n᥀︙اليك الازرار الخاصه ب المطورين لسورس انتاك فقط اضغط على الامر الذي تريد تنفيذه'
+local Sudo_Welcome ='᥀︙اهلا بك مجددا عزيزي المطور \n᥀︙اليك الازرار الخاصه ب المطورين لسورس انتاك فقط اضغط على الامر الذي تريد تنفيذه'
 local key = {{'↫ الاساسيين ᥀','مسح الاساسيين'},{'↫ الثانويين ᥀','مسح الثانويين'},{'↫ المطورين ᥀','مسح المطورين'},{'↫ تغير المطور الاساسي ᥀','↫ تغيير كليشه المطور ᥀'},{'↫ رجوع ᥀'}}
 SendInline(msg.chat_id_,Sudo_Welcome,key)
 return false
 end end
-if text == '↫ التفعيل والتعطيل ᥀' then 
+if text =='↫ التفعيل والتعطيل ᥀' then 
 if SecondSudo(msg) then 
-local Sudo_Welcome = '᥀︙اهلا بك مجددا عزيزي المطور \n᥀︙اليك الازرار الخاصه ب التفعيل والتعطيل لسورس انتاك فقط اضغط على الامر الذي تريد تنفيذه'
+local Sudo_Welcome ='᥀︙اهلا بك مجددا عزيزي المطور \n᥀︙اليك الازرار الخاصه ب التفعيل والتعطيل لسورس انتاك فقط اضغط على الامر الذي تريد تنفيذه'
 local key = {{'↫ تعطيل التواصل ᥀','↫ تفعيل التواصل ᥀'},{'↫ تعطيل ترحيب البوت ᥀','↫ تفعيل ترحيب البوت ᥀'},{'↫ تعطيل المغادره ᥀','↫ تفعيل المغادره ᥀'},{'↫ تعطيل الاذاعه ᥀','↫ تفعيل الاذاعه ᥀'},{'↫ تعطيل البوت الخدمي ᥀','↫ تفعيل البوت الخدمي ᥀'},{'↫ تعطيل النسخه التلقائيه ᥀','↫ تفعيل النسخه التلقائيه ᥀'},{'↫ رجوع ᥀'}}
 SendInline(msg.chat_id_,Sudo_Welcome,key)
 return false
 end end
-if text == '↫ الاذاعه ᥀' then 
+if text =='↫ الاذاعه ᥀' then 
 if SecondSudo(msg) then 
-local Sudo_Welcome = '᥀︙اهلا بك مجددا عزيزي المطور \n᥀︙اليك الازرار الخاصه بالاذاعه لسورس انتاك فقط اضغط على الامر الذي تريد تنفيذه'
+local Sudo_Welcome ='᥀︙اهلا بك مجددا عزيزي المطور \n᥀︙اليك الازرار الخاصه بالاذاعه لسورس انتاك فقط اضغط على الامر الذي تريد تنفيذه'
 local key = {{'↫ اذاعه بالتثبيت ᥀'},{'↫ اذاعه خاص ᥀','↫ اذاعه عام ᥀'},{'↫ اذاعه خاص بالتوجيه ᥀','↫ اذاعه عام بالتوجيه ᥀'},{'الغاء'},{'↫ رجوع ᥀'},}
 SendInline(msg.chat_id_,Sudo_Welcome,key)
 return false
 end end
-if text == '↫ العام ᥀' then 
+if text =='↫ العام ᥀' then 
 if SecondSudo(msg) then 
-local Sudo_Welcome = '᥀︙اهلا بك مجددا عزيزي المطور \n᥀︙اليك الازرار الخاصه بالعام لسورس انتاك فقط اضغط على الامر الذي تريد تنفيذه'
+local Sudo_Welcome ='᥀︙اهلا بك مجددا عزيزي المطور \n᥀︙اليك الازرار الخاصه بالعام لسورس انتاك فقط اضغط على الامر الذي تريد تنفيذه'
 local key = {{'↫ اضف رد عام ᥀','↫ حذف رد عام ᥀'},{'↫ ردود العام ᥀','↫ مسح ردود العام ᥀'},{'↫ قائمه العام ᥀','مسح قائمه العام'},{'↫ رجوع ᥀'}}
 SendInline(msg.chat_id_,Sudo_Welcome,key)
 return false
 end end
-if text == '↫ ردود الخاص ᥀' then 
+if text =='↫ ردود الخاص ᥀' then 
 if SecondSudo(msg) then 
-local Sudo_Welcome = '᥀︙اهلا بك مجددا عزيزي المطور \n᥀︙اليك الازرار الخاصه بردود الخاص لسورس انتاك فقط اضغط على الامر الذي تريد تنفيذه'
+local Sudo_Welcome ='᥀︙اهلا بك مجددا عزيزي المطور \n᥀︙اليك الازرار الخاصه بردود الخاص لسورس انتاك فقط اضغط على الامر الذي تريد تنفيذه'
 local key = {{'↫ تعيين رد الخاص ᥀','↫ حذف رد الخاص ᥀'},{'↫ جلب رد الخاص ᥀'},{'↫ رجوع ᥀'}}
 SendInline(msg.chat_id_,Sudo_Welcome,key)
 return false
 end end
-if text == '↫ الاشتراك الاجباري ᥀' then 
+if text =='↫ الاشتراك الاجباري ᥀' then 
 if SecondSudo(msg) then 
-local Sudo_Welcome = '᥀︙اهلا بك مجددا عزيزي المطور \n᥀︙اليك الازرار الخاصه بالاشتراك الاجباري لسورس انتاك فقط اضغط على الامر الذي تريد تنفيذه'
+local Sudo_Welcome ='᥀︙اهلا بك مجددا عزيزي المطور \n᥀︙اليك الازرار الخاصه بالاشتراك الاجباري لسورس انتاك فقط اضغط على الامر الذي تريد تنفيذه'
 local key = {{'↫  تفعيل الاشتراك الاجباري ᥀','↫  تعطيل الاشتراك الاجباري ᥀'},{'↫ تعيين قناة الاشتراك ᥀',' ↫ حذف قناة الاشتراك ᥀'},{'↫ تغير كليشه الاشتراك ᥀','↫ حذف كليشه الاشتراك ᥀'},{'↫ كليشه الاشتراك ᥀','↫ قناة الاشتراك ᥀'},{'↫ رجوع ᥀'}}
 SendInline(msg.chat_id_,Sudo_Welcome,key)
 return false
 end end
-if text == '↫ الاوامر الخدميه ᥀' or text == '/play' or text == '↫  رجوع  ᥀' or text == 'اوامر الخدميه' or text == '/free' then
-local Sudo_Welcome = '᥀︙اهلا بك مجددا عزيزي \n᥀︙اليك الازرار الخاصه بالاوامر الخدميه الخاصه بسورس انتاك فقط اضغط على الامر الذي تريد تنفيذه'
+if text =='↫ الاوامر الخدميه ᥀' or text =='/play' or text =='↫  رجوع  ᥀' or text =='اوامر الخدميه' or text =='/free' then
+local Sudo_Welcome ='᥀︙اهلا بك مجددا عزيزي \n᥀︙اليك الازرار الخاصه بالاوامر الخدميه الخاصه بسورس انتاك فقط اضغط على الامر الذي تريد تنفيذه'
 local key = {{'↫ اوامر التسليه ᥀','↫ الاوامر الخدميه  ᥀'},{'↫ اوامر النسب ᥀','↫ البوتات ᥀'},{'↫ العاب ᥀'},{'↫  السورس ᥀','↫  المطور ᥀'},{'↫ رجوع ᥀'}}
 SendInline(msg.chat_id_,Sudo_Welcome,key)
 return false
 end
-if text == '↫ اوامر التسليه ᥀' then 
-local Sudo_Welcome = '᥀︙اهلا بك مجددا عزيزي \n᥀︙اليك الازرار الخاصه بأوامر التسليه الخاصه بسورس انتاك فقط اضغط على الامر الذي تريد تنفيذه'
+if text =='↫ اوامر التسليه ᥀' then 
+local Sudo_Welcome ='᥀︙اهلا بك مجددا عزيزي \n᥀︙اليك الازرار الخاصه بأوامر التسليه الخاصه بسورس انتاك فقط اضغط على الامر الذي تريد تنفيذه'
 local key = {{'↫ غنيلي ᥀','↫ اغنيه ᥀'},{'↫ ميمز ᥀','↫ ريمكس ᥀'},{'↫ صوره ᥀','↫ متحركه ᥀'},{'↫ مسلسل ᥀','↫ فلم ᥀'},{'↫  رجوع  ᥀'}}
 SendInline(msg.chat_id_,Sudo_Welcome,key)
 return false
 end
-if text == '↫ الاوامر الخدميه  ᥀' then 
-local Sudo_Welcome = '᥀︙اهلا بك مجددا عزيزي \n᥀︙اليك الازرار الخاصه بالاوامر الخدميه الخاصه بسورس انتاك فقط اضغط على الامر الذي تريد تنفيذه'
+if text =='↫ الاوامر الخدميه  ᥀' then 
+local Sudo_Welcome ='᥀︙اهلا بك مجددا عزيزي \n᥀︙اليك الازرار الخاصه بالاوامر الخدميه الخاصه بسورس انتاك فقط اضغط على الامر الذي تريد تنفيذه'
 local key = {{'↫ الابراج ᥀','↫ حساب العمر ᥀'},{'↫ الزخرفه ᥀','↫ معاني الاسماء ᥀'},{'↫ الحمايه ᥀'},{'↫  معرفي ᥀','↫  اسمي ᥀','↫ ايديي ᥀'},{'↫  نبذتي ᥀','↫ نبذا ᥀'},{'↫  رجوع  ᥀'}}
 SendInline(msg.chat_id_,Sudo_Welcome,key)
 return false
 end
-if text == '↫ البوتات ᥀' then 
-local Sudo_Welcome = '᥀︙اهلا بك مجددا عزيزي \n᥀︙اليك الازرار الخاصه بأوامر البوتات الخاصه بسورس انتاك فقط اضغط على الامر الذي تريد تنفيذه'
+if text =='↫ البوتات ᥀' then 
+local Sudo_Welcome ='᥀︙اهلا بك مجددا عزيزي \n᥀︙اليك الازرار الخاصه بأوامر البوتات الخاصه بسورس انتاك فقط اضغط على الامر الذي تريد تنفيذه'
 local key = {{'↫ بوت الحذف ᥀','↫ بوت الهمسه ᥀'},{'↫ بوت اليوتيوب ᥀','↫ بوت الكت ᥀'},{'↫ بوت الزخرفه ᥀'},{'↫  رجوع  ᥀'}}
 SendInline(msg.chat_id_,Sudo_Welcome,key)
 return false
 end
-if text == '↫ اوامر النسب ᥀' then 
-local Sudo_Welcome = '᥀︙اهلا بك مجددا عزيزي \n᥀︙اليك الازرار الخاصه بأوامر النسب الخاصه بسورس انتاك فقط اضغط على الامر الذي تريد تنفيذه'
+if text =='↫ اوامر النسب ᥀' then 
+local Sudo_Welcome ='᥀︙اهلا بك مجددا عزيزي \n᥀︙اليك الازرار الخاصه بأوامر النسب الخاصه بسورس انتاك فقط اضغط على الامر الذي تريد تنفيذه'
 local key = {{'↫ نسبه الكره ᥀','↫ نسبه الحب ᥀'},{'↫ نسبه الرجوله ᥀','↫ نسبه الانوثه ᥀'},{'↫ نسبه الغباء ᥀','↫ نسبه الجمال ᥀'},{'↫ نسبه الخيانه ᥀'},{'↫  رجوع  ᥀'}}
 SendInline(msg.chat_id_,Sudo_Welcome,key)
 return false
 end
-if text == '↫ العاب ᥀' then 
-local Sudo_Welcome = '᥀︙اهلا بك مجددا عزيزي \n᥀︙اليك الازرار الخاصه بألعاب سورس انتاك فقط اضغط على اللعبه الذي تريد لعبها'
+if text =='↫ العاب ᥀' then 
+local Sudo_Welcome ='᥀︙اهلا بك مجددا عزيزي \n᥀︙اليك الازرار الخاصه بألعاب سورس انتاك فقط اضغط على اللعبه الذي تريد لعبها'
 local key = {{'↫ الالعاب ᥀','↫ الالعاب المتطوره ᥀'},{'↫ كت ᥀'},{'↫ سمايلات ᥀','↫ معاني ᥀'},{'↫ ترتيب ᥀','↫ حزوره ᥀'},{'↫ العكس ᥀','↫ المختلف ᥀'},{'↫ امثله ᥀','↫ اسئله ᥀'},{'↫ تخمين ᥀',''},{'↫ رياضيات ᥀','↫ انكليزي ᥀'},{'↫  رجوع  ᥀'}}
 SendInline(msg.chat_id_,Sudo_Welcome,key)
 return false
 end
 --     Source Antak     --
-if text == '/start' and ChCheck(msg) then  
+if text =='/start' and ChCheck(msg) then  
 if not DevRio:get(Antak..'Rio:Start:Time'..msg.sender_user_id_) then
 tdcli_function({ID="GetUser",user_id_=DevId},function(arg,dp) 
-local inline = {{{text="• ᥀ المطور . •",url="t.me/"..(dp.username_ or "TeAmAnTaK")}},{{text="• ᥀ السورس . •",url="https://t.me/TeAmAnTaK"},{text="• ᥀ لتنصيب بوت . •",url="https://t.me/lTllTT"}},{{text="• ᥀ اضفني في مجموعتك . •",url="t.me/"..dp.username_.."?startgroup=botstart"}}}
+local inline = {{{text="‹ ᥀ المطور . ›",url="t.me/"..(dp.username_ or "TeAmAnTaK")}},{{text="‹ ᥀ السورس . ›",url="https://t.me/TeAmAnTaK"},{text="‹ ᥀ لتنصيب بوت . ›",url="https://t.me/lTllTT"}},{{text="‹ ᥀ اضفني في مجموعتك . ›",url="t.me/"..dp.username_.."?startgroup=botstart"}}}
 local start = DevRio:get(Antak.."Rio:Start:Bot")
 if start then 
 Start_Source = start
@@ -3458,14 +3611,14 @@ if result.forward_info_.sender_user_id_ then
 id_user = result.forward_info_.sender_user_id_    
 end 
 tdcli_function ({ID = "GetUser",user_id_ = id_user},function(arg,data) 
-if text == 'حظر' or text == 'حضر' then
-local Text = '᥀︙العضو ↫ ['..string.sub(data.first_name_,0, 40)..'](tg://user?id='..data.id_..')'..'\n᥀︙تم حظره من التواصل'
+if text =='حظر' or text =='حضر' then
+local Text ='᥀︙العضو ↫ ['..string.sub(data.first_name_,0, 40)..'](tg://user?id='..data.id_..')'..'\n᥀︙تم حظره من التواصل'
 SendText(DevId,Text,msg.id_/2097152/0.5,'md') 
 DevRio:sadd(Antak..'Rio:Ban:Pv',data.id_)  
 return false  
 end 
-if text == 'الغاء الحظر' or text == 'الغاء حظر' then
-local Text = '᥀︙العضو ↫ ['..string.sub(data.first_name_,0, 40)..'](tg://user?id='..data.id_..')'..'\n᥀︙تم الغاء حظره من التواصل'
+if text =='الغاء الحظر' or text =='الغاء حظر' then
+local Text ='᥀︙العضو ↫ ['..string.sub(data.first_name_,0, 40)..'](tg://user?id='..data.id_..')'..'\n᥀︙تم الغاء حظره من التواصل'
 SendText(DevId,Text,msg.id_/2097152/0.5,'md') 
 DevRio:srem(Antak..'Rio:Ban:Pv',data.id_)  
 return false  
@@ -3478,19 +3631,19 @@ return false
 end 
 if text then
 Dev_Rio(id_user, 0, 1, text, 1, "md")  
-Text = '᥀︙تم ارسال الرساله الى ↫ ⤈'
-elseif msg.content_.ID == 'MessageSticker' then    
+Text ='᥀︙تم ارسال الرساله الى ↫ ⤈'
+elseif msg.content_.ID =='MessageSticker' then    
 sendSticker(id_user, msg.id_, 0, 1,nil, msg.content_.sticker_.sticker_.persistent_id_)   
-Text = '᥀︙تم ارسال الملصق الى ↫ ⤈'
-elseif msg.content_.ID == 'MessagePhoto' then    
+Text ='᥀︙تم ارسال الملصق الى ↫ ⤈'
+elseif msg.content_.ID =='MessagePhoto' then    
 sendPhoto(id_user, msg.id_, 0, 1,nil, msg.content_.photo_.sizes_[0].photo_.persistent_id_,(msg.content_.caption_ or ''))    
-Text = '᥀︙تم ارسال الصوره الى ↫ ⤈'
-elseif msg.content_.ID == 'MessageAnimation' then    
+Text ='᥀︙تم ارسال الصوره الى ↫ ⤈'
+elseif msg.content_.ID =='MessageAnimation' then    
 sendDocument(id_user, msg.id_, 0, 1,nil, msg.content_.animation_.animation_.persistent_id_)    
-Text = '᥀︙تم ارسال المتحركه الى ↫ ⤈'
-elseif msg.content_.ID == 'MessageVoice' then    
+Text ='᥀︙تم ارسال المتحركه الى ↫ ⤈'
+elseif msg.content_.ID =='MessageVoice' then    
 sendVoice(id_user, msg.id_, 0, 1,nil, msg.content_.voice_.voice_.persistent_id_)    
-Text = '᥀︙تم ارسال البصمه الى ↫ ⤈'
+Text ='᥀︙تم ارسال البصمه الى ↫ ⤈'
 end     
 SendText(DevId, Text..'\n'..'['..string.sub(data.first_name_,0, 40)..'](tg://user?id='..data.id_..')',0,'md') 
 end,nil);
@@ -3501,7 +3654,7 @@ end
 end 
 --     Source Antak     --
 if text and DevRio:get(Antak..'Rio:Start:Bots'..msg.sender_user_id_) then
-if text == 'الغاء' then   
+if text =='الغاء' then   
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙تم الغاء حفظ كليشة الستارت', 1, 'md')
 DevRio:del(Antak..'Rio:Start:Bots'..msg.sender_user_id_) 
 return false
@@ -3512,16 +3665,16 @@ DevRio:del(Antak..'Rio:Start:Bots'..msg.sender_user_id_)
 return false
 end
 if SecondSudo(msg) then
-if text == 'تعيين رد الخاص' and ChCheck(msg) or text == 'ضع كليشه ستارت' and ChCheck(msg) or text == '↫ تعيين رد الخاص ᥀' and ChCheck(msg) then 
+if text =='تعيين رد الخاص' and ChCheck(msg) or text =='ضع كليشه ستارت' and ChCheck(msg) or text =='↫ تعيين رد الخاص ᥀' and ChCheck(msg) then 
 DevRio:set(Antak..'Rio:Start:Bots'..msg.sender_user_id_,true) 
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙ارسل لي كليشة الستارت الان', 1, 'md')
 return false
 end
-if text == 'حذف رد الخاص' and ChCheck(msg) or text == 'حذف كليشه ستارت' and ChCheck(msg) or text == '↫ حذف رد الخاص ᥀' and ChCheck(msg) then 
+if text =='حذف رد الخاص' and ChCheck(msg) or text =='حذف كليشه ستارت' and ChCheck(msg) or text =='↫ حذف رد الخاص ᥀' and ChCheck(msg) then 
 DevRio:del(Antak..'Start:Bot') 
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙تم حذف كليشة الستارت بنجاح', 1, 'md')
 end
-if text == 'جلب رد الخاص' and ChCheck(msg) or text == '↫ جلب رد الخاص ᥀' and ChCheck(msg) then  
+if text =='جلب رد الخاص' and ChCheck(msg) or text =='↫ جلب رد الخاص ᥀' and ChCheck(msg) then  
 local start = DevRio:get(Antak.."Rio:Start:Bot")
 if start then 
 Start_Source = start
@@ -3531,22 +3684,22 @@ end
 Dev_Rio(msg.chat_id_, msg.id_, 1, Start_Source, 1, 'md')
 return false
 end
-if text == 'تفعيل التواصل' and ChCheck(msg) or text == '↫ تفعيل التواصل ᥀' and ChCheck(msg) then   
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل التواصل بنجاح'
+if text =='تفعيل التواصل' and ChCheck(msg) or text =='↫ تفعيل التواصل ᥀' and ChCheck(msg) then   
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل التواصل بنجاح'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:del(Antak..'Rio:Texting:Pv') 
 end
-if text == 'تعطيل التواصل' and ChCheck(msg) or text == '↫ تعطيل التواصل ᥀' and ChCheck(msg) then  
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل التواصل بنجاح'
+if text =='تعطيل التواصل' and ChCheck(msg) or text =='↫ تعطيل التواصل ᥀' and ChCheck(msg) then  
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل التواصل بنجاح'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:set(Antak..'Rio:Texting:Pv',true) 
 end
 if Sudo(msg) then
-if text == 'تفعيل النسخه التلقائيه' or text == 'تفعيل جلب نسخه الكروبات' or text == 'تفعيل عمل نسخه للمجموعات' or text == '↫ تفعيل النسخه التلقائيه ᥀' then   
+if text =='تفعيل النسخه التلقائيه' or text =='تفعيل جلب نسخه الكروبات' or text =='تفعيل عمل نسخه للمجموعات' or text =='↫ تفعيل النسخه التلقائيه ᥀' then   
 Dev_Rio(msg.chat_id_,msg.id_, 1, "᥀︙تم تفعيل جلب نسخة الكروبات التلقائيه\n᥀︙سيتم ارسال نسخه تلقائيه للكروبات كل يوم الى خاص المطور الاساسي", 1, 'md')
 DevRio:del(Antak.."Rio:Lock:AutoFile")
 end
-if text == 'تعطيل النسخه التلقائيه' or text == 'تعطيل جلب نسخه الكروبات' or text == 'تعطيل عمل نسخه للمجموعات' or text == '↫ تعطيل النسخه التلقائيه ᥀' then  
+if text =='تعطيل النسخه التلقائيه' or text =='تعطيل جلب نسخه الكروبات' or text =='تعطيل عمل نسخه للمجموعات' or text =='↫ تعطيل النسخه التلقائيه ᥀' then  
 Dev_Rio(msg.chat_id_,msg.id_, 1, "᥀︙تم تعطيل جلب نسخة الكروبات التلقائيه", 1, 'md')
 DevRio:set(Antak.."Rio:Lock:AutoFile",true) 
 end
@@ -3560,33 +3713,48 @@ if text == "الزخرفه" or text == "↫ الزخرفه ᥀" then  Dev_Rio(ms
 if text == "معاني الاسماء" or text == "↫ معاني الاسماء ᥀" then  Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙ من خلال البوت يمكنك معرفه معنى اسمك \n᥀︙ فقط قم بارسال امر معنى اسم + الاسم \n᥀︙ مثال : معنى اسم ريو', 1, 'md') end
 if text == "عدد المسح" or text == "تعين عدد المسح" or text == "تعيين عدد المسح" then  Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙ فقط قم بارسال امر عدد المسح + عدد المسح \n᥀︙ مثال : عدد المسح 100', 1, 'md') end
 if text == "انطق" then  Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙ فقط قم بارسال امر انطق + الكلمه\n᥀︙سيقوم البوت بنطق الكلمه \n᥀︙ مثال : انطق هلو', 1, 'md') end
-if text == "يوتيوب" and ChCheck(msg) or text == "اليوتيوب" and ChCheck(msg) or text == "↫ بوت اليوتيوب ᥀" and ChCheck(msg) or text == "بوت اليوتيوب" and ChCheck(msg) or text == "اريد بوت يوتيوب" and ChCheck(msg) or text == "شمرلي بوت يوتيوب" and ChCheck(msg) or text == "يوت" and ChCheck(msg) then local inline = {{{text="• اضغط هنا •",url="https://t.me/t_stbot"}}} SendInline(msg.chat_id_,'*᥀︙اضغط للحصول على بوت اليوتيوب*',nil,inline) return false end
+if text == "يوتيوب" and ChCheck(msg) or text == "اليوتيوب" and ChCheck(msg) or text == "↫ بوت اليوتيوب ᥀" and ChCheck(msg) or text == "بوت اليوتيوب" and ChCheck(msg) or text == "اريد بوت يوتيوب" and ChCheck(msg) or text == "شمرلي بوت يوتيوب" and ChCheck(msg) or text == "يوت" and ChCheck(msg) then local inline = {{{text="‹ اضغط هنا ›",url="https://t.me/t_stbot"}}} SendInline(msg.chat_id_,'*᥀︙اضغط للحصول على بوت اليوتيوب*',nil,inline,msg.id_/2097152/0.5) return false end
 if text == "اهمس" and ChCheck(msg) or text == "↫ بوت الهمسه ᥀" and ChCheck(msg) or text == "بوت الهمسه" and ChCheck(msg) or text == "همسه" and ChCheck(msg) or text == "اريد بوت الهمسه" and ChCheck(msg) or text == "دزلي بوت الهمسه" and ChCheck(msg) or text == "دزولي بوت الهمسه" and ChCheck(msg) then  Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙@HMSEBOT\n᥀︙@nnbbot\n᥀︙@ocBot\n᥀︙@hebot ', 1, 'md') end
-if text == "رابط حذف" and ChCheck(msg) or text == "رابط الحذف" and ChCheck(msg) or text == "اريد رابط الحذف" and ChCheck(msg) or text == "شمرلي رابط الحذف" and ChCheck(msg) or text == "اريد رابط حذف" and ChCheck(msg) then local inline = {{{text="• اضغط هنا •",url="https://t.me/DYFBOT"}}} SendInline(msg.chat_id_,'*᥀︙اضغط للحصول على رابط الحذف*',nil,inline) return false end
-if text == "↫ بوت الحذف ᥀" and ChCheck(msg) or text == "بوت الحذف" and ChCheck(msg) or text == "اريد بوت الحذف" and ChCheck(msg) or text == "اريد بوت حذف" and ChCheck(msg) or text == "بوت حذف" and ChCheck(msg) or text == "بوت حذف حسابات" and ChCheck(msg) or text == "راح احذف" and ChCheck(msg) then local inline = {{{text="• اضغط هنا •",url="https://t.me/DYFBOT"}}} SendInline(msg.chat_id_,'*᥀︙اضغط للحصول على بوت الحذف*',nil,inline) return false end
-if text == "↫ بوت الكت ᥀" and ChCheck(msg) or text == "بوت الكت" and ChCheck(msg) or text == "بوت كت" and ChCheck(msg) then local inline = {{{text="• اضغط هنا •",url="https://t.me/E9OBot"}}} SendInline(msg.chat_id_,'*᥀︙اضغط للحصول على بوت الكت*',nil,inline) return false end
-if text == "↫ بوت الزخرفه ᥀" and ChCheck(msg) or text == "بوت الزخرفه" and ChCheck(msg) or text == "بوت زخرفه" and ChCheck(msg) then local inline = {{{text="• اضغط هنا •",url="https://t.me/W5555Bot"}}} SendInline(msg.chat_id_,'*᥀︙اضغط للحصول على بوت الزخرفه*',nil,inline) return false end
+if text == "رابط حذف" and ChCheck(msg) or text == "رابط الحذف" and ChCheck(msg) or text == "اريد رابط الحذف" and ChCheck(msg) or text == "شمرلي رابط الحذف" and ChCheck(msg) or text == "اريد رابط حذف" and ChCheck(msg) then local inline = {{{text="‹ اضغط هنا ›",url="https://t.me/DYFBOT"}}} SendInline(msg.chat_id_,'*᥀︙اضغط للحصول على رابط الحذف*',nil,inline,msg.id_/2097152/0.5) return false end
+if text == "↫ بوت الحذف ᥀" and ChCheck(msg) or text == "بوت الحذف" and ChCheck(msg) or text == "اريد بوت الحذف" and ChCheck(msg) or text == "اريد بوت حذف" and ChCheck(msg) or text == "بوت حذف" and ChCheck(msg) or text == "بوت حذف حسابات" and ChCheck(msg) or text == "راح احذف" and ChCheck(msg) then local inline = {{{text="‹ اضغط هنا ›",url="https://t.me/DYFBOT"}}} SendInline(msg.chat_id_,'*᥀︙اضغط للحصول على بوت الحذف*',nil,inline,msg.id_/2097152/0.5) return false end
+if text == "↫ بوت الكت ᥀" and ChCheck(msg) or text == "بوت الكت" and ChCheck(msg) or text == "بوت كت" and ChCheck(msg) then local inline = {{{text="‹ اضغط هنا ›",url="https://t.me/E9OBot"}}} SendInline(msg.chat_id_,'*᥀︙اضغط للحصول على بوت الكت*',nil,inline,msg.id_/2097152/0.5) return false end
+if text == "↫ بوت الزخرفه ᥀" and ChCheck(msg) or text == "بوت الزخرفه" and ChCheck(msg) or text == "بوت زخرفه" and ChCheck(msg) then local inline = {{{text="‹ اضغط هنا ›",url="https://t.me/W5555Bot"}}} SendInline(msg.chat_id_,'*᥀︙اضغط للحصول على بوت الزخرفه*',nil,inline,msg.id_/2097152/0.5) return false end
 if text == "ايديي" and ChCheck(msg) or text == "↫ ايديي ᥀" and ChCheck(msg) then Dev_Rio(msg.chat_id_, msg.id_, 1,'᥀︙ايديك ↫ ❨ `'..msg.sender_user_id_..'` ❩', 1, 'md') end
 -- Source Antak --
-if text == 'نبذا' and ChCheck(msg) or text == '↫ نبذا ᥀' then
+if text =='نبذا' and ChCheck(msg) or text =='↫ نبذا ᥀' then
 local AntakTeam = {'- Nothing stops him who wants you .','make them wish they had you !.','Maybe a magical girl','٫ 𝖡𝖾 𝗌𝗂𝗆𝗉𝗅𝖾 𝖺𝗇𝖽 𝖽𝗂𝖿𝖿𝖾𝗋𝖾𝗇𝗍','. 𝖬𝖺𝗄𝖾 𝖽𝗋𝖾𝖺𝗆𝗌 𝖿𝗋𝗈𝗆 𝗒𝗈𝗎𝗋 𝗋𝖾𝖿𝗋𝖺𝖼𝗍𝗂𝗈𝗇𝗌 . .',':Life is lying .','𝖨 𝗐𝗂𝗅𝗅 𝖺𝗅𝗐𝖺𝗒𝗌 𝗅𝗈𝗏𝖾 𝗒𝗈𝗎 𝗇𝖾𝗏𝖾𝗋 𝖿𝗈𝗋𝗀𝖾𝗍'}  
 Dev_Rio(msg.chat_id_, msg.id_, 1, ''..AntakTeam[math.random(#AntakTeam)]..'' , 1, 'md')  
 return false
 end
 --     Source Antak     --
-if text and (text == 'المطور' or text == 'مطور' or text == '↫  المطور ᥀') then
+if text == "المطور" or text == "مطور" or text == "↫  المطور ᥀" then
+local Check = https.request('https://api.telegram.org/bot'..TokenBot..'/getChat?chat_id='..DevRio:get(Antak.."Rio:ChId"))
+local GetInfo = JSON.decode(Check)
+local DevCh1 = GetInfo.result.username
+local DevText = DevRio:get(Antak.."DevText")
+if DevRio:get(Antak.."Rio:ChId") then DevCh = '\n᥀︙*Dev Ch* ↬ [@'..DevCh1..']' else DevCh = '' end
+if DevText then
+send(msg.chat_id_, msg.id_,DevText)
+else
 tdcli_function({ID="GetUser",user_id_=DevId},function(arg,result)
+tdcli_function({ID = "GetUserProfilePhotos",user_id_=DevId,offset_=0,limit_ = 1},function(arg,getpro) 
+if getpro.photos_[0] then
+Text = "*᥀︙Dev Name ↬ * ["..result.first_name_.."](t.me/"..result.username_..")\n*᥀︙Dev User ↬* [@"..result.username_.."]\n*᥀︙Dev id ↬* ["..result.id_.."](t.me/"..result.username_..")\n*᥀︙Dev Ch ↬* [@"..DevCh1.."]"
+keyboard = {}
+keyboard.inline_keyboard = {{{text=''..result.first_name_..'',url="https://t.me/"..result.username_..""}}}
 local msg_id = msg.id_/2097152/0.5
-Text = "*᥀︙Dev Name ↬ * ["..result.first_name_.."](T.me/"..result.username_..")\n*᥀︙Dev User ↬* [@"..result.username_.."]\n*᥀︙Dev id ↬* ["..result.id_.."](T.me/"..result.username_..")"
-keyboard = {} 
-keyboard.inline_keyboard = {{{text = ''..result.first_name_..' ',url="t.me/"..result.username_ or TeAmAnTaK}}}
-https.request("https://api.telegram.org/bot"..TokenBot..'/sendPhoto?chat_id=' .. msg.chat_id_ .. '&photo=https://t.me/'..result.username_..'&caption=' .. URL.escape(Text).."&reply_to_message_id="..msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
-end,nil)
+https.request("https://api.telegram.org/bot"..TokenBot..'/sendPhoto?chat_id='..msg.chat_id_..'&caption='..URL.escape(Text)..'&photo='..getpro.photos_[0].sizes_[1].photo_.persistent_id_..'&reply_to_message_id='..msg_id..'&parse_mode=markdown&disable_web_page_preview=true&reply_markup='..JSON.encode(keyboard)) 
+else
+send(msg.chat_id_, msg.id_, 1, '᥀︙*Dev User* ↬ ['..DevUser..']\n᥀︙*Dev Id* ↬ '..DevId..DevCh, 1, "md")
+end
+end,nil)   
+end,nil)   
+end
 end
 --     Source Antak     --
 if text == "معرفي" or text == "↫  معرفي ᥀" then
 function get_username(extra,result,success)
-text = '᥀︙معرفك ↫ ❨ User ❩'
+text ='᥀︙معرفك ↫ ❨ User ❩'
 local text = text:gsub('User',('@'..result.username_ or ''))
 Dev_Rio(msg.chat_id_, msg.id_, 1, text, 1, 'html')
 end
@@ -3594,14 +3762,14 @@ getUser(msg.sender_user_id_,get_username)
 end
 if text == "اسمي" or text == "↫  اسمي ᥀" then
 function get_firstname(extra,result,success)
-text = '᥀︙اسمك ↫ firstname lastname'
+text ='᥀︙اسمك ↫ firstname lastname'
 local text = text:gsub('firstname',(result.first_name_ or ''))
 local text = text:gsub('lastname',(result.last_name_ or ''))
 Dev_Rio(msg.chat_id_, msg.id_, 1, text, 1, 'html')
 end
 getUser(msg.sender_user_id_,get_firstname)
 end 
-if text == 'نبذتي' or text == 'بايو' or text == '↫  نبذتي ᥀' then
+if text =='نبذتي' or text =='بايو' or text =='↫  نبذتي ᥀' then
 send(msg.chat_id_, msg.id_,'['..GetBio(msg.sender_user_id_)..']')
 end
 if text == "صورتي" or text == "↫ صورتي ᥀" then
@@ -3619,17 +3787,7 @@ end end
 tdcli_function ({ ID = "GetUserProfilePhotos", user_id_ = msg.sender_user_id_, offset_ = 0, limit_ = 1 }, getpro, nil)
 end
 --     Source Antak     --
-if text == "الالعاب المتطوره" or text == "الالعاب الاحترافيه" or text == "↫ الالعاب المتطوره ᥀" then
-if not DevRio:get(Antak..'Rio:Lock:Gamesinline'..msg.chat_id_) then
-Text =[[
-*᥀︙قائمه الالعاب المتطوره اضغط للعب*
-]]
-keyboard = {} 
-keyboard.inline_keyboard = {{{text="• ♟ الشطرنج ♟ •",url='https://t.me/T4TTTTBOT?game=chess'}},{{text="• لعبة فلابي بيرد 🐥 •",url='https://t.me/awesomebot?game=FlappyBird'},{text="• تحدي الرياضيات •",url='https://t.me/gamebot?game=MathBattle'}},{{text="• اكس او •",url='t.me/xobot?start'},{text="• سباق الدراجات 🏍 •",url='https://t.me/gamee?game=MotoFX'}},{{text="• سباق سيارات 🏎 •",url='https://t.me/gamee?game=F1Racer'},{text="• متشابه 👾 •",url='https://t.me/gamee?game=DiamondRows'}},{{text="• كرة قدم ⚽ •",url='https://t.me/gamee?game=FootballStar'}},{{text="• ورق🤹‍♂ •",url='https://t.me/gamee?game=Hexonix'},{text="• Hexonix❌ •",url='https://t.me/gamee?game=Hexonix'}},{{text="• MotoFx🏍️ •",url='https://t.me/gamee?game=MotoFx'}},{{text="• لعبة 2048 🎰 •",url='https://t.me/awesomebot?game=g2048'},{text="• Squares🏁 •",url='https://t.me/gamee?game=Squares'}},{{text="• Atomic 1▶️ •",url='https://t.me/gamee?game=AtomicDrop1'},{text="• Corsairs •",url='https://t.me/gamebot?game=Corsairs'}},{{text="• LumberJack •",url='https://t.me/gamebot?game=LumberJack'}},{{text="• LittlePlane •",url='https://t.me/gamee?game=LittlePlane'},{text="• RollerDisco •",url='https://t.me/gamee?game=RollerDisco'}},{{text="• 🦖 لعبة التنين 🦖 •",url='https://t.me/T4TTTTBOT?game=dragon'},{text="• 🐍 لعبة الافعى 🐍 •",url='https://t.me/T4TTTTBOT?game=snake'}},{{text="• 🔵 لعبة الالوان 🔴 •",url='https://t.me/T4TTTTBOT?game=color'}},{{text="• 🚀 لعبة الصاروخ 🚀 •",url='https://t.me/T4TTTTBOT?game=rocket'},{text="• 🏹 لعبة السهام 🏹 •",url='https://t.me/T4TTTTBOT?game=arrow'}},{{text="• لعبة النينجا •",url='https://t.me/gamee?game=GravityNinja21'},{text="• لعبة الكرتي •",url='https://t.me/gamee?game=KarateKid2'}},{{text = '• TeAm Antak •', url="t.me/TeAmAnTaK"}}}
-local msg_id = msg.id_/2097152/0.5
-https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id=' .. msg.chat_id_ .. '&text=' .. URL.escape(Text).."&reply_to_message_id="..msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
-return false
-end end
+if text == "الالعاب المتطوره" or text == "الالعاب الاحترافيه" or text == "↫ الالعاب المتطوره ᥀" then if not DevRio:get(Antak..'Rio:Lock:Gamesinline'..msg.chat_id_) then local inline = {{{text="‹ ♟ الشطرنج ♟ ›",url='https://t.me/T4TTTTBOT?game=chess'}},{{text="‹ لعبة فلابي بيرد 🐥 ›",url='https://t.me/awesomebot?game=FlappyBird'},{text="‹ تحدي الرياضيات ›",url='https://t.me/gamebot?game=MathBattle'}},{{text="‹ اكس او ›",url='t.me/xobot?start'},{text="‹ سباق الدراجات 🏍 ›",url='https://t.me/gamee?game=MotoFX'}},{{text="‹ سباق سيارات 🏎 ›",url='https://t.me/gamee?game=F1Racer'},{text="‹ متشابه 👾 ›",url='https://t.me/gamee?game=DiamondRows'}},{{text="‹ كرة قدم ⚽ ›",url='https://t.me/gamee?game=FootballStar'}},{{text="‹ ورق🤹‍♂ ›",url='https://t.me/gamee?game=Hexonix'},{text="‹ Hexonix❌ ›",url='https://t.me/gamee?game=Hexonix'}},{{text="‹ MotoFx🏍️ ›",url='https://t.me/gamee?game=MotoFx'}},{{text="‹ لعبة 2048 🎰 ›",url='https://t.me/awesomebot?game=g2048'},{text="‹ Squares🏁 ›",url='https://t.me/gamee?game=Squares'}},{{text="‹ Atomic 1▶️ ›",url='https://t.me/gamee?game=AtomicDrop1'},{text="‹ Corsairs ›",url='https://t.me/gamebot?game=Corsairs'}},{{text="‹ LumberJack ›",url='https://t.me/gamebot?game=LumberJack'}},{{text="‹ LittlePlane ›",url='https://t.me/gamee?game=LittlePlane'},{text="‹ RollerDisco ›",url='https://t.me/gamee?game=RollerDisco'}},{{text="‹ 🦖 لعبة التنين 🦖 ›",url='https://t.me/T4TTTTBOT?game=dragon'},{text="‹ 🐍 لعبة الافعى 🐍 ›",url='https://t.me/T4TTTTBOT?game=snake'}},{{text="‹ 🔵 لعبة الالوان 🔴 ›",url='https://t.me/T4TTTTBOT?game=color'}},{{text="‹ 🚀 لعبة الصاروخ 🚀 ›",url='https://t.me/T4TTTTBOT?game=rocket'},{text="‹ 🏹 لعبة السهام 🏹 ›",url='https://t.me/T4TTTTBOT?game=arrow'}},{{text="‹ لعبة النينجا ›",url='https://t.me/gamee?game=GravityNinja21'},{text="‹ لعبة الكرتي ›",url='https://t.me/gamee?game=KarateKid2'}},{{text='‹ TeAm Antak •', url="t.me/TeAmAnTaK"}}} SendInline(msg.chat_id_,'*᥀︙قائمه الالعاب المتطوره اضغط للعب*',nil,inline,msg.id_/2097152/0.5) return false end end
 --     Source Antak     --
 if text and text:match("^غادر (-%d+)$")  then
 local Text = { string.match(text, "^(غادر) (-%d+)$")}
@@ -3728,7 +3886,7 @@ local Name1 = Name1:gsub("`","")
 local Name1 = Name1:gsub("*","") 
 local Name1 = Name1:gsub("{","") 
 local Name1 = Name1:gsub("}","") 
-local Name = '['..Name1..'](tg://user?id='..result.id_..')'
+local Name ='['..Name1..'](tg://user?id='..result.id_..')'
 local NameChat = dp.title_
 local NameChat = NameChat:gsub('"',"") 
 local NameChat = NameChat:gsub("'","") 
@@ -3742,7 +3900,7 @@ end
 end,nil)
 end,nil)
 end
-if msg.content_.ID == "MessageChatDeletePhoto" or msg.content_.ID == "MessageChatChangePhoto" or msg.content_.ID == 'MessagePinMessage' or msg.content_.ID == "MessageChatJoinByLink" or msg.content_.ID == "MessageChatAddMembers" or msg.content_.ID == 'MessageChatChangeTitle' or msg.content_.ID == "MessageChatDeleteMember" then   
+if msg.content_.ID == "MessageChatDeletePhoto" or msg.content_.ID == "MessageChatChangePhoto" or msg.content_.ID =='MessagePinMessage' or msg.content_.ID == "MessageChatJoinByLink" or msg.content_.ID == "MessageChatAddMembers" or msg.content_.ID =='MessageChatChangeTitle' or msg.content_.ID == "MessageChatDeleteMember" then   
 if DevRio:get(Antak..'Rio:Lock:TagServr'..msg.chat_id_) then
 DeleteMessage(msg.chat_id_,{[0] = msg.id_})    
 end   
@@ -3755,11 +3913,11 @@ end
 --     Source Antak     --
 if text ==('تفعيل') and not SudoBot(msg) and ChCheck(msg) then
 if not DevRio:get(Antak..'Rio:Lock:FreeBot'..Antak) then
-if ChatType == 'pv' then
+if ChatType =='pv' then
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙لاتستطيع تفعيلي هنا يرجى اضافتي في مجموعه اولا', 1, 'md')
 return false
 end
-if ChatType ~= 'sp' then
+if ChatType ~='sp' then
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙المجموعه عاديه وليست خارقه لا تستطيع تفعيلي يرجى ان تضع سجل رسائل المجموعه ضاهر وليس مخفي ومن بعدها يمكنك رفعي ادمن ثم تفعيلي', 1, 'md')
 return false
 end
@@ -3774,11 +3932,11 @@ tdcli_function ({ID = "GetChatMember",chat_id_ = msg.chat_id_,user_id_ = msg.sen
 if ChatMem and ChatMem.status_.ID == "ChatMemberStatusEditor" or ChatMem and ChatMem.status_.ID == "ChatMemberStatusCreator" then
 if ChatMem and ChatMem.user_id_ == msg.sender_user_id_ then
 if ChatMem.status_.ID == "ChatMemberStatusCreator" then
-status = 'منشئ'
+status ='منشئ'
 elseif ChatMem.status_.ID == "ChatMemberStatusEditor" then
-status = 'ادمن'
+status ='ادمن'
 else 
-status = 'عضو'
+status ='عضو'
 end
 tdcli_function ({ID = "GetChannelMembers",channel_id_ = msg.chat_id_:gsub("-100",""),filter_ = {ID = "ChannelMembersAdministrators"},offset_ = 0,limit_ = 100},function(arg,rio) 
 local admins = rio.members_
@@ -3822,7 +3980,7 @@ local Name1 = Name1:gsub("`","")
 local Name1 = Name1:gsub("*","") 
 local Name1 = Name1:gsub("{","") 
 local Name1 = Name1:gsub("}","") 
-local Name = '['..Name1..'](tg://user?id='..result.id_..')'
+local Name ='['..Name1..'](tg://user?id='..result.id_..')'
 local NumMem = data.member_count_
 local NameChat = dp.title_
 local NameChat = NameChat:gsub('"',"") 
@@ -3835,7 +3993,7 @@ local LinkGp = json:decode(https.request('https://api.telegram.org/bot'..TokenBo
 if LinkGp.ok == true then 
 LinkGroup = LinkGp.result
 else
-LinkGroup = 'لا يوجد'
+LinkGroup ='لا يوجد'
 end
 DevRio:set(Antak.."Rio:Groups:Links"..msg.chat_id_,LinkGroup) 
 SendText(DevId,"᥀︙تم تفعيل مجموعه جديده ↫ ⤈ \n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n᥀︙بواسطة ↫ "..Name.."\n᥀︙موقعه في المجموعه ↫ "..status.."\n᥀︙اسم المجموعه ↫ ["..NameChat.."]\n᥀︙عدد اعضاء المجموعه ↫ ❨ *"..NumMem.."* ❩\n᥀︙ايدي المجموعه ↫ ⤈ \n❨ `"..msg.chat_id_.."` ❩\n᥀︙رابط المجموعه ↫ ⤈\n❨ ["..LinkGroup.."] ❩\n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n᥀︙الوقت ↫ "..os.date("%I:%M%p").."\n᥀︙التاريخ ↫ "..os.date("%Y/%m/%d").."",0,'md')
@@ -3867,11 +4025,9 @@ if DevRio:get(Antak..'Rio:Lock:Robot'..msg.chat_id_) then
 tdcli_function({ID="GetUser",user_id_=msg.sender_user_id_},function(arg,dp) 
 HTTPS.request("https://api.telegram.org/bot"..TokenBot.."/restrictChatMember?chat_id="..msg.chat_id_.."&user_id="..dp.id_)
 DevRio:sadd(Antak..'Rio:Tkeed:'..msg.chat_id_, dp.id_)
-local Text = '᥀︙اهلا عزيزي ↫ ['..string.sub(dp.first_name_,0, 40)..'](tg://user?id='..dp.id_..')\n᥀︙يجب علينا التأكد أنك لست روبوت\n᥀︙تم تقيدك اضغط الزر بالاسفل لفكه'
-keyboard = {} 
-keyboard.inline_keyboard = {{{text="• اضغط هنا لفك تقيدك •",callback_data="/UnTkeed"}}} 
-Msg_id = msg.id_/2097152/0.5
-HTTPS.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text='..URL.escape(Text).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+local Text ='᥀︙اهلا عزيزي ↫ ['..string.sub(dp.first_name_,0, 40)..'](tg://user?id='..dp.id_..')\n᥀︙يجب علينا التأكد أنك لست روبوت\n᥀︙تم تقيدك اضغط الزر بالاسفل لفكه'
+local inline = {{{text="‹ اضغط هنا لفك تقيدك ›",callback_data="/UnTkeed"}}} 
+SendInline(msg.chat_id_,Text,nil,inline,msg.id_/2097152/0.5)
 end,nil)
 return false
 end
@@ -3920,7 +4076,7 @@ end
 if text and text:match("^(.*)$") then
 local DelGpRedRedods = DevRio:get(Antak..'Rio:Add:GpRedod'..msg.sender_user_id_..msg.chat_id_)
 local GetGpTexts = DevRio:get(Antak..'Rio:Add:GpTexts'..msg.sender_user_id_..msg.chat_id_)
-if DelGpRedRedods == 'DelGpRedRedods' then
+if DelGpRedRedods =='DelGpRedRedods' then
 Dev_Rio(msg.chat_id_, msg.id_, 1,'᥀︙الرد ↫ '..msg.content_.text_..' للكلمه ↫ '..GetGpTexts..' تم حذفها',  1, "html")
 DevRio:del(Antak..'Rio:Add:GpRedod'..msg.sender_user_id_..msg.chat_id_)
 DevRio:srem(Antak..'Rio:Text:GpTexts'..GetGpTexts..msg.chat_id_,msg.content_.text_)
@@ -3929,7 +4085,7 @@ end
 end
 if text and text:match("^(.*)$") then
 local DelGpRed = DevRio:get(Antak..'Rio:Add:GpRedod'..msg.sender_user_id_..msg.chat_id_)
-if DelGpRed == 'DelGpRedod' then
+if DelGpRed =='DelGpRedod' then
 Dev_Rio(msg.chat_id_, msg.id_, 1,'᥀︙الكلمه ( '..msg.content_.text_..' ) تم حذفها',  1, "html")
 DevRio:del(Antak..'Rio:Add:GpRedod'..msg.sender_user_id_..msg.chat_id_)
 DevRio:del(Antak..'Rio:Text:GpTexts'..msg.content_.text_..msg.chat_id_)
@@ -3939,7 +4095,7 @@ end
 end
 if text and text:match("^(.*)$") then
 local DelGpRed = DevRio:get(Antak..'Rio:Add:GpRed'..msg.sender_user_id_..msg.chat_id_)
-if DelGpRed == 'DelGpRed' then
+if DelGpRed =='DelGpRed' then
 Dev_Rio(msg.chat_id_, msg.id_, 1,'᥀︙الكلمه ( '..msg.content_.text_..' ) تم حذفها',  1, "html")
 DevRio:del(Antak..'Rio:Add:GpRed'..msg.sender_user_id_..msg.chat_id_)
 DevRio:del(Antak..'Rio:Gif:GpRed'..msg.content_.text_..msg.chat_id_)
@@ -3956,7 +4112,7 @@ end
 end
 if text and text:match("^(.*)$") then
 local DelAllRed = DevRio:get(Antak.."Rio:Add:AllRed"..msg.sender_user_id_)
-if DelAllRed == 'DelAllRed' then
+if DelAllRed =='DelAllRed' then
 Dev_Rio(msg.chat_id_, msg.id_, 1,'᥀︙الكلمه ( '..msg.content_.text_..' ) تم حذفها',  1, "html")
 DevRio:del(Antak.."Rio:Add:AllRed"..msg.sender_user_id_)
 DevRio:del(Antak.."Rio:Gif:AllRed"..msg.content_.text_)
@@ -3974,7 +4130,7 @@ end
 --     Source Antak     --
 if text and text:match("^(.*)$") then
 local SaveGpRedod = DevRio:get(Antak..'Rio:Add:GpRedod'..msg.sender_user_id_..msg.chat_id_)
-if SaveGpRedod == 'SaveGpRedod' then
+if SaveGpRedod =='SaveGpRedod' then
 local GetGpTexts = DevRio:get(Antak..'Rio:Add:GpTexts'..msg.sender_user_id_..msg.chat_id_)
 local List = DevRio:smembers(Antak..'Rio:Text:GpTexts'..GetGpTexts..msg.chat_id_)
 if text == "الغاء" then 
@@ -3993,10 +4149,8 @@ DevRio:del(Antak..'Rio:Add:GpRedod'..msg.sender_user_id_..msg.chat_id_)
 return false
 end
 local Rio = "᥀︙تم حفظ الرد رقم ↫ "..(#List+1).."\n᥀︙قم بارسال الرد رقم ↫ "..(#List+2)
-keyboard = {} 
-keyboard.inline_keyboard = {{{text="• انهاء وحفظ "..(#List+1).." من الردود •",callback_data="/EndRedod:"..msg.sender_user_id_..GetGpTexts}},{{text="• الغاء وحذف التخزين •",callback_data="/DelRedod:"..msg.sender_user_id_..GetGpTexts}}} 
-Msg_id = msg.id_/2097152/0.5
-https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(Rio).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+local inline = {{{text="‹ انهاء وحفظ "..(#List+1).." من الردود ›",callback_data="/EndRedod:"..msg.sender_user_id_..GetGpTexts}},{{text="‹ الغاء وحذف التخزين ›",callback_data="/DelRedod:"..msg.sender_user_id_..GetGpTexts}}} 
+SendInline(msg.chat_id_,Rio,nil,inline)
 return false
 end
 end
@@ -4009,7 +4163,7 @@ end
 --     Source Antak     --
 if text and text:match("^(.*)$") then
 local SaveKt = DevRio:get(Antak..'Rio:Add:Kt'..msg.sender_user_id_..msg.chat_id_)
-if SaveKt == 'SaveKt' then
+if SaveKt =='SaveKt' then
 local GetKtTexts = DevRio:get(Antak..'Rio:Add:KtTexts'..msg.sender_user_id_..msg.chat_id_)
 local List = DevRio:smembers(Antak..'Rio:Text:KtTexts'..GetKtTexts..msg.chat_id_)
 if text == "الغاء" then 
@@ -4029,9 +4183,8 @@ return false
 end
 local Rio = "᥀︙تم حفظ الرد رقم ↫ "..(#List+1).."\n᥀︙قم بارسال السؤال رقم ↫ "..(#List+2)
 keyboard = {} 
-keyboard.inline_keyboard = {{{text="• انهاء وحفظ "..(#List+1).." من الاسئله •",callback_data="/EndKt:"..msg.sender_user_id_..GetKtTexts}},{{text="• الغاء وحذف التخزين •",callback_data="/DelAllKt:"..msg.sender_user_id_..GetKtTexts}}} 
-Msg_id = msg.id_/2097152/0.5
-https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(Rio).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+keyboard.inline_keyboard = {{{text="‹ انهاء وحفظ "..(#List+1).." من الاسئله ›",callback_data="/EndKt:"..msg.sender_user_id_..GetKtTexts}},{{text="‹ الغاء وحذف التخزين ›",callback_data="/DelAllKt:"..msg.sender_user_id_..GetKtTexts}}} 
+SendInline(msg.chat_id_,nil,inline,msg.id_/2097152/0.5)
 return false
 end
 end
@@ -4044,8 +4197,8 @@ end
 --     Source Antak     --
 if msg.content_.text_ or msg.content_.video_ or msg.content_.document_ or msg.content_.sticker_ or msg.content_.voice_ or msg.content_.audio_ or msg.content_.photo_ or msg.content_.animation_ then 
 local SaveGpRed = DevRio:get(Antak..'Rio:Add:GpRed'..msg.sender_user_id_..msg.chat_id_)
-if SaveGpRed == 'SaveGpRed' then 
-if text == 'الغاء' then
+if SaveGpRed =='SaveGpRed' then 
+if text =='الغاء' then
 local DelManagerRep = DevRio:get(Antak..'DelManagerRep'..msg.chat_id_)
 DevRio:srem(Antak..'Rio:Manager:GpRed'..msg.chat_id_,DelManagerRep)
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙تم الغاء حفظ الرد', 1, 'md')
@@ -4116,7 +4269,7 @@ sendSticker(msg.chat_id_, msg.id_, 0, 1,nil, DevRio:get(Antak..'Rio:Stecker:GpRe
 end
 if DevRio:get(Antak..'Rio:Text:GpRed'..msg.content_.text_..msg.chat_id_) then
 function AntakTeam(extra,result,success)
-if result.username_ then username = '[@'..result.username_..']' else username = 'لا يوجد' end
+if result.username_ then username ='[@'..result.username_..']' else username ='لا يوجد' end
 local edit_msg = DevRio:get(Antak..'Rio:EditMsg'..msg.chat_id_..msg.sender_user_id_) or 0
 local user_msgs = DevRio:get(Antak..'Rio:UsersMsgs'..msg.chat_id_..':'..msg.sender_user_id_)
 local Text = DevRio:get(Antak..'Rio:Text:GpRed'..msg.content_.text_..msg.chat_id_)
@@ -4135,8 +4288,8 @@ end
 text = msg.content_.text_
 if msg.content_.text_ or msg.content_.video_ or msg.content_.document_ or msg.content_.sticker_ or msg.content_.voice_ or msg.content_.audio_ or msg.content_.photo_ or msg.content_.animation_ then
 local SaveAllRed = DevRio:get(Antak.."Rio:Add:AllRed"..msg.sender_user_id_)
-if SaveAllRed == 'SaveAllRed' then
-if text == 'الغاء' then
+if SaveAllRed =='SaveAllRed' then
+if text =='الغاء' then
 local DelSudoRep = DevRio:get(Antak..'DelSudoRep')
 DevRio:del(Antak.."Rio:Sudo:AllRed",DelSudoRep)
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙تم الغاء حفظ الرد', 1, 'md')
@@ -4211,7 +4364,7 @@ sendSticker(msg.chat_id_, msg.id_, 0, 1,nil, DevRio:get(Antak.."Rio:Stecker:AllR
 end
 if DevRio:get(Antak.."Rio:Text:AllRed"..msg.content_.text_) then
 function AntakTeam(extra,result,success)
-if result.username_ then username = '[@'..result.username_..']' else username = 'لا يوجد' end
+if result.username_ then username ='[@'..result.username_..']' else username ='لا يوجد' end
 local edit_msg = DevRio:get(Antak..'Rio:EditMsg'..msg.chat_id_..msg.sender_user_id_) or 0
 local user_msgs = DevRio:get(Antak..'Rio:UsersMsgs'..msg.chat_id_..':'..msg.sender_user_id_)
 local Text = DevRio:get(Antak.."Rio:Text:AllRed"..msg.content_.text_)
@@ -4230,7 +4383,7 @@ end
 --       Spam Send        --
 function NotSpam(msg,Type)
 tdcli_function ({ID = "GetUser",user_id_ = msg.sender_user_id_},function(arg,dp) 
-local GetName = '['..dp.first_name_..'](tg://user?id='..dp.id_..')'
+local GetName ='['..dp.first_name_..'](tg://user?id='..dp.id_..')'
 if Type == "kick" then 
 ChatKick(msg.chat_id_,msg.sender_user_id_) 
 my_ide = msg.sender_user_id_
@@ -4244,7 +4397,7 @@ DeleteMessage(msg.chat_id_, {[0] = data.messages_[0].id_})
 end;end;end, nil)
 msgm = msgm - 1048576
 end
-Text = '᥀︙العضو ↫ '..GetName..' \n᥀︙قام بالتكرار المحدد تم طرده '
+Text ='᥀︙العضو ↫ '..GetName..' \n᥀︙قام بالتكرار المحدد تم طرده '
 SendText(msg.chat_id_,Text,0,'md')
 return false  
 end 
@@ -4266,7 +4419,7 @@ DeleteMessage(msg.chat_id_, {[0] = data.messages_[0].id_})
 end;end;end, nil)
 msgm = msgm - 1048576
 end
-Text = '᥀︙العضو ↫ '..GetName..' \n᥀︙قام بالتكرار المحدد تم تقيده '
+Text ='᥀︙العضو ↫ '..GetName..' \n᥀︙قام بالتكرار المحدد تم تقيده '
 SendText(msg.chat_id_,Text,0,'md')
 return false  
 end  
@@ -4283,7 +4436,7 @@ DeleteMessage(msg.chat_id_, {[0] = data.messages_[0].id_})
 end;end;end, nil)
 msgm = msgm - 1048576
 end
-Text = '᥀︙العضو ↫ '..GetName..' \n᥀︙قام بالتكرار المحدد تم كتمه '
+Text ='᥀︙العضو ↫ '..GetName..' \n᥀︙قام بالتكرار المحدد تم كتمه '
 SendText(msg.chat_id_,Text,0,'md')
 return false  
 end
@@ -4480,7 +4633,7 @@ function get_welcome(extra,result,success)
 if DevRio:get(Antak..'Rio:Groups:Welcomes'..msg.chat_id_) then
 Welcomes = DevRio:get(Antak..'Rio:Groups:Welcomes'..msg.chat_id_)
 else
-Welcomes = '• نورت حبي \n• firstname \n• @username'
+Welcomes = '• نورت حبي \n• firstname \n• username'
 end
 local Welcomes = Welcomes:gsub('"',"") Welcomes = Welcomes:gsub("'","") Welcomes = Welcomes:gsub(",","") Welcomes = Welcomes:gsub("*","") Welcomes = Welcomes:gsub(";","") Welcomes = Welcomes:gsub("`","") Welcomes = Welcomes:gsub("{","") Welcomes = Welcomes:gsub("}","") 
 local Welcomes = Welcomes:gsub('firstname',('['..result.first_name_..']' or ''))
@@ -4528,7 +4681,7 @@ if DevRio:get(Antak.."Rio:Lock:Welcome"..msg.chat_id_) then
 if DevRio:get(Antak..'Rio:Groups:Welcomes'..msg.chat_id_) then
 Welcomes = DevRio:get(Antak..'Rio:Groups:Welcomes'..msg.chat_id_)
 else
-Welcomes = '• نورت حبي \n• firstname \n• username'
+Welcomes ='• نورت حبي \n• firstname \n• username'
 end
 local Welcomes = Welcomes:gsub('"',"") Welcomes = Welcomes:gsub("'","") Welcomes = Welcomes:gsub(",","") Welcomes = Welcomes:gsub("*","") Welcomes = Welcomes:gsub(";","") Welcomes = Welcomes:gsub("`","") Welcomes = Welcomes:gsub("{","") Welcomes = Welcomes:gsub("}","") 
 local Welcomes = Welcomes:gsub('firstname',('['..msg.content_.members_[0].first_name_..']' or ''))
@@ -4925,11 +5078,11 @@ ReplyStatus(msg,msg.sender_user_id_,"WrongWay","᥀︙ممنوع التكلم ب
 end end
 --     Source Antak     --
 if SecondSudo(msg) then
-if text == 'جلب نسخه الكروبات' and ChCheck(msg) or text == 'جلب نسخه احتياطيه' and ChCheck(msg) or text == 'جلب النسخه الاحتياطيه' and ChCheck(msg) or text == '↫ جلب نسخه احتياطيه ᥀' and ChCheck(msg) then
+if text =='جلب نسخه الكروبات' and ChCheck(msg) or text =='جلب نسخه احتياطيه' and ChCheck(msg) or text =='جلب النسخه الاحتياطيه' and ChCheck(msg) or text =='↫ جلب نسخه احتياطيه ᥀' and ChCheck(msg) then
 local List = DevRio:smembers(Antak..'Rio:Groups') 
 local Users = DevRio:smembers(Antak..'Rio:Users') 
 local BotName = (DevRio:get(Antak.."Rio:NameBot") or 'انتاك')
-local GetJson = '{"BotId": '..Antak..',"BotName": "'..BotName..'","GroupsList":{'  
+local GetJson ='{"BotId": '..Antak..',"BotName": "'..BotName..'","GroupsList":{'  
 for k,v in pairs(List) do 
 LinkGroups = DevRio:get(Antak.."Rio:Groups:Links"..v)
 Welcomes = DevRio:get(Antak..'Rio:Groups:Welcomes'..v) or ''
@@ -5031,10 +5184,10 @@ GetJson = GetJson..'}}'
 local File = io.open('./'..Antak..'.json', "w")
 File:write(GetJson)
 File:close()
-sendDocument(msg.chat_id_, msg.id_, 0, 1, nil, './'..Antak..'.json', '᥀︙يحتوي الملف على ↫ ⤈\n مجموعه '..#List..' \n مشترك '..#Users..' ' ,dl_cb, nil)
+sendDocument(msg.chat_id_, msg.id_, 0, 1, nil, './'..Antak..'.json', '᥀︙يحتوي الملف على ↫ ⤈\n*᥀︙مجموعه*'..#List..' \n*᥀︙مشترك*'..#Users..' ' ,dl_cb, nil)
 io.popen('rm -rf ./'..Antak..'.json')
 end
-if text and (text == 'رفع النسخه' or text == 'رفع النسخه الاحتياطيه' or text == 'رفع نسخه الاحتياطيه') and tonumber(msg.reply_to_message_id_) > 0 then   
+if text and (text =='رفع النسخه' or text =='رفع النسخه الاحتياطيه' or text =='رفع نسخه الاحتياطيه') and tonumber(msg.reply_to_message_id_) > 0 then   
 function by_reply(extra, result, success)   
 if result.content_.document_ then 
 local ID_FILE = result.content_.document_.document_.persistent_id_ 
@@ -5045,7 +5198,7 @@ end
 tdcli_function ({ ID = "GetMessage", chat_id_ = msg.chat_id_, message_id_ = tonumber(msg.reply_to_message_id_) }, by_reply, nil)
 end
 end
-if text == 'رفع ملف السورس' or text == 'رفع الملف' and Sudo(msg) and tonumber(msg.reply_to_message_id_) > 0 then   
+if text =='رفع ملف السورس' or text =='رفع الملف' and Sudo(msg) and tonumber(msg.reply_to_message_id_) > 0 then   
 function by_reply(extra, result, success)   
 if result.content_.document_ then 
 local ID_FILE = result.content_.document_.document_.persistent_id_ 
@@ -5084,14 +5237,14 @@ tdcli_function({ID = "SearchPublicChat",username_ = username},function(arg,data)
 if data and data.message_ and data.message_ == "USERNAME_NOT_OCCUPIED" then 
 send(msg.chat_id_, msg.id_, '᥀︙المعرف لا يوجد فيه قناة')
 return false  end
-if data and data.type_ and data.type_.ID and data.type_.ID == 'PrivateChatInfo' then
+if data and data.type_ and data.type_.ID and data.type_.ID =='PrivateChatInfo' then
 send(msg.chat_id_, msg.id_, '᥀︙عذرا لا يمكنك وضع معرف حسابات في الاشتراك')
 return false  end
 if data and data.type_ and data.type_.channel_ and data.type_.channel_.is_supergroup_ == true then
 send(msg.chat_id_, msg.id_, '᥀︙عذرا لا يمكنك وضع معرف مجموعه في الاشتراك')
 return false  end
 if data and data.type_ and data.type_.channel_ and data.type_.channel_.is_supergroup_ == false then
-if data and data.type_ and data.type_.channel_ and data.type_.channel_.ID and data.type_.channel_.status_.ID == 'ChatMemberStatusEditor' then
+if data and data.type_ and data.type_.channel_ and data.type_.channel_.ID and data.type_.channel_.status_.ID =='ChatMemberStatusEditor' then
 send(msg.chat_id_, msg.id_,'᥀︙البوت ادمن في القناة \n᥀︙تم تفعيل الاشتراك الاجباري \n᥀︙ايدي القناة ↫ '..data.id_..'\n᥀︙معرف القناة ↫ [@'..data.type_.channel_.username_..']')
 DevRio:set(Antak..'Rio:ChId',data.id_)
 else
@@ -5113,7 +5266,7 @@ local DevText = msg.content_.text_:match("(.*)")
 DevRio:set(Antak.."DevText", DevText)
 Dev_Rio(msg.chat_id_, msg.id_, 1, "᥀︙تم حفظ كليشة المطور", 1, "md")
 end
-if DevRio:get(Antak..'Rio:NameBot'..msg.sender_user_id_) == 'msg' then
+if DevRio:get(Antak..'Rio:NameBot'..msg.sender_user_id_) =='msg' then
 if text and text:match("^الغاء$") then 
 DevRio:del(Antak..'Rio:NameBot'..msg.sender_user_id_)
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙تم الغاء الامر', 1, 'md')
@@ -5131,26 +5284,26 @@ if id:match("-100(%d+)") then
 DevRio:incr(Antak..'Rio:UsersMsgs'..Antak..os.date('%d')..':'..msg.chat_id_..':'..msg.sender_user_id_)
 DevRio:incr(Antak..'Rio:UsersMsgs'..msg.chat_id_..':'..msg.sender_user_id_)
 DevRio:incr(Antak..'Rio:MsgNumberDay'..msg.chat_id_..':'..os.date('%d'))  
-ChatType = 'sp' 
+ChatType ='sp' 
 elseif id:match("^(%d+)") then
 if not DevRio:sismember(Antak.."Rio:Users",msg.chat_id_) then
 DevRio:sadd(Antak.."Rio:Users",msg.chat_id_)
 end
-ChatType = 'pv' 
+ChatType ='pv' 
 else
-ChatType = 'gp' 
+ChatType ='gp' 
 end
 end 
 --     Source Antak     --
-if ChatType == 'sp' or ChatType == 'gp' or ChatType == 'pv' then
-if text == 'بوت' or text == 'بوتت' then 
+if ChatType =='sp' or ChatType =='gp' or ChatType =='pv' then
+if text =='بوت' or text =='بوتت' then 
 NameBot = (DevRio:get(Antak..'Rio:NameBot') or 'انتاك')
 local AntakTeam = {' كول حبيبي ؟ اني '..NameBot..' ',' وياك القميل '..NameBot..' ',' اسمي القميل '..NameBot..' '}
 DevRio2 = math.random(#AntakTeam) 
 Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam[DevRio2] , 1, 'html') 
 return false
 end
-if text == 'اسم البوت' or text == 'البوت شنو اسمه' or text == 'شسمه البوت' or text == 'البوت شسمه' then
+if text =='اسم البوت' or text =='البوت شنو اسمه' or text =='شسمه البوت' or text =='البوت شسمه' then
 NameBot = (DevRio:get(Antak..'Rio:NameBot') or 'انتاك') 
 local AntakTeam = {"اسمي القميل "..NameBot.." "} 
 DevRio2 = math.random(#AntakTeam) 
@@ -5173,7 +5326,7 @@ end
 end
 if text ==  'حذف نقاطي' and ChCheck(msg) or text ==  'مسح نقاطي' and ChCheck(msg) then DevRio:del(Antak..'Rio:GamesNumber'..msg.chat_id_..msg.sender_user_id_) Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙تم حذف جميع نقاطك', 1, 'md') end
 --     Source Antak     --
-if text == 'سمايلات' and ChCheck(msg) or text == 'السمايلات' and ChCheck(msg) or text == '↫ سمايلات ᥀' and ChCheck(msg) then
+if text =='سمايلات' and ChCheck(msg) or text =='السمايلات' and ChCheck(msg) or text =='↫ سمايلات ᥀' and ChCheck(msg) then
 if not DevRio:get(Antak..'Rio:Lock:Games'..msg.chat_id_) then
 DevRio2 = {'🍏','🍎','🍐','🍊','🍋','🍌','🍉','🍇','🍓','🍈','🍒','🍑','🍍','🥥','🥝','🍅','🍆','🥑','🥦','🥒','🌶','🌽','🥕','🥔','🍠','🥐','🍞','🥖','🥨','🧀','🥚','🍳','🥞','🥓','🥩','🍗','🍖','🌭','🍔','🍟','🍕','🥪','🥙','🍼','☕️','🍵','🥤','🍶','🍺','🍻','🏀','⚽️','🏈','⚾️','🎾','🏐','🏉','🎱','🏓','🏸','🥅','🎰','🎮','🎳','🎯','🏆','🎻','🎸','🎺','🥁','🎹','🎼','🎧','🎤','🎬','🎨','🎭','🎪','🛎','📤','🎗','🏵','🎖','🏆','🥌','??','🚕','🚗','🚙','🚌','🚎','🏎','🚓','🚑','🚚','🚛','🚜','🇮🇶','⚔️','🛡','🔮','🌡','💣','⏱','🛢','📓','📗','📂','📅','📪','📫','📬','📭','⏰','📺','🎚','☎️','📡'}
 name = DevRio2[math.random(#DevRio2)]
@@ -5295,19 +5448,19 @@ name = string.gsub(name,'⏰','⏰')
 name = string.gsub(name,'📺','📺')
 name = string.gsub(name,'🎚','🎚')
 name = string.gsub(name,'☎️','☎️')
-AntakTeam = '᥀︙اول واحد يدز هذا السمايل يربح ↫ '..name
+AntakTeam ='᥀︙اول واحد يدز هذا السمايل يربح ↫ '..name
 Dev_Rio(msg.chat_id_, msg.id_, 1,AntakTeam, 1, 'md')
 return false
 end end
 if text == DevRio:get(Antak..'Rio:GameNum'..msg.chat_id_) and not DevRio:get(Antak..'Rio:Games:Ids'..msg.chat_id_) then
 if not DevRio:get(Antak..'Rio:Games:Ids'..msg.chat_id_) then 
-AntakTeam = '᥀︙مبروك لقد ربحت في اللعبه \n᥀︙ارسل ↫ سمايلات للعب مره اخرى'
+AntakTeam ='᥀︙مبروك لقد ربحت في اللعبه \n᥀︙ارسل ↫ سمايلات للعب مره اخرى'
 Dev_Rio(msg.chat_id_, msg.id_, 1,AntakTeam, 1, 'md')
 DevRio:incrby(Antak..'Rio:GamesNumber'..msg.chat_id_..msg.sender_user_id_, 1)  
 end
 DevRio:set(Antak..'Rio:Games:Ids'..msg.chat_id_,true)
 end
-if text == 'ترتيب' and ChCheck(msg) or text == 'الترتيب' and ChCheck(msg) or text == '↫ ترتيب ᥀' and ChCheck(msg) then
+if text =='ترتيب' and ChCheck(msg) or text =='الترتيب' and ChCheck(msg) or text =='↫ ترتيب ᥀' and ChCheck(msg) then
 if not DevRio:get(Antak..'Rio:Lock:Games'..msg.chat_id_) then
 DevRio2 = {'سحور','سياره','استقبال','قنفه','ايفون','بزونه','مطبخ','كرستيانو','دجاجه','مدرسه','الوان','غرفه','ثلاجه','كهوه','سفينه','العراق','محطه','طياره','رادار','منزل','مستشفى','كهرباء','تفاحه','اخطبوط','سلمون','فرنسا','برتقاله','تفاح','مطرقه','بتيته','لهانه','شباك','باص','سمكه','ذباب','تلفاز','حاسوب','انترنيت','ساحه','جسر'};
 name = DevRio2[math.random(#DevRio2)]
@@ -5353,19 +5506,19 @@ name = string.gsub(name,'حاسوب','س ا ح و ب')
 name = string.gsub(name,'انترنيت','ا ت ن ر ن ي ت')
 name = string.gsub(name,'ساحه','ح ا ه س')
 name = string.gsub(name,'جسر','ر ج س')
-AntakTeam = '᥀︙اول واحد يرتبها يربح ↫ '..name
+AntakTeam ='᥀︙اول واحد يرتبها يربح ↫ '..name
 Dev_Rio(msg.chat_id_, msg.id_, 1,AntakTeam, 1, 'md')
 return false
 end end
 if text == DevRio:get(Antak..'Rio:GameNum'..msg.chat_id_) and not DevRio:get(Antak..'Rio:Games:Ids'..msg.chat_id_) then
 if not DevRio:get(Antak..'Rio:Games:Ids'..msg.chat_id_) then 
-AntakTeam = '᥀︙مبروك لقد ربحت في اللعبه \n᥀︙ارسل ↫ ترتيب للعب مره اخرى'
+AntakTeam ='᥀︙مبروك لقد ربحت في اللعبه \n᥀︙ارسل ↫ ترتيب للعب مره اخرى'
 Dev_Rio(msg.chat_id_, msg.id_, 1,AntakTeam, 1, 'md')
 DevRio:incrby(Antak..'Rio:GamesNumber'..msg.chat_id_..msg.sender_user_id_, 1)  
 end
 DevRio:set(Antak..'Rio:Games:Ids'..msg.chat_id_,true)
 end
-if text == 'محيبس' and ChCheck(msg) or text == 'بات' and ChCheck(msg) or text == 'المحيبس' and ChCheck(msg) or text == '↫ محيبس ᥀' and ChCheck(msg) then
+if text =='محيبس' and ChCheck(msg) or text =='بات' and ChCheck(msg) or text =='المحيبس' and ChCheck(msg) or text =='↫ محيبس ᥀' and ChCheck(msg) then
 if not DevRio:get(Antak..'Rio:Lock:Games'..msg.chat_id_) then
 Num = math.random(1,6)
 DevRio:set(Antak.."GAMES"..msg.chat_id_,Num) 
@@ -5380,7 +5533,7 @@ Dev_Rio(msg.chat_id_, msg.id_, 1, TEST, 1, "md")
 DevRio:setex(Antak.."SET:GAME"..msg.chat_id_, 100, true)  
 return false  
 end end
-if text == 'حزوره' and ChCheck(msg) or text == 'الحزوره' and ChCheck(msg) or text == '↫ حزوره ᥀' and ChCheck(msg) then
+if text =='حزوره' and ChCheck(msg) or text =='الحزوره' and ChCheck(msg) or text =='↫ حزوره ᥀' and ChCheck(msg) then
 if not DevRio:get(Antak..'Rio:Lock:Games'..msg.chat_id_) then
 DevRio2 = {'الجرس','عقرب الساعه','السمك','المطر','5','الكتاب','البسمار','7','الكعبه','بيت الشعر','لهانه','انا','امي','الابره','الساعه','22','غلط','كم الساعه','البيتنجان','البيض','المرايه','الضوء','الهواء','الضل','العمر','القلم','المشط','الحفره','البحر','الثلج','الاسفنج','الصوت','بلم'};
 name = DevRio2[math.random(#DevRio2)]
@@ -5419,19 +5572,19 @@ name = string.gsub(name,'الثلج','انا ابن الماء فان تركون
 name = string.gsub(name,'الاسفنج','كلي ثقوب ومع ذالك احفض الماء فمن اكون ؟')
 name = string.gsub(name,'الصوت','اسير بلا رجلين ولا ادخل الا بالاذنين فمن انا ؟')
 name = string.gsub(name,'بلم','حامل ومحمول نصف ناشف ونصف مبلول فمن اكون ؟ ')
-AntakTeam = '᥀︙اول واحد يحلها يربح ↫ '..name
+AntakTeam ='᥀︙اول واحد يحلها يربح ↫ '..name
 Dev_Rio(msg.chat_id_, msg.id_, 1,AntakTeam, 1, 'md')
 return false
 end end
 if text == DevRio:get(Antak..'Rio:GameNum'..msg.chat_id_) and not DevRio:get(Antak..'Rio:Games:Ids'..msg.chat_id_) then
 if not DevRio:get(Antak..'Rio:Games:Ids'..msg.chat_id_) then 
-AntakTeam = '᥀︙مبروك لقد ربحت في اللعبه \n᥀︙ارسل ↫ حزوره للعب مره اخرى'
+AntakTeam ='᥀︙مبروك لقد ربحت في اللعبه \n᥀︙ارسل ↫ حزوره للعب مره اخرى'
 Dev_Rio(msg.chat_id_, msg.id_, 1,AntakTeam, 1, 'md')
 DevRio:incrby(Antak..'Rio:GamesNumber'..msg.chat_id_..msg.sender_user_id_, 1)  
 end
 DevRio:set(Antak..'Rio:Games:Ids'..msg.chat_id_,true)
 end 
-if text == 'المعاني' and ChCheck(msg) or text == 'معاني' and ChCheck(msg) or text == '↫ معاني ᥀' and ChCheck(msg) then
+if text =='المعاني' and ChCheck(msg) or text =='معاني' and ChCheck(msg) or text =='↫ معاني ᥀' and ChCheck(msg) then
 if not DevRio:get(Antak..'Rio:Lock:Games'..msg.chat_id_) then
 DevRio2 = {'قرد','دجاجه','بطريق','ضفدع','بومه','نحله','ديك','جمل','بقره','دولفين','تمساح','قرش','نمر','اخطبوط','سمكه','خفاش','اسد','فأر','ذئب','فراشه','عقرب','زرافه','قنفذ','تفاحه','باذنجان'}
 name = DevRio2[math.random(#DevRio2)]
@@ -5462,19 +5615,19 @@ name = string.gsub(name,'زرافه','🦒')
 name = string.gsub(name,'قنفذ','🦔')
 name = string.gsub(name,'تفاحه','🍎')
 name = string.gsub(name,'باذنجان','🍆')
-AntakTeam = '᥀︙ما معنى هذا السمايل :؟ ↫ '..name
+AntakTeam ='᥀︙ما معنى هذا السمايل :؟ ↫ '..name
 Dev_Rio(msg.chat_id_, msg.id_, 1,AntakTeam, 1, 'md')
 return false
 end end
 if text == DevRio:get(Antak..'Rio:GameNum2'..msg.chat_id_) and not DevRio:get(Antak..'Rio:Games:Ids'..msg.chat_id_) then
 if not DevRio:get(Antak..'Rio:Games:Ids'..msg.chat_id_) then 
-AntakTeam = '᥀︙مبروك لقد ربحت في اللعبه \n᥀︙ارسل ↫ المعاني للعب مره اخرى'
+AntakTeam ='᥀︙مبروك لقد ربحت في اللعبه \n᥀︙ارسل ↫ المعاني للعب مره اخرى'
 Dev_Rio(msg.chat_id_, msg.id_, 1,AntakTeam, 1, 'md')
 DevRio:incrby(Antak..'Rio:GamesNumber'..msg.chat_id_..msg.sender_user_id_, 1)  
 end
 DevRio:set(Antak..'Rio:Games:Ids'..msg.chat_id_,true)
 end 
-if text == 'العكس' and ChCheck(msg) or text == 'عكس' and ChCheck(msg) or text == '↫ العكس ᥀' and ChCheck(msg) then
+if text =='العكس' and ChCheck(msg) or text =='عكس' and ChCheck(msg) or text =='↫ العكس ᥀' and ChCheck(msg) then
 if not DevRio:get(Antak..'Rio:Lock:Games'..msg.chat_id_) then
 DevRio2 = {'باي','فهمت','موزين','اسمعك','احبك','موحلو','نضيف','حاره','ناصي','جوه','سريع','ونسه','طويل','سمين','ضعيف','شريف','شجاع','رحت','عدل','نشيط','شبعان','موعطشان','خوش ولد','اني','هادئ'}
 name = DevRio2[math.random(#DevRio2)]
@@ -5505,19 +5658,19 @@ name = string.gsub(name,'موعطشان','عطشان')
 name = string.gsub(name,'خوش ولد','موخوش ولد')
 name = string.gsub(name,'اني','مطي')
 name = string.gsub(name,'هادئ','عصبي')
-AntakTeam = '᥀︙ما هو عكس كلمة ↫ '..name
+AntakTeam ='᥀︙ما هو عكس كلمة ↫ '..name
 Dev_Rio(msg.chat_id_, msg.id_, 1,AntakTeam, 1, 'md')
 return false
 end end
 if text == DevRio:get(Antak..'Rio:GameNum3'..msg.chat_id_) and not DevRio:get(Antak..'Rio:Games:Ids'..msg.chat_id_) then
 if not DevRio:get(Antak..'Rio:Games:Ids'..msg.chat_id_) then 
-AntakTeam = '᥀︙مبروك لقد ربحت في اللعبه \n᥀︙ارسل ↫ العكس للعب مره اخرى'
+AntakTeam ='᥀︙مبروك لقد ربحت في اللعبه \n᥀︙ارسل ↫ العكس للعب مره اخرى'
 Dev_Rio(msg.chat_id_, msg.id_, 1,AntakTeam, 1, 'md')
 DevRio:incrby(Antak..'Rio:GamesNumber'..msg.chat_id_..msg.sender_user_id_, 1)  
 end
 DevRio:set(Antak..'Rio:Games:Ids'..msg.chat_id_,true)
 end 
-if text == 'المختلف' and ChCheck(msg) or text == 'مختلف' and ChCheck(msg) or text == '↫ المختلف ᥀' and ChCheck(msg) then
+if text =='المختلف' and ChCheck(msg) or text =='مختلف' and ChCheck(msg) or text =='↫ المختلف ᥀' and ChCheck(msg) then
 if not DevRio:get(Antak..'Rio:Lock:Games'..msg.chat_id_) then
 DevRio2 = {'😸','☠','🐼','🐇','🌑','🌚','⭐️','📥','⛈','🌥','⛄️','👨‍🔬','👨‍💻','👨‍🔧','👩‍🍳','🧚‍♀','🧚‍♂️','🧝‍♂','🙍‍♂','🧖‍♂','👬','👨‍👨‍👧','🕓','🕤','⌛️','📅','👩‍⚖️','👨‍🎨'};
 name = DevRio2[math.random(#DevRio2)]
@@ -5551,19 +5704,19 @@ name = string.gsub(name,'⌛️','⏳⏳⏳⏳⏳⌛️⏳⏳')
 name = string.gsub(name,'📅','📆📆📆📆📆📅📆📆')
 name = string.gsub(name,'👩‍⚖️','👨‍⚖️👨‍⚖️👨‍⚖️👨‍⚖️👨‍⚖️👩‍⚖️👨‍⚖️👨‍⚖️')
 name = string.gsub(name,'👨‍🎨','👩‍🎨👩‍🎨👨‍🎨👩‍🎨👩‍🎨👩‍🎨👩‍🎨👩‍🎨')
-AntakTeam = '᥀︙اول واحد يطلع المختلف يربح\n{'..name..'} '
+AntakTeam ='᥀︙اول واحد يطلع المختلف يربح\n{'..name..'} '
 Dev_Rio(msg.chat_id_, msg.id_, 1,AntakTeam, 1, 'md')
 return false
 end end
 if text == DevRio:get(Antak..'Rio:GameNum4'..msg.chat_id_) and not DevRio:get(Antak..'Rio:Games:Ids'..msg.chat_id_) then
 if not DevRio:get(Antak..'Rio:Games:Ids'..msg.chat_id_) then 
-AntakTeam = '᥀︙مبروك لقد ربحت في اللعبه \n᥀︙ارسل ↫ المختلف للعب مره اخرى'
+AntakTeam ='᥀︙مبروك لقد ربحت في اللعبه \n᥀︙ارسل ↫ المختلف للعب مره اخرى'
 Dev_Rio(msg.chat_id_, msg.id_, 1,AntakTeam, 1, 'md')
 DevRio:incrby(Antak..'Rio:GamesNumber'..msg.chat_id_..msg.sender_user_id_, 1)  
 end
 DevRio:set(Antak..'Rio:Games:Ids'..msg.chat_id_,true)
 end  
-if text == 'امثله' and ChCheck(msg) or text == 'الامثله' and ChCheck(msg) or text == '↫ امثله ᥀' and ChCheck(msg) then
+if text =='امثله' and ChCheck(msg) or text =='الامثله' and ChCheck(msg) or text =='↫ امثله ᥀' and ChCheck(msg) then
 if not DevRio:get(Antak..'Rio:Lock:Games'..msg.chat_id_) then
 DevRio2 = {
 'جوز','ضراطه','الحبل','الحافي','شقره','بيدك','سلايه','النخله','الخيل','حداد','المبلل','يركص','قرد','العنب','العمه','الخبز','بالحصاد','شهر','شكه','يكحله',
@@ -5591,7 +5744,7 @@ name = string.gsub(name,'شهر','امشي ___ ولا تعبر نهر')
 name = string.gsub(name,'شكه','يامن تعب يامن ___ يا من على الحاضر لكة')
 name = string.gsub(name,'القرد',' ___ بعين امه غزال')
 name = string.gsub(name,'يكحله','اجه ___ عماها')
-AntakTeam = '᥀︙اكمل المثال التالي ↫ ['..name..']'
+AntakTeam ='᥀︙اكمل المثال التالي ↫ ['..name..']'
 Dev_Rio(msg.chat_id_, msg.id_, 1,AntakTeam, 1, 'md')
 return false
 end end
@@ -5599,12 +5752,12 @@ if text == DevRio:get(Antak..'Rio:GameNum5'..msg.chat_id_) then
 if not DevRio:get(Antak..'Rio:Games:Ids'..msg.chat_id_) then 
 DevRio:incrby(Antak..'Rio:GamesNumber'..msg.chat_id_..msg.sender_user_id_, 1)  
 DevRio:del(Antak..'Rio:GameNum5'..msg.chat_id_)
-AntakTeam = '᥀︙مبروك لقد ربحت في اللعبه \n᥀︙ارسل ↫ امثله للعب مره اخرى'
+AntakTeam ='᥀︙مبروك لقد ربحت في اللعبه \n᥀︙ارسل ↫ امثله للعب مره اخرى'
 Dev_Rio(msg.chat_id_, msg.id_, 1,AntakTeam, 1, 'md')
 end
 DevRio:set(Antak..'Rio:Games:Ids'..msg.chat_id_,true)
 end  
-if text == 'رياضيات' and ChCheck(msg) or text == 'الرياضيات' and ChCheck(msg) or text == '↫ رياضيات ᥀' and ChCheck(msg) then
+if text =='رياضيات' and ChCheck(msg) or text =='الرياضيات' and ChCheck(msg) or text =='↫ رياضيات ᥀' and ChCheck(msg) then
 if not DevRio:get(Antak..'Rio:Lock:Games'..msg.chat_id_) then
 DevRio2 = {'9','46','2','9','5','4','25','10','17','15','39','5','16',};
 name = DevRio2[math.random(#DevRio2)]
@@ -5623,7 +5776,7 @@ name = string.gsub(name,'15','25 - 10 = ?')
 name = string.gsub(name,'39','44 - 5 = ?')
 name = string.gsub(name,'5','12 + 1 - 8 = ?')
 name = string.gsub(name,'16','16 + 16 - 16 = ?')
-AntakTeam = '᥀︙اكمل المعادله التاليه ↫ ⤈\n{'..name..'} '
+AntakTeam ='᥀︙اكمل المعادله التاليه ↫ ⤈\n{'..name..'} '
 Dev_Rio(msg.chat_id_, msg.id_, 1,AntakTeam, 1, 'md')
 return false
 end end
@@ -5631,12 +5784,12 @@ if text == DevRio:get(Antak..'Rio:GameNum6'..msg.chat_id_) then
 if not DevRio:get(Antak..'Rio:Games:Ids'..msg.chat_id_) then 
 DevRio:incrby(Antak..'Rio:GamesNumber'..msg.chat_id_..msg.sender_user_id_, 1)  
 DevRio:del(Antak..'Rio:GameNum6'..msg.chat_id_)
-AntakTeam = '᥀︙مبروك لقد ربحت في اللعبه \n᥀︙ارسل ↫ رياضيات للعب مره اخرى'
+AntakTeam ='᥀︙مبروك لقد ربحت في اللعبه \n᥀︙ارسل ↫ رياضيات للعب مره اخرى'
 Dev_Rio(msg.chat_id_, msg.id_, 1,AntakTeam, 1, 'md')
 end
 DevRio:set(Antak..'Rio:Games:Ids'..msg.chat_id_,true)
 end  
-if text == 'الانكليزي' and ChCheck(msg) or text == 'الانجليزيه' and ChCheck(msg) or text == 'انكليزيه' and ChCheck(msg) or text == '↫ انكليزي ᥀' and ChCheck(msg) then
+if text =='الانكليزي' and ChCheck(msg) or text =='الانجليزيه' and ChCheck(msg) or text =='انكليزيه' and ChCheck(msg) or text =='↫ انكليزي ᥀' and ChCheck(msg) then
 if not DevRio:get(Antak..'Rio:Lock:Games'..msg.chat_id_) then
 DevRio2 = {'معلومات','قنوات','مجموعات','كتاب','تفاحه','سدني','نقود','اعلم','ذئب','تمساح','ذكي','شاطئ','غبي',};
 name = DevRio2[math.random(#DevRio2)]
@@ -5654,7 +5807,7 @@ name = string.gsub(name,'تمساح','crocodile')
 name = string.gsub(name,'شاطئ','Beach')
 name = string.gsub(name,'غبي','Stupid')
 name = string.gsub(name,'صداقه','Friendchip')
-AntakTeam = '᥀︙ما معنى كلمة ↫ '..name
+AntakTeam ='᥀︙ما معنى كلمة ↫ '..name
 Dev_Rio(msg.chat_id_, msg.id_, 1,AntakTeam, 1, 'md')
 return false
 end end
@@ -5662,13 +5815,13 @@ if text == DevRio:get(Antak..'Rio:GameNum7'..msg.chat_id_) then
 if not DevRio:get(Antak..'Rio:Games:Ids'..msg.chat_id_) then 
 DevRio:incrby(Antak..'Rio:GamesNumber'..msg.chat_id_..msg.sender_user_id_, 1)  
 DevRio:del(Antak..'Rio:GameNum7'..msg.chat_id_)
-AntakTeam = '᥀︙مبروك لقد ربحت في اللعبه \n᥀︙ارسل ↫ انكليزيه للعب مره اخرى'
+AntakTeam ='᥀︙مبروك لقد ربحت في اللعبه \n᥀︙ارسل ↫ انكليزيه للعب مره اخرى'
 Dev_Rio(msg.chat_id_, msg.id_, 1,AntakTeam, 1, 'md')
 end
 DevRio:set(Antak..'Rio:Games:Ids'..msg.chat_id_,true)
 end  
 --     Source Antak     --
-if text == 'اسئله' and ChCheck(msg) or text == 'اختيارات' and ChCheck(msg) or text == 'الاسئله' and ChCheck(msg) or text == 'اساله' and ChCheck(msg) or text == '↫ اسئله ᥀' and ChCheck(msg) then
+if text =='اسئله' and ChCheck(msg) or text =='اختيارات' and ChCheck(msg) or text =='الاسئله' and ChCheck(msg) or text =='اساله' and ChCheck(msg) or text =='↫ اسئله ᥀' and ChCheck(msg) then
 if not DevRio:get(Antak..'Rio:Lock:Games'..msg.chat_id_) then
 DevRio2 = {'النيل','14','الفم','11','30','بوتين','ستيف جوبر','باريس','10','النمل','حرف الواو','الشعر','سحاب','الاسم','ذهب','حرف الام','العزائم','انسات','المنجنيق','اسيا','6','الاسد','مهر','الدولفين','اوروبا','الزئبق','لندن','الانسان','طوكيو','خديجه',}
 name = DevRio2[math.random(#DevRio2)]
@@ -5712,7 +5865,7 @@ if text == DevRio:get(Antak..'Rio:GameNum8'..msg.chat_id_) then
 if not DevRio:get(Antak..'Rio:Games:Ids'..msg.chat_id_) then 
 DevRio:incrby(Antak..'Rio:GamesNumber'..msg.chat_id_..msg.sender_user_id_, 1)  
 DevRio:del(Antak..'Rio:GameNum8'..msg.chat_id_)
-AntakTeam = '᥀︙مبروك لقد ربحت في اللعبه \n᥀︙ارسل ↫ الاسئله للعب مره اخرى'
+AntakTeam ='᥀︙مبروك لقد ربحت في اللعبه \n᥀︙ارسل ↫ الاسئله للعب مره اخرى'
 Dev_Rio(msg.chat_id_, msg.id_, 1,AntakTeam, 1, 'md')
 end
 DevRio:set(Antak..'Rio:Games:Ids'..msg.chat_id_,true)
@@ -5738,16 +5891,16 @@ DevRio:del(Antak.."GAME:TKMEN"..msg.chat_id_.."" .. msg.sender_user_id_)
 Dev_Rio(msg.chat_id_, msg.id_, 1,'᥀︙*التخمين الصحيح هو* ↫ '..GETNUM..'\n᥀︙*للاسف لقد خسرت حاول مره اخرى لتخمين الرقم الصحيح*', 1, 'md')
 else
 if tonumber(DevRio:get(Antak..'Set:Num'..msg.chat_id_..msg.sender_user_id_)) == 1 then
-SetNum = 'محاولتان فقط'
+SetNum ='محاولتان فقط'
 elseif tonumber(DevRio:get(Antak..'Set:Num'..msg.chat_id_..msg.sender_user_id_)) == 2 then
-SetNum = 'محاوله واحده فقط'
+SetNum ='محاوله واحده فقط'
 end
 Dev_Rio(msg.chat_id_, msg.id_, 1,'᥀︙لقد خمنت الرقم الخطا وتبقى لديك '..SetNum..' ارسل رقم تخمنه مره اخرى للفوز', 1, 'md')
 end
 end
 end
 end
-if text == 'خمن' and ChCheck(msg) or text == 'تخمين' and ChCheck(msg) or text == '↫ تخمين ᥀' and ChCheck(msg) then   
+if text =='خمن' and ChCheck(msg) or text =='تخمين' and ChCheck(msg) or text =='↫ تخمين ᥀' and ChCheck(msg) then   
 if not DevRio:get(Antak..'Rio:Lock:Games'..msg.chat_id_) then
 Num = math.random(1,20)
 DevRio:set(Antak.."GAMES:NUM"..msg.chat_id_,Num) 
@@ -5757,7 +5910,7 @@ return false
 end
 end
 --     Source Antak     --
-if text == 'روليت' and ChCheck(msg) then
+if text =='روليت' and ChCheck(msg) then
 if not DevRio:get(Antak..'Rio:Lock:Games'..msg.chat_id_) then
 DevRio:del(Antak.."Rio:NumRolet"..msg.chat_id_..msg.sender_user_id_) 
 DevRio:del(Antak..'Rio:ListRolet'..msg.chat_id_)  
@@ -5771,7 +5924,7 @@ if text == "1" then
 Text = "᥀︙لا استطيع بدء اللعبه بلاعب واحد فقط"
 else
 DevRio:set(Antak.."Rio:NumRolet"..msg.chat_id_..msg.sender_user_id_,text)  
-Text = '᥀︙تم بدء تسجيل اللسته يرجى ارسال المعرفات \n᥀︙الفائز يحصل على 5 نقاط عدد المطلوبين ↫ '..text..' لاعب'
+Text ='᥀︙تم بدء تسجيل اللسته يرجى ارسال المعرفات \n᥀︙الفائز يحصل على 5 نقاط عدد المطلوبين ↫ '..text..' لاعب'
 end
 DevRio:del(Antak.."Rio:StartRolet"..msg.chat_id_..msg.sender_user_id_)
 send(msg.chat_id_,msg.id_,Text)
@@ -5795,20 +5948,16 @@ if tonumber(CountAll) == tonumber(CountAdd) then
 DevRio:del(Antak.."Rio:NumRolet"..msg.chat_id_..msg.sender_user_id_) 
 DevRio:setex(Antak.."Rio:WittingStartRolet"..msg.chat_id_..msg.sender_user_id_,1400,true) 
 local Text = "᥀︙تم ادخال المعرف ↫ ["..text.."]\n᥀︙وتم اكتمال العدد الكلي هل انت مستعد ؟"
-keyboard = {} 
-keyboard.inline_keyboard = {{{text="• نعم •",callback_data="/YesRolet"},{text="• لا •",callback_data="/NoRolet"}},{{text="• اللاعبين •",callback_data="/ListRolet"}}} 
-Msg_id = msg.id_/2097152/0.5
-return https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(Text).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+local inline = {{{text="‹ نعم ›",callback_data="/YesRolet"},{text="‹ لا ›",callback_data="/NoRolet"}},{{text="‹ اللاعبين ›",callback_data="/ListRolet"}}} 
+SendInline(msg.chat_id_,Text,nil,inline,msg.id_/2097152/0.5)
 end 
 local Text = "᥀︙تم ادخال المعرف ↫ ["..text.."] وتبقى ↫ "..CountUser.." لاعبين ليكتمل العدد ارسل المعرف الاخر"
-keyboard = {} 
-keyboard.inline_keyboard = {{{text="• الغاء •",callback_data="/NoRolet"}}} 
-Msg_id = msg.id_/2097152/0.5
-return https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(Text).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+local inline = {{{text="‹ الغاء ›",callback_data="/NoRolet"}}} 
+SendInline(msg.chat_id_,Text,nil,inline,msg.id_/2097152/0.5)
 end,nil) 
 end
 --     Source Antak     --
-if text == 'كت' and ChCheck(msg) or text == 'تويت' and ChCheck(msg) or text == '↫ كت ᥀' and ChCheck(msg) then
+if text =='كت' and ChCheck(msg) or text =='تويت' and ChCheck(msg) or text =='↫ كت ᥀' and ChCheck(msg) then
 if not DevRio:get(Antak..'Rio:Lock:Games'..msg.chat_id_) then
 local AntakTeam = {
 'آخر مرة زرت مدينة الملاهي؟','آخر مرة أكلت أكلتك المفضّلة؟','الوضع الحالي؟\n‏1. سهران\n‏2. ضايج\n‏3. أتأمل','آخر شيء ضاع منك؟','كلمة أخيرة لشاغل البال؟','طريقتك المعتادة في التخلّص من الطاقة السلبية؟','شهر من أشهر العام له ذكرى جميلة معك؟','كلمة غريبة من لهجتك ومعناها؟🤓','‏- شيء سمعته عالق في ذهنك هاليومين؟','متى تكره الشخص الذي أمامك حتى لو كنت مِن أشد معجبينه؟','‏- أبرز صفة حسنة في صديقك المقرب؟','هل تشعر أن هنالك مَن يُحبك؟','اذا اكتشفت أن أعز أصدقائك يضمر لك السوء، موقفك الصريح؟','أجمل شيء حصل معك خلال هاليوم؟','صِف شعورك وأنت تُحب شخص يُحب غيرك؟👀💔','كلمة لشخص غالي اشتقت إليه؟💕','آخر خبر سعيد، متى وصلك؟','أنا آسف على ....؟','أوصف نفسك بكلمة؟','صريح، مشتاق؟','‏- صريح، هل سبق وخذلت أحدهم ولو عن غير قصد؟','‏- ماذا ستختار من الكلمات لتعبر لنا عن حياتك التي عشتها الى الآن؟💭','‏- فنان/ة تود لو يدعوكَ على مائدة عشاء؟😁❤','‏- تخيّل شيء قد يحدث في المستقبل؟','‏- للشباب | آخر مرة وصلك غزل من فتاة؟🌚','شخص أو صاحب عوضك ونساك مُر الحياة ما اسمه ؟','| اذا شفت حد واعجبك وعندك الجرأه انك تروح وتتعرف عليه ، مقدمة الحديث شو راح تكون ؟.','كم مره تسبح باليوم','نسبة النعاس عندك حاليًا؟','لو فقط مسموح شخص واحد تتابعه فالسناب مين بيكون ؟','يهمك ملابسك تكون ماركة ؟','وش الشيء الي تطلع حرتك فيه و زعلت ؟','عندك أخوان او خوات من الرضاعة؟','عندك معجبين ولا محد درا عنك؟','أصعب صفة قد تتواجد في الرجل .؟','كم المده الي تخليك توقع بحب الشخص؟.','تحس انك مستعد للقاء الله ولا باقي.؟','متصالح مع نفسك؟.','يسكر على أصبعك الباب ولا تعض لسانك  بالغلط؟!','عندك غمازات؟.','‏ألوانك المفضّلة؟','ردة فعلك لما تنظلم من شخص ؟','وش الحب بنظرك؟','أكثر شيء تقدره في الصداقات؟','‏لوخيروك ⁞ الاكل لو النت ؟!','عاجبك وجودك في التلي ولا تتمنى تحذفة.؟','افضل هديه ممكن تناسبك؟','شعورك الحالي في جملة؟','أنا حزين جداً أجعلني أبتسم.؟','بماذا يتعافى المرء؟','تاك لشخص نفسيه؟','شاركنا بيت شعري حزين على ذوقك.؟','اغنية عندك بيها ذكريات؟','اشياء تفتخر انك م سويتها ؟','الصراحة وقاحة ولا صدق تعامل.؟','ايهم اصدق نظرة العين او نبرة الصوت ؟','‏قلّة المال لدى الرجل في هذا الزمن يعتبرها العديد كانها عيب، مع أم ضد؟','إيهما تُفضل حُب ناجح أم صداقة دائمة.؟','على نياتكُم تُرزقون تاك لشخص ينطبق علية هذا الشيء.؟','اكثر كلمة ترفع ضغطك ؟','من أصحاب الماضي والحنين ولا الصفحات المطوية.؟','من أصحاب النسيان او التجاوز رغم الذكرى.؟','غزل بلهجتك ؟','مصروفك كم؟.','للحتيت ⁞ ماذا تفضّلين أن تكون مهنة شريك حياتك المستقبلي.؟','يومك ضاع على؟','ما الذي اسعدك اليوم .؟','كيف تتعامل مع الشخص المُتطفل ( الفضولي ) ؟','أصعب صفة قد تتواجد في المرأة.؟','مع أو ضد لو كان خيراً لبقئ.؟','نصيحة لكل شخص يذكر أحد بغيابة بالسوء.؟','كل شيء يهون الا ؟','هل أنت من النوع الذي يواجه المشاكل أو من النوع الذي يهرب ؟','كلمه لشخص خانك!؟.','تحب تحتفظ بالذكريات ؟','شاركنا أقوى بيت شِعر من تأليفك؟','‏اسرع شيء يحسّن من مزاجك؟','كلمتك التسليكيه ؟','كم ساعات نومك؟.','عندك فوبيا او خوف شديد من شيء معين ؟','موهبة تفوز بمدح الناس لك.؟','قدوتك من الأجيال السابقة؟','شخص تتمنئ له الموت؟.','عادةً تُحب النقاش الطويل أم تحب الاختصار؟','تاك لشخص نيته زباله🌚؟','صوتك حلو ؟ .','كلمتين تكررها دايم؟!','افضل روايه قريتيها؟.','متى حدث التغيير الكبير والملحوظ في شخصيتك؟','أكثر اكلهه تحبها؟.','‏كلما ازدادت ثقافة المرء ازداد بؤسه','تتفق.؟','اغبى كذبه صدقتها بطفولتك؟.','كم المده الي تخليك توقع بحب الشخص؟.','تسامح شخص وجع قلبك ؟.','ردة فعلك لما تنظلم من شخص ؟','شيء يعدل نفسيتك بثواني.؟','‏تتوقع الإنسان يحس بقرب موته؟','وقت حزنك تلجأ لمن يخفف عنك.؟','‏أكثر شيء شخصي ضاع منك؟','تزعلك الدنيا ويرضيك ؟','ما الذي يشغل بالك في الفترة الحالية؟','نهارك يصير أجمل بوجود ..؟','حسيت انك ظلمت شخص.؟','صفة يطلقها عليك من حولك بكثرة؟','‏يوم لا يمكنك نسيانه؟','أكثر اكلهه تحبها؟.','اخر كلمة قالها لك حبيبك؟.','من الشخص الاقرب لقلبك؟.','كم المده الي تخليك توقع بحب الشخص؟.','ماهي الهدية التي تتمنى أن تنتظرك يومًا أمام باب منزلك؟','‏اسم او تاك لشخص لا ترتاح في يومك إلا إذا حاجيته؟','صديق أمك ولا أبوك. ؟','لماذا الأشياء التي نريدها بشغف تأتي متأخرة؟','‏تقبل بالعودة لشخص كسر قلبك مرتين؟','افضل هديه ممكن تناسبك؟','كلمة غريبة ومعناها؟','اذا اشتقت تكابر ولا تبادر ؟.','بامكانك تنزع شعور من قلبك للابد ، ايش هو؟.','لو بتغير اسمك ايش بيكون الجديد ؟','‏شخصية لا تستطيع تقبلها؟','ما هي طريقتك في الحصول على الراحة النفسية؟','‏ايموجي يوصف مزاجك حاليًا بدقة؟','تاريخ ميلادك؟','كيف تحد الدولة من الفقر المُتزايد.؟','‏شي مستحيل يتغير فيك؟','لو اخذوك لمستشفى المخابيل كيف تثبت انت صاحي؟','إيموجي يعبّر عن مزاجك الحالي؟','وقت حزنك تلجأ لمن يخفف عنك.؟','اعترف باي حاجه ؟','شاركني آخر صورة جميلة من كاميرا هاتفك.؟','متصالح مع نفسك؟.','لو عندك امنيه وبتحقق وش هي؟.','هل انت شخص مادي.؟','أخر اتصال جاك من مين ؟','تاك لصديقك المُقرب؟.','تحب العلاقات العاطفيه ولا الصداقه؟.','العين الي تستصغرك........؟','تجامل الناس ولا اللي بقلبك على لسانك؟','وقت حزنك تلجأ لمن يخفف عنك.؟','اكثر المتابعين عندك باي برنامج؟','صفه تتمناها بشريك حياتك؟.','من اصدق في الحب الولد ولا البنت؟.','يرد عليك متأخر على رسالة مهمة وبكل برود، موقفك؟','كلمة لشخص بعيد؟','رحتي لعرس وأكتشفتي العريس حبيبك شنو ردة فعلك.؟','تسامح شخص وجع قلبك ؟.','احقر موقف صار لك؟.','ماذا لو كانت مشاعر البشر مرئية ؟','وين نلقى السعاده برايك؟','قد تخيلت شي في بالك وصار ؟','صفة يطلقها عليك الشخص المفضّل؟','اخر خيانه؟.','تحب تحتفظ بالذكريات ؟','لو بتغير اسمك ايش بيكون الجديد ؟','الاعتذار أخلاق ولا ضعف.؟','هل أنت من النوع الذي يواجه المشاكل أو من النوع الذي يهرب ؟','‏ تكره أحد من قلبك ؟','تاك لشخص وكوله اعترف لك؟','مع أو ضد لو كان خيراً لبقئ.؟','‏هل لديك شخص لا تخفي عنه شيئًا؟','اغنيه تأثر بيك؟','المطوعة والعاقلة من شلتك.؟','مواصفات امير/ة احلامك؟.','‏كلمة لصديقك البعيد؟','تتابع انمي؟ إذا نعم ما أفضل انمي شاهدته؟','قرارتك راضي عنها ام لا ؟','تسامح شخص سبب في بكائك.؟','لو حصل واشتريت جزيرة، ماذا ستختار اسمًا لها.؟','اغنيتك المفضلة؟.','شاركنا اقوئ نكتة عندك.؟','ماذا لو عاد مُشتاقاً.؟','مسلسل كرتوني له ذكريات جميلة عندك؟','أخر اتصال جاك من مين ؟','حيوانك المفضل؟','اول ولد لك شنو رح تسميه ؟','سبب الرحيل.؟','قولها بلهجتك « لا أملك المال ».؟','نهارك يصير أجمل بوجود ..؟','‏لو خيروك، الزواج بمن تُحب او تاخذ مليون دولار؟','تاك لشخص سوالفه حلوه ؟','تصرف لا يُمكن أن تتحمله.؟','ماهي الاطباع فيك التي تحاول اخفائها عن الناس؟.','شيء عندك اهم من الناس؟','قد تخيلت شي في بالك وصار ؟','تمحي العشرة الطيبة عشان موقف ماعجبك أو سوء فهم.؟','جربت شعور احد يحبك بس انت متكدر تحبه؟','بنفسك تبوس شخص بهاي الحظه؟','إذا كانت الصراحة ستبعد عنك من تحب هل تمتلك الشجاعة للمصارحة ام لا .؟','أكمل الدعاء بما شئت ‏اللهم أرزقني ..؟','الصق اخر شيء نسخته .؟','‏تفضل جولة في الغابة أم جولة بحرية؟','‏تاك لشخص لديك لا تخفي عنه شي؟','كلمة غريبة ومعناها؟','‏اوقات لا تحب ان يكلمك فيها احد؟','تملك وسواس من شيء معين ؟','اشمر مقطع من اغنيه متطلع منراسك؟','هل تتأثرين بالكلام الرومانسي من الشباب؟','ما اول شيء يلفت انتباهك في الرجل؟','ماذا تفعلين اذا تعرضتِ للتحرش من قبل شخص ما..؟','اذا كنت شخصاً غني هل توافق على الزواج من فتاة فقيرة..؟','ما هو أكثر شئ لا تستطيع تحمله..؟','ما هي نقاط الضعف في شخصيتك..؟','هل توافق أن زوجتك تدفع الحساب في إحدي المطاعم وأنت موجود؟','ماذا تفعل لو أكتشفت ان زوجتك على علاقة بصديقك؟','ما هي أكثر صفة تكرهها في زوجتك..؟','اذا كان لديك فرصة للخروج مع من سوف تخرج ربعك او زوجتك..؟','ماذا تفعل عندما تري دموع زوجتك..؟','إلى أي الرجال تُريدين أن يكون انتماؤك؟','كم مرة خُدعت في أشخاصٍ، وثقتِ فيهم ثقةً عمياء؟','هل ما زال أصدقاء الطفولة أصدقاءً لك حتى الآن؟','هل ترغبين في أن يكون خطيبك وسيمًا؟','كم مرةٍ فعلت شيئًا لا ترغبين في الإفصاح عنه؟','هل استطعت أن تُحققي آمالك العلمية والعاطفية؟','أكثر شئ ندمت على فعله..؟','هل تشعرين أنك فتاة محظوظة..؟','هل علاقة الحب التي كانت في صغرك، مازالت مستمرة؟','ما هو أكثر شئ يفرحك في هذه الحياة..؟','كم مرة أردت شراء ملابس لأنها جميلة ولكنها لا تناسبك..؟','كم عدد المرات التي قمت فيها بإستبدال شئ اشتريته ولم يعجبك بعد ذلك.؟','كم مرة قمت بكسر الرجيم من أجل تناول طعامك المفضل..؟','هل تعرضت للظلم يوماً ما وعلى يد من..؟','هل كذبت على والديك من قبل..؟','هل خرجتي مع شخص تعرفتي عليه من خلال التليكرام من قبل..؟','هل لو تقدم شخص لاختك من أجل خطبتها وقامت برفضه تقبلين به..؟','لمن تقولين لا أستطيع العيش بدونك..؟','كم عدد المرات التي تعرضتِ فيها إلى أزمة نفسية وأردتِ الصراخ بأعلى صوتك..؟','ماذا تقول للبحر؟','أصعب صفة قد تتواجد في رجل؟','ما أجمل الحياة بدون ...؟','لماذا لم تتم خطبتك حتى الآن..؟','نسبة رضاك عن الأشخاص من حولك هالفترة ؟','ما السيء في هذه الحياة ؟','الفلوس او الحب ؟','أجمل شيء حصل معك خلال هذا الاسبوع ؟','سؤال ينرفزك ؟','كم في حسابك البنكي ؟','شي عندك اهم من الناس ؟','اول ولد او بنت الك شنو تسمي ؟','تفضّل النقاش الطويل او تحب الاختصار ؟','عادي تتزوج او تتزوجين من خارج العشيره ؟','كم مره حبيت ؟','تبادل الكراهية بالكراهية؟ ولا تحرجه بالطيب ؟','قلبي على قلبك مهما صار لمنو تكولها ؟','اكثر المتابعين عندك باي برنامج ؟','نسبة النعاس عندك حاليًا ؟','نسبه الندم عندك للي وثقت بيهم ؟','اول شخص تعرفت عليه بالتليكرام بعده موجود ؟','اذا فديوم شخص ضلمك شنو موقفك ؟','افضل عمر للزواج برئيك ؟','انت من النوع الي دائما ينغدر من اقرب الناس اله ؟','ماهو حيوانك المفضل ؟','تاريخ ميلادك ؟','لونك المفضل ؟','انت من النوع العاطفي والي ميكدر يكتم البداخله ؟','اذا فديوم شخص خانك ويريد يرجعلك تقبل ؟','شي بالحياه مخليك عايش لحد الان ؟','تحب النوم لو الشغل ؟','افضل مكان رحت عليه ؟','اختصر الماضي بكلمه وحده ؟','هل سبق وكنت مصر على أمر ما ومن ثم اكتشفت أنك كنت على خطأ ؟','اكثر كلمة ترفع ضغطك ؟','مع او ضد سب البنت للدفاع عن نفسها ؟','يهمك ظن الناس بيك لو لا؟','عبّر عن مودك بصوره ؟','اغلب وقتك ضايع في ؟','يوم متكدر تنساه ؟','تحس انك محظوظ بالاشخاص الي حولك ؟','تستغل وقت فراغك بشنو ؟','مع او ضد مقولة محد يدوم ل احد ؟','لو اخذوك مستشفى المجانين كيف تثبت لهم انك صاحي ؟','مغني تلاحظ أن صوته يعجب الجميع إلا أنت ؟','اخر خيانه ؟','تصرف ماتتحمله ؟','هل يمكنك الكذب والاستمرار بارتكاب الأخطاء كمحاولة منك لعدم الكشف أنك مخطئ ؟','الصق اخر شي نسخته ؟','عمرك انتقمت من أحد ؟','هل وصلك رسالة غير متوقعة من شخص وأثرت فيك ؟','‏-لو امتلكت العصا السحرية ليوم واحد ماذا ستفعل ؟','جابو طاري شخص تكره عندك تشاركهم ولا تمنعهم ؟','أمنية كنت تتمناها وحققتها ؟','هل التعود على شخص والتحدث معه بشكل يومي يعتبر نوع من أنواع الحب ؟','نسبة جمال صوتك ؟','صفة يطلقها عليك الشخص المفضل ؟','شنو هدفك بالمستقبل القريب ؟','تحب القرائه ؟','كليه تتمنى تنقبل بيها ؟',
@@ -5816,27 +5965,21 @@ local AntakTeam = {
 'اكثر لونين تحبهم مع بعض؟','أجمل بيت شعر سمعته ...','سبق وراودك شعور أنك لم تعد تعرف نفسك؟','تتوقع فيه احد حاقد عليك ويكرهك ؟','أجمل سنة ميلادية مرت عليك ؟','لو فزعت/ي لصديق/ه وقالك مالك دخل وش بتسوي/ين؟','وش تحس انك تحتاج الفترة هاذي ؟','يومك ضاع على؟','@منشن .. شخص تخاف منه اذا عصب ...','فيلم عالق في ذهنك لا تنساه مِن روعته؟','تختار أن تكون غبي أو قبيح؟','الفلوس او الحب ؟','أجمل بلد في قارة آسيا بنظرك؟','ما الذي يشغل بالك في الفترة الحالية؟','احقر الناس هو من ...','وين نلقى السعاده برايك؟','اشياء تفتخر انك م سويتها ؟','تزعلك الدنيا ويرضيك ؟','وش الحب بنظرك؟','افضل هديه ممكن تناسبك؟','كم في حسابك البنكي ؟','كلمة لشخص أسعدك رغم حزنك في يومٍ من الأيام ؟','عمرك انتقمت من أحد ؟!','ما السيء في هذه الحياة ؟','غنية عندك معاها ذكريات🎵🎻','/','أفضل صفة تحبه بنفسك؟','اكثر وقت تحب تنام فيه ...','أطول مدة نمت فيها كم ساعة؟','أصعب قرار ممكن تتخذه ؟','أفضل صفة تحبه بنفسك؟','اكثر وقت تحب تنام فيه ...','أنت محبوب بين الناس؟ ولاكريه؟','إحساسك في هاللحظة؟','اخر شيء اكلته ؟','تشوف الغيره انانيه او حب؟','اذكر موقف ماتنساه بعمرك؟','اكثر مشاكلك بسبب ؟','اول ماتصحى من النوم مين تكلمه؟','آخر مرة ضحكت من كل قلبك؟','لو الجنسية حسب ملامحك وش بتكون جنسيتك؟','اكثر شيء يرفع ضغطك','اذكر موقف ماتنساه بعمرك؟','لو قالوا لك  تناول صنف واحد فقط من الطعام لمدة شهر .',
 'كيف تشوف الجيل ذا؟','ردة فعلك لو مزح معك شخص م تعرفه ؟','احقر الناس هو من ...','تحب ابوك ولا امك','آخر فيلم مسلسل والتقييم🎥؟','أقبح القبحين في العلاقة: الغدر أو الإهمال🤷🏼؟','كلمة لأقرب شخص لقلبك🤍؟','حط@منشن لشخص وقوله "حركتك مالها داعي"😼!','اذا جاك خبر مفرح اول واحد تعلمه فيه مين💃🏽؟','طبع يمكن يخليك تكره شخص حتى لو كنت تُحبه🙅🏻‍♀️؟','افضل ايام الاسبوع عندك🔖؟','يقولون ان الحياة دروس ، ماهو أقوى درس تعلمته من الحياة🏙؟','تاريخ لن تنساه📅؟','تحب الصيف والا الشتاء❄️☀️؟','شخص تحب تستفزه😈؟','شنو ينادونك وانت صغير (عيارتك)👼🏻؟','عقل يفهمك/ج ولا قلب يحبك/ج❤️؟','اول سفره لك وين رح تكون✈️؟','كم عدد اللي معطيهم بلوك👹؟','نوعية من الأشخاص تتجنبهم في حياتك❌؟','شاركنا صورة او فيديو من تصويرك؟📸','كم من عشره تعطي حظك📩؟','اكثر برنامج تواصل اجتماعي تحبه😎؟','من اي دوله انت🌍؟','اكثر دوله ودك تسافر لها🏞؟','مقولة "نكبر وننسى" هل تؤمن بصحتها🧓🏼؟','تعتقد فيه أحد يراقبك👩🏼‍💻؟','لو بيدك تغير الزمن ، تقدمه ولا ترجعه🕰؟','مشروبك المفضل🍹؟','‏قم بلصق آخر اقتباس نسخته؟💭','كم وزنك/ج طولك/ج؟🌚','كم كان عمرك/ج قبل ٨ سنين😈؟','دوله ندمت انك سافرت لها😁؟','لو قالو لك ٣ أمنيات راح تتحقق عالسريع شنو تكون🧞‍♀️؟','‏- نسبة احتياجك للعزلة من 10📊؟','شخص تحبه حظرك بدون سبب واضح، ردة فعلك🧐؟','مبدأ في الحياة تعتمد عليه دائما🕯؟',
 }  
-Text = ''..AntakTeam[math.random(#AntakTeam)]..''
-keyboard = {} 
-keyboard.inline_keyboard = {{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
-Msg_id = msg.id_/2097152/0.5
-https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(Help or Text).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+Text =''..AntakTeam[math.random(#AntakTeam)]..''
+local inline = {{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
+SendInline(msg.chat_id_,Text,nil,inline,msg.id_/2097152/0.5)
 return false
 end
 end
 --     Source Antak     --
 if text == "مسح سحكاتي" or text == "مسح رسائلي" then
 local Msg = DevRio:get(Antak..'Rio:Msg')
-local Text = [[
-᥀︙من خلال الازرار يمكنك مسح رسائلك وسحكاتك
-]] 
-keyboard = {} 
-keyboard.inline_keyboard = {{{text="• مسح رسائلي •",callback_data="/DelMsg:"..msg.sender_user_id_},{text="• مسح سحكاتي •",callback_data="/DelEdit:"..msg.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..msg.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
-Msg_id = msg.id_/2097152/0.5
-return https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(Msg or Text).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+local Text = '᥀︙من خلال الازرار يمكنك مسح رسائلك وسحكاتك'
+local inline = {{{text="‹ مسح رسائلي ›",callback_data="/DelMsg:"..msg.sender_user_id_},{text="‹ مسح سحكاتي ›",callback_data="/DelEdit:"..msg.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..msg.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
+SendInline(msg.chat_id_,Text,nil,inline,msg.id_/2097152/0.5)
 end
 --     Source Antak     --
-if text and (text == "التسليه" or text == "اوامر التسليه" or text == "تسليه" or text == "تسلية" or text == "التسلية") and ChCheck(msg) then
+if text and (text == "التسليه" or text == "اوامر التسليه" or text == "تسليه" or text == "تسلية" or text == "التسلية") and SourceCh(msg) then
 local Tsl = DevRio:get(Antak..'Rio:Tsl')
 local Text = [[
 *᥀︙اهلا بك في قائمة اوامر التسليه ↫ ⤈*
@@ -5849,24 +5992,20 @@ local Text = [[
 ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉
 ᥀︙[Source Channel](https://t.me/TeAmAnTaK)
 ]] 
-keyboard = {} 
-keyboard.inline_keyboard = {{{text="• غنيلي •",callback_data="/Song:"..msg.sender_user_id_},{text="• اغنيه •",callback_data="/mp3:"..msg.sender_user_id_}},{{text="• متحركه •",callback_data="/gif:"..msg.sender_user_id_},{text="• صوره •",callback_data="/photo:"..msg.sender_user_id_}},{{text="• انمي •",callback_data="/anime:"..msg.sender_user_id_},{text="• ريمكس •",callback_data="/remix:"..msg.sender_user_id_}},{{text="• ميمز •",callback_data="/memz:"..msg.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..msg.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
-Msg_id = msg.id_/2097152/0.5
-return https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(Help or Text).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+local inline = {{{text="‹ غنيلي ›",callback_data="/Song:"..msg.sender_user_id_},{text="‹ اغنيه ›",callback_data="/mp3:"..msg.sender_user_id_}},{{text="‹ متحركه ›",callback_data="/gif:"..msg.sender_user_id_},{text="‹ صوره ›",callback_data="/photo:"..msg.sender_user_id_}},{{text="‹ انمي ›",callback_data="/anime:"..msg.sender_user_id_},{text="‹ ريمكس ›",callback_data="/remix:"..msg.sender_user_id_}},{{text="‹ ميمز ›",callback_data="/memz:"..msg.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..msg.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
+SendInline(msg.chat_id_,Text,nil,inline,msg.id_/2097152/0.5)
 end
 --     Source Antak     --
-if text ==('تحكم') and ChCheck(msg) and Admin(msg) then
+if text ==('تحكم') and SourceCh(msg) and Admin(msg) then
 function prom_reply(extra, result, success)
 tdcli_function ({ID = "GetUser",user_id_ = result.sender_user_id_},function(arg,dp) 
 if dp.first_name_ == false then
 Dev_Rio(msg.chat_id_, msg.id_, 1, "᥀︙الحساب محذوف", 1, "md")
 return false  
 end
-local Text = '᥀︙قم باستعمال الازرار للتحكم العضو ↫ ⤈\n᥀︙العضو ↫ ['..dp.first_name_..'](t.me/'..(dp.username_ or 'TeAmAnTaK')..')'
-keyboard = {} 
-keyboard.inline_keyboard = {{{text="• رفع رتبه •",callback_data=msg.sender_user_id_..":SetList:"..result.sender_user_id_},{text="• تنزيل رتبه •",callback_data=msg.sender_user_id_..":RemList:"..result.sender_user_id_}},{{text="• كتم •",callback_data=msg.sender_user_id_..":Mute:"..result.sender_user_id_},{text="• الغاء كتم •",callback_data=msg.sender_user_id_..":UnMute:"..result.sender_user_id_}},{{text="• حظر •",callback_data=msg.sender_user_id_..":Ban:"..result.sender_user_id_},{text="• الغاء حظر •",callback_data=msg.sender_user_id_..":UnBan:"..result.sender_user_id_}},{{text="• تقيد •",callback_data=msg.sender_user_id_..":Tkeed:"..result.sender_user_id_},{text="• الغاء تقيد •",callback_data=msg.sender_user_id_..":UnTkeed:"..result.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
-Msg_id = msg.id_/2097152/0.5
-https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text='..URL.escape(Text).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+local Text ='᥀︙قم باستعمال الازرار للتحكم العضو ↫ ⤈\n᥀︙العضو ↫ ['..dp.first_name_..'](t.me/'..(dp.username_ or 'TeAmAnTaK')..')'
+local inline = {{{text="‹ رفع رتبه ›",callback_data=msg.sender_user_id_..":SetList:"..result.sender_user_id_},{text="‹ تنزيل رتبه ›",callback_data=msg.sender_user_id_..":RemList:"..result.sender_user_id_}},{{text="‹ كتم ›",callback_data=msg.sender_user_id_..":Mute:"..result.sender_user_id_},{text="‹ الغاء كتم ›",callback_data=msg.sender_user_id_..":UnMute:"..result.sender_user_id_}},{{text="‹ حظر ›",callback_data=msg.sender_user_id_..":Ban:"..result.sender_user_id_},{text="‹ الغاء حظر ›",callback_data=msg.sender_user_id_..":UnBan:"..result.sender_user_id_}},{{text="‹ تقيد ›",callback_data=msg.sender_user_id_..":Tkeed:"..result.sender_user_id_},{text="‹ الغاء تقيد ›",callback_data=msg.sender_user_id_..":UnTkeed:"..result.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
+SendInline(msg.chat_id_,Text,nil,inline,msg.id_/2097152/0.5)
 end,nil)
 end 
 if tonumber(tonumber(msg.reply_to_message_id_)) > 0 then
@@ -5874,33 +6013,33 @@ getMessage(msg.chat_id_, tonumber(msg.reply_to_message_id_),prom_reply)
 end 
 end
 --     Source Antak     --
-if text ==('رفع') and ChCheck(msg) then
+if text ==('رفع') and SourceCh(msg) then
 function prom_reply(extra, result, success)
 tdcli_function ({ID = "GetUser",user_id_ = result.sender_user_id_},function(arg,dp) 
 if dp.first_name_ == false then
 Dev_Rio(msg.chat_id_, msg.id_, 1, "᥀︙الحساب محذوف", 1, "md")
 return false  
 end
-local Text = '᥀︙قم باستعمال الازرار لرفع العضو ↫ ⤈\n᥀︙العضو ↫ ['..dp.first_name_..'](t.me/'..(dp.username_ or 'TeAmAnTaK')..')'
+local Text ='᥀︙قم باستعمال الازرار لرفع العضو ↫ ⤈\n᥀︙العضو ↫ ['..dp.first_name_..'](t.me/'..(dp.username_ or 'TeAmAnTaK')..')'
 keyboard = {} 
 if Sudo(msg) then
-keyboard.inline_keyboard = {{{text="• رفع مميز •",callback_data=msg.sender_user_id_..":SetMem:"..result.sender_user_id_},{text="• رفع ادمن •",callback_data=msg.sender_user_id_..":SetAdmin:"..result.sender_user_id_}},{{text="• رفع منشئ •",callback_data=msg.sender_user_id_..":SetConstructor:"..result.sender_user_id_},{text="• رفع مدير •",callback_data=msg.sender_user_id_..":SetManager:"..result.sender_user_id_}},{{text="• رفع منظف •",callback_data=msg.sender_user_id_..":SetCleaner:"..result.sender_user_id_},{text="• رفع منشئ اساسي •",callback_data=msg.sender_user_id_..":SetBasicConstructor:"..result.sender_user_id_}},{{text="• رفع مالك •",callback_data=msg.sender_user_id_..":SetOwner:"..result.sender_user_id_},{text="• رفع مطور •",callback_data=msg.sender_user_id_..":SetSudoBot:"..result.sender_user_id_}},{{text="• رفع مطور ثانوي •",callback_data=msg.sender_user_id_..":SetSecondSudo:"..result.sender_user_id_},{text="• رفع مطور اساسي •",callback_data=msg.sender_user_id_..":SetRioSudo:"..result.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ رفع مميز ›",callback_data=msg.sender_user_id_..":SetMem:"..result.sender_user_id_},{text="‹ رفع ادمن ›",callback_data=msg.sender_user_id_..":SetAdmin:"..result.sender_user_id_}},{{text="‹ رفع منشئ ›",callback_data=msg.sender_user_id_..":SetConstructor:"..result.sender_user_id_},{text="‹ رفع مدير ›",callback_data=msg.sender_user_id_..":SetManager:"..result.sender_user_id_}},{{text="‹ رفع منظف ›",callback_data=msg.sender_user_id_..":SetCleaner:"..result.sender_user_id_},{text="‹ رفع منشئ اساسي ›",callback_data=msg.sender_user_id_..":SetBasicConstructor:"..result.sender_user_id_}},{{text="‹ رفع مالك ›",callback_data=msg.sender_user_id_..":SetOwner:"..result.sender_user_id_},{text="‹ رفع مطور ›",callback_data=msg.sender_user_id_..":SetSudoBot:"..result.sender_user_id_}},{{text="‹ رفع مطور ثانوي ›",callback_data=msg.sender_user_id_..":SetSecondSudo:"..result.sender_user_id_},{text="‹ رفع مطور اساسي ›",callback_data=msg.sender_user_id_..":SetRioSudo:"..result.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 elseif RioSudo(msg) then
-keyboard.inline_keyboard = {{{text="• رفع مميز •",callback_data=msg.sender_user_id_..":SetMem:"..result.sender_user_id_},{text="• رفع ادمن •",callback_data=msg.sender_user_id_..":SetAdmin:"..result.sender_user_id_}},{{text="• رفع منشئ •",callback_data=msg.sender_user_id_..":SetConstructor:"..result.sender_user_id_},{text="• رفع مدير •",callback_data=msg.sender_user_id_..":SetManager:"..result.sender_user_id_}},{{text="• رفع منظف •",callback_data=msg.sender_user_id_..":SetCleaner:"..result.sender_user_id_},{text="• رفع منشئ اساسي •",callback_data=msg.sender_user_id_..":SetBasicConstructor:"..result.sender_user_id_}},{{text="• رفع مالك •",callback_data=msg.sender_user_id_..":SetOwner:"..result.sender_user_id_},{text="• رفع مطور •",callback_data=msg.sender_user_id_..":SetSudoBot:"..result.sender_user_id_}},{{text="• رفع مطور ثانوي •",callback_data=msg.sender_user_id_..":SetSecondSudo:"..result.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ رفع مميز ›",callback_data=msg.sender_user_id_..":SetMem:"..result.sender_user_id_},{text="‹ رفع ادمن ›",callback_data=msg.sender_user_id_..":SetAdmin:"..result.sender_user_id_}},{{text="‹ رفع منشئ ›",callback_data=msg.sender_user_id_..":SetConstructor:"..result.sender_user_id_},{text="‹ رفع مدير ›",callback_data=msg.sender_user_id_..":SetManager:"..result.sender_user_id_}},{{text="‹ رفع منظف ›",callback_data=msg.sender_user_id_..":SetCleaner:"..result.sender_user_id_},{text="‹ رفع منشئ اساسي ›",callback_data=msg.sender_user_id_..":SetBasicConstructor:"..result.sender_user_id_}},{{text="‹ رفع مالك ›",callback_data=msg.sender_user_id_..":SetOwner:"..result.sender_user_id_},{text="‹ رفع مطور ›",callback_data=msg.sender_user_id_..":SetSudoBot:"..result.sender_user_id_}},{{text="‹ رفع مطور ثانوي ›",callback_data=msg.sender_user_id_..":SetSecondSudo:"..result.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 elseif SecondSudo(msg) then
-keyboard.inline_keyboard = {{{text="• رفع مميز •",callback_data=msg.sender_user_id_..":SetMem:"..result.sender_user_id_},{text="• رفع ادمن •",callback_data=msg.sender_user_id_..":SetAdmin:"..result.sender_user_id_}},{{text="• رفع منشئ •",callback_data=msg.sender_user_id_..":SetConstructor:"..result.sender_user_id_},{text="• رفع مدير •",callback_data=msg.sender_user_id_..":SetManager:"..result.sender_user_id_}},{{text="• رفع منظف •",callback_data=msg.sender_user_id_..":SetCleaner:"..result.sender_user_id_},{text="• رفع منشئ اساسي •",callback_data=msg.sender_user_id_..":SetBasicConstructor:"..result.sender_user_id_}},{{text="• رفع مالك •",callback_data=msg.sender_user_id_..":SetOwner:"..result.sender_user_id_},{text="• رفع مطور •",callback_data=msg.sender_user_id_..":SetSudoBot:"..result.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ رفع مميز ›",callback_data=msg.sender_user_id_..":SetMem:"..result.sender_user_id_},{text="‹ رفع ادمن ›",callback_data=msg.sender_user_id_..":SetAdmin:"..result.sender_user_id_}},{{text="‹ رفع منشئ ›",callback_data=msg.sender_user_id_..":SetConstructor:"..result.sender_user_id_},{text="‹ رفع مدير ›",callback_data=msg.sender_user_id_..":SetManager:"..result.sender_user_id_}},{{text="‹ رفع منظف ›",callback_data=msg.sender_user_id_..":SetCleaner:"..result.sender_user_id_},{text="‹ رفع منشئ اساسي ›",callback_data=msg.sender_user_id_..":SetBasicConstructor:"..result.sender_user_id_}},{{text="‹ رفع مالك ›",callback_data=msg.sender_user_id_..":SetOwner:"..result.sender_user_id_},{text="‹ رفع مطور ›",callback_data=msg.sender_user_id_..":SetSudoBot:"..result.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 elseif SudoBot(msg) then
-keyboard.inline_keyboard = {{{text="• رفع مميز •",callback_data=msg.sender_user_id_..":SetMem:"..result.sender_user_id_},{text="• رفع ادمن •",callback_data=msg.sender_user_id_..":SetAdmin:"..result.sender_user_id_}},{{text="• رفع منشئ •",callback_data=msg.sender_user_id_..":SetConstructor:"..result.sender_user_id_},{text="• رفع مدير •",callback_data=msg.sender_user_id_..":SetManager:"..result.sender_user_id_}},{{text="• رفع منظف •",callback_data=msg.sender_user_id_..":SetCleaner:"..result.sender_user_id_},{text="• رفع منشئ اساسي •",callback_data=msg.sender_user_id_..":SetBasicConstructor:"..result.sender_user_id_}},{{text="• رفع مالك •",callback_data=msg.sender_user_id_..":SetOwner:"..result.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ رفع مميز ›",callback_data=msg.sender_user_id_..":SetMem:"..result.sender_user_id_},{text="‹ رفع ادمن ›",callback_data=msg.sender_user_id_..":SetAdmin:"..result.sender_user_id_}},{{text="‹ رفع منشئ ›",callback_data=msg.sender_user_id_..":SetConstructor:"..result.sender_user_id_},{text="‹ رفع مدير ›",callback_data=msg.sender_user_id_..":SetManager:"..result.sender_user_id_}},{{text="‹ رفع منظف ›",callback_data=msg.sender_user_id_..":SetCleaner:"..result.sender_user_id_},{text="‹ رفع منشئ اساسي ›",callback_data=msg.sender_user_id_..":SetBasicConstructor:"..result.sender_user_id_}},{{text="‹ رفع مالك ›",callback_data=msg.sender_user_id_..":SetOwner:"..result.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 elseif Owner(msg) then
-keyboard.inline_keyboard = {{{text="• رفع مميز •",callback_data=msg.sender_user_id_..":SetMem:"..result.sender_user_id_},{text="• رفع ادمن •",callback_data=msg.sender_user_id_..":SetAdmin:"..result.sender_user_id_}},{{text="• رفع منشئ •",callback_data=msg.sender_user_id_..":SetConstructor:"..result.sender_user_id_},{text="• رفع مدير •",callback_data=msg.sender_user_id_..":SetManager:"..result.sender_user_id_}},{{text="• رفع منظف •",callback_data=msg.sender_user_id_..":SetCleaner:"..result.sender_user_id_},{text="• رفع منشئ اساسي •",callback_data=msg.sender_user_id_..":SetBasicConstructor:"..result.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ رفع مميز ›",callback_data=msg.sender_user_id_..":SetMem:"..result.sender_user_id_},{text="‹ رفع ادمن ›",callback_data=msg.sender_user_id_..":SetAdmin:"..result.sender_user_id_}},{{text="‹ رفع منشئ ›",callback_data=msg.sender_user_id_..":SetConstructor:"..result.sender_user_id_},{text="‹ رفع مدير ›",callback_data=msg.sender_user_id_..":SetManager:"..result.sender_user_id_}},{{text="‹ رفع منظف ›",callback_data=msg.sender_user_id_..":SetCleaner:"..result.sender_user_id_},{text="‹ رفع منشئ اساسي ›",callback_data=msg.sender_user_id_..":SetBasicConstructor:"..result.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 elseif BasicConstructor(msg) then
-keyboard.inline_keyboard = {{{text="• رفع مميز •",callback_data=msg.sender_user_id_..":SetMem:"..result.sender_user_id_},{text="• رفع ادمن •",callback_data=msg.sender_user_id_..":SetAdmin:"..result.sender_user_id_}},{{text="• رفع منشئ •",callback_data=msg.sender_user_id_..":SetConstructor:"..result.sender_user_id_},{text="• رفع مدير •",callback_data=msg.sender_user_id_..":SetManager:"..result.sender_user_id_}},{{text="• رفع منظف •",callback_data=msg.sender_user_id_..":SetCleaner:"..result.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ رفع مميز ›",callback_data=msg.sender_user_id_..":SetMem:"..result.sender_user_id_},{text="‹ رفع ادمن ›",callback_data=msg.sender_user_id_..":SetAdmin:"..result.sender_user_id_}},{{text="‹ رفع منشئ ›",callback_data=msg.sender_user_id_..":SetConstructor:"..result.sender_user_id_},{text="‹ رفع مدير ›",callback_data=msg.sender_user_id_..":SetManager:"..result.sender_user_id_}},{{text="‹ رفع منظف ›",callback_data=msg.sender_user_id_..":SetCleaner:"..result.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 elseif Constructor(msg) then
-keyboard.inline_keyboard = {{{text="• رفع مميز •",callback_data=msg.sender_user_id_..":SetMem:"..result.sender_user_id_},{text="• رفع ادمن •",callback_data=msg.sender_user_id_..":SetAdmin:"..result.sender_user_id_}},{{text="• رفع منظف •",callback_data=msg.sender_user_id_..":SetCleaner:"..result.sender_user_id_},{text="• رفع مدير •",callback_data=msg.sender_user_id_..":SetManager:"..result.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ رفع مميز ›",callback_data=msg.sender_user_id_..":SetMem:"..result.sender_user_id_},{text="‹ رفع ادمن ›",callback_data=msg.sender_user_id_..":SetAdmin:"..result.sender_user_id_}},{{text="‹ رفع منظف ›",callback_data=msg.sender_user_id_..":SetCleaner:"..result.sender_user_id_},{text="‹ رفع مدير ›",callback_data=msg.sender_user_id_..":SetManager:"..result.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 elseif Manager(msg) then
-keyboard.inline_keyboard = {{{text="• رفع مميز •",callback_data=msg.sender_user_id_..":SetMem:"..result.sender_user_id_},{text="• رفع ادمن •",callback_data=msg.sender_user_id_..":SetAdmin:"..result.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ رفع مميز ›",callback_data=msg.sender_user_id_..":SetMem:"..result.sender_user_id_},{text="‹ رفع ادمن ›",callback_data=msg.sender_user_id_..":SetAdmin:"..result.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 elseif Admin(msg) then
-keyboard.inline_keyboard = {{{text="• رفع مميز •",callback_data=msg.sender_user_id_..":SetMem:"..result.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ رفع مميز ›",callback_data=msg.sender_user_id_..":SetMem:"..result.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 end
 Msg_id = msg.id_/2097152/0.5
 https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text='..URL.escape(Text).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
@@ -5911,33 +6050,33 @@ getMessage(msg.chat_id_, tonumber(msg.reply_to_message_id_),prom_reply)
 end 
 end
 --     Source Antak     --
-if text ==('تنزيل') and ChCheck(msg) then
+if text ==('تنزيل') and SourceCh(msg) then
 function prom_reply(extra, result, success)
 tdcli_function ({ID = "GetUser",user_id_ = result.sender_user_id_},function(arg,dp) 
 if dp.first_name_ == false then
 Dev_Rio(msg.chat_id_, msg.id_, 1, "᥀︙الحساب محذوف", 1, "md")
 return false  
 end
-local Text = '᥀︙قم باستعمال الازرار لتنزيل العضو ↫ ⤈\n᥀︙العضو ↫ ['..dp.first_name_..'](t.me/'..(dp.username_ or 'TeAmAnTaK')..')'
+local Text ='᥀︙قم باستعمال الازرار لتنزيل العضو ↫ ⤈\n᥀︙العضو ↫ ['..dp.first_name_..'](t.me/'..(dp.username_ or 'TeAmAnTaK')..')'
 keyboard = {} 
 if Sudo(msg) then
-keyboard.inline_keyboard = {{{text="• تنزيل مميز •",callback_data=msg.sender_user_id_..":RemMem:"..result.sender_user_id_},{text="• تنزيل ادمن •",callback_data=msg.sender_user_id_..":RemAdmin:"..result.sender_user_id_}},{{text="• تنزيل منشئ •",callback_data=msg.sender_user_id_..":RemConstructor:"..result.sender_user_id_},{text="• تنزيل مدير •",callback_data=msg.sender_user_id_..":RemManager:"..result.sender_user_id_}},{{text="• تنزيل منظف •",callback_data=msg.sender_user_id_..":RemCleaner:"..result.sender_user_id_},{text="• تنزيل منشئ  اساسي •",callback_data=msg.sender_user_id_..":RemBasicConstructor:"..result.sender_user_id_}},{{text="• تنزيل مالك •",callback_data=msg.sender_user_id_..":RemAbsConstructor:"..result.sender_user_id_},{text="• تنزيل مطور •",callback_data=msg.sender_user_id_..":RemSudoBot:"..result.sender_user_id_}},{{text="• تنزيل مطور ثانوي •",callback_data=msg.sender_user_id_..":RemSecondSudo:"..result.sender_user_id_},{text="• تنزيل مطور اساسي •",callback_data=msg.sender_user_id_..":RemRioSudo:"..result.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ تنزيل مميز ›",callback_data=msg.sender_user_id_..":RemMem:"..result.sender_user_id_},{text="‹ تنزيل ادمن ›",callback_data=msg.sender_user_id_..":RemAdmin:"..result.sender_user_id_}},{{text="‹ تنزيل منشئ ›",callback_data=msg.sender_user_id_..":RemConstructor:"..result.sender_user_id_},{text="‹ تنزيل مدير ›",callback_data=msg.sender_user_id_..":RemManager:"..result.sender_user_id_}},{{text="‹ تنزيل منظف ›",callback_data=msg.sender_user_id_..":RemCleaner:"..result.sender_user_id_},{text="‹ تنزيل منشئ  اساسي ›",callback_data=msg.sender_user_id_..":RemBasicConstructor:"..result.sender_user_id_}},{{text="‹ تنزيل مالك ›",callback_data=msg.sender_user_id_..":RemAbsConstructor:"..result.sender_user_id_},{text="‹ تنزيل مطور ›",callback_data=msg.sender_user_id_..":RemSudoBot:"..result.sender_user_id_}},{{text="‹ تنزيل مطور ثانوي ›",callback_data=msg.sender_user_id_..":RemSecondSudo:"..result.sender_user_id_},{text="‹ تنزيل مطور اساسي ›",callback_data=msg.sender_user_id_..":RemRioSudo:"..result.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 elseif RioSudo(msg) then
-keyboard.inline_keyboard = {{{text="• تنزيل مميز •",callback_data=msg.sender_user_id_..":RemMem:"..Rio},{text="• تنزيل ادمن •",callback_data=msg.sender_user_id_..":RemAdmin:"..Rio}},{{text="• تنزيل منشئ •",callback_data=msg.sender_user_id_..":RemConstructor:"..Rio},{text="• تنزيل مدير •",callback_data=msg.sender_user_id_..":RemManager:"..Rio}},{{text="• تنزيل منظف •",callback_data=msg.sender_user_id_..":RemCleaner:"..Rio},{text="• تنزيل منشئ  اساسي •",callback_data=msg.sender_user_id_..":RemBasicConstructor:"..Rio}},{{text="• تنزيل مالك •",callback_data=msg.sender_user_id_..":RemOwner:"..Rio},{text="• تنزيل مطور •",callback_data=msg.sender_user_id_..":RemSudoBot:"..Rio}},{{text="• تنزيل مطور ثانوي •",callback_data=msg.sender_user_id_..":RemSecondSudo:"..Rio}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
-elseif SecondSudo(data) then
-keyboard.inline_keyboard = {{{text="• تنزيل مميز •",callback_data=msg.sender_user_id_..":RemMem:"..Rio},{text="• تنزيل ادمن •",callback_data=msg.sender_user_id_..":RemAdmin:"..Rio}},{{text="• تنزيل منشئ •",callback_data=msg.sender_user_id_..":RemConstructor:"..Rio},{text="• تنزيل مدير •",callback_data=msg.sender_user_id_..":RemManager:"..Rio}},{{text="• تنزيل منظف •",callback_data=msg.sender_user_id_..":RemCleaner:"..Rio},{text="• تنزيل منشئ  اساسي •",callback_data=msg.sender_user_id_..":RemBasicConstructor:"..Rio}},{{text="• تنزيل مالك •",callback_data=msg.sender_user_id_..":RemOwner:"..Rio},{text="• تنزيل مطور •",callback_data=msg.sender_user_id_..":RemSudoBot:"..Rio}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
-elseif SudoBot(data) then
-keyboard.inline_keyboard = {{{text="• تنزيل مميز •",callback_data=msg.sender_user_id_..":RemMem:"..Rio},{text="• تنزيل ادمن •",callback_data=msg.sender_user_id_..":RemAdmin:"..Rio}},{{text="• تنزيل منشئ •",callback_data=msg.sender_user_id_..":RemConstructor:"..Rio},{text="• تنزيل مدير •",callback_data=msg.sender_user_id_..":RemManager:"..Rio}},{{text="• تنزيل منظف •",callback_data=msg.sender_user_id_..":RemCleaner:"..Rio},{text="• تنزيل منشئ  اساسي •",callback_data=msg.sender_user_id_..":RemBasicConstructor:"..Rio}},{{text="• تنزيل مالك •",callback_data=msg.sender_user_id_..":RemOwner:"..Rio}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
-elseif Owner(data) then
-keyboard.inline_keyboard = {{{text="• تنزيل مميز •",callback_data=msg.sender_user_id_..":RemMem:"..Rio},{text="• تنزيل ادمن •",callback_data=msg.sender_user_id_..":RemAdmin:"..Rio}},{{text="• تنزيل منشئ •",callback_data=msg.sender_user_id_..":RemConstructor:"..Rio},{text="• تنزيل مدير •",callback_data=msg.sender_user_id_..":RemManager:"..Rio}},{{text="• تنزيل منظف •",callback_data=msg.sender_user_id_..":RemCleaner:"..Rio},{text="• تنزيل منشئ  اساسي •",callback_data=msg.sender_user_id_..":RemBasicConstructor:"..Rio}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
-elseif BasicConstructor(data) then
-keyboard.inline_keyboard = {{{text="• تنزيل مميز •",callback_data=msg.sender_user_id_..":RemMem:"..Rio},{text="• تنزيل ادمن •",callback_data=msg.sender_user_id_..":RemAdmin:"..Rio}},{{text="• تنزيل منشئ •",callback_data=msg.sender_user_id_..":RemConstructor:"..Rio},{text="• تنزيل مدير •",callback_data=msg.sender_user_id_..":RemManager:"..Rio}},{{text="• تنزيل منظف •",callback_data=msg.sender_user_id_..":RemCleaner:"..Rio}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
-elseif Constructor(data) then
-keyboard.inline_keyboard = {{{text="• تنزيل مميز •",callback_data=msg.sender_user_id_..":RemMem:"..Rio},{text="• تنزيل ادمن •",callback_data=msg.sender_user_id_..":RemAdmin:"..Rio}},{{text="• تنزيل منظف •",callback_data=msg.sender_user_id_..":RemCleaner:"..Rio},{text="• تنزيل مدير •",callback_data=msg.sender_user_id_..":RemManager:"..Rio}},{{text = '• Antak TeAM •',url="t.me/TeAmAnTaK"}}}
-elseif Manager(data) then
-keyboard.inline_keyboard = {{{text="• تنزيل مميز •",callback_data=msg.sender_user_id_..":RemMem:"..Rio},{text="• تنزيل ادمن •",callback_data=msg.sender_user_id_..":RemAdmin:"..Rio}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
-elseif Admin(data) then
-keyboard.inline_keyboard = {{{text="• تنزيل مميز •",callback_data=msg.sender_user_id_..":RemMem:"..Rio}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ تنزيل مميز ›",callback_data=msg.sender_user_id_..":RemMem:"..Rio},{text="‹ تنزيل ادمن ›",callback_data=msg.sender_user_id_..":RemAdmin:"..Rio}},{{text="‹ تنزيل منشئ ›",callback_data=msg.sender_user_id_..":RemConstructor:"..Rio},{text="‹ تنزيل مدير ›",callback_data=msg.sender_user_id_..":RemManager:"..Rio}},{{text="‹ تنزيل منظف ›",callback_data=msg.sender_user_id_..":RemCleaner:"..Rio},{text="‹ تنزيل منشئ  اساسي ›",callback_data=msg.sender_user_id_..":RemBasicConstructor:"..Rio}},{{text="‹ تنزيل مالك ›",callback_data=msg.sender_user_id_..":RemOwner:"..Rio},{text="‹ تنزيل مطور ›",callback_data=msg.sender_user_id_..":RemSudoBot:"..Rio}},{{text="‹ تنزيل مطور ثانوي ›",callback_data=msg.sender_user_id_..":RemSecondSudo:"..Rio}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
+elseif SecondSudo(msg) then
+keyboard.inline_keyboard = {{{text="‹ تنزيل مميز ›",callback_data=msg.sender_user_id_..":RemMem:"..Rio},{text="‹ تنزيل ادمن ›",callback_data=msg.sender_user_id_..":RemAdmin:"..Rio}},{{text="‹ تنزيل منشئ ›",callback_data=msg.sender_user_id_..":RemConstructor:"..Rio},{text="‹ تنزيل مدير ›",callback_data=msg.sender_user_id_..":RemManager:"..Rio}},{{text="‹ تنزيل منظف ›",callback_data=msg.sender_user_id_..":RemCleaner:"..Rio},{text="‹ تنزيل منشئ  اساسي ›",callback_data=msg.sender_user_id_..":RemBasicConstructor:"..Rio}},{{text="‹ تنزيل مالك ›",callback_data=msg.sender_user_id_..":RemOwner:"..Rio},{text="‹ تنزيل مطور ›",callback_data=msg.sender_user_id_..":RemSudoBot:"..Rio}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
+elseif SudoBot(msg) then
+keyboard.inline_keyboard = {{{text="‹ تنزيل مميز ›",callback_data=msg.sender_user_id_..":RemMem:"..Rio},{text="‹ تنزيل ادمن ›",callback_data=msg.sender_user_id_..":RemAdmin:"..Rio}},{{text="‹ تنزيل منشئ ›",callback_data=msg.sender_user_id_..":RemConstructor:"..Rio},{text="‹ تنزيل مدير ›",callback_data=msg.sender_user_id_..":RemManager:"..Rio}},{{text="‹ تنزيل منظف ›",callback_data=msg.sender_user_id_..":RemCleaner:"..Rio},{text="‹ تنزيل منشئ  اساسي ›",callback_data=msg.sender_user_id_..":RemBasicConstructor:"..Rio}},{{text="‹ تنزيل مالك ›",callback_data=msg.sender_user_id_..":RemOwner:"..Rio}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
+elseif Owner(msg) then
+keyboard.inline_keyboard = {{{text="‹ تنزيل مميز ›",callback_data=msg.sender_user_id_..":RemMem:"..Rio},{text="‹ تنزيل ادمن ›",callback_data=msg.sender_user_id_..":RemAdmin:"..Rio}},{{text="‹ تنزيل منشئ ›",callback_data=msg.sender_user_id_..":RemConstructor:"..Rio},{text="‹ تنزيل مدير ›",callback_data=msg.sender_user_id_..":RemManager:"..Rio}},{{text="‹ تنزيل منظف ›",callback_data=msg.sender_user_id_..":RemCleaner:"..Rio},{text="‹ تنزيل منشئ  اساسي ›",callback_data=msg.sender_user_id_..":RemBasicConstructor:"..Rio}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
+elseif BasicConstructor(msg) then
+keyboard.inline_keyboard = {{{text="‹ تنزيل مميز ›",callback_data=msg.sender_user_id_..":RemMem:"..Rio},{text="‹ تنزيل ادمن ›",callback_data=msg.sender_user_id_..":RemAdmin:"..Rio}},{{text="‹ تنزيل منشئ ›",callback_data=msg.sender_user_id_..":RemConstructor:"..Rio},{text="‹ تنزيل مدير ›",callback_data=msg.sender_user_id_..":RemManager:"..Rio}},{{text="‹ تنزيل منظف ›",callback_data=msg.sender_user_id_..":RemCleaner:"..Rio}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
+elseif Constructor(msg) then
+keyboard.inline_keyboard = {{{text="‹ تنزيل مميز ›",callback_data=msg.sender_user_id_..":RemMem:"..Rio},{text="‹ تنزيل ادمن ›",callback_data=msg.sender_user_id_..":RemAdmin:"..Rio}},{{text="‹ تنزيل منظف ›",callback_data=msg.sender_user_id_..":RemCleaner:"..Rio},{text="‹ تنزيل مدير ›",callback_data=msg.sender_user_id_..":RemManager:"..Rio}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
+elseif Manager(msg) then
+keyboard.inline_keyboard = {{{text="‹ تنزيل مميز ›",callback_data=msg.sender_user_id_..":RemMem:"..Rio},{text="‹ تنزيل ادمن ›",callback_data=msg.sender_user_id_..":RemAdmin:"..Rio}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
+elseif Admin(msg) then
+keyboard.inline_keyboard = {{{text="‹ تنزيل مميز ›",callback_data=msg.sender_user_id_..":RemMem:"..Rio}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 end
 Msg_id = msg.id_/2097152/0.5
 https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text='..URL.escape(Text).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
@@ -5950,16 +6089,12 @@ end
 --     Source Antak     --
 if text == "الرابط" then
 local Link = DevRio:get(Antak..'Rio:Link')
-local Text = [[
-*᥀︙اختر نوع الرابط لجلبه*
-]] 
-keyboard = {} 
-keyboard.inline_keyboard = {{{text="• الرابط نص •",callback_data="/LinkText:"..msg.sender_user_id_},{text="• الرابط انلاين •",callback_data="/Linkinline:"..msg.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..msg.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
-Msg_id = msg.id_/2097152/0.5
-return https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(Link or Text).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+local Text = '*᥀︙اختر نوع الرابط لجلبه*'
+local inline = {{{text="‹ الرابط نص ›",callback_data="/LinkText:"..msg.sender_user_id_},{text="‹ الرابط انلاين ›",callback_data="/Linkinline:"..msg.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..msg.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
+SendInline(msg.chat_id_,Text,nil,inline,msg.id_/2097152/0.5)
 end
 --     Source Antak     --
-if text == 'الالعاب' and ChCheck(msg) or text == 'العاب' and ChCheck(msg) or text == 'اللعبه' and ChCheck(msg) or text == '↫ الالعاب ᥀' and ChCheck(msg) then
+if text =='الالعاب' and ChCheck(msg) or text =='العاب' and ChCheck(msg) or text =='اللعبه' and ChCheck(msg) or text =='↫ الالعاب ᥀' and ChCheck(msg) then
 if not DevRio:get(Antak..'Rio:Lock:Games'..msg.chat_id_) then
 local Games = DevRio:get(Antak..'Rio:Games')
 local Text = [[
@@ -5984,14 +6119,12 @@ local Text = [[
 ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉
 ᥀︙[Source Channel](https://t.me/TeAmAnTaK)
 ]]
-keyboard = {} 
-keyboard.inline_keyboard = {{{text="• الالعاب المتطوره •",callback_data="/GameInline:"..msg.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..msg.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
-Msg_id = msg.id_/2097152/0.5
-return https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(Game or Text).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+local inline = {{{text="‹ الالعاب المتطوره ›",callback_data="/GameInline:"..msg.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..msg.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
+SendInline(msg.chat_id_,Text,nil,inline,msg.id_/2097152/0.5)
 end
 end
 --     Source Antak     --
-if text == 'بيع نقاطي' and ChCheck(msg) then
+if text =='بيع نقاطي' and ChCheck(msg) then
 if tonumber((DevRio:get(Antak..'Rio:GamesNumber'..msg.chat_id_..msg.sender_user_id_) or 0)) == 0 then
 Dev_Rio(msg.chat_id_, msg.id_, 1,'᥀︙لم تربح اي نقطه\n᥀︙ارسل ↫ الالعاب للعب', 1, 'md')
 else
@@ -6002,7 +6135,7 @@ DevRio:del(Antak..'Rio:GamesNumber'..msg.chat_id_..msg.sender_user_id_)
 end
 end
 --     Source Antak     --
-if text == 'رفع المشرفين' and ChCheck(msg) or text == 'رفع الادمنيه' and ChCheck(msg) then  
+if text =='رفع المشرفين' and ChCheck(msg) or text =='رفع الادمنيه' and ChCheck(msg) then  
 tdcli_function ({ID = "GetChannelMembers",channel_id_ = msg.chat_id_:gsub("-100",""),filter_ = {ID = "ChannelMembersAdministrators"},offset_ = 0,limit_ = 200},function(arg,rio) 
 local num = 0
 local admins = rio.members_  
@@ -6035,11 +6168,11 @@ end
 if text ==('موقعي') and ChCheck(msg) then
 tdcli_function ({ID = "GetChatMember",chat_id_ = msg.chat_id_,user_id_ = msg.sender_user_id_},function(arg,da) 
 if da.status_.ID == "ChatMemberStatusCreator" then
-rtpa = 'المنشئ'
+rtpa ='المنشئ'
 elseif da.status_.ID == "ChatMemberStatusEditor" then
-rtpa = 'الادمن'
+rtpa ='الادمن'
 elseif da.status_.ID == "ChatMemberStatusMember" then
-rtpa = 'عضو'
+rtpa ='عضو'
 end
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙موقعك ↫ '..rtpa, 1, 'md')
 end,nil)
@@ -6051,8 +6184,8 @@ local msguser = tonumber(DevRio:get(Antak..'Rio:UsersMsgs'..msg.chat_id_..':'..m
 local user_msgs = DevRio:get(Antak..'Rio:UsersMsgs'..msg.chat_id_..':'..msg.sender_user_id_)
 local cont = (tonumber(DevRio:get(Antak..'Rio:ContactNumber'..msg.chat_id_..':'..msg.sender_user_id_)) or 0)
 local user_nkt = tonumber(DevRio:get(Antak..'Rio:GamesNumber'..msg.chat_id_..msg.sender_user_id_) or 0)
-if result.username_ then username = '@'..result.username_ else username = 'لا يوجد' end
-if result.last_name_ then lastname = result.last_name_ else lastname = '' end
+if result.username_ then username ='@'..result.username_ else username ='لا يوجد' end
+if result.last_name_ then lastname = result.last_name_ else lastname ='' end
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙اسمك ↫ ❨ ['..result.first_name_..'] ❩\n᥀︙معرفك ↫ ❨ ['..username..'] ❩\n᥀︙ايديك ↫ ❨ `'..result.id_..'` ❩\n᥀︙نقاطك ↫ ❨ '..user_nkt..' ❩\n᥀︙رسائلك ↫ ❨ '..user_msgs..' ❩\n᥀︙جهاتك ↫ ❨ '..cont..' ❩\n᥀︙تفاعلك ↫ '..formsgs(msguser)..'\n᥀︙رتبتك ↫ '..IdRank(msg.sender_user_id_, msg.chat_id_), 1, 'md')
 end
 getUser(msg.sender_user_id_,get_me)
@@ -6088,7 +6221,7 @@ if not Sudo(msg) then
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙للمطور الاساسي فقط ', 1, 'md')
 else
 DevRio:del(Antak..'Rio:ChId')
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل الاشتراك الاجباري'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل الاشتراك الاجباري'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 end
 return false  
@@ -6102,7 +6235,7 @@ Dev_Rio(msg.chat_id_, msg.id_, 1,"᥀︙تم حذف قناة الاشتراك ا
 end
 end
 if SecondSudo(msg) then
-if text == 'جلب قناة الاشتراك' or text == 'قناة الاشتراك' or text == 'الاشتراك الاجباري' or text == 'قناة الاشتراك الاجباري' or text == '↫ قناة الاشتراك ᥀' then
+if text =='جلب قناة الاشتراك' or text =='قناة الاشتراك' or text =='الاشتراك الاجباري' or text =='قناة الاشتراك الاجباري' or text =='↫ قناة الاشتراك ᥀' then
 if DevRio:get(Antak..'Rio:ChId') then
 local Check = https.request('https://api.telegram.org/bot'..TokenBot..'/getChat?chat_id='..DevRio:get(Antak.."Rio:ChId"))
 local GetInfo = JSON.decode(Check)
@@ -6114,7 +6247,7 @@ return false
 end end
 --     Source Antak     --
 if SudoBot(msg) then
-if text == 'اذاعه للكل بالتوجيه' and tonumber(msg.reply_to_message_id_) > 0 then
+if text =='اذاعه للكل بالتوجيه' and tonumber(msg.reply_to_message_id_) > 0 then
 function AntakTeam(extra,result,success)
 if DevRio:get(Antak.."Rio:Send:Bot"..Antak) and not RioSudo(msg) then 
 send(msg.chat_id_, msg.id_,"᥀︙الاذاعه معطله من قبل المطور الاساسي")
@@ -6145,13 +6278,13 @@ Welcome To Source
 ᥀︙[TeAm Antak](https://t.me/TeAmAnTaK)
 ]]
 keyboard = {} 
-keyboard.inline_keyboard = {{{text = '᥀ Source Channel',url="https://t.me/TeAmAnTaK"}},{{text = '᥀ Developer',url="t.me/lTllTT"}},{{text= '᥀ Exp Source .',url="https://t.me/ExpAntak"}}}
+keyboard.inline_keyboard = {{{text='‹ Source AnTaK ›',url="https://t.me/TeAmAnTaK"}},{{text='‹ Developer AnTaK ›',url="t.me/lTllTT"},{text='‹ Tws Antak ›',url="https://t.me/VIVVBOT"}},{{text='‹ Exp AnTaK ›',url="https://t.me/ExpAntak"}}}
 local msg_id = msg.id_/2097152/0.5
 https.request("https://api.telegram.org/bot"..TokenBot..'/sendPhoto?chat_id=' .. msg.chat_id_ .. '&photo=https://t.me/TeAmAnTaK&caption=' .. URL.escape(Text).."&reply_to_message_id="..msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 return false
 end
 --     Source Antak     --
-if ChatType == 'sp' or ChatType == 'gp'  then
+if ChatType =='sp' or ChatType =='gp'  then
 if text == "اطردني" and ChCheck(msg) or text == "ادفرني" and ChCheck(msg) then
 if DevRio:get(Antak.."Rio:Kick:Me"..msg.chat_id_) then
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙عذرا هذه الخاصيه معطله ', 1, 'md')
@@ -6159,21 +6292,19 @@ return false
 end
 DevRio:set(Antak..'yes'..msg.sender_user_id_, 'delyes')
 DevRio:set(Antak..'no'..msg.sender_user_id_, 'delno')
-local Text = '᥀︙هل انت متأكد من المغادره'
-keyboard = {} 
-keyboard.inline_keyboard = {{{text="• نعم •",callback_data="/delyes"},{text="• لا •",callback_data="/delno"}}} 
-Msg_id = msg.id_/2097152/0.5
-return https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(Text).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+local Text ='᥀︙هل انت متأكد من المغادره'
+local inline = {{{text="‹ نعم ›",callback_data="/delyes"},{text="‹ لا ›",callback_data="/delno"}}} 
+SendInline(msg.chat_id_,Text,nil,inline,msg.id_/2097152/0.5)
 end
 --     Source Antak     --
-if text == 'تعطيل اطردني' and Manager(msg) and ChCheck(msg) then
+if text =='تعطيل اطردني' and Manager(msg) and ChCheck(msg) then
 DevRio:set(Antak.."Rio:Kick:Me"..msg.chat_id_, true)
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل امر اطردني'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل امر اطردني'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 end
-if text == 'تفعيل اطردني' and Manager(msg) and ChCheck(msg) then
+if text =='تفعيل اطردني' and Manager(msg) and ChCheck(msg) then
 DevRio:del(Antak.."Rio:Kick:Me"..msg.chat_id_)
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل امر اطردني'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل امر اطردني'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 end
 --     Source Antak     --
@@ -6184,31 +6315,29 @@ return false
 end
 DevRio:set(Antak..'yesdel'..msg.sender_user_id_, 'delyes')
 DevRio:set(Antak..'nodel'..msg.sender_user_id_, 'delno')
-local Text = '᥀︙هل انت متأكد من تنزيلك'
-keyboard = {} 
-keyboard.inline_keyboard = {{{text="• نعم •",callback_data="/yesdel"},{text="• لا •",callback_data="/nodel"}}} 
-Msg_id = msg.id_/2097152/0.5
-return https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(Text).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+local Text ='᥀︙هل انت متأكد من تنزيلك'
+local inline = {{{text="‹ نعم ›",callback_data="/yesdel"},{text="‹ لا ›",callback_data="/nodel"}}} 
+SendInline(msg.chat_id_,Text,nil,inline,msg.id_/2097152/0.5)
 end
 --     Source Antak     --
-if text == 'تعطيل نزلني' and BasicConstructor(msg) and ChCheck(msg) then
+if text =='تعطيل نزلني' and BasicConstructor(msg) and ChCheck(msg) then
 DevRio:set(Antak.."Rio:Del:Me"..msg.chat_id_, true)
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل امر نزلني'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل امر نزلني'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 end
-if text == 'تفعيل نزلني' and BasicConstructor(msg) and ChCheck(msg) then
+if text =='تفعيل نزلني' and BasicConstructor(msg) and ChCheck(msg) then
 DevRio:del(Antak.."Rio:Del:Me"..msg.chat_id_)
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل امر نزلني'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل امر نزلني'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 end
 --     Source Antak     --
-if text and (text == 'تفعيل التاك' or text == 'تفعيل التاك للكل' or text == 'تفعيل تاك للكل') and Admin(msg) and ChCheck(msg) then 
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل امر تاك للكل'
+if text and (text =='تفعيل التاك' or text =='تفعيل التاك للكل' or text =='تفعيل تاك للكل') and Admin(msg) and ChCheck(msg) then 
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل امر تاك للكل'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:del(Antak..'Rio:Lock:TagAll'..msg.chat_id_)
 end
-if text and (text == 'تعطيل التاك' or text == 'تعطيل التاك للكل' or text == 'تعطيل تاك للكل') and Admin(msg) and ChCheck(msg) then 
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل امر تاك للكل'
+if text and (text =='تعطيل التاك' or text =='تعطيل التاك للكل' or text =='تعطيل تاك للكل') and Admin(msg) and ChCheck(msg) then 
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل امر تاك للكل'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:set(Antak..'Rio:Lock:TagAll'..msg.chat_id_,true)
 end
@@ -6265,12 +6394,12 @@ Dev_Rio(msg.chat_id_, msg.id_, 1, "᥀︙انضمام الاعضاء اليوم 
 end
 --     Source Antak     --
 if text == "تعطيل تفاعلي" and Manager(msg) and ChCheck(msg) then
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل تفاعلي'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل تفاعلي'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:del(Antak..'Rio:msg:Rio'..msg.chat_id_) 
 end
 if text == "تفعيل تفاعلي" and Manager(msg) and ChCheck(msg) then
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل تفاعلي'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل تفاعلي'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:set(Antak..'Rio:msg:Rio'..msg.chat_id_,true)  
 end
@@ -6299,7 +6428,7 @@ if text == "جهاتي" and ChCheck(msg) or text == "اضافاتي" and ChCheck
 if text == "تعديلاتي" or text == "سحكاتي" and ChCheck(msg) then local edit_msg = DevRio:get(Antak..'Rio:EditMsg'..msg.chat_id_..msg.sender_user_id_) or 0  Dev_Rio(msg.chat_id_, msg.id_, 1, "᥀︙عدد تعديلاتك ↫ *❨ "..edit_msg.." ❩* ", 1, 'md') end
 if text == "رتبتي" and ChCheck(msg) then Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙رتبتك ↫ '..IdRank(msg.sender_user_id_, msg.chat_id_), 1, 'html') end
 if text == "ايدي المجموعه" and ChCheck(msg) then Dev_Rio(msg.chat_id_, msg.id_, 1, "᥀︙ايدي المجموعه ↫ `"..msg.chat_id_.."`", 1, 'md') end
-if text == 'مسح جهاتي' or text == 'مسح اضافاتي' or text == 'حذف جهاتي' or text == 'حذف اضافاتي' then DevRio:del(Antak..'Rio:ContactNumber'..msg.chat_id_..':'..msg.sender_user_id_) Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙تم حذف جميع جهاتك المضافه' , 1, 'md') end
+if text =='مسح جهاتي' or text =='مسح اضافاتي' or text =='حذف جهاتي' or text =='حذف اضافاتي' then DevRio:del(Antak..'Rio:ContactNumber'..msg.chat_id_..':'..msg.sender_user_id_) Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙تم حذف جميع جهاتك المضافه' , 1, 'md') end
 --     Source Antak     --
 if text and text:match('^هينه @(.*)') and ChCheck(msg) or text and text:match('^هينها @(.*)') and ChCheck(msg) then 
 if not DevRio:get(Antak..'Rio:Lock:Stupid'..msg.chat_id_) then
@@ -6442,44 +6571,35 @@ Dev_Rio(msg.chat_id_, msg.id_, 1, "᥀︙لاتستطيع تنزيل المطو�
 return false 
 end
 if DevRio:sismember(Antak..'Rio:RioSudo:',result.sender_user_id_) then
-riosudo = 'المطورين الاساسيين • ' else riosudo = '' end
+riosudo ='المطورين الاساسيين • ' else riosudo ='' end
 if DevRio:sismember(Antak..'Rio:SecondSudo:',result.sender_user_id_) then
-secondsudo = 'المطورين الثانويين • ' else secondsudo = '' end
+secondsudo ='المطورين الثانويين • ' else secondsudo ='' end
 if DevRio:sismember(Antak..'Rio:SudoBot:',result.sender_user_id_) then
-sudobot = 'المطورين • ' else sudobot = '' end
-if DevRio:sismember(Antak..'Rio:RioSudoGp:'..msg.chat_id_, result.sender_user_id_) then
-riosudogp = 'مطورين اساسيين المجموعه • ' else riosudogp = '' end
-if DevRio:sismember(Antak..'Rio:SecondSudoGp:'..msg.chat_id_, result.sender_user_id_) then
-secondsudogp = 'ثانويين المجموعه • ' else secondsudogp = '' end
-if DevRio:sismember(Antak..'Rio:SudoBotGp:'..msg.chat_id_, result.sender_user_id_) then
-sudobotgp = 'مطورين المجموعه • ' else sudobotgp = '' end
+sudobot ='المطورين • ' else sudobot ='' end
 if DevRio:sismember(Antak..'Rio:Owner:'..msg.chat_id_, result.sender_user_id_) then
-owner = 'المالكين • ' else owner = '' end
+owner ='المالكين • ' else owner ='' end
 if DevRio:sismember(Antak..'Rio:BasicConstructor:'..msg.chat_id_, result.sender_user_id_) then
-basicconstructor = 'المنشئين الاساسيين • ' else basicconstructor = '' end
+basicconstructor ='المنشئين الاساسيين • ' else basicconstructor ='' end
 if DevRio:sismember(Antak..'Rio:Constructor:'..msg.chat_id_, result.sender_user_id_) then
-constructor = 'المنشئين • ' else constructor = '' end 
+constructor ='المنشئين • ' else constructor ='' end 
 if DevRio:sismember(Antak..'Rio:Managers:'..msg.chat_id_, result.sender_user_id_) then
-manager = 'المدراء • ' else manager = '' end
+manager ='المدراء • ' else manager ='' end
 if DevRio:sismember(Antak..'Rio:Admins:'..msg.chat_id_, result.sender_user_id_) then
-admins = 'الادمنيه • ' else admins = '' end
+admins ='الادمنيه • ' else admins ='' end
 if DevRio:sismember(Antak..'Rio:VipMem:'..msg.chat_id_, result.sender_user_id_) then
-vipmem = 'المميزين • ' else vipmem = '' end
+vipmem ='المميزين • ' else vipmem ='' end
 if DevRio:sismember(Antak..'Rio:Cleaner:'..msg.chat_id_, result.sender_user_id_) then
-cleaner = 'المنظفين • ' else cleaner = ''
+cleaner ='المنظفين • ' else cleaner =''
 end
 if RankChecking(result.sender_user_id_,msg.chat_id_) ~= false then
-ReplyStatus(msg,result.sender_user_id_,"Reply","᥀︙تم تنزيله من ↫ ⤈\n~ ( "..riosudo..secondsudo..sudobot..riosudogp..secondsudogp..sudobotgp..owner..basicconstructor..constructor..manager..admins..vipmem..cleaner.." ) ~")  
+ReplyStatus(msg,result.sender_user_id_,"Reply","᥀︙تم تنزيله من ↫ ⤈\n~ ( "..riosudo..secondsudo..sudobot..owner..basicconstructor..constructor..manager..admins..vipmem..cleaner.." ) ~")  
 else 
 ReplyStatus(msg,result.sender_user_id_,"Reply","᥀︙لم تتم ترقيته مسبقا")  
 end
-if RioDelAll(msg.sender_user_id_,msg.chat_id_) == 'sudoid' then
+if RioDelAll(msg.sender_user_id_,msg.chat_id_) =='sudoid' then
 DevRio:srem(Antak..'Rio:RioSudo:', result.sender_user_id_)
 DevRio:srem(Antak..'Rio:SecondSudo:', result.sender_user_id_)
 DevRio:srem(Antak..'Rio:SudoBot:', result.sender_user_id_)
-DevRio:srem(Antak..'Rio:RioSudoGp:'..msg.chat_id_,result.sender_user_id_)
-DevRio:srem(Antak..'Rio:SecondSudoGp:'..msg.chat_id_,result.sender_user_id_)
-DevRio:srem(Antak..'Rio:SudoBotGp:'..msg.chat_id_,result.sender_user_id_)
 DevRio:srem(Antak..'Rio:Owner:'..msg.chat_id_,result.sender_user_id_)
 DevRio:srem(Antak..'Rio:BasicConstructor:'..msg.chat_id_,result.sender_user_id_)
 DevRio:srem(Antak..'Rio:Constructor:'..msg.chat_id_,result.sender_user_id_)
@@ -6487,12 +6607,9 @@ DevRio:srem(Antak..'Rio:Managers:'..msg.chat_id_, result.sender_user_id_)
 DevRio:srem(Antak..'Rio:Admins:'..msg.chat_id_, result.sender_user_id_)
 DevRio:srem(Antak..'Rio:VipMem:'..msg.chat_id_, result.sender_user_id_)
 DevRio:srem(Antak..'Rio:Cleaner:'..msg.chat_id_, result.sender_user_id_)
-elseif RioDelAll(msg.sender_user_id_,msg.chat_id_) == 'riosudo' then
+elseif RioDelAll(msg.sender_user_id_,msg.chat_id_) =='riosudo' then
 DevRio:srem(Antak..'Rio:SecondSudo:', result.sender_user_id_)
 DevRio:srem(Antak..'Rio:SudoBot:', result.sender_user_id_)
-DevRio:srem(Antak..'Rio:RioSudoGp:'..msg.chat_id_,result.sender_user_id_)
-DevRio:srem(Antak..'Rio:SecondSudoGp:'..msg.chat_id_,result.sender_user_id_)
-DevRio:srem(Antak..'Rio:SudoBotGp:'..msg.chat_id_,result.sender_user_id_)
 DevRio:srem(Antak..'Rio:Owner:'..msg.chat_id_,result.sender_user_id_)
 DevRio:srem(Antak..'Rio:BasicConstructor:'..msg.chat_id_,result.sender_user_id_)
 DevRio:srem(Antak..'Rio:Constructor:'..msg.chat_id_,result.sender_user_id_)
@@ -6500,10 +6617,8 @@ DevRio:srem(Antak..'Rio:Managers:'..msg.chat_id_, result.sender_user_id_)
 DevRio:srem(Antak..'Rio:Admins:'..msg.chat_id_, result.sender_user_id_)
 DevRio:srem(Antak..'Rio:VipMem:'..msg.chat_id_, result.sender_user_id_)
 DevRio:srem(Antak..'Rio:Cleaner:'..msg.chat_id_, result.sender_user_id_)
-elseif RioDelAll(msg.sender_user_id_,msg.chat_id_) == 'secondsudo' then
+elseif RioDelAll(msg.sender_user_id_,msg.chat_id_) =='secondsudo' then
 DevRio:srem(Antak..'Rio:SudoBot:', result.sender_user_id_)
-DevRio:srem(Antak..'Rio:SecondSudoGp:'..msg.chat_id_,result.sender_user_id_)
-DevRio:srem(Antak..'Rio:SudoBotGp:'..msg.chat_id_,result.sender_user_id_)
 DevRio:srem(Antak..'Rio:Owner:'..msg.chat_id_,result.sender_user_id_)
 DevRio:srem(Antak..'Rio:BasicConstructor:'..msg.chat_id_,result.sender_user_id_)
 DevRio:srem(Antak..'Rio:Constructor:'..msg.chat_id_,result.sender_user_id_)
@@ -6511,67 +6626,39 @@ DevRio:srem(Antak..'Rio:Managers:'..msg.chat_id_, result.sender_user_id_)
 DevRio:srem(Antak..'Rio:Admins:'..msg.chat_id_, result.sender_user_id_)
 DevRio:srem(Antak..'Rio:VipMem:'..msg.chat_id_, result.sender_user_id_)
 DevRio:srem(Antak..'Rio:Cleaner:'..msg.chat_id_, result.sender_user_id_)
-elseif RioDelAll(msg.sender_user_id_,msg.chat_id_) == 'sudobot' then
+elseif RioDelAll(msg.sender_user_id_,msg.chat_id_) =='sudobot' then
 DevRio:srem(Antak..'Rio:Admins:'..msg.chat_id_, result.sender_user_id_)
 DevRio:srem(Antak..'Rio:VipMem:'..msg.chat_id_, result.sender_user_id_)
 DevRio:srem(Antak..'Rio:Managers:'..msg.chat_id_, result.sender_user_id_)
 DevRio:srem(Antak..'Rio:Constructor:'..msg.chat_id_,result.sender_user_id_)
 DevRio:srem(Antak..'Rio:BasicConstructor:'..msg.chat_id_,result.sender_user_id_)
 DevRio:srem(Antak..'Rio:Owner:'..msg.chat_id_,result.sender_user_id_)
-DevRio:srem(Antak..'Rio:SudoBotGp:'..msg.chat_id_,result.sender_user_id_)
-elseif RioDelAll(msg.sender_user_id_,msg.chat_id_) == 'riosudogp' then
-DevRio:srem(Antak..'Rio:Admins:'..msg.chat_id_, result.sender_user_id_)
-DevRio:srem(Antak..'Rio:VipMem:'..msg.chat_id_, result.sender_user_id_)
-DevRio:srem(Antak..'Rio:Managers:'..msg.chat_id_, result.sender_user_id_)
-DevRio:srem(Antak..'Rio:Constructor:'..msg.chat_id_,result.sender_user_id_)
-DevRio:srem(Antak..'Rio:BasicConstructor:'..msg.chat_id_,result.sender_user_id_)
-DevRio:srem(Antak..'Rio:Owner:'..msg.chat_id_,result.sender_user_id_)
-DevRio:srem(Antak..'Rio:SudoBotGp:'..msg.chat_id_,result.sender_user_id_)
-DevRio:srem(Antak..'Rio:SecondSudoGp:'..msg.chat_id_,result.sender_user_id_)
-DevRio:srem(Antak..'Rio:Cleaner:'..msg.chat_id_, result.sender_user_id_)
-elseif RioDelAll(msg.sender_user_id_,msg.chat_id_) == 'secondsudogp' then
-DevRio:srem(Antak..'Rio:Admins:'..msg.chat_id_, result.sender_user_id_)
-DevRio:srem(Antak..'Rio:VipMem:'..msg.chat_id_, result.sender_user_id_)
-DevRio:srem(Antak..'Rio:Managers:'..msg.chat_id_, result.sender_user_id_)
-DevRio:srem(Antak..'Rio:Constructor:'..msg.chat_id_,result.sender_user_id_)
-DevRio:srem(Antak..'Rio:BasicConstructor:'..msg.chat_id_,result.sender_user_id_)
-DevRio:srem(Antak..'Rio:Owner:'..msg.chat_id_,result.sender_user_id_)
-DevRio:srem(Antak..'Rio:SudoBotGp:'..msg.chat_id_,result.sender_user_id_)
-DevRio:srem(Antak..'Rio:Cleaner:'..msg.chat_id_, result.sender_user_id_)
-elseif RioDelAll(msg.sender_user_id_,msg.chat_id_) == 'sudobotgp' then
-DevRio:srem(Antak..'Rio:Admins:'..msg.chat_id_, result.sender_user_id_)
-DevRio:srem(Antak..'Rio:VipMem:'..msg.chat_id_, result.sender_user_id_)
-DevRio:srem(Antak..'Rio:Managers:'..msg.chat_id_, result.sender_user_id_)
-DevRio:srem(Antak..'Rio:Constructor:'..msg.chat_id_,result.sender_user_id_)
-DevRio:srem(Antak..'Rio:BasicConstructor:'..msg.chat_id_,result.sender_user_id_)
-DevRio:srem(Antak..'Rio:Owner:'..msg.chat_id_,result.sender_user_id_)
-DevRio:srem(Antak..'Rio:Cleaner:'..msg.chat_id_, result.sender_user_id_)
-elseif RioDelAll(msg.sender_user_id_,msg.chat_id_) == 'owner' then
+elseif RioDelAll(msg.sender_user_id_,msg.chat_id_) =='owner' then
 DevRio:srem(Antak..'Rio:Admins:'..msg.chat_id_, result.sender_user_id_)
 DevRio:srem(Antak..'Rio:VipMem:'..msg.chat_id_, result.sender_user_id_)
 DevRio:srem(Antak..'Rio:Managers:'..msg.chat_id_, result.sender_user_id_)
 DevRio:srem(Antak..'Rio:Constructor:'..msg.chat_id_,result.sender_user_id_)
 DevRio:srem(Antak..'Rio:BasicConstructor:'..msg.chat_id_,result.sender_user_id_)
 DevRio:srem(Antak..'Rio:Cleaner:'..msg.chat_id_, result.sender_user_id_)
-elseif RioDelAll(msg.sender_user_id_,msg.chat_id_) == 'rioconstructor' then
+elseif RioDelAll(msg.sender_user_id_,msg.chat_id_) =='rioconstructor' then
 DevRio:srem(Antak..'Rio:Admins:'..msg.chat_id_, result.sender_user_id_)
 DevRio:srem(Antak..'Rio:VipMem:'..msg.chat_id_, result.sender_user_id_)
 DevRio:srem(Antak..'Rio:Managers:'..msg.chat_id_, result.sender_user_id_)
 DevRio:srem(Antak..'Rio:Constructor:'..msg.chat_id_,result.sender_user_id_)
 DevRio:srem(Antak..'Rio:BasicConstructor:'..msg.chat_id_,result.sender_user_id_)
 DevRio:srem(Antak..'Rio:Cleaner:'..msg.chat_id_, result.sender_user_id_)
-elseif RioDelAll(msg.sender_user_id_,msg.chat_id_) == 'basicconstructor' then
+elseif RioDelAll(msg.sender_user_id_,msg.chat_id_) =='basicconstructor' then
 DevRio:srem(Antak..'Rio:Admins:'..msg.chat_id_, result.sender_user_id_)
 DevRio:srem(Antak..'Rio:VipMem:'..msg.chat_id_, result.sender_user_id_)
 DevRio:srem(Antak..'Rio:Managers:'..msg.chat_id_, result.sender_user_id_)
 DevRio:srem(Antak..'Rio:Constructor:'..msg.chat_id_,result.sender_user_id_)
 DevRio:srem(Antak..'Rio:Cleaner:'..msg.chat_id_, result.sender_user_id_)
-elseif RioDelAll(msg.sender_user_id_,msg.chat_id_) == 'constructor' then
+elseif RioDelAll(msg.sender_user_id_,msg.chat_id_) =='constructor' then
 DevRio:srem(Antak..'Rio:Admins:'..msg.chat_id_, result.sender_user_id_)
 DevRio:srem(Antak..'Rio:VipMem:'..msg.chat_id_, result.sender_user_id_)
 DevRio:srem(Antak..'Rio:Managers:'..msg.chat_id_, result.sender_user_id_)
 DevRio:srem(Antak..'Rio:Cleaner:'..msg.chat_id_, result.sender_user_id_)
-elseif RioDelAll(msg.sender_user_id_,msg.chat_id_) == 'manager' then
+elseif RioDelAll(msg.sender_user_id_,msg.chat_id_) =='manager' then
 DevRio:srem(Antak..'Rio:Admins:'..msg.chat_id_, result.sender_user_id_)
 DevRio:srem(Antak..'Rio:VipMem:'..msg.chat_id_, result.sender_user_id_)
 end
@@ -6587,68 +6674,52 @@ Dev_Rio(msg.chat_id_, msg.id_, 1, "᥀︙لاتستطيع تنزيل المطو�
 return false 
 end
 if DevRio:sismember(Antak..'Rio:RioSudo:',result.id_) then
-Riosudo = 'المطورين الاساسيين • ' else Riosudo = '' end
+Riosudo ='المطورين الاساسيين • ' else Riosudo ='' end
 if DevRio:sismember(Antak..'Rio:SecondSudo:',result.id_) then
-secondsudo = 'المطورين الثانويين • ' else secondsudo = '' end
+secondsudo ='المطورين الثانويين • ' else secondsudo ='' end
 if DevRio:sismember(Antak..'Rio:SudoBot:',result.id_) then
-sudobot = 'المطورين • ' else sudobot = '' end
-if DevRio:sismember(Antak..'Rio:RioSudoGp:'..msg.chat_id_, result.id_) then
-riosudogp = 'مطورين اساسيين المجموعه • ' else riosudogp = '' end
-if DevRio:sismember(Antak..'Rio:SecondSudoGp:'..msg.chat_id_, result.id_) then
-secondsudogp = 'ثانويين المجموعه • ' else secondsudogp = '' end
-if DevRio:sismember(Antak..'Rio:SudoBotGp:'..msg.chat_id_, result.id_) then
-sudobotgp = 'مطورين المجموعه • ' else sudobotgp = '' end
+sudobot ='المطورين • ' else sudobot ='' end
 if DevRio:sismember(Antak..'Rio:Owner:'..msg.chat_id_, result.id_) then
-owner = 'المالكين • ' else owner = '' end
+owner ='المالكين • ' else owner ='' end
 if DevRio:sismember(Antak..'Rio:BasicConstructor:'..msg.chat_id_, result.id_) then
-basicconstructor = 'المنشئين الاساسيين • ' else basicconstructor = '' end
+basicconstructor ='المنشئين الاساسيين • ' else basicconstructor ='' end
 if DevRio:sismember(Antak..'Rio:Constructor:'..msg.chat_id_, result.id_) then
-constructor = 'المنشئين • ' else constructor = '' end 
+constructor ='المنشئين • ' else constructor ='' end 
 if DevRio:sismember(Antak..'Rio:Managers:'..msg.chat_id_, result.id_) then
-manager = 'المدراء • ' else manager = '' end
+manager ='المدراء • ' else manager ='' end
 if DevRio:sismember(Antak..'Rio:Admins:'..msg.chat_id_, result.id_) then
-admins = 'الادمنيه • ' else admins = '' end
+admins ='الادمنيه • ' else admins ='' end
 if DevRio:sismember(Antak..'Rio:VipMem:'..msg.chat_id_, result.id_) then
-vipmem = 'المميزين • ' else vipmem = '' end
+vipmem ='المميزين • ' else vipmem ='' end
 if DevRio:sismember(Antak..'Rio:Cleaner:'..msg.chat_id_, result.id_) then
-cleaner = 'المنظفين • ' else cleaner = ''
+cleaner ='المنظفين • ' else cleaner =''
 end
 if RankChecking(result.id_,msg.chat_id_) ~= false then
-ReplyStatus(msg,result.id_,"Reply","᥀︙تم تنزيله من ↫ ⤈\n~ ( "..riosudo..secondsudo..sudobot..riosudogp..secondsudogp..sudobotgp..owner..basicconstructor..constructor..manager..admins..vipmem..cleaner.." ) ~")  
+ReplyStatus(msg,result.id_,"Reply","᥀︙تم تنزيله من ↫ ⤈\n~ ( "..riosudo..secondsudo..sudobot..owner..basicconstructor..constructor..manager..admins..vipmem..cleaner.." ) ~")  
 else 
 ReplyStatus(msg,result.id_,"Reply","᥀︙لم تتم ترقيته مسبقا")  
 end 
-if RioDelAll(msg.sender_user_id_,msg.chat_id_) == 'sudoid' then
+if RioDelAll(msg.sender_user_id_,msg.chat_id_) =='sudoid' then
 DevRio:srem(Antak..'Rio:RioSudo:', result.id_)
 DevRio:srem(Antak..'Rio:SecondSudo:', result.id_)
 DevRio:srem(Antak..'Rio:SudoBot:', result.id_)
-DevRio:srem(Antak..'Rio:RioSudoGp:'..msg.chat_id_,result.id_)
-DevRio:srem(Antak..'Rio:SecondSudoGp:'..msg.chat_id_,result.id_)
-DevRio:srem(Antak..'Rio:SudoBotGp:'..msg.chat_id_,result.id_)
-DevRio:srem(Antak..'Rio:Owner:'..msg.chat_id_,result.id_)
 DevRio:srem(Antak..'Rio:BasicConstructor:'..msg.chat_id_,result.id_)
 DevRio:srem(Antak..'Rio:Constructor:'..msg.chat_id_,result.id_)
 DevRio:srem(Antak..'Rio:Managers:'..msg.chat_id_, result.id_)
 DevRio:srem(Antak..'Rio:Admins:'..msg.chat_id_, result.id_)
 DevRio:srem(Antak..'Rio:VipMem:'..msg.chat_id_, result.id_)
 DevRio:srem(Antak..'Rio:Cleaner:'..msg.chat_id_, result.id_)
-elseif RioDelAll(msg.sender_user_id_,msg.chat_id_) == 'riosudo' then
+elseif RioDelAll(msg.sender_user_id_,msg.chat_id_) =='riosudo' then
 DevRio:srem(Antak..'Rio:SecondSudo:', result.id_)
 DevRio:srem(Antak..'Rio:SudoBot:', result.id_)
-DevRio:srem(Antak..'Rio:RioSudoGp:'..msg.chat_id_,result.id_)
-DevRio:srem(Antak..'Rio:SecondSudoGp:'..msg.chat_id_,result.id_)
-DevRio:srem(Antak..'Rio:SudoBotGp:'..msg.chat_id_,result.id_)
-DevRio:srem(Antak..'Rio:Owner:'..msg.chat_id_,result.id_)
 DevRio:srem(Antak..'Rio:BasicConstructor:'..msg.chat_id_,result.id_)
 DevRio:srem(Antak..'Rio:Constructor:'..msg.chat_id_,result.id_)
 DevRio:srem(Antak..'Rio:Managers:'..msg.chat_id_, result.id_)
 DevRio:srem(Antak..'Rio:Admins:'..msg.chat_id_, result.id_)
 DevRio:srem(Antak..'Rio:VipMem:'..msg.chat_id_, result.id_)
 DevRio:srem(Antak..'Rio:Cleaner:'..msg.chat_id_, result.id_)
-elseif RioDelAll(msg.sender_user_id_,msg.chat_id_) == 'secondsudo' then
+elseif RioDelAll(msg.sender_user_id_,msg.chat_id_) =='secondsudo' then
 DevRio:srem(Antak..'Rio:SudoBot:', result.id_)
-DevRio:srem(Antak..'Rio:SecondSudoGp:'..msg.chat_id_,result.id_)
-DevRio:srem(Antak..'Rio:SudoBotGp:'..msg.chat_id_,result.id_)
 DevRio:srem(Antak..'Rio:Owner:'..msg.chat_id_,result.id_)
 DevRio:srem(Antak..'Rio:BasicConstructor:'..msg.chat_id_,result.id_)
 DevRio:srem(Antak..'Rio:Constructor:'..msg.chat_id_,result.id_)
@@ -6656,67 +6727,39 @@ DevRio:srem(Antak..'Rio:Managers:'..msg.chat_id_, result.id_)
 DevRio:srem(Antak..'Rio:Admins:'..msg.chat_id_, result.id_)
 DevRio:srem(Antak..'Rio:VipMem:'..msg.chat_id_, result.id_)
 DevRio:srem(Antak..'Rio:Cleaner:'..msg.chat_id_, result.id_)
-elseif RioDelAll(msg.sender_user_id_,msg.chat_id_) == 'sudobot' then
+elseif RioDelAll(msg.sender_user_id_,msg.chat_id_) =='sudobot' then
 DevRio:srem(Antak..'Rio:Admins:'..msg.chat_id_, result.id_)
 DevRio:srem(Antak..'Rio:VipMem:'..msg.chat_id_, result.id_)
 DevRio:srem(Antak..'Rio:Managers:'..msg.chat_id_, result.id_)
 DevRio:srem(Antak..'Rio:Constructor:'..msg.chat_id_,result.id_)
 DevRio:srem(Antak..'Rio:BasicConstructor:'..msg.chat_id_,result.id_)
 DevRio:srem(Antak..'Rio:Owner:'..msg.chat_id_,result.id_)
-DevRio:srem(Antak..'Rio:SudoBotGp:'..msg.chat_id_,result.id_)
-elseif RioDelAll(msg.sender_user_id_,msg.chat_id_) == 'riosudogp' then
-DevRio:srem(Antak..'Rio:Admins:'..msg.chat_id_, result.id_)
-DevRio:srem(Antak..'Rio:VipMem:'..msg.chat_id_, result.id_)
-DevRio:srem(Antak..'Rio:Managers:'..msg.chat_id_, result.id_)
-DevRio:srem(Antak..'Rio:Constructor:'..msg.chat_id_,result.id_)
-DevRio:srem(Antak..'Rio:BasicConstructor:'..msg.chat_id_,result.id_)
-DevRio:srem(Antak..'Rio:Owner:'..msg.chat_id_,result.id_)
-DevRio:srem(Antak..'Rio:SudoBotGp:'..msg.chat_id_,result.id_)
-DevRio:srem(Antak..'Rio:SecondSudoGp:'..msg.chat_id_,result.id_)
-DevRio:srem(Antak..'Rio:Cleaner:'..msg.chat_id_, result.id_)
-elseif RioDelAll(msg.sender_user_id_,msg.chat_id_) == 'secondsudogp' then
-DevRio:srem(Antak..'Rio:Admins:'..msg.chat_id_, result.id_)
-DevRio:srem(Antak..'Rio:VipMem:'..msg.chat_id_, result.id_)
-DevRio:srem(Antak..'Rio:Managers:'..msg.chat_id_, result.id_)
-DevRio:srem(Antak..'Rio:Constructor:'..msg.chat_id_,result.id_)
-DevRio:srem(Antak..'Rio:BasicConstructor:'..msg.chat_id_,result.id_)
-DevRio:srem(Antak..'Rio:Owner:'..msg.chat_id_,result.id_)
-DevRio:srem(Antak..'Rio:SudoBotGp:'..msg.chat_id_,result.id_)
-DevRio:srem(Antak..'Rio:Cleaner:'..msg.chat_id_, result.id_)
-elseif RioDelAll(msg.sender_user_id_,msg.chat_id_) == 'sudobotgp' then
-DevRio:srem(Antak..'Rio:Admins:'..msg.chat_id_, result.id_)
-DevRio:srem(Antak..'Rio:VipMem:'..msg.chat_id_, result.id_)
-DevRio:srem(Antak..'Rio:Managers:'..msg.chat_id_, result.id_)
-DevRio:srem(Antak..'Rio:Constructor:'..msg.chat_id_,result.id_)
-DevRio:srem(Antak..'Rio:BasicConstructor:'..msg.chat_id_,result.id_)
-DevRio:srem(Antak..'Rio:Owner:'..msg.chat_id_,result.id_)
-DevRio:srem(Antak..'Rio:Cleaner:'..msg.chat_id_, result.id_)
-elseif RioDelAll(msg.sender_user_id_,msg.chat_id_) == 'owner' then
+elseif RioDelAll(msg.sender_user_id_,msg.chat_id_) =='owner' then
 DevRio:srem(Antak..'Rio:Admins:'..msg.chat_id_, result.id_)
 DevRio:srem(Antak..'Rio:VipMem:'..msg.chat_id_, result.id_)
 DevRio:srem(Antak..'Rio:Managers:'..msg.chat_id_, result.id_)
 DevRio:srem(Antak..'Rio:Constructor:'..msg.chat_id_,result.id_)
 DevRio:srem(Antak..'Rio:BasicConstructor:'..msg.chat_id_,result.id_)
 DevRio:srem(Antak..'Rio:Cleaner:'..msg.chat_id_, result.id_)
-elseif RioDelAll(msg.sender_user_id_,msg.chat_id_) == 'rioconstructor' then
+elseif RioDelAll(msg.sender_user_id_,msg.chat_id_) =='rioconstructor' then
 DevRio:srem(Antak..'Rio:Admins:'..msg.chat_id_, result.id_)
 DevRio:srem(Antak..'Rio:VipMem:'..msg.chat_id_, result.id_)
 DevRio:srem(Antak..'Rio:Managers:'..msg.chat_id_, result.id_)
 DevRio:srem(Antak..'Rio:Constructor:'..msg.chat_id_,result.id_)
 DevRio:srem(Antak..'Rio:BasicConstructor:'..msg.chat_id_,result.id_)
 DevRio:srem(Antak..'Rio:Cleaner:'..msg.chat_id_, result.id_)
-elseif RioDelAll(msg.sender_user_id_,msg.chat_id_) == 'basicconstructor' then
+elseif RioDelAll(msg.sender_user_id_,msg.chat_id_) =='basicconstructor' then
 DevRio:srem(Antak..'Rio:Admins:'..msg.chat_id_, result.id_)
 DevRio:srem(Antak..'Rio:VipMem:'..msg.chat_id_, result.id_)
 DevRio:srem(Antak..'Rio:Managers:'..msg.chat_id_, result.id_)
 DevRio:srem(Antak..'Rio:Constructor:'..msg.chat_id_,result.id_)
 DevRio:srem(Antak..'Rio:Cleaner:'..msg.chat_id_, result.id_)
-elseif RioDelAll(msg.sender_user_id_,msg.chat_id_) == 'constructor' then
+elseif RioDelAll(msg.sender_user_id_,msg.chat_id_) =='constructor' then
 DevRio:srem(Antak..'Rio:Admins:'..msg.chat_id_, result.id_)
 DevRio:srem(Antak..'Rio:VipMem:'..msg.chat_id_, result.id_)
 DevRio:srem(Antak..'Rio:Managers:'..msg.chat_id_, result.id_)
 DevRio:srem(Antak..'Rio:Cleaner:'..msg.chat_id_, result.id_)
-elseif RioDelAll(msg.sender_user_id_,msg.chat_id_) == 'manager' then
+elseif RioDelAll(msg.sender_user_id_,msg.chat_id_) =='manager' then
 DevRio:srem(Antak..'Rio:Admins:'..msg.chat_id_, result.id_)
 DevRio:srem(Antak..'Rio:VipMem:'..msg.chat_id_, result.id_)
 end
@@ -6888,176 +6931,8 @@ DevRio:srem(Antak..'Rio:SudoBot:',user)
 ReplyStatus(msg,user,"Reply","᥀︙تم تنزيله من قائمة المطورين")  
 end end
 --     Source Antak     --
---  Set RioSudoGp  --
-if RioSudo(msg) then
-if text ==('رفع مطور اساسي مجموعه') and ChCheck(msg) then
-function raf_reply(extra, result, success)
-DevRio:sadd(Antak..'Rio:RioSudoGp:'..msg.chat_id_,result.sender_user_id_)
-ReplyStatus(msg,result.sender_user_id_,"Reply","᥀︙تم رفعه مطور اساسي مجموعه")  
-end 
-if tonumber(tonumber(msg.reply_to_message_id_)) > 0 then
-getMessage(msg.chat_id_, tonumber(msg.reply_to_message_id_),raf_reply)
-end end
-if text and text:match('^رفع مطور اساسي مجموعه @(.*)') and ChCheck(msg) then
-local username = text:match('^رفع مطور اساسي مجموعه @(.*)')
-function promreply(extra,result,success)
-if result.id_ then
-DevRio:sadd(Antak..'Rio:RioSudoGp:'..msg.chat_id_,result.id_)
-ReplyStatus(msg,result.sender_user_id_,"Reply","᥀︙تم رفعه مطور اساسي مجموعه")  
-else 
-Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙*المعرف غير صحيح*', 1, 'md')
-end end 
-resolve_username(username,promreply)
-end
-if text and text:match('^رفع مطور اساسي مجموعه (%d+)') and ChCheck(msg) then
-local user = text:match('رفع مطور اساسي مجموعه (%d+)')
-DevRio:sadd(Antak..'Rio:RioSudoGp:'..msg.chat_id_,user)
-ReplyStatus(msg,result.sender_user_id_,"Reply","᥀︙تم رفعه مطور اساسي مجموعه")  
-end
---     Source Antak     --
---  Rem RioSudoGp  --
-if text ==('تنزيل مطور اساسي مجموعه') and ChCheck(msg) then
-function prom_reply(extra, result, success)
-DevRio:srem(Antak..'Rio:RioSudoGp:'..msg.chat_id_,result.sender_user_id_)
-ReplyStatus(msg,result.sender_user_id_,"Reply","᥀︙تم تنزيله مطور اساسي مجموعه")  
-end 
-if tonumber(tonumber(msg.reply_to_message_id_)) > 0 then
-getMessage(msg.chat_id_, tonumber(msg.reply_to_message_id_),prom_reply)
-end end
-if text and text:match('^تنزيل مطور اساسي مجموعه @(.*)') and ChCheck(msg) then
-local username = text:match('^تنزيل مطور اساسي مجموعه @(.*)')
-function promreply(extra,result,success)
-if result.id_ then
-DevRio:srem(Antak..'Rio:RioSudoGp:'..msg.chat_id_,result.id_)
-ReplyStatus(msg,result.sender_user_id_,"Reply","᥀︙تم تنزيله مطور اساسي مجموعه")  
-else 
-Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙*المعرف غير صحيح*', 1, 'md')
-end end 
-resolve_username(username,promreply)
-end
-if text and text:match('^تنزيل مطور اساسي مجموعه (%d+)') and ChCheck(msg) then
-local user = text:match('تنزيل مطور اساسي مجموعه (%d+)')
-DevRio:srem(Antak..'Rio:RioSudoGp:'..msg.chat_id_,user)
-ReplyStatus(msg,result.sender_user_id_,"Reply","᥀︙تم تنزيله مطور اساسي مجموعه")  
-end end
-if text ==('رفع مطور اساسي مجموعه') and not RioSudo(msg) then
-Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙هذا الامر للمطورين فقط', 1, 'md')
-end
---     Source Antak     --
---  Set SecondSudoGp  --
-if RioSudoGp(msg) then
-if text ==('رفع ثانوي مجموعه') and ChCheck(msg) then
-function raf_reply(extra, result, success)
-DevRio:sadd(Antak..'Rio:SecondSudoGp:'..msg.chat_id_,result.sender_user_id_)
-ReplyStatus(msg,result.sender_user_id_,"Reply","᥀︙تم رفعه مطور ثانوي مجموعه")  
-end 
-if tonumber(tonumber(msg.reply_to_message_id_)) > 0 then
-getMessage(msg.chat_id_, tonumber(msg.reply_to_message_id_),raf_reply)
-end end
-if text and text:match('^رفع ثانوي مجموعه @(.*)') and ChCheck(msg) then
-local username = text:match('^رفع ثانوي مجموعه @(.*)')
-function promreply(extra,result,success)
-if result.id_ then
-DevRio:sadd(Antak..'Rio:SecondSudoGp:'..msg.chat_id_,result.id_)
-ReplyStatus(msg,result.sender_user_id_,"Reply","᥀︙تم رفعه مطور ثانوي مجموعه")  
-else 
-Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙*المعرف غير صحيح*', 1, 'md')
-end end 
-resolve_username(username,promreply)
-end
-if text and text:match('^رفع ثانوي مجموعه (%d+)') and ChCheck(msg) then
-local user = text:match('رفع ثانوي مجموعه (%d+)')
-DevRio:sadd(Antak..'Rio:SecondSudoGp:'..msg.chat_id_,user)
-ReplyStatus(msg,result.sender_user_id_,"Reply","᥀︙تم رفعه مطور ثانوي مجموعه")  
-end
---     Source Antak     --
---  Rem SecondSudoGp  --
-if text ==('تنزيل ثانوي مجموعه') and ChCheck(msg) then
-function prom_reply(extra, result, success)
-DevRio:srem(Antak..'Rio:SecondSudoGp:'..msg.chat_id_,result.sender_user_id_)
-ReplyStatus(msg,result.sender_user_id_,"Reply","᥀︙تم تنزيله مطور ثانوي مجموعه")  
-end 
-if tonumber(tonumber(msg.reply_to_message_id_)) > 0 then
-getMessage(msg.chat_id_, tonumber(msg.reply_to_message_id_),prom_reply)
-end end
-if text and text:match('^تنزيل ثانوي مجموعه @(.*)') and ChCheck(msg) then
-local username = text:match('^تنزيل ثانوي مجموعه @(.*)')
-function promreply(extra,result,success)
-if result.id_ then
-DevRio:srem(Antak..'Rio:SecondSudoGp:'..msg.chat_id_,result.id_)
-ReplyStatus(msg,result.sender_user_id_,"Reply","᥀︙تم تنزيله مطور ثانوي مجموعه")  
-else 
-Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙*المعرف غير صحيح*', 1, 'md')
-end end 
-resolve_username(username,promreply)
-end
-if text and text:match('^تنزيل ثانوي مجموعه (%d+)') and ChCheck(msg) then
-local user = text:match('تنزيل ثانوي مجموعه (%d+)')
-DevRio:srem(Antak..'Rio:SecondSudoGp:'..msg.chat_id_,user)
-ReplyStatus(msg,result.sender_user_id_,"Reply","᥀︙تم تنزيله مطور ثانوي مجموعه")  
-end end
-if text ==('رفع ثانوي مجموعه') and not RioSudoGp(msg) then
-Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙هذا الامر للمطورين فقط', 1, 'md')
-end
---     Source Antak     --
---  Set SudoBotGp  --
-if SecondSudoGp(msg) then
-if text ==('رفع مطور مجموعه') and ChCheck(msg) then
-function raf_reply(extra, result, success)
-DevRio:sadd(Antak..'Rio:SudoBotGp:'..msg.chat_id_,result.sender_user_id_)
-ReplyStatus(msg,result.sender_user_id_,"Reply","᥀︙تم رفعه مطور مجموعه")  
-end 
-if tonumber(tonumber(msg.reply_to_message_id_)) > 0 then
-getMessage(msg.chat_id_, tonumber(msg.reply_to_message_id_),raf_reply)
-end end
-if text and text:match('^رفع مطور مجموعه @(.*)') and ChCheck(msg) then
-local username = text:match('^رفع مطور مجموعه @(.*)')
-function promreply(extra,result,success)
-if result.id_ then
-DevRio:sadd(Antak..'Rio:SudoBotGp:'..msg.chat_id_,result.id_)
-ReplyStatus(msg,result.sender_user_id_,"Reply","᥀︙تم رفعه مطور مجموعه")  
-else 
-Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙*المعرف غير صحيح*', 1, 'md')
-end end 
-resolve_username(username,promreply)
-end
-if text and text:match('^رفع مطور مجموعه (%d+)') and ChCheck(msg) then
-local user = text:match('رفع مطور مجموعه (%d+)')
-DevRio:sadd(Antak..'Rio:SudoBotGp:'..msg.chat_id_,user)
-ReplyStatus(msg,result.sender_user_id_,"Reply","᥀︙تم رفعه مطور مجموعه")  
-end
---     Source Antak     --
---  Rem SudoBotGp  --
-if text ==('تنزيل مطور مجموعه') and ChCheck(msg) then
-function prom_reply(extra, result, success)
-DevRio:srem(Antak..'Rio:SudoBotGp:'..msg.chat_id_,result.sender_user_id_)
-ReplyStatus(msg,result.sender_user_id_,"Reply","᥀︙تم تنزيله مطور مجموعه")  
-end 
-if tonumber(tonumber(msg.reply_to_message_id_)) > 0 then
-getMessage(msg.chat_id_, tonumber(msg.reply_to_message_id_),prom_reply)
-end end
-if text and text:match('^تنزيل مطور مجموعه @(.*)') and ChCheck(msg) then
-local username = text:match('^تنزيل مطور مجموعه @(.*)')
-function promreply(extra,result,success)
-if result.id_ then
-DevRio:srem(Antak..'Rio:SudoBotGp:'..msg.chat_id_,result.id_)
-ReplyStatus(msg,result.sender_user_id_,"Reply","᥀︙تم تنزيله مطور مجموعه")  
-else 
-Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙*المعرف غير صحيح*', 1, 'md')
-end end 
-resolve_username(username,promreply)
-end
-if text and text:match('^تنزيل مطور مجموعه (%d+)') and ChCheck(msg) then
-local user = text:match('تنزيل مطور مجموعه (%d+)')
-DevRio:srem(Antak..'Rio:SudoBotGp:'..msg.chat_id_,user)
-ReplyStatus(msg,result.sender_user_id_,"Reply","᥀︙تم تنزيله مطور مجموعه")  
-end end
-if text ==('رفع مطور مجموعه') and not SecondSudoGp(msg) then
-Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙هذا الامر للمطورين فقط', 1, 'md')
-end
---     Source Antak     --
 --   Set RioConstructor   --
-if ChatType == 'sp' or ChatType == 'gp'  then
+if ChatType =='sp' or ChatType =='gp'  then
 if SudoBot(msg) then
 if text ==('رفع مالك') and ChCheck(msg) then
 function raf_reply(extra, result, success)
@@ -7589,7 +7464,7 @@ getMessage(msg.chat_id_, tonumber(msg.reply_to_message_id_),ReplySet)
 end
 end
 end
-if text == 'لقبه' and ChCheck(msg) then
+if text =='لقبه' and ChCheck(msg) then
 function ReplyGet(extra, result, success)
 if GetCustomTitle(msg.sender_user_id_,msg.chat_id_) == false then
 send(msg.chat_id_, msg.id_,'᥀︙ليس لديه لقب هنا') 
@@ -7601,7 +7476,7 @@ if tonumber(tonumber(msg.reply_to_message_id_)) > 0 then
 getMessage(msg.chat_id_, tonumber(msg.reply_to_message_id_),ReplyGet)
 end
 end
-if text == 'لقبي' and ChCheck(msg) then
+if text =='لقبي' and ChCheck(msg) then
 if GetCustomTitle(msg.sender_user_id_,msg.chat_id_) == false then
 send(msg.chat_id_, msg.id_,'᥀︙ليس لديك لقب هنا') 
 else
@@ -7649,22 +7524,22 @@ end end end
 if RioConstructor(msg) then
 if text == "تفعيل الحظر" and ChCheck(msg) or text == "تفعيل الطرد" and ChCheck(msg) then
 DevRio:del(Antak.."Rio:Lock:KickBan"..msg.chat_id_)
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل الطرد والحظر'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل الطرد والحظر'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 end
 if text == "تعطيل الحظر" and ChCheck(msg) or text == "تعطيل الطرد" and ChCheck(msg) then
 DevRio:set(Antak.."Rio:Lock:KickBan"..msg.chat_id_,"true")
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل الطرد والحظر'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل الطرد والحظر'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 end
 if text == "تفعيل الكتم" and ChCheck(msg) or text == "تفعيل التقييد" and ChCheck(msg) then
 DevRio:del(Antak.."Rio:Lock:MuteTked"..msg.chat_id_)
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل الكتم والتقيد'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل الكتم والتقيد'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 end
 if text == "تعطيل الكتم" and ChCheck(msg) or text == "تعطيل التقييد" and ChCheck(msg) then
 DevRio:set(Antak.."Rio:Lock:MuteTked"..msg.chat_id_,"true")
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل الكتم والتقيد'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل الكتم والتقيد'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 end
 end
@@ -7700,11 +7575,9 @@ send(msg.chat_id_,msg.id_,"᥀︙لا استطيع طرد مشرفين المج�
 return false  
 end
 ChatKick(result.chat_id_, result.sender_user_id_)
-text = "᥀︙تم طرده من المجموعه" 
-keyboard = {} 
-keyboard.inline_keyboard = {{{text="• الغاء حظر •",callback_data=msg.sender_user_id_..":UnBan:"..result.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
-Msg_id = msg.id_/2097152/0.5
-https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(text).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+local Text = "᥀︙تم طرده من المجموعه" 
+local inline = {{{text="‹ الغاء حظر ›",callback_data=msg.sender_user_id_..":UnBan:"..result.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
+SendInline(msg.chat_id_,Text,nil,inline,msg.id_/2097152/0.5)
 end,nil)
 end
 end 
@@ -7787,11 +7660,9 @@ return false
 end
 ChatKick(result.chat_id_, result.sender_user_id_)
 DevRio:sadd(Antak..'Rio:Ban:'..msg.chat_id_, result.sender_user_id_)
-text = "᥀︙تم حظره من المجموعه" 
-keyboard = {} 
-keyboard.inline_keyboard = {{{text="• الغاء حظر •",callback_data=msg.sender_user_id_..":UnBan:"..result.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
-Msg_id = msg.id_/2097152/0.5
-https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(text).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+local Text = "᥀︙تم حظره من المجموعه" 
+local inline = {{{text="‹ الغاء حظر ›",callback_data=msg.sender_user_id_..":UnBan:"..result.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
+SendInline(msg.chat_id_,Text,nil,inline,msg.id_/2097152/0.5)
 end,nil) 
 end 
 end 
@@ -7898,11 +7769,9 @@ if DevRio:sismember(Antak..'Rio:Muted:'..msg.chat_id_, result.sender_user_id_) t
 ReplyStatus(msg,result.sender_user_id_,"Reply","᥀︙هو بالفعل مكتوم من المجموعه")  
 else
 DevRio:sadd(Antak..'Rio:Muted:'..msg.chat_id_, result.sender_user_id_)
-text = "᥀︙تم كتمه من المجموعه" 
-keyboard = {} 
-keyboard.inline_keyboard = {{{text="• الغاء كتم •",callback_data=msg.sender_user_id_..":UnMute:"..result.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
-Msg_id = msg.id_/2097152/0.5
-https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(text).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+local Text = "᥀︙تم كتمه من المجموعه" 
+local inline = {{{text="‹ الغاء كتم ›",callback_data=msg.sender_user_id_..":UnMute:"..result.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
+SendInline(msg.chat_id_,Text,nil,inline,msg.id_/2097152/0.5)
 end
 end
 end 
@@ -8002,11 +7871,9 @@ Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙لا تستطيع تقيد ↫ '..IdRan
 else
 HTTPS.request("https://api.telegram.org/bot"..TokenBot.."/restrictChatMember?chat_id="..msg.chat_id_.."&user_id="..result.sender_user_id_)
 DevRio:sadd(Antak..'Rio:Tkeed:'..msg.chat_id_, result.sender_user_id_)
-text = "᥀︙تم تقيده من المجموعه" 
-keyboard = {} 
-keyboard.inline_keyboard = {{{text="• الغاء تقيد •",callback_data=msg.sender_user_id_..":UnTkeed:"..result.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
-Msg_id = msg.id_/2097152/0.5
-https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(text).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+local Text = "᥀︙تم تقيده من المجموعه" 
+local inline = {{{text="‹ الغاء تقيد ›",callback_data=msg.sender_user_id_..":UnTkeed:"..result.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
+SendInline(msg.chat_id_,Text,nil,inline,msg.id_/2097152/0.5)
 end
 end 
 if tonumber(tonumber(msg.reply_to_message_id_)) > 0 then
@@ -8100,11 +7967,9 @@ return false
 end
 ChatKick(result.chat_id_, result.sender_user_id_)
 DevRio:sadd(Antak..'Rio:BanAll:', result.sender_user_id_)
-text = "᥀︙تم حظره عام من المجموعات" 
-keyboard = {} 
-keyboard.inline_keyboard = {{{text="• الغاء العام •",callback_data=msg.sender_user_id_..":UnAll:"..result.sender_user_id_},{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..msg.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
-Msg_id = msg.id_/2097152/0.5
-https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(text).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+local Text = "᥀︙تم حظره عام من المجموعات" 
+local inline = {{{text="‹ الغاء العام ›",callback_data=msg.sender_user_id_..":UnAll:"..result.sender_user_id_},{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..msg.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
+SendInline(msg.chat_id_,Text,nil,inline,msg.id_/2097152/0.5)
 end
 if tonumber(tonumber(msg.reply_to_message_id_)) == 0 then
 else
@@ -8181,11 +8046,9 @@ Dev_Rio(msg.chat_id_, msg.id_, 1, "᥀︙*لاتستطيع كتم المطور �
 return false 
 end
 DevRio:sadd(Antak..'Rio:MuteAll:', result.sender_user_id_)          
-text = "᥀︙تم كتمه عام من المجموعات" 
-keyboard = {} 
-keyboard.inline_keyboard = {{{text="• الغاء العام •",callback_data=msg.sender_user_id_..":UnAll:"..result.sender_user_id_},{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..msg.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
-Msg_id = msg.id_/2097152/0.5
-https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(text).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+local Text = "᥀︙تم كتمه عام من المجموعات" 
+local inline = {{{text="‹ الغاء العام ›",callback_data=msg.sender_user_id_..":UnAll:"..result.sender_user_id_},{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..msg.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
+SendInline(msg.chat_id_,Text,nil,inline,msg.id_/2097152/0.5)
 end
 if tonumber(tonumber(msg.reply_to_message_id_)) == 0 then
 else
@@ -8286,12 +8149,10 @@ tdcli_function ({ID = "GetUser",user_id_ = text},function(arg,dp)
 if dp.first_name_ ~= false then
 DevRio:del(Antak.."Rio:EditDev"..msg.sender_user_id_)
 DevRio:set(Antak.."Rio:NewDev"..msg.sender_user_id_,dp.id_)
-if dp.username_ ~= false then DevUser = '\n᥀︙المعرف ↫ [@'..dp.username_..']' else DevUser = '' end
-local Text = '᥀︙الايدي ↫ '..dp.id_..DevUser..'\n᥀︙الاسم ↫ ['..dp.first_name_..'](tg://user?id='..dp.id_..')\n᥀︙تم حفظ المعلومات بنجاح\n᥀︙استخدم الازرار للتاكيد ↫ ⤈'
-keyboard = {} 
-keyboard.inline_keyboard = {{{text="• نعم •",callback_data="/setyes"},{text="• لا •",callback_data="/setno"}}} 
-Msg_id = msg.id_/2097152/0.5
-return https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(Text).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+if dp.username_ ~= false then DevUser ='\n᥀︙المعرف ↫ [@'..dp.username_..']' else DevUser ='' end
+local Text ='᥀︙الايدي ↫ '..dp.id_..DevUser..'\n᥀︙الاسم ↫ ['..dp.first_name_..'](tg://user?id='..dp.id_..')\n᥀︙تم حفظ المعلومات بنجاح\n᥀︙استخدم الازرار للتاكيد ↫ ⤈'
+local inline = {{{text="‹ نعم ›",callback_data="/setyes"},{text="‹ لا ›",callback_data="/setno"}}} 
+SendInline(msg.chat_id_,Text,nil,inline,msg.id_/2097152/0.5)
 else
 send(msg.chat_id_, msg.id_,"᥀︙المعلومات خاطئه قم بالتاكد واعد المحاوله")
 DevRio:del(Antak.."Rio:EditDev"..msg.sender_user_id_)
@@ -8426,7 +8287,7 @@ end
 tdcli_function ({ID = "PinChannelMessage",channel_id_ = msg.chat_id_:gsub("-100",""),message_id_ = msg.reply_to_message_id_,disable_notification_ = 1},function(arg,data) 
 if data.ID == "Ok" then
 DevRio:set(Antak..'Rio:PinnedMsg'..msg.chat_id_,msg.reply_to_message_id_)
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تثبيت الرساله بنجاح'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تثبيت الرساله بنجاح'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 return false  
 end
@@ -8456,10 +8317,8 @@ end end
 if #List == 0 then 
 text = "᥀︙*لا يوجد مميزين*"
 end
-keyboard = {} 
-keyboard.inline_keyboard = {{{text="• مسح المميزين •",callback_data="/DelVipMem:"..msg.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
-Msg_id = msg.id_/2097152/0.5
-https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(text).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+local inline = {{{text="‹ مسح المميزين ›",callback_data="/DelVipMem:"..msg.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
+SendInline(msg.chat_id_,text,nil,inline,msg.id_/2097152/0.5)
 end end
 --     Source Antak     --
 if Manager(msg) then
@@ -8477,10 +8336,8 @@ end end
 if #List == 0 then
 text = "᥀︙*لا يوجد ادمنيه*"
 end
-keyboard = {} 
-keyboard.inline_keyboard = {{{text="• مسح الادمنيه •",callback_data="/DelAdmins:"..msg.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
-Msg_id = msg.id_/2097152/0.5
-https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(text).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+local inline = {{{text="‹ مسح الادمنيه ›",callback_data="/DelAdmins:"..msg.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
+SendInline(msg.chat_id_,text,nil,inline,msg.id_/2097152/0.5)
 end end
 --     Source Antak     -- 
 if Constructor(msg) then
@@ -8497,10 +8354,8 @@ end end
 if #List == 0 then 
 text = "᥀︙*لا يوجد مدراء*"
 end
-keyboard = {} 
-keyboard.inline_keyboard = {{{text="• مسح المدراء •",callback_data="/DelManagers:"..msg.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
-Msg_id = msg.id_/2097152/0.5
-https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(text).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+local inline = {{{text="‹ مسح المدراء ›",callback_data="/DelManagers:"..msg.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
+SendInline(msg.chat_id_,text,nil,inline,msg.id_/2097152/0.5)
 end 
 if text == "المنظفين" and ChCheck(msg) then 
 local List = DevRio:smembers(Antak..'Rio:Cleaner:'..msg.chat_id_)
@@ -8515,10 +8370,8 @@ end end
 if #List == 0 then 
 text = "᥀︙*لا يوجد منظفين*"
 end
-keyboard = {} 
-keyboard.inline_keyboard = {{{text="• مسح المنظفين •",callback_data="/DelCleanr:"..msg.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
-Msg_id = msg.id_/2097152/0.5
-https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(text).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+local inline = {{{text="‹ مسح المنظفين ›",callback_data="/DelCleanr:"..msg.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
+SendInline(msg.chat_id_,text,nil,inline,msg.id_/2097152/0.5)
 end end
 --     Source Antak     --
 if BasicConstructor(msg) then
@@ -8535,10 +8388,8 @@ end end
 if #List == 0 then 
 text = "᥀︙*لا يوجد منشئين*"
 end
-keyboard = {} 
-keyboard.inline_keyboard = {{{text="• مسح المنشئين •",callback_data="/DelConstructor:"..msg.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
-Msg_id = msg.id_/2097152/0.5
-https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(text).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+local inline = {{{text="‹ مسح المنشئين ›",callback_data="/DelConstructor:"..msg.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
+SendInline(msg.chat_id_,text,nil,inline,msg.id_/2097152/0.5)
 end end
 --     Source Antak     --
 if Owner(msg) then
@@ -8555,10 +8406,8 @@ end end
 if #List == 0 then 
 text = "᥀︙*لا يوجد مالكين*"
 end 
-keyboard = {} 
-keyboard.inline_keyboard = {{{text="• مسح المالكين •",callback_data="/DelOwner:"..msg.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
-Msg_id = msg.id_/2097152/0.5
-https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(text).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+local inline = {{{text="‹ مسح المالكين ›",callback_data="/DelOwner:"..msg.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
+SendInline(msg.chat_id_,text,nil,inline,msg.id_/2097152/0.5)
 end
 if text == "المنشئين الاساسيين" and ChCheck(msg) or text == "منشئين اساسيين" and ChCheck(msg) or text == "المنشئين الاساسين" and ChCheck(msg) then 
 local List = DevRio:smembers(Antak..'Rio:BasicConstructor:'..msg.chat_id_)
@@ -8573,7 +8422,8 @@ end end
 if #List == 0 then 
 text = "᥀︙*لا يوجد منشئين اساسيين*"
 end
-Dev_Rio(msg.chat_id_, msg.id_, 1, text, 1, "md")
+local inline = {{{text="‹ مسح المنشئين الاساسيين ›",callback_data="/DelBasicConstructor:"..msg.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
+SendInline(msg.chat_id_,text,nil,inline,msg.id_/2097152/0.5)
 end 
 end 
 if text ==("المنشئ") and ChCheck(msg) or text ==("المالك") and ChCheck(msg) then
@@ -8584,18 +8434,24 @@ if data.members_[i].status_.ID == "ChatMemberStatusCreator" then
 Manager_id = admins[i].user_id_
 tdcli_function ({ID = "GetUser",user_id_ = Manager_id},function(arg,dp) 
 if dp.first_name_ == false then
-Dev_Rio(msg.chat_id_, msg.id_, 1, "᥀︙حساب المنشئ محذوف", 1, "md")
+send(msg.chat_id_, msg.id_, 1, "᥀︙حساب المنشئ محذوف", 1, "md")
 return false  
 end
-local msg_id = msg.id_/2097152/0.5
+tdcli_function ({ID="GetUserProfilePhotos",user_id_=Manager_id,offset_=0,limit_=1},function(arg,getpro) 
+if getpro.photos_[0] then
 Text = "*᥀︙Owner Name ↬ * ["..dp.first_name_.."](T.me/"..dp.username_..")\n*᥀︙Owner User ↬* [@"..dp.username_.."]\n*᥀︙Owner id ↬* ["..dp.id_.."](T.me/"..dp.username_..")"
 keyboard = {} 
-keyboard.inline_keyboard = {{{text = ''..dp.first_name_..' ',url="t.me/"..dp.username_ or TeAmAnTaK}}}
-https.request("https://api.telegram.org/bot"..TokenBot..'/sendPhoto?chat_id=' .. msg.chat_id_ .. '&photo=https://t.me/'..dp.username_..'&caption=' .. URL.escape(Text).."&reply_to_message_id="..msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
-end,nil)    
-end
+keyboard.inline_keyboard = {{{text=''..dp.first_name_..'',url="t.me/"..dp.username_ or TeAmAnTaK}}}
+local msg_id = msg.id_/2097152/0.5
+https.request("https://api.telegram.org/bot"..TokenBot..'/sendPhoto?chat_id='..msg.chat_id_..'&caption='..URL.escape(Text)..'&photo='..getpro.photos_[0].sizes_[1].photo_.persistent_id_..'&reply_to_message_id='..msg_id..'&parse_mode=markdown&disable_web_page_preview=true&reply_markup='..JSON.encode(keyboard)) 
+else
+send(msg.chat_id_, msg.id_,Text,1, 'md')
 end
 end,nil)   
+end,nil)   
+end
+end
+end,nil)  
 end
 --     Source Antak     --
 if Admin(msg) then
@@ -8612,10 +8468,8 @@ end end
 if #List == 0 then 
 text = "᥀︙*لا يوجد مكتومين*"
 end
-keyboard = {} 
-keyboard.inline_keyboard = {{{text="• مسح المكتومين •",callback_data="/DelMute:"..msg.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
-Msg_id = msg.id_/2097152/0.5
-https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(text).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+local inline = {{{text="‹ مسح المكتومين ›",callback_data="/DelMute:"..msg.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
+SendInline(msg.chat_id_,text,nil,inline,msg.id_/2097152/0.5)
 end
 --     Source Antak     --
 if text == "المقيدين" and ChCheck(msg) then 
@@ -8631,10 +8485,8 @@ end end
 if #List == 0 then
 text = "᥀︙*لا يوجد مقيدين*"
 end
-keyboard = {} 
-keyboard.inline_keyboard = {{{text="• مسح المقيدين •",callback_data="/DelKeed:"..msg.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
-Msg_id = msg.id_/2097152/0.5
-https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(text).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+local inline = {{{text="‹ مسح المقيدين ›",callback_data="/DelKeed:"..msg.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
+SendInline(msg.chat_id_,text,nil,inline,msg.id_/2097152/0.5)
 end
 --     Source Antak     --
 if text == "المحظورين" and ChCheck(msg) or text == "المحضورين" and ChCheck(msg) then 
@@ -8650,10 +8502,8 @@ end end
 if #List == 0 then 
 text = "᥀︙*لا يوجد محظورين*"
 end
-keyboard = {} 
-keyboard.inline_keyboard = {{{text="• مسح المحظورين •",callback_data="/DelBan:"..msg.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
-Msg_id = msg.id_/2097152/0.5
-https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(text).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+local inline = {{{text="‹ مسح المحظورين ›",callback_data="/DelBan:"..msg.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
+SendInline(msg.chat_id_,text,nil,inline,msg.id_/2097152/0.5)
 end
 --     Source Antak     --
 if text == "المطايه" and ChCheck(msg) or text == "المطاية" and ChCheck(msg) then
@@ -8681,10 +8531,8 @@ end
 if #List == 0 then
 text = "᥀︙لا توجد كلمات ممنوعه"
 end
-keyboard = {} 
-keyboard.inline_keyboard = {{{text="• مسح المتحركات •",callback_data="/DelGif:"..msg.sender_user_id_},{text="• مسح الملصقات •",callback_data="/DelSticker:"..msg.sender_user_id_}},{{text="• مسح الصور •",callback_data="/DelPhoto:"..msg.sender_user_id_},{text="• مسح الكلمات •",callback_data="/DelTextfilter:"..msg.sender_user_id_}},{{text="• مسح قوائم المنع •",callback_data="/DelAllFilter:"..msg.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..msg.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
-Msg_id = msg.id_/2097152/0.5
-https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(text or List).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+local inline = {{{text="‹ مسح المتحركات ›",callback_data="/DelGif:"..msg.sender_user_id_},{text="‹ مسح الملصقات ›",callback_data="/DelSticker:"..msg.sender_user_id_}},{{text="‹ مسح الصور ›",callback_data="/DelPhoto:"..msg.sender_user_id_},{text="‹ مسح الكلمات ›",callback_data="/DelTextfilter:"..msg.sender_user_id_}},{{text="‹ مسح قوائم المنع ›",callback_data="/DelAllFilter:"..msg.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..msg.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
+SendInline(msg.chat_id_,text,nil,inline,msg.id_/2097152/0.5)
 end
 end 
 --     Source Antak     --
@@ -8701,10 +8549,8 @@ end end
 if #List == 0 then
 text = "᥀︙*عذرا لم يتم رفع اي مطورين اساسيين*"
 end
-keyboard = {} 
-keyboard.inline_keyboard = {{{text="• مسح الاساسيين •",callback_data="/DelRioSudo:"..msg.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
-Msg_id = msg.id_/2097152/0.5
-https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(text).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+local inline = {{{text="‹ مسح الاساسيين ›",callback_data="/DelRioSudo:"..msg.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
+SendInline(msg.chat_id_,text,nil,inline,msg.id_/2097152/0.5)
 end 
 --     Source Antak     --
 if text == "المطورين الثانويين" and SecondSudo(msg) and ChCheck(msg) or text == "الثانويين" and SecondSudo(msg) and ChCheck(msg) or text == "↫ الثانويين ᥀" and SecondSudo(msg) and ChCheck(msg) then 
@@ -8720,10 +8566,8 @@ end end
 if #List == 0 then
 text = "᥀︙*عذرا لم يتم رفع اي مطورين ثانويين*"
 end
-keyboard = {} 
-keyboard.inline_keyboard = {{{text="• مسح الثانويين •",callback_data="/DelSecondSudo:"..msg.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
-Msg_id = msg.id_/2097152/0.5
-https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(text).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+local inline = {{{text="‹ مسح الثانويين ›",callback_data="/DelSecondSudo:"..msg.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
+SendInline(msg.chat_id_,text,nil,inline,msg.id_/2097152/0.5)
 end
 --     Source Antak     --
 if SudoBot(msg) then
@@ -8759,10 +8603,8 @@ text = text
 else
 text = "᥀︙*لم يتم حظر او كتم اي عضو*"
 end
-keyboard = {} 
-keyboard.inline_keyboard = {{{text="• مسح قائمه العام •",callback_data="/DelListAll:"..msg.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
-Msg_id = msg.id_/2097152/0.5
-https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(text).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+local inline = {{{text="‹ مسح قائمه العام ›",callback_data="/DelListAll:"..msg.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
+SendInline(msg.chat_id_,text,nil,inline,msg.id_/2097152/0.5)
 end 
 --     Source Antak     --
 if text == "المطورين" and ChCheck(msg) or text == "↫ المطورين ᥀" and ChCheck(msg) then 
@@ -8779,10 +8621,8 @@ end end
 if #List == 0 then
 text = "᥀︙*عذرا لم يتم رفع اي مطورين*"
 end 
-keyboard = {} 
-keyboard.inline_keyboard = {{{text="• مسح المطورين •",callback_data="/DelSudoBot:"..msg.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
-Msg_id = msg.id_/2097152/0.5
-https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(text).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+local inline = {{{text="‹ مسح المطورين ›",callback_data="/DelSudoBot:"..msg.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
+SendInline(msg.chat_id_,text,nil,inline,msg.id_/2097152/0.5)
 end
 --     Source Antak     --
 if text ==("رفع المنشئ") and ChCheck(msg) or text ==("رفع المالك") and ChCheck(msg) then 
@@ -8807,7 +8647,7 @@ end
 end 
 --     Source Antak     --
 if Manager(msg) then
-if text == 'منع' and tonumber(msg.reply_to_message_id_) > 0 and ChCheck(msg) then 
+if text =='منع' and tonumber(msg.reply_to_message_id_) > 0 and ChCheck(msg) then 
 function filter_by_reply(extra, result, success) 
 if result.content_.sticker_ then
 local idsticker = result.content_.sticker_.sticker_.persistent_id_
@@ -8831,7 +8671,7 @@ end
 getMessage(msg.chat_id_, msg.reply_to_message_id_,filter_by_reply) 
 end
 --     Source Antak     --
-if text == 'الغاء منع' and tonumber(msg.reply_to_message_id_) > 0 and ChCheck(msg) then     
+if text =='الغاء منع' and tonumber(msg.reply_to_message_id_) > 0 and ChCheck(msg) then     
 function unfilter_by_reply(extra, result, success) 
 if result.content_.sticker_ then
 local idsticker = result.content_.sticker_.sticker_.persistent_id_
@@ -8857,16 +8697,16 @@ end
 end
 --     Source Antak     --
 if text and (text == "تفعيل تحويل الصيغ" or text == "تفعيل التحويل") and Manager(msg) and ChCheck(msg) then
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل تحويل الصيغ'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل تحويل الصيغ'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:del(Antak..'Rio:Thwel:Rio'..msg.chat_id_) 
 end
 if text and (text == "تعطيل تحويل الصيغ" or text == "تعطيل التحويل") and Manager(msg) and ChCheck(msg) then
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل تحويل الصيغ'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل تحويل الصيغ'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:set(Antak..'Rio:Thwel:Rio'..msg.chat_id_,true)  
 end
-if text == 'تحويل' and not DevRio:get(Antak..'Rio:Thwel:Rio'..msg.chat_id_) then  
+if text =='تحويل' and not DevRio:get(Antak..'Rio:Thwel:Rio'..msg.chat_id_) then  
 if tonumber(msg.reply_to_message_id_) > 0 then 
 function ThwelByReply(extra, result, success)
 if result.content_.photo_ then 
@@ -8904,38 +8744,38 @@ tdcli_function ({ID = "GetUser",user_id_ = result.sender_user_id_},function(arg,
 local user_msgs = DevRio:get(Antak..'Rio:UsersMsgs'..msg.chat_id_..':'..data.id_) or 0
 local user_nkt = tonumber(DevRio:get(Antak..'Rio:GamesNumber'..msg.chat_id_..data.id_) or 0)
 if DevRio:sismember(Antak..'Rio:BanAll:',result.sender_user_id_) then
-Tkeed = 'محظور عام'
+Tkeed ='محظور عام'
 elseif DevRio:sismember(Antak..'Rio:MuteAll:',result.sender_user_id_) then
-Tkeed = 'مكتوم عام'
+Tkeed ='مكتوم عام'
 elseif DevRio:sismember(Antak..'Rio:Ban:'..msg.chat_id_,result.sender_user_id_) then
-Tkeed = 'محظور'
+Tkeed ='محظور'
 elseif DevRio:sismember(Antak..'Rio:Muted:'..msg.chat_id_,result.sender_user_id_) then
-Tkeed = 'مكتوم'
+Tkeed ='مكتوم'
 elseif DevRio:sismember(Antak..'Rio:Tkeed:'..msg.chat_id_,result.sender_user_id_) then
-Tkeed = 'مقيد'
+Tkeed ='مقيد'
 else
 Tkeed = false
 end
 if Tkeed ~= false then
-Tked = '\n᥀︙القيود ↫ '..Tkeed
+Tked ='\n᥀︙القيود ↫ '..Tkeed
 else 
-Tked = '' 
+Tked ='' 
 end
 if DevRio:sismember(Antak..'Rio:SudoBot:',result.sender_user_id_) and SudoBot(msg) then
-sudobot = '\n᥀︙عدد الكروبات ↫ '..(DevRio:get(Antak..'Rio:Sudos'..result.sender_user_id_) or 0)..'' 
+sudobot ='\n᥀︙عدد الكروبات ↫ '..(DevRio:get(Antak..'Rio:Sudos'..result.sender_user_id_) or 0)..'' 
 else 
-sudobot = '' 
+sudobot ='' 
 end
 if GetCustomTitle(result.sender_user_id_,msg.chat_id_) ~= false then
-CustomTitle = '\n᥀︙لقبه ↫ '..GetCustomTitle(result.sender_user_id_,msg.chat_id_)
+CustomTitle ='\n᥀︙لقبه ↫ '..GetCustomTitle(result.sender_user_id_,msg.chat_id_)
 else 
-CustomTitle = '' 
+CustomTitle ='' 
 end
 if data.first_name_ == false then 
 Dev_Rio(msg.chat_id_, msg.id_, 1,'᥀︙الحساب محذوف', 1, 'md')
 return false  end
 if data.username_ == false then
-Text = '᥀︙اسمه ↫ ['..data.first_name_..'](tg://user?id='..result.sender_user_id_..')\n᥀︙ايديه ↫ ❨ `'..result.sender_user_id_..'` ❩\n᥀︙رتبته ↫ '..IdRank(result.sender_user_id_, msg.chat_id_)..sudobot..'\n᥀︙رسائله ↫ ❨ '..user_msgs..' ❩\n᥀︙تفاعله ↫ '..formsgs(user_msgs)..CustomTitle..'\n᥀︙نقاطه ↫ ❨ '..user_nkt..' ❩'..Tked
+Text ='᥀︙اسمه ↫ ['..data.first_name_..'](tg://user?id='..result.sender_user_id_..')\n᥀︙ايديه ↫ ❨ `'..result.sender_user_id_..'` ❩\n᥀︙رتبته ↫ '..IdRank(result.sender_user_id_, msg.chat_id_)..sudobot..'\n᥀︙رسائله ↫ ❨ '..user_msgs..' ❩\n᥀︙تفاعله ↫ '..formsgs(user_msgs)..CustomTitle..'\n᥀︙نقاطه ↫ ❨ '..user_nkt..' ❩'..Tked
 SendText(msg.chat_id_,Text,msg.id_/2097152/0.5,'md')
 else
 Dev_Rio(msg.chat_id_, msg.id_, 1,'᥀︙معرفه ↫ [@'..data.username_..']\n᥀︙ايديه ↫ ❨ `'..result.sender_user_id_..'` ❩\n᥀︙رتبته ↫ '..IdRank(result.sender_user_id_, msg.chat_id_)..sudobot..'\n᥀︙رسائله ↫ ❨ '..user_msgs..' ❩\n᥀︙تفاعله ↫ '..formsgs(user_msgs)..CustomTitle..'\n᥀︙نقاطه ↫ ❨ '..user_nkt..' ❩'..Tked, 1, 'md')
@@ -8952,12 +8792,12 @@ Dev_Rio(msg.chat_id_, msg.id_, 1,'᥀︙*المعرف غير صحيح*', 1, 'md'
 return false  end
 if res.type_.ID == "ChannelChatInfo" then 
 if res.type_.channel_.is_supergroup_ == false then
-local ch = 'قناة'
-local chn = '᥀︙نوع الحساب ↫ ❨ '..ch..' ❩\n᥀︙الايدي ↫ ❨ `'..res.id_..'` ❩\n᥀︙المعرف ↫ ❨ [@'..username..'] ❩\n᥀︙الاسم ↫ ❨ ['..res.title_..'] ❩'
+local ch ='قناة'
+local chn ='᥀︙نوع الحساب ↫ ❨ '..ch..' ❩\n᥀︙الايدي ↫ ❨ `'..res.id_..'` ❩\n᥀︙المعرف ↫ ❨ [@'..username..'] ❩\n᥀︙الاسم ↫ ❨ ['..res.title_..'] ❩'
 Dev_Rio(msg.chat_id_, msg.id_, 1,chn, 1, 'md')
 else
-local gr = 'مجموعه'
-local grr = '᥀︙نوع الحساب ↫ ❨ '..gr..' ❩\n᥀︙الايدي ↫ ❨ '..res.id_..' ❩\n᥀︙المعرف ↫ ❨ [@'..username..'] ❩\n᥀︙الاسم ↫ ❨ ['..res.title_..'] ❩'
+local gr ='مجموعه'
+local grr ='᥀︙نوع الحساب ↫ ❨ '..gr..' ❩\n᥀︙الايدي ↫ ❨ '..res.id_..' ❩\n᥀︙المعرف ↫ ❨ [@'..username..'] ❩\n᥀︙الاسم ↫ ❨ ['..res.title_..'] ❩'
 Dev_Rio(msg.chat_id_, msg.id_, 1,grr, 1, 'md')
 end
 return false  end
@@ -8966,32 +8806,32 @@ tdcli_function ({ID = "GetUser",user_id_ = res.id_},function(arg,data)
 local user_msgs = DevRio:get(Antak..'Rio:UsersMsgs'..msg.chat_id_..':'..res.id_) or 0
 local user_nkt = tonumber(DevRio:get(Antak..'Rio:GamesNumber'..msg.chat_id_..res.id_) or 0)
 if DevRio:sismember(Antak..'Rio:BanAll:',res.id_) then
-Tkeed = 'محظور عام'
+Tkeed ='محظور عام'
 elseif DevRio:sismember(Antak..'Rio:MuteAll:',res.id_) then
-Tkeed = 'مكتوم عام'
+Tkeed ='مكتوم عام'
 elseif DevRio:sismember(Antak..'Rio:Ban:'..msg.chat_id_,res.id_) then
-Tkeed = 'محظور'
+Tkeed ='محظور'
 elseif DevRio:sismember(Antak..'Rio:Muted:'..msg.chat_id_,res.id_) then
-Tkeed = 'مكتوم'
+Tkeed ='مكتوم'
 elseif DevRio:sismember(Antak..'Rio:Tkeed:'..msg.chat_id_,res.id_) then
-Tkeed = 'مقيد'
+Tkeed ='مقيد'
 else
 Tkeed = false
 end
 if Tkeed ~= false then
-Tked = '\n᥀︙القيود ↫ '..Tkeed
+Tked ='\n᥀︙القيود ↫ '..Tkeed
 else 
-Tked = '' 
+Tked ='' 
 end
 if DevRio:sismember(Antak..'Rio:SudoBot:',res.id_) and SudoBot(msg) then
-sudobot = '\n᥀︙عدد الكروبات ↫ '..(DevRio:get(Antak..'Rio:Sudos'..res.id_) or 0)..'' 
+sudobot ='\n᥀︙عدد الكروبات ↫ '..(DevRio:get(Antak..'Rio:Sudos'..res.id_) or 0)..'' 
 else 
-sudobot = '' 
+sudobot ='' 
 end
 if GetCustomTitle(res.id_,msg.chat_id_) ~= false then
-CustomTitle = '\n᥀︙لقبه ↫ '..GetCustomTitle(res.id_,msg.chat_id_)
+CustomTitle ='\n᥀︙لقبه ↫ '..GetCustomTitle(res.id_,msg.chat_id_)
 else 
-CustomTitle = '' 
+CustomTitle ='' 
 end
 if data.first_name_ == false then
 Dev_Rio(msg.chat_id_, msg.id_, 1,'᥀︙الحساب محذوف', 1, 'md')
@@ -9012,38 +8852,38 @@ end
 local user_msgs = DevRio:get(Antak..'Rio:UsersMsgs'..msg.chat_id_..':'..iduser) or 0
 local user_nkt = tonumber(DevRio:get(Antak..'Rio:GamesNumber'..msg.chat_id_..iduser) or 0)
 if DevRio:sismember(Antak..'Rio:BanAll:',iduser) then
-Tkeed = 'محظور عام'
+Tkeed ='محظور عام'
 elseif DevRio:sismember(Antak..'Rio:MuteAll:',iduser) then
-Tkeed = 'مكتوم عام'
+Tkeed ='مكتوم عام'
 elseif DevRio:sismember(Antak..'Rio:Ban:'..msg.chat_id_,iduser) then
-Tkeed = 'محظور'
+Tkeed ='محظور'
 elseif DevRio:sismember(Antak..'Rio:Muted:'..msg.chat_id_,iduser) then
-Tkeed = 'مكتوم'
+Tkeed ='مكتوم'
 elseif DevRio:sismember(Antak..'Rio:Tkeed:'..msg.chat_id_,iduser) then
-Tkeed = 'مقيد'
+Tkeed ='مقيد'
 else
 Tkeed = false
 end
 if Tkeed ~= false then
-Tked = '\n᥀︙القيود ↫ '..Tkeed
+Tked ='\n᥀︙القيود ↫ '..Tkeed
 else 
-Tked = '' 
+Tked ='' 
 end
 if DevRio:sismember(Antak..'Rio:SudoBot:',iduser) and SudoBot(msg) then
-sudobot = '\n᥀︙عدد الكروبات ↫ '..(DevRio:get(Antak..'Rio:Sudos'..iduser) or 0)..'' 
+sudobot ='\n᥀︙عدد الكروبات ↫ '..(DevRio:get(Antak..'Rio:Sudos'..iduser) or 0)..'' 
 else 
-sudobot = '' 
+sudobot ='' 
 end
 if GetCustomTitle(iduser,msg.chat_id_) ~= false then
-CustomTitle = '\n᥀︙لقبه ↫ '..GetCustomTitle(iduser,msg.chat_id_)
+CustomTitle ='\n᥀︙لقبه ↫ '..GetCustomTitle(iduser,msg.chat_id_)
 else 
-CustomTitle = '' 
+CustomTitle ='' 
 end
 if data.first_name_ == false then
 Dev_Rio(msg.chat_id_, msg.id_, 1,'᥀︙الحساب محذوف', 1, 'md')
 return false  end
 if data.username_ == false then
-Text = '᥀︙اسمه ↫ ['..data.first_name_..'](tg://user?id='..iduser..')\n᥀︙ايديه ↫ ❨ `'..iduser..'` ❩\n᥀︙رتبته ↫ '..IdRank(data.id_, msg.chat_id_)..sudobot..'\n᥀︙رسائله ↫ ❨ '..user_msgs..' ❩\n᥀︙تفاعله ↫ '..formsgs(user_msgs)..CustomTitle..'\n᥀︙نقاطه ↫ ❨ '..user_nkt..' ❩'..Tked
+Text ='᥀︙اسمه ↫ ['..data.first_name_..'](tg://user?id='..iduser..')\n᥀︙ايديه ↫ ❨ `'..iduser..'` ❩\n᥀︙رتبته ↫ '..IdRank(data.id_, msg.chat_id_)..sudobot..'\n᥀︙رسائله ↫ ❨ '..user_msgs..' ❩\n᥀︙تفاعله ↫ '..formsgs(user_msgs)..CustomTitle..'\n᥀︙نقاطه ↫ ❨ '..user_nkt..' ❩'..Tked
 SendText(msg.chat_id_,Text,msg.id_/2097152/0.5,'md')
 else
 Dev_Rio(msg.chat_id_, msg.id_, 1,'᥀︙معرفه ↫ [@'..data.username_..']\n᥀︙ايديه ↫ ❨ `'..iduser..'` ❩\n᥀︙رتبته ↫ '..IdRank(data.id_, msg.chat_id_)..sudobot..'\n᥀︙رسائله ↫ ❨ '..user_msgs..' ❩\n᥀︙تفاعله ↫ '..formsgs(user_msgs)..CustomTitle..'\n᥀︙نقاطه ↫ ❨ '..user_nkt..' ❩'..Tked, 1, 'md')
@@ -9052,13 +8892,13 @@ end,nil)
 return false 
 end 
 --     Source Antak     --
-if text == 'كشف القيود' and tonumber(msg.reply_to_message_id_) > 0 and Admin(msg) and ChCheck(msg) then 
+if text =='كشف القيود' and tonumber(msg.reply_to_message_id_) > 0 and Admin(msg) and ChCheck(msg) then 
 function kshf_by_reply(extra, result, success)
-if DevRio:sismember(Antak..'Rio:Muted:'..msg.chat_id_,result.sender_user_id_) then muted = 'مكتوم' else muted = 'غير مكتوم' end
-if DevRio:sismember(Antak..'Rio:Ban:'..msg.chat_id_,result.sender_user_id_) then banned = 'محظور' else banned = 'غير محظور' end
-if DevRio:sismember(Antak..'Rio:BanAll:',result.sender_user_id_) then banall = 'محظور عام' else banall = 'غير محظور عام' end
-if DevRio:sismember(Antak..'Rio:MuteAll:',result.sender_user_id_) then muteall = 'مكتوم عام' else muteall = 'غير مكتوم عام' end
-if DevRio:sismember(Antak..'Rio:Tkeed:',result.sender_user_id_) then tkeed = 'مقيد' else tkeed = 'غير مقيد' end
+if DevRio:sismember(Antak..'Rio:Muted:'..msg.chat_id_,result.sender_user_id_) then muted ='مكتوم' else muted ='غير مكتوم' end
+if DevRio:sismember(Antak..'Rio:Ban:'..msg.chat_id_,result.sender_user_id_) then banned ='محظور' else banned ='غير محظور' end
+if DevRio:sismember(Antak..'Rio:BanAll:',result.sender_user_id_) then banall ='محظور عام' else banall ='غير محظور عام' end
+if DevRio:sismember(Antak..'Rio:MuteAll:',result.sender_user_id_) then muteall ='مكتوم عام' else muteall ='غير مكتوم عام' end
+if DevRio:sismember(Antak..'Rio:Tkeed:',result.sender_user_id_) then tkeed ='مقيد' else tkeed ='غير مقيد' end
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙الحظر العام ↫ '..banall..'\n᥀︙الكتم العام ↫ '..muteall..'\n᥀︙الحظر ↫ '..banned..'\n᥀︙الكتم ↫ '..muted..'\n᥀︙التقيد ↫ '..tkeed, 1, 'md')  
 end
 getMessage(msg.chat_id_, tonumber(msg.reply_to_message_id_),kshf_by_reply) 
@@ -9067,11 +8907,11 @@ if text and text:match('^كشف القيود @(.*)') and Admin(msg) and ChCheck(
 local username = text:match('^كشف القيود @(.*)') 
 function kshf_by_username(extra, result, success)
 if result.id_ then
-if DevRio:sismember(Antak..'Rio:Muted:'..msg.chat_id_,result.id_) then muted = 'مكتوم' else muted = 'غير مكتوم' end
-if DevRio:sismember(Antak..'Rio:Ban:'..msg.chat_id_,result.id_) then banned = 'محظور' else banned = 'غير محظور' end
-if DevRio:sismember(Antak..'Rio:BanAll:',result.id_) then banall = 'محظور عام' else banall = 'غير محظور عام' end
-if DevRio:sismember(Antak..'Rio:MuteAll:',result.id_) then muteall = 'مكتوم عام' else muteall = 'غير مكتوم عام' end
-if DevRio:sismember(Antak..'Rio:Tkeed:',result.id_) then tkeed = 'مقيد' else tkeed = 'غير مقيد' end
+if DevRio:sismember(Antak..'Rio:Muted:'..msg.chat_id_,result.id_) then muted ='مكتوم' else muted ='غير مكتوم' end
+if DevRio:sismember(Antak..'Rio:Ban:'..msg.chat_id_,result.id_) then banned ='محظور' else banned ='غير محظور' end
+if DevRio:sismember(Antak..'Rio:BanAll:',result.id_) then banall ='محظور عام' else banall ='غير محظور عام' end
+if DevRio:sismember(Antak..'Rio:MuteAll:',result.id_) then muteall ='مكتوم عام' else muteall ='غير مكتوم عام' end
+if DevRio:sismember(Antak..'Rio:Tkeed:',result.id_) then tkeed ='مقيد' else tkeed ='غير مقيد' end
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙الحظر العام ↫ '..banall..'\n᥀︙الكتم العام ↫ '..muteall..'\n᥀︙الحظر ↫ '..banned..'\n᥀︙الكتم ↫ '..muted..'\n᥀︙التقيد ↫ '..tkeed, 1, 'md')  
 else
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙*المعرف غير صحيح*', 1, 'md')  
@@ -9079,7 +8919,7 @@ end
 end
 resolve_username(username,kshf_by_username) 
 end
-if text == 'رفع القيود' and tonumber(msg.reply_to_message_id_) > 0 and Admin(msg) and ChCheck(msg) then 
+if text =='رفع القيود' and tonumber(msg.reply_to_message_id_) > 0 and Admin(msg) and ChCheck(msg) then 
 function unbanreply(extra, result, success) 
 if tonumber(result.sender_user_id_) == tonumber(Antak) then  
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙انا البوت وليس لدي قيود', 1, 'md')  
@@ -9246,7 +9086,7 @@ DevRio:set("Antak:New:id:"..Antak..msg.sender_user_id_,'AntakTeam')
 return "AntakTeam"
 end
 if text and DevRio:get("Antak:New:id:"..Antak..msg.sender_user_id_) then 
-if text == 'الغاء' then   
+if text =='الغاء' then   
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙تم الغاء حفظ كليشة الايدي', 1, 'md')
 DevRio:del("Antak:New:id:"..Antak..msg.sender_user_id_)
 return false
@@ -9268,7 +9108,7 @@ DevRio:set("Antak:New:id:"..Antak..msg.chat_id_..msg.sender_user_id_,'AntakTeam'
 return "AntakTeam"
 end
 if text and Manager(msg) and DevRio:get("Antak:New:id:"..Antak..msg.chat_id_..msg.sender_user_id_) then 
-if text == 'الغاء' then   
+if text =='الغاء' then   
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙تم الغاء حفظ كليشة الايدي', 1, 'md')
 DevRio:del("Antak:New:id:"..Antak..msg.chat_id_..msg.sender_user_id_)
 return false
@@ -9289,8 +9129,8 @@ return ""
 else
 if text and (text:match("^ايدي$") or text:match("^id$") or text:match("^Id$")) and ChCheck(msg) then
 function AntakTeam(extra,rio,success)
-if rio.username_ then username = '@'..rio.username_ else username = 'لا يوجد' end
-if GetCustomTitle(msg.sender_user_id_,msg.chat_id_) ~= false then CustomTitle = GetCustomTitle(msg.sender_user_id_,msg.chat_id_) else CustomTitle = 'لا يوجد' end
+if rio.username_ then username ='@'..rio.username_ else username ='لا يوجد' end
+if GetCustomTitle(msg.sender_user_id_,msg.chat_id_) ~= false then CustomTitle = GetCustomTitle(msg.sender_user_id_,msg.chat_id_) else CustomTitle ='لا يوجد' end
 local function getpro(extra, rio, success) 
 local msgsday = DevRio:get(Antak..'Rio:UsersMsgs'..Antak..os.date('%d')..':'..msg.chat_id_..':'..msg.sender_user_id_) or 0
 local edit_msg = DevRio:get(Antak..'Rio:EditMsg'..msg.chat_id_..msg.sender_user_id_) or 0
@@ -9416,7 +9256,7 @@ getUser(msg.sender_user_id_, AntakTeam)
 end
 end 
 --     Source Antak     --
-if ChatType == 'sp' or ChatType == 'gp'  then
+if ChatType =='sp' or ChatType =='gp'  then
 if Admin(msg) then
 if text and text:match("^قفل (.*)$") and ChCheck(msg) then
 local LockText = {string.match(text, "^(قفل) (.*)$")}
@@ -9535,46 +9375,46 @@ Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙تم وضع زمن التكرار ↫ '
 end
 --     Source Antak     --
 if Manager(msg) then
-if text and text == 'تفعيل الايدي بالصوره' and ChCheck(msg) then
+if text and text =='تفعيل الايدي بالصوره' and ChCheck(msg) then
 if not DevRio:get(Antak..'Rio:Lock:Id:Photo'..msg.chat_id_) then
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙الايدي بالصوره بالتاكيد مفعل', 1, 'md')
 else
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل الايدي بالصوره'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل الايدي بالصوره'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:del(Antak..'Rio:Lock:Id:Photo'..msg.chat_id_)
 end end
-if text and text == 'تعطيل الايدي بالصوره' and ChCheck(msg) then
+if text and text =='تعطيل الايدي بالصوره' and ChCheck(msg) then
 if DevRio:get(Antak..'Rio:Lock:Id:Photo'..msg.chat_id_) then
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙الايدي بالصوره بالتاكيد معطل', 1, 'md')
 else
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل الايدي بالصوره'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل الايدي بالصوره'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:set(Antak..'Rio:Lock:Id:Photo'..msg.chat_id_,true)
 end end 
 
-if text and text == 'تفعيل الايدي' and ChCheck(msg) then
+if text and text =='تفعيل الايدي' and ChCheck(msg) then
 if not DevRio:get(Antak..'Rio:Lock:Id'..msg.chat_id_) then
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙الايدي بالتاكيد مفعل ', 1, 'md')
 else
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل الايدي بنجاح'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل الايدي بنجاح'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:del(Antak..'Rio:Lock:Id'..msg.chat_id_)
 end end 
-if text and text == 'تعطيل الايدي' and ChCheck(msg) then
+if text and text =='تعطيل الايدي' and ChCheck(msg) then
 if DevRio:get(Antak..'Rio:Lock:Id'..msg.chat_id_) then
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙الايدي بالتاكيد معطل ', 1, 'md')
 else
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل الايدي بنجاح'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل الايدي بنجاح'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:set(Antak..'Rio:Lock:Id'..msg.chat_id_,true)
 end end
 end
 --     Source Antak     --
-if text == 'ضع رابط' and ChCheck(msg) or text == 'وضع رابط' and ChCheck(msg) or text == 'ضع الرابط' and ChCheck(msg) or text == 'وضع الرابط' and ChCheck(msg) then
+if text =='ضع رابط' and ChCheck(msg) or text =='وضع رابط' and ChCheck(msg) or text =='ضع الرابط' and ChCheck(msg) or text =='وضع الرابط' and ChCheck(msg) then
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙ارسل رابط المجموعه او رابط قناة المجموعه', 1, 'md')
 DevRio:setex(Antak.."Rio:Set:Groups:Links"..msg.chat_id_..msg.sender_user_id_,300,true) 
 end
-if text == 'انشاء رابط' and ChCheck(msg) or text == 'انشاء الرابط' and ChCheck(msg) then
+if text =='انشاء رابط' and ChCheck(msg) or text =='انشاء الرابط' and ChCheck(msg) then
 local LinkGp = json:decode(https.request('https://api.telegram.org/bot'..TokenBot..'/exportChatInviteLink?chat_id='..msg.chat_id_))
 if not DevRio:get(Antak.."Rio:Groups:Links"..msg.chat_id_)  then 
 if LinkGp.ok == true then 
@@ -9593,17 +9433,17 @@ end
 --     Source Antak     --
 if Admin(msg) then
 if text and text:match("^تفعيل الترحيب$") and ChCheck(msg) then
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل الترحيب بنجاح'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل الترحيب بنجاح'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:set(Antak.."Rio:Lock:Welcome"..msg.chat_id_,true)
 end
 if text and text:match("^تعطيل الترحيب$") and ChCheck(msg) then
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل الترحيب بنجاح'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل الترحيب بنجاح'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:del(Antak.."Rio:Lock:Welcome"..msg.chat_id_)
 end
 if DevRio:get(Antak..'Rio:setwelcome'..msg.chat_id_..':'..msg.sender_user_id_) then 
-if text == 'الغاء' then 
+if text =='الغاء' then 
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙تم الغاء حفظ كليشة الترحيب', 1, 'md')
 DevRio:del(Antak..'Rio:setwelcome'..msg.chat_id_..':'..msg.sender_user_id_)
 return false  
@@ -9632,7 +9472,7 @@ end
 end
 --     Source Antak     --
 if DevRio:get(Antak..'Rio:SetDescription'..msg.chat_id_..':'..msg.sender_user_id_) then  
-if text == 'الغاء' then 
+if text =='الغاء' then 
 Dev_Rio(msg.chat_id_, msg.id_, 1, "᥀︙تم الغاء حفظ الوصف", 1, 'md')
 DevRio:del(Antak..'Rio:SetDescription'..msg.chat_id_..':'..msg.sender_user_id_)
 return false  
@@ -9653,7 +9493,7 @@ DevRio:set(Antak.."Rio:SetFilters"..msg.sender_user_id_..msg.chat_id_,"add")
 return false  
 end    
 if DevRio:get(Antak.."Rio:SetFilters"..msg.sender_user_id_..msg.chat_id_) == "add" then
-if text == 'الغاء' then 
+if text =='الغاء' then 
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙تم الغاء امر المنع', 1, 'md')
 DevRio:del(Antak.."Rio:SetFilters"..msg.sender_user_id_..msg.chat_id_)  
 return false  
@@ -9669,7 +9509,7 @@ DevRio:set(Antak.."Rio:SetFilters"..msg.sender_user_id_..msg.chat_id_,"del")
 return false  
 end    
 if DevRio:get(Antak.."Rio:SetFilters"..msg.sender_user_id_..msg.chat_id_) == "del" then   
-if text == 'الغاء' then 
+if text =='الغاء' then 
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙تم الغاء امر الغاء المنع', 1, 'md')
 DevRio:del(Antak.."Rio:SetFilters"..msg.sender_user_id_..msg.chat_id_)  
 return false  
@@ -9705,12 +9545,12 @@ if not SudoBot(msg) then
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙للمطورين فقط ', 1, 'md')
 else
 local list = DevRio:smembers(Antak.."Rio:Groups")
-local t = '᥀︙مجموعات البوت ↫ ⤈ \n'
+local t ='᥀︙مجموعات البوت ↫ ⤈ \n'
 for k,v in pairs(list) do
 t = t..k.."~ : `"..v.."`\n" 
 end
 if #list == 0 then
-t = '᥀︙لا يوجد مجموعات مفعله'
+t ='᥀︙لا يوجد مجموعات مفعله'
 end
 Dev_Rio(msg.chat_id_, msg.id_, 1,t, 1, 'md')
 end end
@@ -9788,14 +9628,14 @@ else
 local Antakgp2 = (w + q)
 local Antakgp3 = #group - Antakgp2
 if q == 0 then
-Antakgp2 = ''
+Antakgp2 =''
 else
-Antakgp2 = '\n᥀︙تم حذف ↫ { '..q..' } مجموعه من البوت'
+Antakgp2 ='\n᥀︙تم حذف ↫ { '..q..' } مجموعه من البوت'
 end
 if w == 0 then
-Antakgp1 = ''
+Antakgp1 =''
 else
-Antakgp1 = '\n᥀︙تم حذف ↫ { '..w..' } مجموعه بسبب تنزيل البوت الى عضو'
+Antakgp1 ='\n᥀︙تم حذف ↫ { '..w..' } مجموعه بسبب تنزيل البوت الى عضو'
 end
 Dev_Rio(msg.chat_id_, msg.id_, 1,'᥀︙عدد الكروبات الان ↫ { '..#group..' }'..Antakgp1..Antakgp2..'\n᥀︙العدد الحقيقي الان  ↫ ( '..Antakgp3..' ) \n ', 1, 'md')
 end end
@@ -9806,12 +9646,12 @@ end
 end
 --     Source Antak     --
 if text and (text == "تفعيل التلقائي" or text == "تفعيل المسح التلقائي" or text == "تفعيل الحذف التلقائي") and Constructor(msg) and ChCheck(msg) then
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل ميزة الحذف التلقائي للميديا'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل ميزة الحذف التلقائي للميديا'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:set(Antak..'Rio:Lock:CleanNum'..msg.chat_id_,true)  
 end
 if text and (text == "تعطيل التلقائي" or text == "تعطيل المسح التلقائي" or text == "تعطيل الحذف التلقائي") and Constructor(msg) and ChCheck(msg) then
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل الحذف التلقائي للميديا'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل الحذف التلقائي للميديا'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:del(Antak..'Rio:Lock:CleanNum'..msg.chat_id_) 
 end
@@ -9850,12 +9690,12 @@ end
 end
 --     Source Antak     --
 if text == "تفعيل امسح" and Constructor(msg) then
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل امسح بنجاح'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل امسح بنجاح'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:set(Antak..'Rio:Lock:Clean'..msg.chat_id_,true)  
 end
 if text == "تعطيل امسح" and Constructor(msg) then
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل امسح بنجاح'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل امسح بنجاح'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:del(Antak..'Rio:Lock:Clean'..msg.chat_id_) 
 end
@@ -9886,12 +9726,12 @@ end
 end
 --     Source Antak     --
 if text == "تفعيل مسح الاغاني" and Constructor(msg) then
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل مسح الاغاني بنجاح'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل مسح الاغاني بنجاح'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:set(Antak..'Rio:Lock:CleanMusic'..msg.chat_id_,true)  
 end
 if text == "تعطيل مسح الاغاني" and Constructor(msg) then
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل مسح الاغاني بنجاح'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل مسح الاغاني بنجاح'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:del(Antak..'Rio:Lock:CleanMusic'..msg.chat_id_) 
 end
@@ -9941,7 +9781,7 @@ end,nil)
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙تم تنظيف 100 من الرسائل المعدله', 1, 'md')
 end
 --     Source Antak     --
-if ChatType == 'sp' or ChatType == 'gp'  then
+if ChatType =='sp' or ChatType =='gp'  then
 if Admin(msg) then
 if text and text:match("^فتح (.*)$") and ChCheck(msg) then
 local UnLockText = {string.match(text, "^(فتح) (.*)$")}
@@ -10456,12 +10296,12 @@ if text == "فحص" and ChCheck(msg) or text == "فحص البوت" and ChCheck(
 local Check = https.request('https://api.telegram.org/bot'..TokenBot..'/getChatMember?chat_id='..msg.chat_id_..'&user_id='..Antak)
 local GetInfo = JSON.decode(Check)
 if GetInfo.ok == true then
-if GetInfo.result.can_change_info == true then EDT = '✔️' else EDT = '✖️' end
-if GetInfo.result.can_delete_messages == true then DEL = '✔️' else DEL = '✖️' end
-if GetInfo.result.can_invite_users == true then INV = '✔️' else INV = '✖️' end
-if GetInfo.result.can_pin_messages == true then PIN = '✔️' else PIN = '✖️' end
-if GetInfo.result.can_restrict_members == true then BAN = '✔️' else BAN = '✖️' end
-if GetInfo.result.can_promote_members == true then VIP = '✔️' else VIP = '✖️' end 
+if GetInfo.result.can_change_info == true then EDT ='✔️' else EDT ='✖️' end
+if GetInfo.result.can_delete_messages == true then DEL ='✔️' else DEL ='✖️' end
+if GetInfo.result.can_invite_users == true then INV ='✔️' else INV ='✖️' end
+if GetInfo.result.can_pin_messages == true then PIN ='✔️' else PIN ='✖️' end
+if GetInfo.result.can_restrict_members == true then BAN ='✔️' else BAN ='✖️' end
+if GetInfo.result.can_promote_members == true then VIP ='✔️' else VIP ='✖️' end 
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙صلاحيات البوت هي ↫ ⤈\n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n᥀︙حذف الرسائل ↫ '..DEL..'\n᥀︙دعوة المستخدمين ↫ '..INV..'\n᥀︙حظر المستخدمين ↫ '..BAN..'\n᥀︙تثبيت الرسائل ↫ '..PIN..'\n᥀︙تغيير المعلومات ↫ '..EDT..'\n᥀︙اضافة مشرفين ↫ '..VIP..'\n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉', 1, 'md')
 end end
 if text and text:match("^تغير رد المطور (.*)$") and ChCheck(msg) then
@@ -10520,7 +10360,7 @@ end
 if text == "كشف البوتات" and ChCheck(msg) then 
 tdcli_function ({ID = "GetChannelMembers",channel_id_ = msg.chat_id_:gsub("-100",""),filter_ = {ID = "ChannelMembersBots"},offset_ = 0,limit_ = 100 },function(extra,result,success)
 local admins = result.members_  
-text = '᥀︙*قائمة البوتات* ↫ ⤈ \n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n'
+text ='᥀︙*قائمة البوتات* ↫ ⤈ \n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n'
 local n = 0
 local t = 0
 for i=0 , #admins do 
@@ -10528,25 +10368,25 @@ n = (n + 1)
 tdcli_function ({ID = "GetUser",user_id_ = admins[i].user_id_
 },function(arg,data) 
 if result.members_[i].status_.ID == "ChatMemberStatusMember" then  
-ab = ''
+ab =''
 elseif result.members_[i].status_.ID == "ChatMemberStatusEditor" then  
 t = t + 1
-ab = ' ✯'
+ab =' ✯'
 end
 text = text.."~ [@"..data.username_..']'..ab.."\n"
 if #admins == 0 then
 Dev_Rio(msg.chat_id_, msg.id_, 1, "᥀︙*لاتوجد بوتات هنا*", 1, 'md')
 return false end
 if #admins == i then 
-local a = '┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n᥀︙*عدد البوتات هنا* ↫ '..n..'\n'
-local f = '᥀︙*عدد البوتات المرفوعه* ↫ '..t..'\n᥀︙*ملاحضه علامة الـ*✯ *تعني ان البوت ادمن في هذه المجموعه*'
+local a ='┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n᥀︙*عدد البوتات هنا* ↫ '..n..'\n'
+local f ='᥀︙*عدد البوتات المرفوعه* ↫ '..t..'\n᥀︙*ملاحضه علامة الـ*✯ *تعني ان البوت ادمن في هذه المجموعه*'
 Dev_Rio(msg.chat_id_, msg.id_, 1, text..a..f, 1, 'md')
 end
 end,nil)
 end
 end,nil)
 end
-if text == 'حذف البوتات' and ChCheck(msg) or text == 'طرد البوتات' and ChCheck(msg) or text == 'مسح البوتات' and ChCheck(msg) then
+if text =='حذف البوتات' and ChCheck(msg) or text =='طرد البوتات' and ChCheck(msg) or text =='مسح البوتات' and ChCheck(msg) then
 tdcli_function ({ ID = "GetChannelMembers",channel_id_ = msg.chat_id_:gsub("-100",""),filter_ = {ID = "ChannelMembersBots"},offset_ = 0,limit_ = 100 },function(arg,dp)  
 local admins = dp.members_  
 local x = 0
@@ -10575,105 +10415,87 @@ if text and text:match("^حذف (.*)$") or text and text:match("^مسح (.*)$") 
 local txts = {string.match(text, "^(حذف) (.*)$")}
 local txtss = {string.match(text, "^(مسح) (.*)$")}
 if Sudo(msg) then
-if txts[2] == 'الاساسيين' or txtss[2] == 'الاساسيين' or txts[2] == 'المطورين الاساسيين' or txtss[2] == 'المطورين الاساسيين' then
+if txts[2] =='الاساسيين' or txtss[2] =='الاساسيين' or txts[2] =='المطورين الاساسيين' or txtss[2] =='المطورين الاساسيين' then
 DevRio:del(Antak..'Rio:RioSudo:')
 ReplyStatus(msg,msg.sender_user_id_,"ReplyBy","᥀︙تم حذف المطورين الاساسيين")  
 end
 end
 if RioSudo(msg) then
-if txts[2] == 'الثانويين' or txtss[2] == 'الثانويين' or txts[2] == 'المطورين الثانويين' or txtss[2] == 'المطورين الثانويين' then
+if txts[2] =='الثانويين' or txtss[2] =='الثانويين' or txts[2] =='المطورين الثانويين' or txtss[2] =='المطورين الثانويين' then
 DevRio:del(Antak..'Rio:SecondSudo:')
 ReplyStatus(msg,msg.sender_user_id_,"ReplyBy","᥀︙تم حذف المطورين الثانويين")  
 end
 end
 if SecondSudo(msg) then 
-if txts[2] == 'المطورين' or txtss[2] == 'المطورين' then
+if txts[2] =='المطورين' or txtss[2] =='المطورين' then
 DevRio:del(Antak..'Rio:SudoBot:')
 ReplyStatus(msg,msg.sender_user_id_,"ReplyBy","᥀︙تم حذف المطورين")  
 end
-if txts[2] == 'قائمه العام' or txtss[2] == 'قائمه العام' then
+if txts[2] =='قائمه العام' or txtss[2] =='قائمه العام' then
 DevRio:del(Antak..'Rio:BanAll:')
 DevRio:del(Antak..'Rio:MuteAll:')
 ReplyStatus(msg,msg.sender_user_id_,"ReplyBy","᥀︙تم حذف قائمة العام")  
 end
 end
-if SecondSudoGp(msg) then
-if txts[2] == 'مطورين المجموعه' or txtss[2] == 'مطورين المجموعه' then
-ReplyStatus(msg,msg.sender_user_id_,"ReplyBy","᥀︙تم حذف مطورين المجموعه")  
-DevRio:del(Antak..'Rio:SudoBotGp:'..msg.chat_id_)
-end
-end
-if RioSudoGp(msg) then
-if txts[2] == 'ثانويين المجموعه' or txtss[2] == 'ثانويين المجموعه' then
-ReplyStatus(msg,msg.sender_user_id_,"ReplyBy","᥀︙تم حذف ثانويين المجموعه")  
-DevRio:del(Antak..'Rio:SecondSudoGp:'..msg.chat_id_)
-end
-end
-if RioSudo(msg) then
-if txts[2] == 'اساسيين المجموعه' or txtss[2] == 'اساسيين المجموعه' then
-ReplyStatus(msg,msg.sender_user_id_,"ReplyBy","᥀︙تم حذف اساسيين المجموعه")  
-DevRio:del(Antak..'Rio:RioSudoGp:'..msg.chat_id_)
-end
-end
 if SudoBot(msg) then
-if txts[2] == 'المالكين' or txtss[2] == 'المالكين' then
+if txts[2] =='المالكين' or txtss[2] =='المالكين' then
 ReplyStatus(msg,msg.sender_user_id_,"ReplyBy","᥀︙تم حذف الماالكين")  
 DevRio:del(Antak..'Rio:Owner:'..msg.chat_id_)
 end
 end
 if SudoBot(msg) then
-if txts[2] == 'المالكين' or txtss[2] == 'المالكين' then
+if txts[2] =='المالكين' or txtss[2] =='المالكين' then
 ReplyStatus(msg,msg.sender_user_id_,"ReplyBy","᥀︙تم حذف الماالكين")  
 DevRio:del(Antak..'Rio:Owner:'..msg.chat_id_)
 end
 end
 if Owner(msg) then
-if txts[2] == 'المنشئين الاساسيين' or txtss[2] == 'المنشئين الاساسيين' then
+if txts[2] =='المنشئين الاساسيين' or txtss[2] =='المنشئين الاساسيين' then
 ReplyStatus(msg,msg.sender_user_id_,"ReplyBy","᥀︙تم حذف المنشئين الاساسيين")  
 DevRio:del(Antak..'Rio:BasicConstructor:'..msg.chat_id_)
 end
 end
 if BasicConstructor(msg) then
-if txts[2] == 'المنشئين' or txtss[2] == 'المنشئين' then
+if txts[2] =='المنشئين' or txtss[2] =='المنشئين' then
 ReplyStatus(msg,msg.sender_user_id_,"ReplyBy","᥀︙تم حذف المنشئين")  
 DevRio:del(Antak..'Rio:Constructor:'..msg.chat_id_)
 end end
 if Constructor(msg) then
-if txts[2] == 'المدراء' or txtss[2] == 'المدراء' then
+if txts[2] =='المدراء' or txtss[2] =='المدراء' then
 ReplyStatus(msg,msg.sender_user_id_,"ReplyBy","᥀︙تم حذف المدراء")  
 DevRio:del(Antak..'Rio:Managers:'..msg.chat_id_)
 end 
-if txts[2] == 'المنظفين' or txtss[2] == 'المنظفين' then
+if txts[2] =='المنظفين' or txtss[2] =='المنظفين' then
 ReplyStatus(msg,msg.sender_user_id_,"ReplyBy","᥀︙تم حذف المنظفين")  
 DevRio:del(Antak..'Rio:Cleaner:'..msg.chat_id_)
 end end
 if Manager(msg) then
-if txts[2] == 'الادمنيه' or txtss[2] == 'الادمنيه' then
+if txts[2] =='الادمنيه' or txtss[2] =='الادمنيه' then
 ReplyStatus(msg,msg.sender_user_id_,"ReplyBy","᥀︙تم حذف الادمنيه")  
 DevRio:del(Antak..'Rio:Admins:'..msg.chat_id_)
 end
 end
-if txts[2] == 'قوانين' or txtss[2] == 'قوانين' then
+if txts[2] =='قوانين' or txtss[2] =='قوانين' then
 ReplyStatus(msg,msg.sender_user_id_,"ReplyBy","᥀︙تم حذف القوانين")  
 DevRio:del(Antak..'Rio:rules'..msg.chat_id_)
 end
-if txts[2] == 'المطايه' or txtss[2] == 'المطايه' then
+if txts[2] =='المطايه' or txtss[2] =='المطايه' then
 ReplyStatus(msg,msg.sender_user_id_,"ReplyBy","᥀︙تم حذف المطايه")  
 DevRio:del(Antak..'User:Donky:'..msg.chat_id_)
 end
-if txts[2] == 'الرابط' or txtss[2] == 'الرابط' then
+if txts[2] =='الرابط' or txtss[2] =='الرابط' then
 ReplyStatus(msg,msg.sender_user_id_,"ReplyBy","᥀︙تم حذف رابط المجموعه")  
 DevRio:del(Antak.."Rio:Groups:Links"..msg.chat_id_)
 end
-if txts[2] == 'المميزين' or txtss[2] == 'المميزين' then
+if txts[2] =='المميزين' or txtss[2] =='المميزين' then
 ReplyStatus(msg,msg.sender_user_id_,"ReplyBy","᥀︙تم حذف المميزين")  
 DevRio:del(Antak..'Rio:VipMem:'..msg.chat_id_)
 end
-if txts[2] == 'المكتومين' or txtss[2] == 'المكتومين' then
+if txts[2] =='المكتومين' or txtss[2] =='المكتومين' then
 DevRio:del(Antak..'Rio:Muted:'..msg.chat_id_)
 ReplyStatus(msg,msg.sender_user_id_,"ReplyBy","᥀︙تم حذف المكتومين")  
 end
-if txts[2] == 'المقيدين' or txtss[2] == 'المقيدين' then     
+if txts[2] =='المقيدين' or txtss[2] =='المقيدين' then     
 local List = DevRio:smembers(Antak..'Rio:Tkeed:'..msg.chat_id_)
 for k,v in pairs(List) do   
 HTTPS.request("https://api.telegram.org/bot"..TokenBot.."/restrictChatMember?chat_id="..msg.chat_id_.."&user_id="..v.."&can_send_messages=True&can_send_media_messages=True&can_send_other_messages=True&can_add_web_page_previews=True") 
@@ -10681,22 +10503,22 @@ DevRio:srem(Antak..'Rio:Tkeed:'..msg.chat_id_, v)
 end 
 ReplyStatus(msg,msg.sender_user_id_,"ReplyBy","᥀︙تم حذف المقيدين")  
 end
-if txts[2] == 'قوائم المنع' or txtss[2] == 'قوائم المنع' then
+if txts[2] =='قوائم المنع' or txtss[2] =='قوائم المنع' then
 ReplyStatus(msg,msg.sender_user_id_,"ReplyBy","᥀︙تم حذف قوائم المنع")  
 DevRio:del(Antak..'Rio:Filters:'..msg.chat_id_)
 DevRio:del(Antak.."Rio:FilterAnimation"..msg.chat_id_)
 DevRio:del(Antak.."Rio:FilterPhoto"..msg.chat_id_)
 DevRio:del(Antak.."Rio:FilterSteckr"..msg.chat_id_)
 end
-if txts[2] == 'قائمه منع المتحركات' or txtss[2] == 'قائمه منع المتحركات' then     
+if txts[2] =='قائمه منع المتحركات' or txtss[2] =='قائمه منع المتحركات' then     
 DevRio:del(Antak.."Rio:FilterAnimation"..msg.chat_id_)
 ReplyStatus(msg,msg.sender_user_id_,"ReplyBy","᥀︙تم حذف قائمة منع المتحركات")  
 end
-if txts[2] == 'قائمه منع الصور' or txtss[2] == 'قائمه منع الصور' then     
+if txts[2] =='قائمه منع الصور' or txtss[2] =='قائمه منع الصور' then     
 DevRio:del(Antak.."Rio:FilterPhoto"..msg.chat_id_)
 ReplyStatus(msg,msg.sender_user_id_,"ReplyBy","᥀︙تم حذف قائمة منع الصور")  
 end
-if txts[2] == 'قائمه منع الملصقات' or txtss[2] == 'قائمه منع الملصقات' then     
+if txts[2] =='قائمه منع الملصقات' or txtss[2] =='قائمه منع الملصقات' then     
 DevRio:del(Antak.."Rio:FilterSteckr"..msg.chat_id_)
 ReplyStatus(msg,msg.sender_user_id_,"ReplyBy","᥀︙تم حذف قائمة منع الملصقات")  
 end
@@ -10721,12 +10543,12 @@ local Managers = DevRio:smembers(Antak..'Rio:Managers:'..msg.chat_id_)
 local admins = DevRio:smembers(Antak..'Rio:Admins:'..msg.chat_id_)
 local vipmem = DevRio:smembers(Antak..'Rio:VipMem:'..msg.chat_id_)
 local donky = DevRio:smembers(Antak..'User:Donky:'..msg.chat_id_)
-if #basicconstructor ~= 0 then basicconstructort = 'المنشئين الاساسيين • ' else basicconstructort = '' end
-if #constructor ~= 0 then constructort = 'المنشئين • ' else constructort = '' end
-if #Managers ~= 0 then Managerst = 'المدراء • ' else Managerst = '' end
-if #admins ~= 0 then adminst = 'الادمنيه • ' else adminst = '' end
-if #vipmem ~= 0 then vipmemt = 'المميزين • ' else vipmemt = '' end
-if #donky ~= 0 then donkyt = 'المطايه • ' else donkyt = '' end
+if #basicconstructor ~= 0 then basicconstructort ='المنشئين الاساسيين • ' else basicconstructort ='' end
+if #constructor ~= 0 then constructort ='المنشئين • ' else constructort ='' end
+if #Managers ~= 0 then Managerst ='المدراء • ' else Managerst ='' end
+if #admins ~= 0 then adminst ='الادمنيه • ' else adminst ='' end
+if #vipmem ~= 0 then vipmemt ='المميزين • ' else vipmemt ='' end
+if #donky ~= 0 then donkyt ='المطايه • ' else donkyt ='' end
 if #basicconstructor ~= 0 or #constructor ~= 0 or #Managers ~= 0 or #admins ~= 0 or #vipmem ~= 0 or #donky ~= 0 then 
 DevRio:del(Antak..'Rio:BasicConstructor:'..msg.chat_id_)
 DevRio:del(Antak..'Rio:Constructor:'..msg.chat_id_)
@@ -10771,35 +10593,35 @@ else
 lock_bots = "مفتوحه"    
 end
 --     Source Antak     --
-if DevRio:get(Antak..'Rio:Lock:Text'..msg.chat_id_) then mute_text = 'مقفله' else mute_text = 'مفتوحه'end
-if DevRio:get(Antak..'Rio:Lock:Photo'..msg.chat_id_) then mute_photo = 'مقفله' else mute_photo = 'مفتوحه' end
-if DevRio:get(Antak..'Rio:Lock:Videos'..msg.chat_id_) then mute_video = 'مقفله' else mute_video = 'مفتوحه' end
-if DevRio:get(Antak..'Rio:Lock:Gifs'..msg.chat_id_) then mute_gifs = 'مقفله' else mute_gifs = 'مفتوحه' end
-if DevRio:get(Antak..'Rio:Lock:Music'..msg.chat_id_) then mute_music = 'مقفله' else mute_music = 'مفتوحه' end
-if DevRio:get(Antak..'Rio:Lock:Inline'..msg.chat_id_) then mute_in = 'مقفله' else mute_in = 'مفتوحه' end
-if DevRio:get(Antak..'Rio:Lock:Voice'..msg.chat_id_) then mute_voice = 'مقفله' else mute_voice = 'مفتوحه' end
-if DevRio:get(Antak..'Rio:Lock:EditMsgs'..msg.chat_id_) then mute_edit = 'مقفله' else mute_edit = 'مفتوحه' end
-if DevRio:get(Antak..'Rio:Lock:Links'..msg.chat_id_) then mute_links = 'مقفله' else mute_links = 'مفتوحه' end
-if DevRio:get(Antak..'Rio:Lock:Pin'..msg.chat_id_) then lock_pin = 'مقفله' else lock_pin = 'مفتوحه' end
-if DevRio:get(Antak..'Rio:Lock:Stickers'..msg.chat_id_) then lock_sticker = 'مقفله' else lock_sticker = 'مفتوحه' end
-if DevRio:get(Antak..'Rio:Lock:TagServr'..msg.chat_id_) then lock_tgservice = 'مقفله' else lock_tgservice = 'مفتوحه' end
-if DevRio:get(Antak..'Rio:Lock:WebLinks'..msg.chat_id_) then lock_wp = 'مقفله' else lock_wp = 'مفتوحه' end
-if DevRio:get(Antak..'Rio:Lock:Hashtak'..msg.chat_id_) then lock_htag = 'مقفله' else lock_htag = 'مفتوحه' end
-if DevRio:get(Antak..'Rio:Lock:Tags'..msg.chat_id_) then lock_tag = 'مقفله' else lock_tag = 'مفتوحه' end
-if DevRio:get(Antak..'Rio:Lock:Location'..msg.chat_id_) then lock_location = 'مقفله' else lock_location = 'مفتوحه' end
-if DevRio:get(Antak..'Rio:Lock:Contact'..msg.chat_id_) then lock_contact = 'مقفله' else lock_contact = 'مفتوحه' end
-if DevRio:get(Antak..'Rio:Lock:English'..msg.chat_id_) then lock_english = 'مقفله' else lock_english = 'مفتوحه' end
-if DevRio:get(Antak..'Rio:Lock:Arabic'..msg.chat_id_) then lock_arabic = 'مقفله' else lock_arabic = 'مفتوحه' end
-if DevRio:get(Antak..'Rio:Lock:Forwards'..msg.chat_id_) then lock_forward = 'مقفله' else lock_forward = 'مفتوحه' end
-if DevRio:get(Antak..'Rio:Lock:Document'..msg.chat_id_) then lock_file = 'مقفله' else lock_file = 'مفتوحه' end
-if DevRio:get(Antak..'Rio:Lock:Markdown'..msg.chat_id_) then markdown = 'مقفله' else markdown = 'مفتوحه' end
-if DevRio:get(Antak..'Rio:Lock:Spam'..msg.chat_id_) then lock_spam = 'مقفله' else lock_spam = 'مفتوحه' end
-if DevRio:get(Antak..'Rio:Lock:Join'..msg.chat_id_) then lock_Join = 'مقفل' else lock_Join = 'مفتوح' end
-if DevRio:get(Antak.."Rio:Lock:Welcome"..msg.chat_id_) then send_welcome = 'مقفله' else send_welcome = 'مفتوحه' end
-if DevRio:get(Antak..'Rio:Lock:Fshar'..msg.chat_id_) then lock_fshar = 'مفتوح' else lock_fshar = 'مقفل' end
-if DevRio:get(Antak..'Rio:Lock:Kfr'..msg.chat_id_) then lock_kaf = 'مفتوح' else lock_kaf = 'مقفل' end
-if DevRio:get(Antak..'Rio:Lock:Taf'..msg.chat_id_) then lock_taf = 'مفتوحه' else lock_taf = 'مقفله' end
-if DevRio:get(Antak..'Rio:Lock:Farsi'..msg.chat_id_) then lock_farsi = 'مقفله' else lock_farsi = 'مفتوحه' end
+if DevRio:get(Antak..'Rio:Lock:Text'..msg.chat_id_) then mute_text ='مقفله' else mute_text ='مفتوحه'end
+if DevRio:get(Antak..'Rio:Lock:Photo'..msg.chat_id_) then mute_photo ='مقفله' else mute_photo ='مفتوحه' end
+if DevRio:get(Antak..'Rio:Lock:Videos'..msg.chat_id_) then mute_video ='مقفله' else mute_video ='مفتوحه' end
+if DevRio:get(Antak..'Rio:Lock:Gifs'..msg.chat_id_) then mute_gifs ='مقفله' else mute_gifs ='مفتوحه' end
+if DevRio:get(Antak..'Rio:Lock:Music'..msg.chat_id_) then mute_music ='مقفله' else mute_music ='مفتوحه' end
+if DevRio:get(Antak..'Rio:Lock:Inline'..msg.chat_id_) then mute_in ='مقفله' else mute_in ='مفتوحه' end
+if DevRio:get(Antak..'Rio:Lock:Voice'..msg.chat_id_) then mute_voice ='مقفله' else mute_voice ='مفتوحه' end
+if DevRio:get(Antak..'Rio:Lock:EditMsgs'..msg.chat_id_) then mute_edit ='مقفله' else mute_edit ='مفتوحه' end
+if DevRio:get(Antak..'Rio:Lock:Links'..msg.chat_id_) then mute_links ='مقفله' else mute_links ='مفتوحه' end
+if DevRio:get(Antak..'Rio:Lock:Pin'..msg.chat_id_) then lock_pin ='مقفله' else lock_pin ='مفتوحه' end
+if DevRio:get(Antak..'Rio:Lock:Stickers'..msg.chat_id_) then lock_sticker ='مقفله' else lock_sticker ='مفتوحه' end
+if DevRio:get(Antak..'Rio:Lock:TagServr'..msg.chat_id_) then lock_tgservice ='مقفله' else lock_tgservice ='مفتوحه' end
+if DevRio:get(Antak..'Rio:Lock:WebLinks'..msg.chat_id_) then lock_wp ='مقفله' else lock_wp ='مفتوحه' end
+if DevRio:get(Antak..'Rio:Lock:Hashtak'..msg.chat_id_) then lock_htag ='مقفله' else lock_htag ='مفتوحه' end
+if DevRio:get(Antak..'Rio:Lock:Tags'..msg.chat_id_) then lock_tag ='مقفله' else lock_tag ='مفتوحه' end
+if DevRio:get(Antak..'Rio:Lock:Location'..msg.chat_id_) then lock_location ='مقفله' else lock_location ='مفتوحه' end
+if DevRio:get(Antak..'Rio:Lock:Contact'..msg.chat_id_) then lock_contact ='مقفله' else lock_contact ='مفتوحه' end
+if DevRio:get(Antak..'Rio:Lock:English'..msg.chat_id_) then lock_english ='مقفله' else lock_english ='مفتوحه' end
+if DevRio:get(Antak..'Rio:Lock:Arabic'..msg.chat_id_) then lock_arabic ='مقفله' else lock_arabic ='مفتوحه' end
+if DevRio:get(Antak..'Rio:Lock:Forwards'..msg.chat_id_) then lock_forward ='مقفله' else lock_forward ='مفتوحه' end
+if DevRio:get(Antak..'Rio:Lock:Document'..msg.chat_id_) then lock_file ='مقفله' else lock_file ='مفتوحه' end
+if DevRio:get(Antak..'Rio:Lock:Markdown'..msg.chat_id_) then markdown ='مقفله' else markdown ='مفتوحه' end
+if DevRio:get(Antak..'Rio:Lock:Spam'..msg.chat_id_) then lock_spam ='مقفله' else lock_spam ='مفتوحه' end
+if DevRio:get(Antak..'Rio:Lock:Join'..msg.chat_id_) then lock_Join ='مقفل' else lock_Join ='مفتوح' end
+if DevRio:get(Antak.."Rio:Lock:Welcome"..msg.chat_id_) then send_welcome ='مقفله' else send_welcome ='مفتوحه' end
+if DevRio:get(Antak..'Rio:Lock:Fshar'..msg.chat_id_) then lock_fshar ='مفتوح' else lock_fshar ='مقفل' end
+if DevRio:get(Antak..'Rio:Lock:Kfr'..msg.chat_id_) then lock_kaf ='مفتوح' else lock_kaf ='مقفل' end
+if DevRio:get(Antak..'Rio:Lock:Taf'..msg.chat_id_) then lock_taf ='مفتوحه' else lock_taf ='مقفله' end
+if DevRio:get(Antak..'Rio:Lock:Farsi'..msg.chat_id_) then lock_farsi ='مقفله' else lock_farsi ='مفتوحه' end
 local Flood_Num = DevRio:hget(Antak.."Rio:Spam:Group:User"..msg.chat_id_,"Num:Spam") or 5
 --     Source Antak     --
 local TXTE = "᥀︙اعدادات المجموعه ↫ ⤈\n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n"
@@ -10846,12 +10668,12 @@ Dev_Rio(msg.chat_id_,0, 1, txt[2], 1, 'md')
 DeleteMessage(msg.chat_id_,{[0] = msg.id_})
 end
 if text == "تفعيل انطق" and Manager(msg) and ChCheck(msg) then
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل ميزة انطق'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل ميزة انطق'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:del(Antak..'Rio:Antk:Rio'..msg.chat_id_) 
 end
 if text == "تعطيل انطق" and Manager(msg) and ChCheck(msg) then
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل ميزة انطق'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل ميزة انطق'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:set(Antak..'Rio:Antk:Rio'..msg.chat_id_,true)  
 end
@@ -10866,7 +10688,7 @@ end
 end
 --     Source Antak     --
 if DevRio:get(Antak..'Rio:setrules'..msg.chat_id_..':'..msg.sender_user_id_) then 
-if text == 'الغاء' then 
+if text =='الغاء' then 
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙تم الغاء حفظ قوانين المجموعه', 1, 'md')
 DevRio:del(Antak..'Rio:setrules'..msg.chat_id_..':'..msg.sender_user_id_)
 return false  
@@ -10886,7 +10708,7 @@ local rules = DevRio:get(Antak..'Rio:rules'..msg.chat_id_)
 Dev_Rio(msg.chat_id_, msg.id_, 1, rules, 1, nil)
 end
 --     Source Antak     --
-if text == 'رقمي' and ChCheck(msg) then
+if text =='رقمي' and ChCheck(msg) then
 tdcli_function({ID="GetUser",user_id_=msg.sender_user_id_},function(extra,result,success)
 if result.phone_number_  then
 MyNumber = "᥀︙رقمك ↫ +"..result.phone_number_
@@ -10898,17 +10720,17 @@ end,nil)
 end
 --     Source Antak     --
 if text == "تفعيل الزخرفه" and Manager(msg) and ChCheck(msg) then
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل الزخرفه بنجاح'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل الزخرفه بنجاح'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:del(Antak..'Rio:Zrf:Rio'..msg.chat_id_) 
 end
 if text == "تعطيل الزخرفه" and Manager(msg) and ChCheck(msg) then
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل الزخرفه بنجاح'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل الزخرفه بنجاح'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:set(Antak..'Rio:Zrf:Rio'..msg.chat_id_,true)  
 end
 if DevRio:get(Antak..'Zrf:Rio'..msg.chat_id_..msg.sender_user_id_) then 
-if text and text == 'الغاء' then 
+if text and text =='الغاء' then 
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙تم الغاء امر الزخرفه', 1, 'md')
 DevRio:del(Antak..'Zrf:Rio'..msg.chat_id_..msg.sender_user_id_)
 return false  
@@ -10926,7 +10748,7 @@ DevRio:del(Antak..'Zrf:Rio'..msg.chat_id_..msg.sender_user_id_)
 return false   
 end
 if not DevRio:get(Antak..'Rio:Zrf:Rio'..msg.chat_id_) then
-if text == 'زخرفه' and ChCheck(msg) or text == 'الزخرفه' and ChCheck(msg) then  
+if text =='زخرفه' and ChCheck(msg) or text =='الزخرفه' and ChCheck(msg) then  
 DevRio:setex(Antak.."Zrf:Rio"..msg.chat_id_..msg.sender_user_id_,300,true)
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙ارسل لي الكلمه لزخرفتها \nيمكنك الزخرفة باللغه { en } ~ { ar } ', 1, 'md')
 end
@@ -10947,12 +10769,12 @@ end
 end
 --     Source Antak     --
 if text == "تفعيل الابراج" and Manager(msg) and ChCheck(msg) then
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل الابراج بنجاح'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل الابراج بنجاح'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:del(Antak..'Rio:Brg:Rio'..msg.chat_id_) 
 end
 if text == "تعطيل الابراج" and Manager(msg) and ChCheck(msg) then
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل الابراج بنجاح'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل الابراج بنجاح'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:set(Antak..'Rio:Brg:Rio'..msg.chat_id_,true)  
 end
@@ -10967,12 +10789,12 @@ end
 end
 --     Source Antak     --
 if text and (text == "تفعيل اوامر النسب" or text == "تفعيل نسبه الحب" or text == "تفعيل نسبه الكره" or text == "تفعيل نسبه الرجوله" or text == "تفعيل نسبه الانوثه" or text == "تفعيل نسبه الغباء") and Manager(msg) and ChCheck(msg) then
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل اوامر النسب'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل اوامر النسب'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:del(Antak..'Rio:Nsba:Rio'..msg.chat_id_) 
 end
 if text and (text == "تعطيل اوامر النسب" or text == "تعطيل نسبه الحب" or text == "تعطيل نسبه الكره" or text == "تعطيل نسبه الرجوله" or text == "تعطيل نسبه الانوثه" or text == "تعطيل نسبه الغباء") and Manager(msg) and ChCheck(msg) then
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل اوامر النسب'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل اوامر النسب'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:set(Antak..'Rio:Nsba:Rio'..msg.chat_id_,true)  
 end
@@ -10983,7 +10805,7 @@ Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙قم بارسل اسمين لحساب �
 end
 end
 if text and text ~= "نسبه الحب" and text ~= "نسبة الحب" and DevRio:get(Antak..'LoveNsba:Rio'..msg.chat_id_..msg.sender_user_id_) then
-if text and text == 'الغاء' then 
+if text and text =='الغاء' then 
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙تم الغاء امر نسبة الحب ', 1, 'md')
 DevRio:del(Antak..'LoveNsba:Rio'..msg.chat_id_..msg.sender_user_id_) 
 return false 
@@ -11000,7 +10822,7 @@ Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙قم بارسل اسمين لحساب �
 end
 end
 if text and text ~= "نسبه الخيانه" and text ~= "نسبة الخيانه" and text ~= "↫ نسبه الخيانه ᥀" and DevRio:get(Antak..'RyNsba:Rio'..msg.chat_id_..msg.sender_user_id_) then
-if text and text == 'الغاء' then 
+if text and text =='الغاء' then 
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙تم الغاء امر نسبة الخيانه ', 1, 'md')
 DevRio:del(Antak..'RyNsba:Rio'..msg.chat_id_..msg.sender_user_id_) 
 return false 
@@ -11017,7 +10839,7 @@ Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙قم بارسل اسم الشخص لق�
 end
 end
 if text and text ~= "نسبه الجمال" and text ~= "نسبة الجمال" and text ~= "↫ نسبه الجمال ᥀" and DevRio:get(Antak..'JNsba:Rio'..msg.chat_id_..msg.sender_user_id_) then
-if text and text == 'الغاء' then 
+if text and text =='الغاء' then 
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙تم الغاء امر نسبة الجمال ', 1, 'md')
 DevRio:del(Antak..'JNsba:Rio'..msg.chat_id_..msg.sender_user_id_) 
 return false 
@@ -11034,7 +10856,7 @@ Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙قم بارسل اسمين لحساب �
 end
 end
 if text and text ~= "نسبه الكره" and text ~= "نسبة الكره" and text ~= "↫ نسبه الكره ᥀" and DevRio:get(Antak..'HataNsba:Rio'..msg.chat_id_..msg.sender_user_id_) then
-if text and text == 'الغاء' then 
+if text and text =='الغاء' then 
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙تم الغاء امر نسبة الكره ', 1, 'md')
 DevRio:del(Antak..'HataNsba:Rio'..msg.chat_id_..msg.sender_user_id_) 
 return false 
@@ -11051,7 +10873,7 @@ Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙قم بارسل اسم الشخص لق�
 end
 end
 if text and text ~= "نسبه الرجوله" and text ~= "نسبة الرجوله" and text ~= "نسبه رجوله" and text ~= "نسبة رجوله" and text ~= "↫ نسبه الرجوله ᥀" and DevRio:get(Antak..'RjolaNsba:Rio'..msg.chat_id_..msg.sender_user_id_) then
-if text and text == 'الغاء' then 
+if text and text =='الغاء' then 
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙تم الغاء امر نسبة الرجوله ', 1, 'md')
 DevRio:del(Antak..'RjolaNsba:Rio'..msg.chat_id_..msg.sender_user_id_) 
 return false 
@@ -11068,7 +10890,7 @@ Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙قم بارسل اسم الشخص لق�
 end
 end
 if text and text ~= "نسبه الانوثه" and text ~= "نسبة الانوثه" and text ~= "نسبه انوثه" and text ~= "نسبة انوثه" and text ~= "↫ نسبه الانوثه ᥀" and DevRio:get(Antak..'AnothaNsba:Rio'..msg.chat_id_..msg.sender_user_id_) then
-if text and text == 'الغاء' then 
+if text and text =='الغاء' then 
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙تم الغاء امر نسبة الانوثه ', 1, 'md')
 DevRio:del(Antak..'AnothaNsba:Rio'..msg.chat_id_..msg.sender_user_id_) 
 return false 
@@ -11085,7 +10907,7 @@ Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙قم بارسل اسم الشخص لق�
 end
 end
 if text and text ~= "نسبه الغباء" and text ~= "نسبة الغباء" and text ~= "↫ نسبه الغباء ᥀" and DevRio:get(Antak..'StupidNsba:Rio'..msg.chat_id_..msg.sender_user_id_) then
-if text and text == 'الغاء' then 
+if text and text =='الغاء' then 
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙تم الغاء امر نسبة الغباء ', 1, 'md')
 DevRio:del(Antak..'StupidNsba:Rio'..msg.chat_id_..msg.sender_user_id_) 
 return false 
@@ -11097,12 +10919,12 @@ return false
 end
 --     Source Antak     --
 if text == "تفعيل حساب العمر" and Manager(msg) and ChCheck(msg) then
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل حساب العمر'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل حساب العمر'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:del(Antak..'Rio:Age:Rio'..msg.chat_id_) 
 end
 if text == "تعطيل حساب العمر" and Manager(msg) and ChCheck(msg) then
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل حساب العمر'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل حساب العمر'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:set(Antak..'Rio:Age:Rio'..msg.chat_id_,true)  
 end
@@ -11117,17 +10939,17 @@ end
 end
 --     Source Antak     --
 if text == "تفعيل معاني الاسماء" and Manager(msg) and ChCheck(msg) then
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل معاني الاسماء'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل معاني الاسماء'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:del(Antak..'Rio:Mean:Rio'..msg.chat_id_) 
 end
 if text == "تعطيل معاني الاسماء" and Manager(msg) and ChCheck(msg) then
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل معاني الاسماء'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل معاني الاسماء'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:set(Antak..'Rio:Mean:Rio'..msg.chat_id_,true)  
 end
 if not DevRio:get(Antak..'Rio:Mean:Rio'..msg.chat_id_) then
-if text and text:match("^معنى الاسم (.*)$") and ChCheck(msg) or text and text:match("^معنى اسم (.*)$") and ChCheck(msg) then 
+if text and text:match("^معنى الاسم (.*)$") and SourceCh(msg) or text and text:match("^معنى اسم (.*)$") and SourceCh(msg) then 
 local TextMean = text:match("^معنى الاسم (.*)$") or text:match("^معنى اسم (.*)$") 
 UrlMean = https.request('https://apiabs.ml/Mean.php?Abs='..URL.escape(TextMean)) 
 Mean = JSON.decode(UrlMean) 
@@ -11136,146 +10958,146 @@ Dev_Rio(msg.chat_id_, msg.id_, 1, t, 1, 'html')
 end
 end
 --     Source Antak     --
-if text == "تفعيل متحركه" and Manager(msg) and ChCheck(msg) or text == "تفعيل المتحركه" and Manager(msg) and ChCheck(msg) then
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل المتحركه'
+if text == "تفعيل متحركه" and Manager(msg) and SourceCh(msg) or text == "تفعيل المتحركه" and Manager(msg) and SourceCh(msg) then
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل المتحركه'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:del(Antak..'Rio:gif:Rio'..msg.chat_id_) 
 end
-if text == "تعطيل متحركه" and Manager(msg) and ChCheck(msg) or text == "تعطيل المتحركه" and Manager(msg) and ChCheck(msg) then
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل المتحركه'
+if text == "تعطيل متحركه" and Manager(msg) and SourceCh(msg) or text == "تعطيل المتحركه" and Manager(msg) and SourceCh(msg) then
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل المتحركه'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:set(Antak..'Rio:gif:Rio'..msg.chat_id_,true)  
 end
-if text and (text == "متحركه" or text == "↫ متحركه ᥀") and not DevRio:get(Antak..'Rio:gif:Rio'..msg.chat_id_) and ChCheck(msg) then
+if text and (text == "متحركه" or text == "↫ متحركه ᥀") and not DevRio:get(Antak..'Rio:gif:Rio'..msg.chat_id_) and SourceCh(msg) then
 Rio = math.random(2,1075); 
 local Text ='*᥀︙تم اختيار المتحركه لك*'
 keyboard = {}  
-keyboard.inline_keyboard = {{{text="• مره اخرى •",callback_data="/gif:"..msg.sender_user_id_}},{{text = '• Antak Team •',url="t.me/TeAmAnTaK"}}} 
+keyboard.inline_keyboard = {{{text="‹ مره اخرى ›",callback_data="/gif:"..msg.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}} 
 local msg_id = msg.id_/2097152/0.5 
 https.request("https://api.telegram.org/bot"..TokenBot..'/sendanimation?chat_id=' .. msg.chat_id_ .. '&animation=https://t.me/GifDavid/'..Rio..'&caption=' .. URL.escape(Text).."&reply_to_message_id="..msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard)) 
 end
 --     Source Antak     --
-if text == "تفعيل ميمز" and Manager(msg) and ChCheck(msg) or text == "تفعيل الميمز" and Manager(msg) and ChCheck(msg) then
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل الميمز'
+if text == "تفعيل ميمز" and Manager(msg) and SourceCh(msg) or text == "تفعيل الميمز" and Manager(msg) and SourceCh(msg) then
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل الميمز'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:del(Antak..'Rio:memz:Rio'..msg.chat_id_) 
 end
-if text == "تعطيل ميمز" and Manager(msg) and ChCheck(msg) or text == "تعطيل الميمز" and Manager(msg) and ChCheck(msg) then
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل الميمز'
+if text == "تعطيل ميمز" and Manager(msg) and SourceCh(msg) or text == "تعطيل الميمز" and Manager(msg) and SourceCh(msg) then
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل الميمز'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:set(Antak..'Rio:memz:Rio'..msg.chat_id_,true)  
 end
-if text and (text == "ميمز" or text == "↫ ميمز ᥀") and not DevRio:get(Antak..'Rio:memz:Rio'..msg.chat_id_) and ChCheck(msg) then
+if text and (text == "ميمز" or text == "↫ ميمز ᥀") and not DevRio:get(Antak..'Rio:memz:Rio'..msg.chat_id_) and SourceCh(msg) then
 Rio = math.random(2,1201); 
 local Text ='*᥀︙تم اختيار مقطع الميمز لك*'
 keyboard = {}  
-keyboard.inline_keyboard = {{{text="• مره اخرى •",callback_data="/memz:"..msg.sender_user_id_}},{{text = '• Antak Team •',url="t.me/TeAmAnTaK"}}} 
+keyboard.inline_keyboard = {{{text="‹ مره اخرى ›",callback_data="/memz:"..msg.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}} 
 local msg_id = msg.id_/2097152/0.5 
 https.request("https://api.telegram.org/bot"..TokenBot..'/sendVoice?chat_id=' .. msg.chat_id_ .. '&voice=https://t.me/MemzDavid/'..Rio..'&caption=' .. URL.escape(Text).."&reply_to_message_id="..msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard)) 
 end
 --     Source Antak     --
-if text == "تفعيل غنيلي" and Manager(msg) and ChCheck(msg) then
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل غنيلي'
+if text == "تفعيل غنيلي" and Manager(msg) and SourceCh(msg) then
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل غنيلي'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:del(Antak..'Rio:Audios:Rio'..msg.chat_id_) 
 end
-if text == "تعطيل غنيلي" and Manager(msg) and ChCheck(msg) then
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل غنيلي'
+if text == "تعطيل غنيلي" and Manager(msg) and SourceCh(msg) then
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل غنيلي'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:set(Antak..'Rio:Audios:Rio'..msg.chat_id_,true)  
 end
-if text and (text == "غنيلي" or text == "↫ غنيلي ᥀") and not DevRio:get(Antak..'Rio:Audios:Rio'..msg.chat_id_) and ChCheck(msg) then
+if text and (text == "غنيلي" or text == "↫ غنيلي ᥀") and not DevRio:get(Antak..'Rio:Audios:Rio'..msg.chat_id_) and SourceCh(msg) then
 Rio = math.random(4,2824); 
 local Text ='*᥀︙تم اختيار المقطع الصوتي لك*'
 keyboard = {}  
-keyboard.inline_keyboard = {{{text="• مره اخرى •",callback_data="/Song:"..msg.sender_user_id_}},{{text = '• Antak Team •',url="t.me/TeAmAnTaK"}}} 
+keyboard.inline_keyboard = {{{text="‹ مره اخرى ›",callback_data="/Song:"..msg.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}} 
 local msg_id = msg.id_/2097152/0.5 
 https.request("https://api.telegram.org/bot"..TokenBot..'/sendVoice?chat_id=' .. msg.chat_id_ .. '&voice=https://t.me/AudiosDavid/'..Rio..'&caption=' .. URL.escape(Text).."&reply_to_message_id="..msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard)) 
 end
 --     Source Antak     --
-if text == "تفعيل الاغاني" and Manager(msg) and ChCheck(msg) or text == "تفعيل اغنيه" and Manager(msg) and ChCheck(msg) then
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل الاغاني'
+if text == "تفعيل الاغاني" and Manager(msg) and SourceCh(msg) or text == "تفعيل اغنيه" and Manager(msg) and SourceCh(msg) then
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل الاغاني'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:del(Antak..'Rio:mp3:Rio'..msg.chat_id_) 
 end
-if text == "تعطيل الاغاني" and Manager(msg) and ChCheck(msg) or text == "تعطيل اغنيه" and Manager(msg) and ChCheck(msg) then
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل الاغاني'
+if text == "تعطيل الاغاني" and Manager(msg) and SourceCh(msg) or text == "تعطيل اغنيه" and Manager(msg) and SourceCh(msg) then
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل الاغاني'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:set(Antak..'Rio:mp3:Rio'..msg.chat_id_,true)  
 end
-if text and (text == "اغنيه" or text == "↫ اغنيه ᥀" or text == "اغاني") and not DevRio:get(Antak..'Rio:mp3:Rio'..msg.chat_id_) and ChCheck(msg) then
+if text and (text == "اغنيه" or text == "↫ اغنيه ᥀" or text == "اغاني") and not DevRio:get(Antak..'Rio:mp3:Rio'..msg.chat_id_) and SourceCh(msg) then
 Rio = math.random(2,1167); 
 local Text ='*᥀︙تم اختيار الاغنيه لك*'
 keyboard = {}  
-keyboard.inline_keyboard = {{{text="• مره اخرى •",callback_data="/mp3:"..msg.sender_user_id_}},{{text = '• Antak Team •',url="t.me/TeAmAnTaK"}}} 
+keyboard.inline_keyboard = {{{text="‹ مره اخرى ›",callback_data="/mp3:"..msg.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}} 
 local msg_id = msg.id_/2097152/0.5 
 https.request("https://api.telegram.org/bot"..TokenBot..'/sendAudio?chat_id=' .. msg.chat_id_ .. '&audio=https://t.me/DavidMp3/'..Rio..'&caption=' .. URL.escape(Text).."&reply_to_message_id="..msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard)) 
 end
 --     Source Antak     --
-if text == "تفعيل ريمكس" and Manager(msg) and ChCheck(msg) or text == "تفعيل الريمكس" and Manager(msg) and ChCheck(msg) then
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل الريمكس'
+if text == "تفعيل ريمكس" and Manager(msg) and SourceCh(msg) or text == "تفعيل الريمكس" and Manager(msg) and SourceCh(msg) then
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل الريمكس'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:del(Antak..'Rio:Remix:Rio'..msg.chat_id_) 
 end
-if text == "تعطيل ريمكس" and Manager(msg) and ChCheck(msg) or text == "تعطيل الريمكس" and Manager(msg) and ChCheck(msg) then
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل الريمكس'
+if text == "تعطيل ريمكس" and Manager(msg) and SourceCh(msg) or text == "تعطيل الريمكس" and Manager(msg) and SourceCh(msg) then
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل الريمكس'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:set(Antak..'Rio:Remix:Rio'..msg.chat_id_,true)  
 end
-if text and (text == "ريمكس" or text == "↫ ريمكس ᥀") and not DevRio:get(Antak..'Rio:Remix:Rio'..msg.chat_id_) and ChCheck(msg) then
+if text and (text == "ريمكس" or text == "↫ ريمكس ᥀") and not DevRio:get(Antak..'Rio:Remix:Rio'..msg.chat_id_) and SourceCh(msg) then
 Rio = math.random(2,612); 
 local Text ='*᥀︙تم اختيار الريمكس لك*'
 keyboard = {}  
-keyboard.inline_keyboard = {{{text="• مره اخرى •",callback_data="/remix:"..msg.sender_user_id_}},{{text = '• Antak Team •',url="t.me/TeAmAnTaK"}}} 
+keyboard.inline_keyboard = {{{text="‹ مره اخرى ›",callback_data="/remix:"..msg.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}} 
 local msg_id = msg.id_/2097152/0.5 
 https.request("https://api.telegram.org/bot"..TokenBot..'/sendVoice?chat_id=' .. msg.chat_id_ .. '&voice=https://t.me/RemixDavid/'..Rio..'&caption=' .. URL.escape(Text).."&reply_to_message_id="..msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard)) 
 end
 --     Source Antak     --
-if text == "تفعيل صوره" and Manager(msg) and ChCheck(msg) or text == "تفعيل الصوره" and Manager(msg) and ChCheck(msg) then
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل الصوره'
+if text == "تفعيل صوره" and Manager(msg) and SourceCh(msg) or text == "تفعيل الصوره" and Manager(msg) and SourceCh(msg) then
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل الصوره'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:del(Antak..'Rio:Photo:Rio'..msg.chat_id_) 
 end
-if text == "تعطيل صوره" and Manager(msg) and ChCheck(msg) or text == "تعطيل الصوره" and Manager(msg) and ChCheck(msg) then
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل الصوره'
+if text == "تعطيل صوره" and Manager(msg) and SourceCh(msg) or text == "تعطيل الصوره" and Manager(msg) and SourceCh(msg) then
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل الصوره'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:set(Antak..'Rio:Photo:Rio'..msg.chat_id_,true)  
 end
-if text and (text == "صوره" or text == "↫ صوره ᥀") and not DevRio:get(Antak..'Rio:Photo:Rio'..msg.chat_id_) and ChCheck(msg) then
+if text and (text == "صوره" or text == "↫ صوره ᥀") and not DevRio:get(Antak..'Rio:Photo:Rio'..msg.chat_id_) and SourceCh(msg) then
 Rio = math.random(4,1171); 
 local Text ='*᥀︙تم اختيار الصوره لك*'
 keyboard = {}  
-keyboard.inline_keyboard = {{{text="• مره اخرى •",callback_data="/photo:"..msg.sender_user_id_}},{{text = '• Antak Team •',url="t.me/TeAmAnTaK"}}} 
+keyboard.inline_keyboard = {{{text="‹ مره اخرى ›",callback_data="/photo:"..msg.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}} 
 local msg_id = msg.id_/2097152/0.5 
 https.request("https://api.telegram.org/bot"..TokenBot..'/sendphoto?chat_id=' .. msg.chat_id_ .. '&photo=https://t.me/PhotosDavid/'..Rio..'&caption=' .. URL.escape(Text).."&reply_to_message_id="..msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard)) 
 end
 --     Source Antak     --
-if text == "تفعيل انمي" and Manager(msg) and ChCheck(msg) or text == "تفعيل الانمي" and Manager(msg) and ChCheck(msg) then
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل الانمي'
+if text == "تفعيل انمي" and Manager(msg) and SourceCh(msg) or text == "تفعيل الانمي" and Manager(msg) and SourceCh(msg) then
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل الانمي'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:del(Antak..'Rio:Anime:Rio'..msg.chat_id_) 
 end
-if text == "تعطيل انمي" and Manager(msg) and ChCheck(msg) or text == "تعطيل الانمي" and Manager(msg) and ChCheck(msg) then
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل الانمي'
+if text == "تعطيل انمي" and Manager(msg) and SourceCh(msg) or text == "تعطيل الانمي" and Manager(msg) and SourceCh(msg) then
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل الانمي'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:set(Antak..'Rio:Anime:Rio'..msg.chat_id_,true)  
 end
-if text and (text == "انمي" or text == "↫ انمي ᥀") and not DevRio:get(Antak..'Rio:Anime:Rio'..msg.chat_id_) and ChCheck(msg) then
+if text and (text == "انمي" or text == "↫ انمي ᥀") and not DevRio:get(Antak..'Rio:Anime:Rio'..msg.chat_id_) and SourceCh(msg) then
 Rio = math.random(3,1002); 
 local Text ='*᥀︙تم اختيار صورة الانمي لك*'
 keyboard = {}  
-keyboard.inline_keyboard = {{{text="• مره اخرى •",callback_data="/anime:"..msg.sender_user_id_}},{{text = '• Antak Team •',url="t.me/TeAmAnTaK"}}} 
+keyboard.inline_keyboard = {{{text="‹ مره اخرى ›",callback_data="/anime:"..msg.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}} 
 local msg_id = msg.id_/2097152/0.5 
 https.request("https://api.telegram.org/bot"..TokenBot..'/sendphoto?chat_id=' .. msg.chat_id_ .. '&photo=https://t.me/AnimeDavid/'..Rio..'&caption=' .. URL.escape(Text).."&reply_to_message_id="..msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard)) 
 end
 --     Source Antak     --
-if text == "تفعيل فلم" and Manager(msg) and ChCheck(msg) then
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل الافلام'
+if text == "تفعيل فلم" and Manager(msg) and SourceCh(msg) then
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل الافلام'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:del(Antak..'Rio:Movies:Rio'..msg.chat_id_) 
 end
-if text == "تعطيل فلم" and Manager(msg) and ChCheck(msg) then
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل الافلام'
+if text == "تعطيل فلم" and Manager(msg) and SourceCh(msg) then
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل الافلام'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:set(Antak..'Rio:Movies:Rio'..msg.chat_id_,true)  
 end
@@ -11283,122 +11105,122 @@ if text and (text == "فلم" or text == "↫ فلم ᥀") and not DevRio:get(An
 Rio = math.random(45,125); 
 local Text ='*᥀︙تم اختيار الفلم لك*'
 keyboard = {}  
-keyboard.inline_keyboard = {{{text="• مره اخرى •",callback_data="/Movies:"..msg.sender_user_id_}},{{text = '• Antak Team •',url="t.me/TeAmAnTaK"}}} 
+keyboard.inline_keyboard = {{{text="‹ مره اخرى ›",callback_data="/Movies:"..msg.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}} 
 local msg_id = msg.id_/2097152/0.5 
 https.request("https://api.telegram.org/bot"..TokenBot..'/sendphoto?chat_id=' .. msg.chat_id_ .. '&photo=https://t.me/MoviesDavid/'..Rio..'&caption=' .. URL.escape(Text).."&reply_to_message_id="..msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard)) 
 end
 --     Source Antak     --
-if text == "تفعيل مسلسل" and Manager(msg) and ChCheck(msg) then
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل المسلسلات'
+if text == "تفعيل مسلسل" and Manager(msg) and SourceCh(msg) then
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل المسلسلات'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:del(Antak..'Rio:Series:Rio'..msg.chat_id_) 
 end
-if text == "تعطيل مسلسل" and Manager(msg) and ChCheck(msg) then
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل المسلسلات'
+if text == "تعطيل مسلسل" and Manager(msg) and SourceCh(msg) then
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل المسلسلات'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:set(Antak..'Rio:Series:Rio'..msg.chat_id_,true)  
 end
-if text and (text == "مسلسل" or text == "↫ مسلسل ᥀") and not DevRio:get(Antak..'Rio:Series:Rio'..msg.chat_id_) and ChCheck(msg) then
+if text and (text == "مسلسل" or text == "↫ مسلسل ᥀") and not DevRio:get(Antak..'Rio:Series:Rio'..msg.chat_id_) and SourceCh(msg) then
 Rio = math.random(2,54); 
 local Text ='*᥀︙تم اختيار المسلسل لك*'
 keyboard = {}  
-keyboard.inline_keyboard = {{{text="• مره اخرى •",callback_data="/series:"..msg.sender_user_id_}},{{text = '• Antak Team •',url="t.me/TeAmAnTaK"}}} 
+keyboard.inline_keyboard = {{{text="‹ مره اخرى ›",callback_data="/series:"..msg.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}} 
 local msg_id = msg.id_/2097152/0.5 
 https.request("https://api.telegram.org/bot"..TokenBot..'/sendphoto?chat_id=' .. msg.chat_id_ .. '&photo=https://t.me/SeriesDavid/'..Rio..'&caption=' .. URL.escape(Text).."&reply_to_message_id="..msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard)) 
 end
 --     Source Antak     --
 if Admin(msg) then
 if DevRio:get(Antak..'Rio:LockSettings'..msg.chat_id_) then 
-if text == "الروابط" then if DevRio:get(Antak..'Rio:Lock:Links'..msg.chat_id_) then mute_links = 'مقفله' else mute_links = 'مفتوحه' end local AntakTeam = "\n" .."᥀︙الروابط ↫ "..mute_links.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
-if text == "المعرف" or text == "المعرفات" then if DevRio:get(Antak..'Rio:Lock:Tags'..msg.chat_id_) then lock_tag = 'مقفوله' else lock_tag = 'مفتوحه' end local AntakTeam = "\n" .."᥀︙المعرف ↫ "..lock_tag.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
-if text == "المتحركه" or text == "الملصقات المتحركه" then if DevRio:get(Antak..'Rio:Lock:Gifs'..msg.chat_id_) then mute_gifs = 'مقفوله' else mute_gifs = 'مفتوحه' end local AntakTeam = "\n" .."᥀︙المتحركه ↫ "..mute_gifs.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
-if text == "الملصقات" then if DevRio:get(Antak..'Rio:Lock:Stickers'..msg.chat_id_) then lock_sticker = 'مقفوله' else lock_sticker = 'مفتوحه' end local AntakTeam = "\n" .."᥀︙الملصقات ↫ "..lock_sticker.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
-if text == "الصور" then if DevRio:get(Antak..'Rio:Lock:Photo'..msg.chat_id_) then mute_photo = 'مقفوله' else mute_photo = 'مفتوحه' end local AntakTeam = "\n" .."᥀︙الصور ↫ "..mute_photo.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
-if text == "الفيديو" or text == "الفيديوهات" then if DevRio:get(Antak..'Rio:Lock:Videos'..msg.chat_id_) then mute_video = 'مقفوله' else mute_video = 'مفتوحه' end local AntakTeam = "\n" .."᥀︙الفيديو ↫ "..mute_video.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
-if text == "الاونلاين" then if DevRio:get(Antak..'Rio:Lock:Inline'..msg.chat_id_) then mute_in = 'مقفل' else mute_in = 'مفتوح' end local AntakTeam = "\n" .."᥀︙الاونلاين ↫ "..mute_in.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
-if text == "الدردشه" then if DevRio:get(Antak..'Rio:Lock:Text'..msg.chat_id_) then mute_text = 'مقفله' else mute_text = 'مفتوحه' end local AntakTeam = "\n" .."᥀︙الدردشه ↫ "..mute_text.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
-if text == "التوجيه" or text == "اعاده التوجيه" then if DevRio:get(Antak..'Rio:Lock:Forwards'..msg.chat_id_) then lock_forward = 'مقفل' else lock_forward = 'مفتوح' end local AntakTeam = "\n" .."᥀︙التوجيه ↫ "..lock_forward.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
-if text == "الاغاني" then if DevRio:get(Antak..'Rio:Lock:Music'..msg.chat_id_) then mute_music = 'مقفوله' else mute_music = 'مفتوحه' end local AntakTeam = "\n" .."᥀︙الاغاني ↫ "..mute_music.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
-if text == "الصوت" or text == "الصوتيات" then if DevRio:get(Antak..'Rio:Lock:Voice'..msg.chat_id_) then mute_voice = 'مقفول' else mute_voice = 'مفتوح' end local AntakTeam = "\n" .."᥀︙الصوت ↫ "..mute_voice.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
-if text == "الجهات" or text == "جهات الاتصال" then if DevRio:get(Antak..'Rio:Lock:Contact'..msg.chat_id_) then lock_contact = 'مقفوله' else lock_contact = 'مفتوحه' end local AntakTeam = "\n" .."᥀︙الجهات ↫ "..lock_contact.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
-if text == "الماركداون" then if DevRio:get(Antak..'Rio:Lock:Markdown'..msg.chat_id_) then markdown = 'مقفل' else markdown = 'مفتوح' end local AntakTeam = "\n" .."᥀︙الماركداون ↫ "..markdown.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
-if text == "الهاشتاك" then if DevRio:get(Antak..'Rio:Lock:Hashtak'..msg.chat_id_) then lock_htag = 'مقفل' else lock_htag = 'مفتوح' end local AntakTeam = "\n" .."᥀︙الهاشتاك ↫ "..lock_htag.."\n"Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
-if text == "التعديل" then if DevRio:get(Antak..'Rio:Lock:EditMsgs'..msg.chat_id_) then mute_edit = 'مقفل' else mute_edit = 'مفتوح' end local AntakTeam = "\n" .."᥀︙التعديل ↫ "..mute_edit.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
-if text == "التثبيت" then if DevRio:get(Antak..'Rio:Lock:Pin'..msg.chat_id_) then lock_pin = 'مقفل' else lock_pin = 'مفتوح' end local AntakTeam = "\n" .."᥀︙التثبيت ↫ "..lock_pin.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
-if text == "الاشعارات" then if DevRio:get(Antak..'Rio:Lock:TagServr'..msg.chat_id_) then lock_tgservice = 'مقفوله' else lock_tgservice = 'مفتوحه' end local AntakTeam = "\n" .."᥀︙الاشعارات ↫ "..lock_tgservice.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
-if text == "الكلايش" then if DevRio:get(Antak..'Rio:Lock:Spam'..msg.chat_id_) then lock_spam = 'مقفوله' else lock_spam = 'مفتوحه' end local AntakTeam = "\n" .."᥀︙الكلايش ↫ "..lock_spam.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
-if text == "الدخول" then if DevRio:get(Antak..'Rio:Lock:Join'..msg.chat_id_) then lock_Join = 'مقفول' else lock_Join = 'مفتوح' end local AntakTeam = "\n" .."᥀︙الدخول ↫ "..lock_Join.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
-if text == "الشبكات" then if DevRio:get(Antak..'Rio:Lock:WebLinks'..msg.chat_id_) then lock_wp = 'مقفوله' else lock_wp = 'مفتوحه' end local AntakTeam = "\n" .."᥀︙الشبكات ↫ "..lock_wp.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
-if text == "المواقع" then if DevRio:get(Antak..'Rio:Lock:Location'..msg.chat_id_) then lock_location = 'مقفوله' else lock_location = 'مفتوحه' end local AntakTeam = "\n" .."᥀︙المواقع ↫ "..lock_location.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
-if text == "العربيه" then if DevRio:get(Antak..'Rio:Lock:Arabic'..msg.chat_id_) then lock_arabic = 'مقفوله' else lock_arabic = 'مفتوحه' end local AntakTeam = "\n" .."᥀︙العربيه ↫ "..lock_arabic.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
-if text == "الانكليزيه" then if DevRio:get(Antak..'Rio:Lock:English'..msg.chat_id_) then lock_english = 'مقفوله' else lock_english = 'مفتوحه' end local AntakTeam = "\n" .."᥀︙الانكليزيه ↫ "..lock_english.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
-if text == "الكفر" then if DevRio:get(Antak..'Rio:Lock:Kfr'..msg.chat_id_) then lock_kaf = 'مفتوح' else lock_kaf = 'مقفل' end local AntakTeam = "\n" .."᥀︙الكفر ↫ "..lock_kaf.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
-if text == "الفشار" then if DevRio:get(Antak..'Rio:Lock:Fshar'..msg.chat_id_) then lock_fshar = 'مفتوح' else lock_fshar = 'مقفل' end local AntakTeam = "\n" .."᥀︙الفشار ↫ "..lock_fshar.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
-if text == "الطائفيه" then if DevRio:get(Antak..'Rio:Lock:Taf'..msg.chat_id_) then lock_taf = 'مفتوحه' else lock_taf = 'مقفله' end local AntakTeam = "\n" .."᥀︙الطائفيه ↫ "..lock_taf.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
+if text == "الروابط" then if DevRio:get(Antak..'Rio:Lock:Links'..msg.chat_id_) then mute_links ='مقفله' else mute_links ='مفتوحه' end local AntakTeam = "\n" .."᥀︙الروابط ↫ "..mute_links.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
+if text == "المعرف" or text == "المعرفات" then if DevRio:get(Antak..'Rio:Lock:Tags'..msg.chat_id_) then lock_tag ='مقفوله' else lock_tag ='مفتوحه' end local AntakTeam = "\n" .."᥀︙المعرف ↫ "..lock_tag.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
+if text == "المتحركه" or text == "الملصقات المتحركه" then if DevRio:get(Antak..'Rio:Lock:Gifs'..msg.chat_id_) then mute_gifs ='مقفوله' else mute_gifs ='مفتوحه' end local AntakTeam = "\n" .."᥀︙المتحركه ↫ "..mute_gifs.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
+if text == "الملصقات" then if DevRio:get(Antak..'Rio:Lock:Stickers'..msg.chat_id_) then lock_sticker ='مقفوله' else lock_sticker ='مفتوحه' end local AntakTeam = "\n" .."᥀︙الملصقات ↫ "..lock_sticker.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
+if text == "الصور" then if DevRio:get(Antak..'Rio:Lock:Photo'..msg.chat_id_) then mute_photo ='مقفوله' else mute_photo ='مفتوحه' end local AntakTeam = "\n" .."᥀︙الصور ↫ "..mute_photo.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
+if text == "الفيديو" or text == "الفيديوهات" then if DevRio:get(Antak..'Rio:Lock:Videos'..msg.chat_id_) then mute_video ='مقفوله' else mute_video ='مفتوحه' end local AntakTeam = "\n" .."᥀︙الفيديو ↫ "..mute_video.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
+if text == "الاونلاين" then if DevRio:get(Antak..'Rio:Lock:Inline'..msg.chat_id_) then mute_in ='مقفل' else mute_in ='مفتوح' end local AntakTeam = "\n" .."᥀︙الاونلاين ↫ "..mute_in.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
+if text == "الدردشه" then if DevRio:get(Antak..'Rio:Lock:Text'..msg.chat_id_) then mute_text ='مقفله' else mute_text ='مفتوحه' end local AntakTeam = "\n" .."᥀︙الدردشه ↫ "..mute_text.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
+if text == "التوجيه" or text == "اعاده التوجيه" then if DevRio:get(Antak..'Rio:Lock:Forwards'..msg.chat_id_) then lock_forward ='مقفل' else lock_forward ='مفتوح' end local AntakTeam = "\n" .."᥀︙التوجيه ↫ "..lock_forward.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
+if text == "الاغاني" then if DevRio:get(Antak..'Rio:Lock:Music'..msg.chat_id_) then mute_music ='مقفوله' else mute_music ='مفتوحه' end local AntakTeam = "\n" .."᥀︙الاغاني ↫ "..mute_music.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
+if text == "الصوت" or text == "الصوتيات" then if DevRio:get(Antak..'Rio:Lock:Voice'..msg.chat_id_) then mute_voice ='مقفول' else mute_voice ='مفتوح' end local AntakTeam = "\n" .."᥀︙الصوت ↫ "..mute_voice.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
+if text == "الجهات" or text == "جهات الاتصال" then if DevRio:get(Antak..'Rio:Lock:Contact'..msg.chat_id_) then lock_contact ='مقفوله' else lock_contact ='مفتوحه' end local AntakTeam = "\n" .."᥀︙الجهات ↫ "..lock_contact.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
+if text == "الماركداون" then if DevRio:get(Antak..'Rio:Lock:Markdown'..msg.chat_id_) then markdown ='مقفل' else markdown ='مفتوح' end local AntakTeam = "\n" .."᥀︙الماركداون ↫ "..markdown.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
+if text == "الهاشتاك" then if DevRio:get(Antak..'Rio:Lock:Hashtak'..msg.chat_id_) then lock_htag ='مقفل' else lock_htag ='مفتوح' end local AntakTeam = "\n" .."᥀︙الهاشتاك ↫ "..lock_htag.."\n"Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
+if text == "التعديل" then if DevRio:get(Antak..'Rio:Lock:EditMsgs'..msg.chat_id_) then mute_edit ='مقفل' else mute_edit ='مفتوح' end local AntakTeam = "\n" .."᥀︙التعديل ↫ "..mute_edit.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
+if text == "التثبيت" then if DevRio:get(Antak..'Rio:Lock:Pin'..msg.chat_id_) then lock_pin ='مقفل' else lock_pin ='مفتوح' end local AntakTeam = "\n" .."᥀︙التثبيت ↫ "..lock_pin.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
+if text == "الاشعارات" then if DevRio:get(Antak..'Rio:Lock:TagServr'..msg.chat_id_) then lock_tgservice ='مقفوله' else lock_tgservice ='مفتوحه' end local AntakTeam = "\n" .."᥀︙الاشعارات ↫ "..lock_tgservice.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
+if text == "الكلايش" then if DevRio:get(Antak..'Rio:Lock:Spam'..msg.chat_id_) then lock_spam ='مقفوله' else lock_spam ='مفتوحه' end local AntakTeam = "\n" .."᥀︙الكلايش ↫ "..lock_spam.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
+if text == "الدخول" then if DevRio:get(Antak..'Rio:Lock:Join'..msg.chat_id_) then lock_Join ='مقفول' else lock_Join ='مفتوح' end local AntakTeam = "\n" .."᥀︙الدخول ↫ "..lock_Join.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
+if text == "الشبكات" then if DevRio:get(Antak..'Rio:Lock:WebLinks'..msg.chat_id_) then lock_wp ='مقفوله' else lock_wp ='مفتوحه' end local AntakTeam = "\n" .."᥀︙الشبكات ↫ "..lock_wp.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
+if text == "المواقع" then if DevRio:get(Antak..'Rio:Lock:Location'..msg.chat_id_) then lock_location ='مقفوله' else lock_location ='مفتوحه' end local AntakTeam = "\n" .."᥀︙المواقع ↫ "..lock_location.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
+if text == "العربيه" then if DevRio:get(Antak..'Rio:Lock:Arabic'..msg.chat_id_) then lock_arabic ='مقفوله' else lock_arabic ='مفتوحه' end local AntakTeam = "\n" .."᥀︙العربيه ↫ "..lock_arabic.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
+if text == "الانكليزيه" then if DevRio:get(Antak..'Rio:Lock:English'..msg.chat_id_) then lock_english ='مقفوله' else lock_english ='مفتوحه' end local AntakTeam = "\n" .."᥀︙الانكليزيه ↫ "..lock_english.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
+if text == "الكفر" then if DevRio:get(Antak..'Rio:Lock:Kfr'..msg.chat_id_) then lock_kaf ='مفتوح' else lock_kaf ='مقفل' end local AntakTeam = "\n" .."᥀︙الكفر ↫ "..lock_kaf.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
+if text == "الفشار" then if DevRio:get(Antak..'Rio:Lock:Fshar'..msg.chat_id_) then lock_fshar ='مفتوح' else lock_fshar ='مقفل' end local AntakTeam = "\n" .."᥀︙الفشار ↫ "..lock_fshar.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
+if text == "الطائفيه" then if DevRio:get(Antak..'Rio:Lock:Taf'..msg.chat_id_) then lock_taf ='مفتوحه' else lock_taf ='مقفله' end local AntakTeam = "\n" .."᥀︙الطائفيه ↫ "..lock_taf.."\n" Dev_Rio(msg.chat_id_, msg.id_, 1, AntakTeam, 1, 'md') end
 end
 --     Source Antak     --
-if text == 'تفعيل كشف الاعدادات' and ChCheck(msg) then 
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل كشف الاعدادات'
+if text =='تفعيل كشف الاعدادات' and ChCheck(msg) then 
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل كشف الاعدادات'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:set(Antak..'Rio:LockSettings'..msg.chat_id_,true)  
 end
-if text == 'تعطيل كشف الاعدادات' and ChCheck(msg) then 
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل كشف الاعدادات'
+if text =='تعطيل كشف الاعدادات' and ChCheck(msg) then 
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل كشف الاعدادات'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:del(Antak..'Rio:LockSettings'..msg.chat_id_) 
 end
 --     Source Antak     --
-if text and (text == 'تعطيل التحقق' or text == 'قفل التحقق' or text == 'تعطيل تنبيه الدخول') and Manager(msg) and ChCheck(msg) then 
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل التحقق بنجاح'
+if text and (text =='تعطيل التحقق' or text =='قفل التحقق' or text =='تعطيل تنبيه الدخول') and Manager(msg) and ChCheck(msg) then 
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل التحقق بنجاح'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:del(Antak..'Rio:Lock:Robot'..msg.chat_id_)
 end
-if text and (text == 'تفعيل التحقق' or text == 'فتح التحقق' or text == 'تفعيل تنبيه الدخول') and Manager(msg) and ChCheck(msg) then 
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل التحقق بنجاح'
+if text and (text =='تفعيل التحقق' or text =='فتح التحقق' or text =='تفعيل تنبيه الدخول') and Manager(msg) and ChCheck(msg) then 
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل التحقق بنجاح'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:set(Antak..'Rio:Lock:Robot'..msg.chat_id_,true)
 end
 --     Source Antak     --
-if text == 'تفعيل ردود المدير' and Manager(msg) and ChCheck(msg) then 
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل ردود المدير'
+if text =='تفعيل ردود المدير' and Manager(msg) and ChCheck(msg) then 
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل ردود المدير'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:del(Antak..'Rio:Lock:GpRed'..msg.chat_id_)
 end
-if text == 'تعطيل ردود المدير' and Manager(msg) and ChCheck(msg) then 
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل ردود المدير'
+if text =='تعطيل ردود المدير' and Manager(msg) and ChCheck(msg) then 
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل ردود المدير'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:set(Antak..'Rio:Lock:GpRed'..msg.chat_id_,true)
 end
 --     Source Antak     --
-if text == 'تفعيل ردود المطور' and Manager(msg) and ChCheck(msg) then 
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل ردود المطور'
+if text =='تفعيل ردود المطور' and Manager(msg) and ChCheck(msg) then 
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل ردود المطور'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:del(Antak..'Rio:Lock:AllRed'..msg.chat_id_)
 end
-if text == 'تعطيل ردود المطور' and Manager(msg) and ChCheck(msg) then 
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل ردود المطور'
+if text =='تعطيل ردود المطور' and Manager(msg) and ChCheck(msg) then 
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل ردود المطور'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:set(Antak..'Rio:Lock:AllRed'..msg.chat_id_,true)
 end
 --     Source Antak     --
 if RioSudo(msg) then
-if text == 'تفعيل المغادره' or text == '↫ تفعيل المغادره ᥀' and ChCheck(msg) then 
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل المغادره بنجاح'
+if text =='تفعيل المغادره' or text =='↫ تفعيل المغادره ᥀' and ChCheck(msg) then 
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل المغادره بنجاح'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:del(Antak.."Rio:Left:Bot"..Antak)
 end
-if text == 'تعطيل المغادره' or text == '↫ تعطيل المغادره ᥀' and ChCheck(msg) then 
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل المغادره بنجاح'
+if text =='تعطيل المغادره' or text =='↫ تعطيل المغادره ᥀' and ChCheck(msg) then 
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل المغادره بنجاح'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:set(Antak.."Rio:Left:Bot"..Antak,true) 
 end 
-if text == 'تفعيل الاذاعه' or text == '↫ تفعيل الاذاعه ᥀' and ChCheck(msg) then 
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل الاذاعه بنجاح'
+if text =='تفعيل الاذاعه' or text =='↫ تفعيل الاذاعه ᥀' and ChCheck(msg) then 
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل الاذاعه بنجاح'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:del(Antak.."Rio:Send:Bot"..Antak)
 end
-if text == 'تعطيل الاذاعه' or text == '↫ تعطيل الاذاعه ᥀' and ChCheck(msg) then 
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل الاذاعه بنجاح'
+if text =='تعطيل الاذاعه' or text =='↫ تعطيل الاذاعه ᥀' and ChCheck(msg) then 
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل الاذاعه بنجاح'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:set(Antak.."Rio:Send:Bot"..Antak,true) 
 end
@@ -11414,7 +11236,7 @@ end
 if data.message_ == "CHAT_ADMIN_REQUIRED" then
 send(msg.chat_id_,msg.id_,"᥀︙ليست لدي صلاحية تغير معلومات المجموعه يرجى التحقق من الصلاحيات")  
 else
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تغير اسم المجموعه'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تغير اسم المجموعه'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 end
 end,nil) 
@@ -11436,7 +11258,7 @@ if data.message_ == "CHAT_ADMIN_REQUIRED" then
 send(msg.chat_id_, msg.id_,"᥀︙ليست لدي صلاحية تغير معلومات المجموعه يرجى التحقق من الصلاحيات") 
 DevRio:del(Antak..'Rio:SetPhoto'..msg.chat_id_..':'..msg.sender_user_id_)
 else
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تغير صورة المجموعه'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تغير صورة المجموعه'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 end
 end,nil) 
@@ -11463,7 +11285,7 @@ end
 tdcli_function({ID="UnpinChannelMessage",channel_id_ = msg.chat_id_:gsub("-100","")},function(arg,data) 
 if data.ID == "Ok" then
 DevRio:del(Antak..'Rio:PinnedMsg'..msg.chat_id_)
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم الغاء تثبيت الرساله'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم الغاء تثبيت الرساله'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 return false  
 end
@@ -11485,7 +11307,7 @@ return false
 end
 tdcli_function({ID="UnpinChannelMessage",channel_id_ = msg.chat_id_:gsub("-100","")},function(arg,data) 
 if data.ID == "Ok" then
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم الغاء تثبيت الكل'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم الغاء تثبيت الكل'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 https.request('https://api.telegram.org/bot'..TokenBot..'/unpinAllChatMessages?chat_id='..msg.chat_id_)
 DevRio:del(Antak.."Rio:PinnedMsg"..msg.chat_id_)
@@ -11510,12 +11332,12 @@ end
 local PinId = DevRio:get(Antak..'Rio:PinnedMsg'..msg.chat_id_)
 if PinId then
 Pin(msg.chat_id_,PinId,0)
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم اعادة تثبيت الرساله'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم اعادة تثبيت الرساله'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 end end
 end
 --     Source Antak     --
-if text == 'طرد المحذوفين' and ChCheck(msg) or text == 'مسح المحذوفين' and ChCheck(msg) or text == 'طرد الحسابات المحذوفه' and ChCheck(msg) or text == 'حذف المحذوفين' and ChCheck(msg) then  
+if text =='طرد المحذوفين' and ChCheck(msg) or text =='مسح المحذوفين' and ChCheck(msg) or text =='طرد الحسابات المحذوفه' and ChCheck(msg) or text =='حذف المحذوفين' and ChCheck(msg) then  
 tdcli_function({ID = "GetChannelMembers",channel_id_ = msg.chat_id_:gsub("-100",""),offset_ = 0,limit_ = 1000}, function(arg,del)
 for k, v in pairs(del.members_) do
 tdcli_function({ID = "GetUser",user_id_ = v.user_id_},function(b,data) 
@@ -11569,7 +11391,7 @@ local TkeedList = DevRio:scard(Antak.."Rio:Rio:Tkeed:"..ChatId) or 0
 local AdminsList = DevRio:scard(Antak.."Rio:Admins:"..ChatId) or 0
 local VipList = DevRio:scard(Antak.."Rio:VipMem:"..ChatId) or 0
 local LinkGp = json:decode(https.request('https://api.telegram.org/bot'..TokenBot..'/exportChatInviteLink?chat_id='..ChatId))
-if LinkGp.ok == true then LinkGroup = LinkGp.result else LinkGroup = 't.me/TeAmAnTaK' end
+if LinkGp.ok == true then LinkGroup = LinkGp.result else LinkGroup ='t.me/TeAmAnTaK' end
 tdcli_function({ID ="GetChat",chat_id_=ChatId},function(arg,dp)
 tdcli_function ({ID = "GetChannelMembers",channel_id_ = ChatId:gsub("-100",""),filter_ = {ID = "ChannelMembersAdministrators"},offset_ = 0,limit_ = 100},function(arg,data) 
 if dp.id_ then
@@ -11601,58 +11423,58 @@ DevRio:set(Antak..'Rio:Num:Add:Bot',Num)
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙تم وضع عدد الاعضاء ↫ *'..Num..'* عضو', 1, 'md')
 end
 --     Source Antak     --
-if text == 'تفعيل البوت الخدمي' and ChCheck(msg) or text == '↫ تفعيل البوت الخدمي ᥀' and ChCheck(msg) then 
+if text =='تفعيل البوت الخدمي' and ChCheck(msg) or text =='↫ تفعيل البوت الخدمي ᥀' and ChCheck(msg) then 
 if not RioSudo(msg) then
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙للمطور الاساسي فقط', 1, 'md')
 else 
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل البوت الخدمي'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل البوت الخدمي'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:del(Antak..'Rio:Lock:FreeBot'..Antak) 
 end 
 end
-if text == 'تعطيل البوت الخدمي' and ChCheck(msg) or text == '↫ تعطيل البوت الخدمي ᥀' and ChCheck(msg) then 
+if text =='تعطيل البوت الخدمي' and ChCheck(msg) or text =='↫ تعطيل البوت الخدمي ᥀' and ChCheck(msg) then 
 if not RioSudo(msg) then
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙للمطور الاساسي فقط', 1, 'md')
 else 
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل البوت الخدمي'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل البوت الخدمي'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:set(Antak..'Rio:Lock:FreeBot'..Antak,true) 
 end 
 end
-if ChatType == 'sp' or ChatType == 'gp'  then
-if text == 'تعطيل صورتي' and Manager(msg) and ChCheck(msg) then   
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل صورتي بنجاح'
+if ChatType =='sp' or ChatType =='gp'  then
+if text =='تعطيل صورتي' and Manager(msg) and ChCheck(msg) then   
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل صورتي بنجاح'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:del(Antak..'Rio:Photo:Profile'..msg.chat_id_) 
 end
-if text == 'تفعيل صورتي' and Manager(msg) and ChCheck(msg) then  
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل صورتي بنجاح'
+if text =='تفعيل صورتي' and Manager(msg) and ChCheck(msg) then  
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل صورتي بنجاح'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:set(Antak..'Rio:Photo:Profile'..msg.chat_id_,true)  
 end
-if text == 'تفعيل الالعاب' and Manager(msg) and ChCheck(msg) or text == 'تفعيل اللعبه' and Manager(msg) and ChCheck(msg) then   
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل الالعاب بنجاح'
+if text =='تفعيل الالعاب' and Manager(msg) and ChCheck(msg) or text =='تفعيل اللعبه' and Manager(msg) and ChCheck(msg) then   
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل الالعاب بنجاح'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:del(Antak..'Rio:Lock:Games'..msg.chat_id_) 
 end
-if text == 'تعطيل الالعاب' and Manager(msg) and ChCheck(msg) or text == 'تعطيل اللعبه' and Manager(msg) and ChCheck(msg) then  
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل الالعاب بنجاح'
+if text =='تعطيل الالعاب' and Manager(msg) and ChCheck(msg) or text =='تعطيل اللعبه' and Manager(msg) and ChCheck(msg) then  
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل الالعاب بنجاح'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:set(Antak..'Rio:Lock:Games'..msg.chat_id_,true)  
 end
-if text == 'تفعيل الالعاب المتطوره' and Manager(msg) and ChCheck(msg) or text == 'تفعيل الالعاب الاحترافيه' and Manager(msg) and ChCheck(msg) then   
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل الالعاب المتطوره بنجاح'
+if text =='تفعيل الالعاب المتطوره' and Manager(msg) and ChCheck(msg) or text =='تفعيل الالعاب الاحترافيه' and Manager(msg) and ChCheck(msg) then   
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل الالعاب المتطوره بنجاح'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:del(Antak..'Rio:Lock:Gamesinline'..msg.chat_id_) 
 end
-if text == 'تعطيل الالعاب المتطوره' and Manager(msg) and ChCheck(msg) or text == 'تعطيل الالعاب الاحترافيه' and Manager(msg) and ChCheck(msg) then  
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل الالعاب المتطوره بنجاح'
+if text =='تعطيل الالعاب المتطوره' and Manager(msg) and ChCheck(msg) or text =='تعطيل الالعاب الاحترافيه' and Manager(msg) and ChCheck(msg) then  
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل الالعاب المتطوره بنجاح'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:set(Antak..'Rio:Lock:Gamesinline'..msg.chat_id_,true)  
 end
 if text == "تفعيل الرابط" and ChCheck(msg) or text == "تفعيل جلب الرابط" and ChCheck(msg) then 
 if Admin(msg) then
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل جلب رابط المجموعه'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل جلب رابط المجموعه'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:del(Antak.."Rio:Lock:GpLinks"..msg.chat_id_)
 return false  
@@ -11660,7 +11482,7 @@ end
 end
 if text == "تعطيل الرابط" and ChCheck(msg) or text == "تعطيل جلب الرابط" and ChCheck(msg) then 
 if Admin(msg) then
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل جلب رابط المجموعه'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل جلب رابط المجموعه'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:set(Antak.."Rio:Lock:GpLinks"..msg.chat_id_,"ok")
 return false  
@@ -11668,7 +11490,7 @@ end
 end
 if text == "تعطيل الرابط انلاين" and ChCheck(msg) or text == "تعطيل جلب الرابط انلاين" and ChCheck(msg) then 
 if Admin(msg) then
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل جلب رابط انلاين المجموعه'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل جلب رابط انلاين المجموعه'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:set(Antak.."Rio:Lock:GpLinksinline"..msg.chat_id_,"ok")
 return false  
@@ -11676,7 +11498,7 @@ end
 end
 if text == "تفعيل الرابط انلاين" and ChCheck(msg) or text == "تفعيل جلب الرابط انلاين" and ChCheck(msg) then 
 if Admin(msg) then
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل جلب رابط انلاين المجموعه'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل جلب رابط انلاين المجموعه'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:del(Antak.."Rio:Lock:GpLinksinline"..msg.chat_id_)
 return false  
@@ -11686,7 +11508,7 @@ if text and (text == "تفعيل حذف الردود" or text == "تفعيل م�
 if not RioConstructor(msg) then
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙لمالك المجموعه او اعلى فقط ', 1, 'md')
 else
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل حذف ردود المدير'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل حذف ردود المدير'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:del(Antak.."Rio:Lock:GpRd"..msg.chat_id_)
 return false  
@@ -11696,7 +11518,7 @@ if text and (text == "تعطيل حذف الردود" or text == "تعطيل م�
 if not RioConstructor(msg) then
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙لمالك المجموعه او اعلى فقط ', 1, 'md')
 else
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل حذف ردود المدير'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل حذف ردود المدير'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:set(Antak.."Rio:Lock:GpRd"..msg.chat_id_,true)
 return false  
@@ -11706,7 +11528,7 @@ if text and (text == "تفعيل اضف رد" or text == "تفعيل اضافه 
 if not RioConstructor(msg) then
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙لمالك المجموعه او اعلى فقط ', 1, 'md')
 else
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل اضف رد'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل اضف رد'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:del(Antak.."Rio:Lock:Rd"..msg.chat_id_)
 return false  
@@ -11716,7 +11538,7 @@ if text and (text == "تعطيل اضف رد" or text == "تعطيل اضافه 
 if not RioConstructor(msg) then
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙لمالك المجموعه او اعلى فقط ', 1, 'md')
 else
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل اضف رد'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل اضف رد'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:set(Antak.."Rio:Lock:Rd"..msg.chat_id_,true)
 return false  
@@ -11724,7 +11546,7 @@ end
 end
 --     Source Antak     --
 if text and text:match('^تفعيل$') and SudoBot(msg) and ChCheck(msg) then
-if ChatType ~= 'sp' then
+if ChatType ~='sp' then
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙المجموعه عاديه وليست خارقه لا تستطيع تفعيلي يرجى ان تضع سجل رسائل المجموعه ضاهر وليس مخفي ومن بعدها يمكنك رفعي ادمن ثم تفعيلي', 1, 'md')
 return false
 end
@@ -11767,7 +11589,9 @@ end,nil)
 if DevRio:sismember(Antak..'Rio:Groups',msg.chat_id_) then
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙المجموعه بالتاكيد مفعله', 1, 'md')
 else
-ReplyStatus(msg,result.id_,"ReplyBy","᥀︙تم تفعيل المجموعه "..dp.title_)  
+Text = "᥀︙تم تفعيل المجموعه "..dp.title_
+local inline = {{{text="‹ ترتيب الاوامر ›",callback_data="/SetCmdGp:"..msg.sender_user_id_},{text="‹ رفع الادمنيه ›",callback_data="/UploadAdmin:"..msg.sender_user_id_}},{{text="‹ غادر ›",callback_data="/LeaveBot:"..msg.sender_user_id_},{text="‹ تعطيل ›",callback_data="/Stop:"..msg.sender_user_id_}},{{text="‹ TeAm Antak ›",url="t.me/TeAmAnTaK"}}}
+SendInline(msg.chat_id_,Text,nil,inline,msg.id_/2097152/0.5)
 DevRio:sadd(Antak.."Rio:Groups",msg.chat_id_)
 if not DevRio:get(Antak..'Rio:SudosGp'..msg.sender_user_id_..msg.chat_id_) and not SecondSudo(msg) then 
 DevRio:incrby(Antak..'Rio:Sudos'..msg.sender_user_id_,1)
@@ -11780,7 +11604,7 @@ local Name1 = Name1:gsub("`","")
 local Name1 = Name1:gsub("*","") 
 local Name1 = Name1:gsub("{","") 
 local Name1 = Name1:gsub("}","") 
-local Name = '['..Name1..'](tg://user?id='..result.id_..')'
+local Name ='['..Name1..'](tg://user?id='..result.id_..')'
 local NumMem = data.member_count_
 local NameChat = dp.title_
 local NameChat = NameChat:gsub('"',"") 
@@ -11793,7 +11617,7 @@ local LinkGp = json:decode(https.request('https://api.telegram.org/bot'..TokenBo
 if LinkGp.ok == true then 
 LinkGroup = LinkGp.result
 else
-LinkGroup = 'لا يوجد'
+LinkGroup ='لا يوجد'
 end
 DevRio:set(Antak.."Rio:Groups:Links"..msg.chat_id_,LinkGroup) 
 if not Sudo(msg) then
@@ -11804,13 +11628,15 @@ end,nil)
 end,nil)
 end,nil)
 end
-if text == 'تعطيل' and SudoBot(msg) and ChCheck(msg) then
+if text =='تعطيل' and SudoBot(msg) and ChCheck(msg) then
 tdcli_function ({ID = "GetUser",user_id_ = msg.sender_user_id_},function(extra,result,success)
 tdcli_function({ID ="GetChat",chat_id_=msg.chat_id_},function(arg,dp) 
 if not DevRio:sismember(Antak..'Rio:Groups',msg.chat_id_) then
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙المجموعه بالتاكيد معطله', 1, 'md')
 else
-ReplyStatus(msg,result.id_,"ReplyBy","᥀︙تم تعطيل المجموعه "..dp.title_)  
+Text = "᥀︙تم تعطيل المجموعه "..dp.title_
+local inline = {{{text="‹ غادر ›",callback_data="/LeaveBot:"..msg.sender_user_id_},{text="‹ تفعيل ›",callback_data="/On:"..msg.sender_user_id_}},{{text="‹ TeAm Antak ›",url="t.me/TeAmAnTaK"}}}
+SendInline(msg.chat_id_,Text,nil,inline,msg.id_/2097152/0.5)
 DevRio:srem(Antak.."Rio:Groups",msg.chat_id_)
 local Name1 = result.first_name_
 local Name1 = Name1:gsub('"',"") 
@@ -11819,7 +11645,7 @@ local Name1 = Name1:gsub("`","")
 local Name1 = Name1:gsub("*","") 
 local Name1 = Name1:gsub("{","") 
 local Name1 = Name1:gsub("}","") 
-local Name = '['..Name1..'](tg://user?id='..result.id_..')'
+local Name ='['..Name1..'](tg://user?id='..result.id_..')'
 local NameChat = dp.title_
 local NameChat = NameChat:gsub('"',"") 
 local NameChat = NameChat:gsub("'","") 
@@ -11831,7 +11657,7 @@ local LinkGp = json:decode(https.request('https://api.telegram.org/bot'..TokenBo
 if LinkGp.ok == true then 
 LinkGroup = LinkGp.result
 else
-LinkGroup = 'لا يوجد'
+LinkGroup ='لا يوجد'
 end
 DevRio:set(Antak.."Rio:Groups:Links"..msg.chat_id_,LinkGroup) 
 if not Sudo(msg) then
@@ -11853,7 +11679,7 @@ local Name1 = Name1:gsub("`","")
 local Name1 = Name1:gsub("*","") 
 local Name1 = Name1:gsub("{","") 
 local Name1 = Name1:gsub("}","") 
-local Name = '['..Name1..'](tg://user?id='..result.id_..')'
+local Name ='['..Name1..'](tg://user?id='..result.id_..')'
 local NameChat = dp.title_
 local NameChat = NameChat:gsub('"',"") 
 local NameChat = NameChat:gsub("'","") 
@@ -11866,7 +11692,7 @@ if LinkGp.ok == true then
 LinkGroup = LinkGp.result
 LinkGroup = "᥀︙رابط المجموعه ↫ ⤈\n❨ ["..LinkGroup.."] ❩"
 else
-LinkGroup = '᥀︙ليست لدي صلاحية الدعوه لهذه المجموعه !'
+LinkGroup ='᥀︙ليست لدي صلاحية الدعوه لهذه المجموعه !'
 end
 if not Sudo(msg) then
 SendText(DevId,"᥀︙هناك من بحاجه الى مساعده ↫ ⤈ \n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n᥀︙الشخص ↫ "..Name.."\n᥀︙اسم المجموعه ↫ ["..NameChat.."]\n᥀︙ايدي المجموعه ↫ ⤈ \n❨ `"..msg.chat_id_.."` ❩\n"..LinkGroup.."\n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n᥀︙الوقت ↫ "..os.date("%I:%M%p").."\n᥀︙التاريخ ↫ "..os.date("%Y/%m/%d").."",0,'md')
@@ -11875,7 +11701,7 @@ end,nil)
 end,nil)
 end
 --     Source Antak     --
-if text == 'روابط الكروبات' or text == 'روابط المجموعات' or text == '↫ روابط المجموعات ᥀' then
+if text =='روابط الكروبات' or text =='روابط المجموعات' or text =='↫ روابط المجموعات ᥀' then
 if not RioSudo(msg) then
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙للمطور الاساسي فقط ', 1, 'md')
 else
@@ -11906,12 +11732,12 @@ send(msg.chat_id_, msg.id_,"᥀︙الاذاعه معطله من قبل المط
 return false
 end
 DevRio:setex(Antak.."Rio:Send:Pv"..msg.chat_id_..":" .. msg.sender_user_id_, 600, true) 
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙ارسل لي سواء ↫ ⤈ \n❨ ملف • ملصق • متحركه • صوره\n • فيديو • بصمه • صوت • رساله ❩\n᥀︙للخروج ارسل ↫ ( الغاء ) \n ✓'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙ارسل لي سواء ↫ ⤈ \n❨ ملف • ملصق • متحركه • صوره\n • فيديو • بصمه • صوت • رساله ❩\n᥀︙للخروج ارسل ↫ ( الغاء ) \n ✓'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 return false
 end 
 if DevRio:get(Antak.."Rio:Send:Pv"..msg.chat_id_..":" .. msg.sender_user_id_) then 
-if text == 'الغاء' then   
+if text =='الغاء' then   
 Dev_Rio(msg.chat_id_, msg.id_, 1, "᥀︙تم الغاء امر الاذاعه بنجاح", 1, 'md')
 DevRio:del(Antak.."Rio:Send:Pv"..msg.chat_id_..":" .. msg.sender_user_id_) 
 return false
@@ -11973,12 +11799,12 @@ send(msg.chat_id_, msg.id_,"᥀︙الاذاعه معطله من قبل المط
 return false
 end
 DevRio:setex(Antak.."Rio:Send:Gp"..msg.chat_id_..":" .. msg.sender_user_id_, 600, true) 
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙ارسل لي سواء ↫ ⤈ \n❨ ملف • ملصق • متحركه • صوره\n • فيديو • بصمه • صوت • رساله ❩\n᥀︙للخروج ارسل ↫ ( الغاء ) \n ✓'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙ارسل لي سواء ↫ ⤈ \n❨ ملف • ملصق • متحركه • صوره\n • فيديو • بصمه • صوت • رساله ❩\n᥀︙للخروج ارسل ↫ ( الغاء ) \n ✓'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 return false
 end 
 if DevRio:get(Antak.."Rio:Send:Gp"..msg.chat_id_..":" .. msg.sender_user_id_) then 
-if text == 'الغاء' then   
+if text =='الغاء' then   
 Dev_Rio(msg.chat_id_, msg.id_, 1, "᥀︙تم الغاء امر الاذاعه بنجاح", 1, 'md')
 DevRio:del(Antak.."Rio:Send:Gp"..msg.chat_id_..":" .. msg.sender_user_id_) 
 return false
@@ -12040,12 +11866,12 @@ send(msg.chat_id_, msg.id_,"᥀︙الاذاعه معطله من قبل المط
 return false
 end
 DevRio:setex(Antak.."Rio:Send:FwdGp"..msg.chat_id_..":" .. msg.sender_user_id_, 600, true) 
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙ارسل الرساله الان لتوجيها \n᥀︙للخروج ارسل ↫ ( الغاء ) \n ✓'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙ارسل الرساله الان لتوجيها \n᥀︙للخروج ارسل ↫ ( الغاء ) \n ✓'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 return false
 end 
 if DevRio:get(Antak.."Rio:Send:FwdGp"..msg.chat_id_..":" .. msg.sender_user_id_) then 
-if text == 'الغاء' then   
+if text =='الغاء' then   
 Dev_Rio(msg.chat_id_, msg.id_, 1, "᥀︙تم الغاء امر الاذاعه بنجاح", 1, 'md')
 DevRio:del(Antak.."Rio:Send:FwdGp"..msg.chat_id_..":" .. msg.sender_user_id_) 
 return false  
@@ -12064,12 +11890,12 @@ send(msg.chat_id_, msg.id_,"᥀︙الاذاعه معطله من قبل المط
 return false
 end
 DevRio:setex(Antak.."Rio:Send:FwdPv"..msg.chat_id_..":" .. msg.sender_user_id_, 600, true) 
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙ارسل الرساله الان لتوجيها \n᥀︙للخروج ارسل ↫ ( الغاء ) \n ✓'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙ارسل الرساله الان لتوجيها \n᥀︙للخروج ارسل ↫ ( الغاء ) \n ✓'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 return false
 end 
 if DevRio:get(Antak.."Rio:Send:FwdPv"..msg.chat_id_..":" .. msg.sender_user_id_) then 
-if text == 'الغاء' then   
+if text =='الغاء' then   
 Dev_Rio(msg.chat_id_, msg.id_, 1, "᥀︙تم الغاء امر الاذاعه بنجاح", 1, 'md')
 DevRio:del(Antak.."Rio:Send:FwdPv"..msg.chat_id_..":" .. msg.sender_user_id_) 
 return false  
@@ -12088,7 +11914,7 @@ send(msg.chat_id_, msg.id_,"᥀︙الاذاعه معطله من قبل المط
 return false
 end
 DevRio:setex(Antak.."Rio:Send:Gp:Pin"..msg.chat_id_..":" .. msg.sender_user_id_, 600, true) 
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙ارسل لي سواء ↫ ⤈ \n❨ ملف • ملصق • متحركه • صوره\n • فيديو • بصمه • صوت • رساله ❩\n᥀︙للخروج ارسل ↫ ( الغاء ) \n ✓'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙ارسل لي سواء ↫ ⤈ \n❨ ملف • ملصق • متحركه • صوره\n • فيديو • بصمه • صوت • رساله ❩\n᥀︙للخروج ارسل ↫ ( الغاء ) \n ✓'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 return false
 end 
@@ -12158,7 +11984,7 @@ DevRio:del(Antak.."Rio:Send:Gp:Pin"..msg.chat_id_..":" .. msg.sender_user_id_)
 return false
 end
 --     Source Antak     --
-if text and (text == 'حذف رد من متعدد' or text == 'مسح رد من متعدد') and ChCheck(msg) then
+if text and (text =='حذف رد من متعدد' or text =='مسح رد من متعدد') and ChCheck(msg) then
 if not Bot(msg) and DevRio:get(Antak..'Rio:Lock:Rd'..msg.chat_id_) then 
 Dev_Rio(msg.chat_id_, msg.id_, 1,'᥀︙لاتستطيع حذف رد وذالك بسبب تعطيله', 1, 'md')
 return false
@@ -12177,7 +12003,7 @@ return false
 end
 if text and text:match("^(.*)$") then
 local DelGpRedRedod = DevRio:get(Antak..'Rio:Add:GpRedod'..msg.sender_user_id_..msg.chat_id_)
-if DelGpRedRedod == 'DelGpRedRedod' then
+if DelGpRedRedod =='DelGpRedRedod' then
 if text == "الغاء" then 
 Dev_Rio(msg.chat_id_, msg.id_, 1, "᥀︙تم الغاء الامر" ,  1, "md")
 DevRio:del(Antak..'Rio:Add:GpRedod'..msg.sender_user_id_..msg.chat_id_)
@@ -12192,7 +12018,7 @@ DevRio:set(Antak..'Rio:Add:GpRedod'..msg.sender_user_id_..msg.chat_id_,'DelGpRed
 DevRio:set(Antak..'Rio:Add:GpTexts'..msg.sender_user_id_..msg.chat_id_,text)
 return false
 end end
-if text and (text == 'حذف رد متعدد' or text == 'مسح رد متعدد') and ChCheck(msg) then
+if text and (text =='حذف رد متعدد' or text =='مسح رد متعدد') and ChCheck(msg) then
 if not Bot(msg) and DevRio:get(Antak..'Rio:Lock:Rd'..msg.chat_id_) then 
 Dev_Rio(msg.chat_id_, msg.id_, 1,'᥀︙لاتستطيع حذف رد وذالك بسبب تعطيله', 1, 'md')
 return false
@@ -12209,7 +12035,7 @@ DevRio:set(Antak..'Rio:Add:GpRedod'..msg.sender_user_id_..msg.chat_id_,'DelGpRed
 Dev_Rio(msg.chat_id_, msg.id_, 1, "᥀︙حسنا ارسل الكلمه لحذفها" ,  1, "md")
 return false
 end
-if text == 'اضف رد متعدد' and ChCheck(msg) then
+if text =='اضف رد متعدد' and ChCheck(msg) then
 if not Bot(msg) and DevRio:get(Antak..'Rio:Lock:Rd'..msg.chat_id_) then 
 Dev_Rio(msg.chat_id_, msg.id_, 1,'᥀︙لاتستطيع اضافه رد وذالك بسبب تعطيله', 1, 'md')
 return false
@@ -12223,7 +12049,7 @@ return false
 end end
 if text and text:match("^(.*)$") then
 local SetGpRedod = DevRio:get(Antak..'Rio:Add:GpRedod'..msg.sender_user_id_..msg.chat_id_)
-if SetGpRedod == 'SetGpRedod' then
+if SetGpRedod =='SetGpRedod' then
 if text == "الغاء" then 
 Dev_Rio(msg.chat_id_, msg.id_, 1, "᥀︙تم الغاء الامر" ,  1, "md")
 DevRio:del(Antak..'Rio:Add:GpRedod'..msg.sender_user_id_..msg.chat_id_)
@@ -12231,10 +12057,8 @@ return false
 end
 if DevRio:sismember(Antak..'Rio:Manager:GpRedod'..msg.chat_id_,text) then
 local Rio = "᥀︙لاتستطيع اضافة رد بالتاكيد مضاف في القائمه قم بحذفه اولا !"
-keyboard = {} 
-keyboard.inline_keyboard = {{{text="• حذف الرد ↫ "..text,callback_data="/DelRed:"..msg.sender_user_id_..text}}} 
-Msg_id = msg.id_/2097152/0.5
-https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(Rio).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+local inline = {{{text="‹ حذف الرد ↫ "..text,callback_data="/DelRed:"..msg.sender_user_id_..text}}} 
+SendInline(msg.chat_id_,Rio,nil,inline,msg.id_/2097152/0.5)
 DevRio:del(Antak..'Rio:Add:GpRedod'..msg.sender_user_id_..msg.chat_id_)
 return false
 end
@@ -12245,14 +12069,14 @@ DevRio:sadd(Antak..'Rio:Manager:GpRedod'..msg.chat_id_,text)
 return false
 end end
 --     Source Antak     --
-if text == 'اضف كت' and ChCheck(msg) then
+if text =='اضف كت' and ChCheck(msg) then
 DevRio:set(Antak..'Rio:Add:Kt'..msg.sender_user_id_..msg.chat_id_,'SetKt')
 Dev_Rio(msg.chat_id_, msg.id_, 1, "᥀︙حسنا ارسل امر `كت تويت` الان" ,  1, "md")
 return false
 end
 if text and text:match("^(.*)$") then
 local SetKt = DevRio:get(Antak..'Rio:Add:Kt'..msg.sender_user_id_..msg.chat_id_)
-if SetKt == 'SetKt' then
+if SetKt =='SetKt' then
 if text == "الغاء" then 
 Dev_Rio(msg.chat_id_, msg.id_, 1, "᥀︙تم الغاء الامر" ,  1, "md")
 DevRio:del(Antak..'Rio:Add:Kt'..msg.sender_user_id_..msg.chat_id_)
@@ -12265,7 +12089,7 @@ DevRio:sadd(Antak..'Rio:Sudo:Kt'..msg.chat_id_,text)
 return false
 end end
 --     Source Antak     --
-if text and (text == 'حذف رد' or text == 'مسح رد') and ChCheck(msg) then
+if text and (text =='حذف رد' or text =='مسح رد') and ChCheck(msg) then
 if not Bot(msg) and DevRio:get(Antak..'Rio:Lock:Rd'..msg.chat_id_) then 
 Dev_Rio(msg.chat_id_, msg.id_, 1,'᥀︙لاتستطيع حذف رد وذالك بسبب تعطيله', 1, 'md')
 return false
@@ -12278,7 +12102,7 @@ DevRio:set(Antak..'Rio:Add:GpRed'..msg.sender_user_id_..msg.chat_id_,'DelGpRed')
 Dev_Rio(msg.chat_id_, msg.id_, 1, "᥀︙حسنا ارسل الكلمه لحذفها " ,  1, "md")
 return false
 end
-if text and (text == 'اضف رد' or text == 'اضافه رد' or text == 'اضافة رد') and ChCheck(msg) then
+if text and (text =='اضف رد' or text =='اضافه رد' or text =='اضافة رد') and ChCheck(msg) then
 if not Bot(msg) and DevRio:get(Antak..'Rio:Lock:Rd'..msg.chat_id_) then 
 Dev_Rio(msg.chat_id_, msg.id_, 1,'᥀︙لاتستطيع اضافه رد وذالك بسبب تعطيله', 1, 'md')
 return false
@@ -12292,7 +12116,7 @@ return false
 end end
 if text and text:match("^(.*)$") then
 local SetGpRed = DevRio:get(Antak..'Rio:Add:GpRed'..msg.sender_user_id_..msg.chat_id_)
-if SetGpRed == 'SetGpRed' then
+if SetGpRed =='SetGpRed' then
 if text == "الغاء" then 
 Dev_Rio(msg.chat_id_, msg.id_, 1, "᥀︙تم الغاء الامر" ,  1, "md")
 DevRio:del(Antak..'Rio:Add:GpRed'..msg.sender_user_id_..msg.chat_id_)
@@ -12303,14 +12127,12 @@ DevRio:set(Antak..'Rio:Add:GpRed'..msg.sender_user_id_..msg.chat_id_,'SaveGpRed'
 DevRio:set(Antak..'Rio:Add:GpText'..msg.sender_user_id_..msg.chat_id_,text)
 DevRio:sadd(Antak..'Rio:Manager:GpRed'..msg.chat_id_,text)
 DevRio:set(Antak..'DelManagerRep'..msg.chat_id_,text)
-keyboard = {} 
-keyboard.inline_keyboard = {{{text="• تغير الرد •",callback_data="/ChangeRed:"..msg.sender_user_id_}},{{text="• الغاء •",callback_data="/CancelRed:"..msg.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
-Msg_id = msg.id_/2097152/0.5
-https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(Text).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+local inline = {{{text="‹ تغير الرد ›",callback_data="/ChangeRed:"..msg.sender_user_id_}},{{text="‹ الغاء ›",callback_data="/CancelRed:"..msg.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
+SendInline(msg.chat_id_,Text,nil,inline,msg.id_/2097152/0.5)
 return false
 end end
 --     Source Antak     --
-if text and (text == 'حذف رد عام' or text == '↫ حذف رد عام ᥀' or text == 'مسح رد عام' or text == 'حذف رد للكل' or text == 'مسح رد للكل' or text == 'مسح رد مطور' or text == 'حذف رد مطور') and ChCheck(msg) then
+if text and (text =='حذف رد عام' or text =='↫ حذف رد عام ᥀' or text =='مسح رد عام' or text =='حذف رد للكل' or text =='مسح رد للكل' or text =='مسح رد مطور' or text =='حذف رد مطور') and ChCheck(msg) then
 if not Bot(msg) and DevRio:get(Antak..'Rio:Lock:Rd'..msg.chat_id_) then 
 Dev_Rio(msg.chat_id_, msg.id_, 1,'᥀︙لاتستطيع حذف رد وذالك بسبب تعطيله', 1, 'md')
 return false
@@ -12323,7 +12145,7 @@ DevRio:set(Antak.."Rio:Add:AllRed"..msg.sender_user_id_,'DelAllRed')
 Dev_Rio(msg.chat_id_, msg.id_, 1, "᥀︙حسنا ارسل الكلمه لحذفها " ,  1, "md")
 return false
 end
-if text and (text == 'اضف رد عام' or text == '↫ اضف رد عام ᥀' or text == 'اضف رد للكل' or text == 'اضف رد مطور') and ChCheck(msg) then
+if text and (text =='اضف رد عام' or text =='↫ اضف رد عام ᥀' or text =='اضف رد للكل' or text =='اضف رد مطور') and ChCheck(msg) then
 if not Bot(msg) and DevRio:get(Antak..'Rio:Lock:Rd'..msg.chat_id_) then 
 Dev_Rio(msg.chat_id_, msg.id_, 1,'᥀︙لاتستطيع اضافه رد وذالك بسبب تعطيله', 1, 'md')
 return false
@@ -12337,7 +12159,7 @@ return false
 end end
 if text and text:match("^(.*)$") then
 local SetAllRed = DevRio:get(Antak.."Rio:Add:AllRed"..msg.sender_user_id_)
-if SetAllRed == 'SetAllRed' then
+if SetAllRed =='SetAllRed' then
 if text == "الغاء" then 
 Dev_Rio(msg.chat_id_, msg.id_, 1, "᥀︙تم الغاء الامر" ,  1, "md")
 DevRio:del(Antak..'Rio:Add:AllRed'..msg.sender_user_id_)
@@ -12348,28 +12170,26 @@ DevRio:set(Antak.."Rio:Add:AllRed"..msg.sender_user_id_,'SaveAllRed')
 DevRio:set(Antak.."Rio:Add:AllText"..msg.sender_user_id_, text)
 DevRio:sadd(Antak.."Rio:Sudo:AllRed",text)
 DevRio:set(Antak.."DelSudoRep",text)
-keyboard = {} 
-keyboard.inline_keyboard = {{{text="• تغير الرد •",callback_data="/ChangeAllRed:"..msg.sender_user_id_}},{{text="• الغاء •",callback_data="/CancelAllRed:"..msg.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
-Msg_id = msg.id_/2097152/0.5
-https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(Text).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+local inline = {{{text="‹ تغير الرد ›",callback_data="/ChangeAllRed:"..msg.sender_user_id_}},{{text="‹ الغاء ›",callback_data="/CancelAllRed:"..msg.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
+SendInline(msg.chat_id_,Text,nil,inline,msg.id_/2097152/0.5)
 return false
 end end
 --     Source Antak     --
-if text == 'الردود المتعدده' and ChCheck(msg) then
+if text =='الردود المتعدده' and ChCheck(msg) then
 if not Manager(msg) then
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙للمدير واعلى فقط ', 1, 'md')
 else
 local redod = DevRio:smembers(Antak..'Rio:Manager:GpRedod'..msg.chat_id_)
-MsgRep = '᥀︙قائمة الردود المتعدده ↫ ⤈ \n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n'
+MsgRep ='᥀︙قائمة الردود المتعدده ↫ ⤈ \n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n'
 for k,v in pairs(redod) do
 MsgRep = MsgRep..k..'~ (`'..v..'`) • {*العدد ↫ '..#DevRio:smembers(Antak..'Rio:Text:GpTexts'..v..msg.chat_id_)..'*}\n' 
 end
 if #redod == 0 then
-MsgRep = '᥀︙لا توجد ردود متعدده مضافه'
+MsgRep ='᥀︙لا توجد ردود متعدده مضافه'
 end
 send(msg.chat_id_,msg.id_,MsgRep)
 end
-if text and (text == 'حذف الردود المتعدده' or text == 'مسح الردود المتعدده') and ChCheck(msg) then
+if text and (text =='حذف الردود المتعدده' or text =='مسح الردود المتعدده') and ChCheck(msg) then
 if not Bot(msg) and DevRio:get(Antak..'Rio:Lock:GpRd'..msg.chat_id_) then 
 Dev_Rio(msg.chat_id_, msg.id_, 1,'᥀︙لاتستطيع حذف ردود المتعدده وذالك بسبب تعطيله', 1, 'md')
 return false
@@ -12392,38 +12212,36 @@ end
 end
 end
 --     Source Antak     --
-if text == 'الردود' and Manager(msg) and ChCheck(msg) or text == 'ردود المدير' and Manager(msg) and ChCheck(msg) then
+if text =='الردود' and Manager(msg) and ChCheck(msg) or text =='ردود المدير' and Manager(msg) and ChCheck(msg) then
 local redod = DevRio:smembers(Antak..'Rio:Manager:GpRed'..msg.chat_id_)
-MsgRep = '᥀︙ردود المدير ↫ ⤈ \n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n'
+MsgRep ='᥀︙ردود المدير ↫ ⤈ \n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n'
 for k,v in pairs(redod) do
 if DevRio:get(Antak.."Rio:Gif:GpRed"..v..msg.chat_id_) then
-dp = 'متحركه 🎭'
+dp ='متحركه 🎭'
 elseif DevRio:get(Antak.."Rio:Voice:GpRed"..v..msg.chat_id_) then
-dp = 'بصمه 🎙'
+dp ='بصمه 🎙'
 elseif DevRio:get(Antak.."Rio:Stecker:GpRed"..v..msg.chat_id_) then
-dp = 'ملصق 🃏'
+dp ='ملصق 🃏'
 elseif DevRio:get(Antak.."Rio:Text:GpRed"..v..msg.chat_id_) then
-dp = 'رساله ✉'
+dp ='رساله ✉'
 elseif DevRio:get(Antak.."Rio:Photo:GpRed"..v..msg.chat_id_) then
-dp = 'صوره 🎇'
+dp ='صوره 🎇'
 elseif DevRio:get(Antak.."Rio:Video:GpRed"..v..msg.chat_id_) then
-dp = 'فيديو 📽'
+dp ='فيديو 📽'
 elseif DevRio:get(Antak.."Rio:File:GpRed"..v..msg.chat_id_) then
-dp = 'ملف 📁'
+dp ='ملف 📁'
 elseif DevRio:get(Antak.."Rio:Audio:GpRed"..v..msg.chat_id_) then
-dp = 'اغنيه 🎶'
+dp ='اغنيه 🎶'
 end
 MsgRep = MsgRep..k..'~ (`'..v..'`) ↫ {*'..dp..'*}\n' 
 end
 if #redod == 0 then
-MsgRep = '*᥀︙لا توجد ردود مضافه*'
+MsgRep ='*᥀︙لا توجد ردود مضافه*'
 end
-keyboard = {} 
-keyboard.inline_keyboard = {{{text="• مسح ردود المدير •",callback_data="/DelGpRed:"..msg.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..msg.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
-Msg_id = msg.id_/2097152/0.5
-https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(MsgRep).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+local inline = {{{text="‹ مسح ردود المدير ›",callback_data="/DelGpRed:"..msg.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..msg.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
+SendInline(msg.chat_id_,MsgRep,nil,inline,msg.id_/2097152/0.5)
 end
-if text and (text =='حذف الردود' or text == 'مسح الردود' or text == 'حذف ردود المدير' or text == 'مسح ردود المدير') and ChCheck(msg) then
+if text and (text =='حذف الردود' or text =='مسح الردود' or text =='حذف ردود المدير' or text =='مسح ردود المدير') and ChCheck(msg) then
 if not Bot(msg) and DevRio:get(Antak..'Rio:Lock:GpRd'..msg.chat_id_) then 
 Dev_Rio(msg.chat_id_, msg.id_, 1,'᥀︙لاتستطيع حذف ردود المدير وذالك بسبب تعطيله', 1, 'md')
 return false
@@ -12454,34 +12272,32 @@ end
 --     Source Antak     --
 if  text == "ردود المطور" and SecondSudo(msg) or text == "الردود العام" and SecondSudo(msg) or text == "ردود العام" and SecondSudo(msg) or text == "↫ الردود العام ᥀" and SecondSudo(msg) then
 local redod = DevRio:smembers(Antak.."Rio:Sudo:AllRed")
-MsgRep = '᥀︙ردود المطور ↫ ⤈ \n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n'
+MsgRep ='᥀︙ردود المطور ↫ ⤈ \n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n'
 for k,v in pairs(redod) do
 if DevRio:get(Antak.."Rio:Gif:AllRed"..v) then
-dp = 'متحركه 🎭'
+dp ='متحركه 🎭'
 elseif DevRio:get(Antak.."Rio:Voice:AllRed"..v) then
-dp = 'بصمه 🎙'
+dp ='بصمه 🎙'
 elseif DevRio:get(Antak.."Rio:Stecker:AllRed"..v) then
-dp = 'ملصق 🃏'
+dp ='ملصق 🃏'
 elseif DevRio:get(Antak.."Rio:Text:AllRed"..v) then
-dp = 'رساله ✉'
+dp ='رساله ✉'
 elseif DevRio:get(Antak.."Rio:Photo:AllRed"..v) then
-dp = 'صوره 🎇'
+dp ='صوره 🎇'
 elseif DevRio:get(Antak.."Rio:Video:AllRed"..v) then
-dp = 'فيديو 📽'
+dp ='فيديو 📽'
 elseif DevRio:get(Antak.."Rio:File:AllRed"..v) then
-dp = 'ملف 📁'
+dp ='ملف 📁'
 elseif DevRio:get(Antak.."Rio:Audio:AllRed"..v) then
-dp = 'اغنيه 🎶'
+dp ='اغنيه 🎶'
 end
 MsgRep = MsgRep..k..'~ (`'..v..'`) ↫ {*'..dp..'*}\n' 
 end
 if #redod == 0 then
-MsgRep = '*᥀︙لا توجد ردود مضافه*'
+MsgRep ='*᥀︙لا توجد ردود مضافه*'
 end
-keyboard = {} 
-keyboard.inline_keyboard = {{{text="• مسح ردود المطور •",callback_data="/DelGpRedAll:"..msg.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
-Msg_id = msg.id_/2097152/0.5
-https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(MsgRep or redod).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+local inline = {{{text="‹ مسح ردود المطور ›",callback_data="/DelGpRedAll:"..msg.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
+SendInline(msg.chat_id_,MsgRep,nil,inline,msg.id_/2097152/0.5)
 end
 if text and (text == "حذف ردود المطور" or text == "حذف ردود العام" or text == "مسح ردود المطور" or text == "↫ مسح ردود العام ᥀") then
 if not Bot(msg) and DevRio:get(Antak..'Rio:Lock:GpRd'..msg.chat_id_) then 
@@ -12522,12 +12338,12 @@ DevRio:set(Antak..'Rio:NameBot'..msg.sender_user_id_, 'msg')
 return false 
 end
 end
-if text and text == 'حذف اسم البوت' and ChCheck(msg) or text == 'مسح اسم البوت' and ChCheck(msg) then
+if text and text =='حذف اسم البوت' and ChCheck(msg) or text =='مسح اسم البوت' and ChCheck(msg) then
 if not SecondSudo(msg) then
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙للمطور الاساسي فقط ', 1, 'md')
 else
 DevRio:del(Antak..'Rio:NameBot')
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم حذف اسم البوت'
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم حذف اسم البوت'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 end end 
 --     Source Antak     --
@@ -12544,7 +12360,7 @@ DevRio:set(Antak..'Rio:Help0'..msg.sender_user_id_, 'msg')
 return false end
 if text and text:match("^(.*)$") then
 local AntakTeam =  DevRio:get(Antak..'Rio:Help0'..msg.sender_user_id_)
-if AntakTeam == 'msg' then
+if AntakTeam =='msg' then
 Dev_Rio(msg.chat_id_, msg.id_, 1, text , 1, 'md')
 DevRio:del(Antak..'Rio:Help0'..msg.sender_user_id_)
 DevRio:set(Antak..'Rio:Help', text)
@@ -12567,15 +12383,15 @@ local Text = [[
 ]] 
 keyboard = {} 
 if SudoBot(msg) then
-keyboard.inline_keyboard = {{{text="• اوامر الادمنيه •",callback_data="/HelpList2:"..msg.sender_user_id_},{text="• اوامر الحمايه •",callback_data="/HelpList1:"..msg.sender_user_id_}},{{text="• اوامر المنشئين •",callback_data="/HelpList4:"..msg.sender_user_id_},{text="• اوامر المدراء •",callback_data="/HelpList3:"..msg.sender_user_id_}},{{text="• اوامر الاعضاء •",callback_data="/HelpList6:"..msg.sender_user_id_},{text="• اوامر المطورين •",callback_data="/HelpList5:"..msg.sender_user_id_}},{{text="• اوامر الرتب •",callback_data="/DelList:"..msg.sender_user_id_}},{{text="• التفعيل و التعطيل •",callback_data="/lockorder:"..msg.sender_user_id_},{text="• القفل و الفتح •",callback_data="/locklist:"..msg.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..msg.sender_user_id_}}}
+keyboard.inline_keyboard = {{{text="‹ اوامر الادمنيه ›",callback_data="/HelpList2:"..msg.sender_user_id_},{text="‹ اوامر الحمايه ›",callback_data="/HelpList1:"..msg.sender_user_id_}},{{text="‹ اوامر المنشئين ›",callback_data="/HelpList4:"..msg.sender_user_id_},{text="‹ اوامر المدراء ›",callback_data="/HelpList3:"..msg.sender_user_id_}},{{text="‹ اوامر الاعضاء ›",callback_data="/HelpList6:"..msg.sender_user_id_},{text="‹ اوامر المطورين ›",callback_data="/HelpList5:"..msg.sender_user_id_}},{{text="‹ اوامر الرتب ›",callback_data="/DelList:"..msg.sender_user_id_}},{{text="‹ التفعيل و التعطيل ›",callback_data="/lockorder:"..msg.sender_user_id_},{text="‹ القفل و الفتح ›",callback_data="/locklist:"..msg.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..msg.sender_user_id_}}}
 elseif Constructor(msg) then
-keyboard.inline_keyboard = {{{text="• اوامر الادمنيه •",callback_data="/HelpList2:"..msg.sender_user_id_},{text="• اوامر الحمايه •",callback_data="/HelpList1:"..msg.sender_user_id_}},{{text="• اوامر المنشئين •",callback_data="/HelpList4:"..msg.sender_user_id_},{text="• اوامر المدراء •",callback_data="/HelpList3:"..msg.sender_user_id_}},{{text="• اوامر الاعضاء •",callback_data="/HelpList6:"..msg.sender_user_id_}},{{text="• اوامر الرتب •",callback_data="/DelList:"..msg.sender_user_id_}},{{text="• التفعيل و التعطيل •",callback_data="/lockorder:"..msg.sender_user_id_},{text="• القفل و الفتح •",callback_data="/locklist:"..msg.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..msg.sender_user_id_}}}
+keyboard.inline_keyboard = {{{text="‹ اوامر الادمنيه ›",callback_data="/HelpList2:"..msg.sender_user_id_},{text="‹ اوامر الحمايه ›",callback_data="/HelpList1:"..msg.sender_user_id_}},{{text="‹ اوامر المنشئين ›",callback_data="/HelpList4:"..msg.sender_user_id_},{text="‹ اوامر المدراء ›",callback_data="/HelpList3:"..msg.sender_user_id_}},{{text="‹ اوامر الاعضاء ›",callback_data="/HelpList6:"..msg.sender_user_id_}},{{text="‹ اوامر الرتب ›",callback_data="/DelList:"..msg.sender_user_id_}},{{text="‹ التفعيل و التعطيل ›",callback_data="/lockorder:"..msg.sender_user_id_},{text="‹ القفل و الفتح ›",callback_data="/locklist:"..msg.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..msg.sender_user_id_}}}
 elseif Manager(msg) then
-keyboard.inline_keyboard = {{{text="• اوامر الادمنيه •",callback_data="/HelpList2:"..msg.sender_user_id_},{text="• اوامر الحمايه •",callback_data="/HelpList1:"..msg.sender_user_id_},{text="• اوامر المدراء •",callback_data="/HelpList3:"..msg.sender_user_id_}},{{text="• اوامر الاعضاء •",callback_data="/HelpList6:"..msg.sender_user_id_}},{{text="• اوامر الرتب •",callback_data="/DelList:"..msg.sender_user_id_}},{{text="• التفعيل و التعطيل •",callback_data="/lockorder:"..msg.sender_user_id_},{text="• القفل و الفتح •",callback_data="/locklist:"..msg.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..msg.sender_user_id_}}}
+keyboard.inline_keyboard = {{{text="‹ اوامر الادمنيه ›",callback_data="/HelpList2:"..msg.sender_user_id_},{text="‹ اوامر الحمايه ›",callback_data="/HelpList1:"..msg.sender_user_id_},{text="‹ اوامر المدراء ›",callback_data="/HelpList3:"..msg.sender_user_id_}},{{text="‹ اوامر الاعضاء ›",callback_data="/HelpList6:"..msg.sender_user_id_}},{{text="‹ اوامر الرتب ›",callback_data="/DelList:"..msg.sender_user_id_}},{{text="‹ التفعيل و التعطيل ›",callback_data="/lockorder:"..msg.sender_user_id_},{text="‹ القفل و الفتح ›",callback_data="/locklist:"..msg.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..msg.sender_user_id_}}}
 elseif Admin(msg) then
-keyboard.inline_keyboard = {{{text="• اوامر الادمنيه •",callback_data="/HelpList2:"..msg.sender_user_id_},{text="• اوامر الحمايه •",callback_data="/HelpList1:"..msg.sender_user_id_}},{{text="• اوامر الاعضاء •",callback_data="/HelpList6:"..msg.sender_user_id_}},{{text="• اوامر الرتب •",callback_data="/DelList:"..msg.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..msg.sender_user_id_}}}
+keyboard.inline_keyboard = {{{text="‹ اوامر الادمنيه ›",callback_data="/HelpList2:"..msg.sender_user_id_},{text="‹ اوامر الحمايه ›",callback_data="/HelpList1:"..msg.sender_user_id_}},{{text="‹ اوامر الاعضاء ›",callback_data="/HelpList6:"..msg.sender_user_id_}},{{text="‹ اوامر الرتب ›",callback_data="/DelList:"..msg.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..msg.sender_user_id_}}}
 else
-keyboard.inline_keyboard = {{{text="• اوامر الاعضاء •",callback_data="/HelpList6:"..msg.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..msg.sender_user_id_}}}
+keyboard.inline_keyboard = {{{text="‹ اوامر الاعضاء ›",callback_data="/HelpList6:"..msg.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..msg.sender_user_id_}}}
 end
 Msg_id = msg.id_/2097152/0.5
 return https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(Help or Text).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
@@ -12586,7 +12402,7 @@ DevRio:set(Antak..'Rio:Help01'..msg.sender_user_id_, 'msg')
 return false end
 if text and text:match("^(.*)$") then
 local AntakTeam =  DevRio:get(Antak..'Rio:Help01'..msg.sender_user_id_)
-if AntakTeam == 'msg' then 
+if AntakTeam =='msg' then 
 Dev_Rio(msg.chat_id_, msg.id_, 1, text , 1, 'md')
 DevRio:del(Antak..'Rio:Help01'..msg.sender_user_id_)
 DevRio:set(Antak..'Rio:Help1', text)
@@ -12654,7 +12470,7 @@ DevRio:set(Antak..'Rio:Help21'..msg.sender_user_id_, 'msg')
 return false end
 if text and text:match("^(.*)$") then
 local AntakTeam =  DevRio:get(Antak..'Rio:Help21'..msg.sender_user_id_)
-if AntakTeam == 'msg' then
+if AntakTeam =='msg' then
 Dev_Rio(msg.chat_id_, msg.id_, 1, text , 1, 'md')
 DevRio:del(Antak..'Rio:Help21'..msg.sender_user_id_)
 DevRio:set(Antak..'Rio:Help2', text)
@@ -12729,7 +12545,7 @@ DevRio:set(Antak..'Rio:Help31'..msg.sender_user_id_, 'msg')
 return false end
 if text and text:match("^(.*)$") then
 local AntakTeam =  DevRio:get(Antak..'Rio:Help31'..msg.sender_user_id_)
-if AntakTeam == 'msg' then
+if AntakTeam =='msg' then
 Dev_Rio(msg.chat_id_, msg.id_, 1, text , 1, 'md')
 DevRio:del(Antak..'Rio:Help31'..msg.sender_user_id_)
 DevRio:set(Antak..'Rio:Help3', text)
@@ -12794,7 +12610,7 @@ DevRio:set(Antak..'Rio:Help41'..msg.sender_user_id_, 'msg')
 return false end
 if text and text:match("^(.*)$") then
 local AntakTeam =  DevRio:get(Antak..'Rio:Help41'..msg.sender_user_id_)
-if AntakTeam == 'msg' then
+if AntakTeam =='msg' then
 Dev_Rio(msg.chat_id_, msg.id_, 1, text , 1, 'md')
 DevRio:del(Antak..'Rio:Help41'..msg.sender_user_id_)
 DevRio:set(Antak..'Rio:Help4', text)
@@ -12853,7 +12669,7 @@ DevRio:set(Antak..'Rio:Help51'..msg.sender_user_id_, 'msg')
 return false end
 if text and text:match("^(.*)$") then
 local AntakTeam =  DevRio:get(Antak..'Rio:Help51'..msg.sender_user_id_)
-if AntakTeam == 'msg' then
+if AntakTeam =='msg' then
 Dev_Rio(msg.chat_id_, msg.id_, 1, text , 1, 'md')
 DevRio:del(Antak..'Rio:Help51'..msg.sender_user_id_)
 DevRio:set(Antak..'Rio:Help5', text)
@@ -12937,7 +12753,7 @@ DevRio:set(Antak..'Rio:Help61'..msg.sender_user_id_, 'msg')
 return false end
 if text and text:match("^(.*)$") then
 local AntakTeam =  DevRio:get(Antak..'Rio:Help61'..msg.sender_user_id_)
-if AntakTeam == 'msg' then
+if AntakTeam =='msg' then
 Dev_Rio(msg.chat_id_, msg.id_, 1, text , 1, 'md')
 DevRio:del(Antak..'Rio:Help61'..msg.sender_user_id_)
 DevRio:set(Antak..'Rio:Help6', text)
@@ -12981,7 +12797,7 @@ end
 if text == "مسح الرتب" and Admin(msg) then
 local Del = DevRio:get(Antak..'Rio:Del')
 local Text = [[
-᥀︙اهلا بك في قائمة اوامر الرتب ↫ ⤈ 
+*᥀︙اهلا بك في قائمة اوامر الرتب ↫ ⤈*
 ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉
 *᥀︙يمكنك مسح رتب المجموعه من خلال الازرار اسفل*
 ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉
@@ -12989,23 +12805,23 @@ local Text = [[
 ]] 
 keyboard = {} 
 if Sudo(msg) then
-keyboard.inline_keyboard = {{{text="• مسح الاساسيين •",callback_data="/DelRioSudo:"..msg.sender_user_id_},{text="• مسح الثانويين •",callback_data="/DelSecondSudo:"..msg.sender_user_id_}},{{text="• مسح المطورين •",callback_data="/DelSudoBot:"..msg.sender_user_id_},{text="• مسح المالكين •",callback_data="/DelOwner:"..msg.sender_user_id_}},{{text="• مسح المنشئين الاساسيين •",callback_data="/DelBasicConstructor:"..msg.sender_user_id_},{text="• مسح المنشئين •",callback_data="/DelConstructor:"..msg.sender_user_id_}},{{text="• مسح المدراء •",callback_data="/DelManagers:"..msg.sender_user_id_},{text="• مسح الادمنيه •",callback_data="/DelAdmins:"..msg.sender_user_id_}},{{text="• مسح المميزين •",callback_data="/DelVipMem:"..msg.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..msg.sender_user_id_},{text="• القائمه الرئيسيه •",callback_data="/DelList:"..msg.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ مسح الاساسيين ›",callback_data="/DelRioSudo:"..msg.sender_user_id_},{text="‹ مسح الثانويين ›",callback_data="/DelSecondSudo:"..msg.sender_user_id_}},{{text="‹ مسح المطورين ›",callback_data="/DelSudoBot:"..msg.sender_user_id_},{text="‹ مسح المالكين ›",callback_data="/DelOwner:"..msg.sender_user_id_}},{{text="‹ مسح المنشئين الاساسيين ›",callback_data="/DelBasicConstructor:"..msg.sender_user_id_},{text="‹ مسح المنشئين ›",callback_data="/DelConstructor:"..msg.sender_user_id_}},{{text="‹ مسح المدراء ›",callback_data="/DelManagers:"..msg.sender_user_id_},{text="‹ مسح الادمنيه ›",callback_data="/DelAdmins:"..msg.sender_user_id_}},{{text="‹ مسح المميزين ›",callback_data="/DelVipMem:"..msg.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..msg.sender_user_id_},{text="‹ القائمه الرئيسيه ›",callback_data="/DelList:"..msg.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 elseif RioSudo(msg) then
-keyboard.inline_keyboard = {{{text="• مسح الثانويين •",callback_data="/DelSecondSudo:"..msg.sender_user_id_}},{{text="• مسح المطورين •",callback_data="/DelSudoBot:"..msg.sender_user_id_},{text="• مسح المالكين •",callback_data="/DelOwner:"..msg.sender_user_id_}},{{text="• مسح المنشئين الاساسيين •",callback_data="/DelBasicConstructor:"..msg.sender_user_id_},{text="• مسح المنشئين •",callback_data="/DelConstructor:"..msg.sender_user_id_}},{{text="• مسح المدراء •",callback_data="/DelManagers:"..msg.sender_user_id_},{text="• مسح الادمنيه •",callback_data="/DelAdmins:"..msg.sender_user_id_}},{{text="• مسح المميزين •",callback_data="/DelVipMem:"..msg.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..msg.sender_user_id_},{text="• القائمه الرئيسيه •",callback_data="/DelList:"..msg.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ مسح الثانويين ›",callback_data="/DelSecondSudo:"..msg.sender_user_id_}},{{text="‹ مسح المطورين ›",callback_data="/DelSudoBot:"..msg.sender_user_id_},{text="‹ مسح المالكين ›",callback_data="/DelOwner:"..msg.sender_user_id_}},{{text="‹ مسح المنشئين الاساسيين ›",callback_data="/DelBasicConstructor:"..msg.sender_user_id_},{text="‹ مسح المنشئين ›",callback_data="/DelConstructor:"..msg.sender_user_id_}},{{text="‹ مسح المدراء ›",callback_data="/DelManagers:"..msg.sender_user_id_},{text="‹ مسح الادمنيه ›",callback_data="/DelAdmins:"..msg.sender_user_id_}},{{text="‹ مسح المميزين ›",callback_data="/DelVipMem:"..msg.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..msg.sender_user_id_},{text="‹ القائمه الرئيسيه ›",callback_data="/DelList:"..msg.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 elseif SecondSudo(msg) then
-keyboard.inline_keyboard = {{{text="• مسح المطورين •",callback_data="/DelSudoBot:"..msg.sender_user_id_},{text="• مسح المالكين •",callback_data="/DelOwner:"..msg.sender_user_id_}},{{text="• مسح المنشئين الاساسيين •",callback_data="/DelBasicConstructor:"..msg.sender_user_id_},{text="• مسح المنشئين •",callback_data="/DelConstructor:"..msg.sender_user_id_}},{{text="• مسح المدراء •",callback_data="/DelManagers:"..msg.sender_user_id_},{text="• مسح الادمنيه •",callback_data="/DelAdmins:"..msg.sender_user_id_}},{{text="• مسح المميزين •",callback_data="/DelVipMem:"..msg.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..msg.sender_user_id_},{text="• القائمه الرئيسيه •",callback_data="/DelList:"..msg.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ مسح المطورين ›",callback_data="/DelSudoBot:"..msg.sender_user_id_},{text="‹ مسح المالكين ›",callback_data="/DelOwner:"..msg.sender_user_id_}},{{text="‹ مسح المنشئين الاساسيين ›",callback_data="/DelBasicConstructor:"..msg.sender_user_id_},{text="‹ مسح المنشئين ›",callback_data="/DelConstructor:"..msg.sender_user_id_}},{{text="‹ مسح المدراء ›",callback_data="/DelManagers:"..msg.sender_user_id_},{text="‹ مسح الادمنيه ›",callback_data="/DelAdmins:"..msg.sender_user_id_}},{{text="‹ مسح المميزين ›",callback_data="/DelVipMem:"..msg.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..msg.sender_user_id_},{text="‹ القائمه الرئيسيه ›",callback_data="/DelList:"..msg.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 elseif SudoBot(msg) then
-keyboard.inline_keyboard = {{{text="• مسح المالكين •",callback_data="/DelOwner:"..msg.sender_user_id_}},{{text="• مسح المنشئين الاساسيين •",callback_data="/DelBasicConstructor:"..msg.sender_user_id_},{text="• مسح المنشئين •",callback_data="/DelConstructor:"..msg.sender_user_id_}},{{text="• مسح المدراء •",callback_data="/DelManagers:"..msg.sender_user_id_},{text="• مسح الادمنيه •",callback_data="/DelAdmins:"..msg.sender_user_id_}},{{text="• مسح المميزين •",callback_data="/DelVipMem:"..msg.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..msg.sender_user_id_},{text="• القائمه الرئيسيه •",callback_data="/DelList:"..msg.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ مسح المالكين ›",callback_data="/DelOwner:"..msg.sender_user_id_}},{{text="‹ مسح المنشئين الاساسيين ›",callback_data="/DelBasicConstructor:"..msg.sender_user_id_},{text="‹ مسح المنشئين ›",callback_data="/DelConstructor:"..msg.sender_user_id_}},{{text="‹ مسح المدراء ›",callback_data="/DelManagers:"..msg.sender_user_id_},{text="‹ مسح الادمنيه ›",callback_data="/DelAdmins:"..msg.sender_user_id_}},{{text="‹ مسح المميزين ›",callback_data="/DelVipMem:"..msg.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..msg.sender_user_id_},{text="‹ القائمه الرئيسيه ›",callback_data="/DelList:"..msg.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 elseif Owner(msg) then
-keyboard.inline_keyboard = {{{text="• مسح المنشئين الاساسيين •",callback_data="/DelBasicConstructor:"..msg.sender_user_id_},{text="• مسح المنشئين •",callback_data="/DelConstructor:"..msg.sender_user_id_}},{{text="• مسح المدراء •",callback_data="/DelManagers:"..msg.sender_user_id_},{text="• مسح الادمنيه •",callback_data="/DelAdmins:"..msg.sender_user_id_}},{{text="• مسح المميزين •",callback_data="/DelVipMem:"..msg.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..msg.sender_user_id_},{text="• القائمه الرئيسيه •",callback_data="/DelList:"..msg.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ مسح المنشئين الاساسيين ›",callback_data="/DelBasicConstructor:"..msg.sender_user_id_},{text="‹ مسح المنشئين ›",callback_data="/DelConstructor:"..msg.sender_user_id_}},{{text="‹ مسح المدراء ›",callback_data="/DelManagers:"..msg.sender_user_id_},{text="‹ مسح الادمنيه ›",callback_data="/DelAdmins:"..msg.sender_user_id_}},{{text="‹ مسح المميزين ›",callback_data="/DelVipMem:"..msg.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..msg.sender_user_id_},{text="‹ القائمه الرئيسيه ›",callback_data="/DelList:"..msg.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 elseif BasicConstructor(msg) then
-keyboard.inline_keyboard = {{{text="• مسح المنشئين •",callback_data="/DelConstructor:"..msg.sender_user_id_}},{{text="• مسح المدراء •",callback_data="/DelManagers:"..msg.sender_user_id_},{text="• مسح الادمنيه •",callback_data="/DelAdmins:"..msg.sender_user_id_}},{{text="• مسح المميزين •",callback_data="/DelVipMem:"..msg.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..msg.sender_user_id_},{text="• القائمه الرئيسيه •",callback_data="/DelList:"..msg.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ مسح المنشئين ›",callback_data="/DelConstructor:"..msg.sender_user_id_}},{{text="‹ مسح المدراء ›",callback_data="/DelManagers:"..msg.sender_user_id_},{text="‹ مسح الادمنيه ›",callback_data="/DelAdmins:"..msg.sender_user_id_}},{{text="‹ مسح المميزين ›",callback_data="/DelVipMem:"..msg.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..msg.sender_user_id_},{text="‹ القائمه الرئيسيه ›",callback_data="/DelList:"..msg.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 elseif Constructor(msg) then
-keyboard.inline_keyboard = {{{text="• مسح المدراء •",callback_data="/DelManagers:"..msg.sender_user_id_},{text="• مسح الادمنيه •",callback_data="/DelAdmins:"..msg.sender_user_id_}},{{text="• مسح المميزين •",callback_data="/DelVipMem:"..msg.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..msg.sender_user_id_},{text="• القائمه الرئيسيه •",callback_data="/DelList:"..msg.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ مسح المدراء ›",callback_data="/DelManagers:"..msg.sender_user_id_},{text="‹ مسح الادمنيه ›",callback_data="/DelAdmins:"..msg.sender_user_id_}},{{text="‹ مسح المميزين ›",callback_data="/DelVipMem:"..msg.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..msg.sender_user_id_},{text="‹ القائمه الرئيسيه ›",callback_data="/DelList:"..msg.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 elseif Manager(msg) then
-keyboard.inline_keyboard = {{{text="• مسح الادمنيه •",callback_data="/DelAdmins:"..msg.sender_user_id_}},{{text="• مسح المميزين •",callback_data="/DelVipMem:"..msg.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..msg.sender_user_id_},{text="• القائمه الرئيسيه •",callback_data="/DelList:"..msg.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ مسح الادمنيه ›",callback_data="/DelAdmins:"..msg.sender_user_id_}},{{text="‹ مسح المميزين ›",callback_data="/DelVipMem:"..msg.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..msg.sender_user_id_},{text="‹ القائمه الرئيسيه ›",callback_data="/DelList:"..msg.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 elseif Admin(msg) then
-keyboard.inline_keyboard = {{{text="• مسح المميزين •",callback_data="/DelVipMem:"..msg.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..msg.sender_user_id_},{text="• القائمه الرئيسيه •",callback_data="/DelList:"..msg.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text="‹ مسح المميزين ›",callback_data="/DelVipMem:"..msg.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..msg.sender_user_id_},{text="‹ القائمه الرئيسيه ›",callback_data="/DelList:"..msg.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
 end
 Msg_id = msg.id_/2097152/0.5
 return https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(Del or Text).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
@@ -13020,10 +12836,8 @@ local Text = [[
 ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉
 ᥀︙[Source Channel](https://t.me/TeAmAnTaK)
 ]] 
-keyboard = {} 
-keyboard.inline_keyboard = {{{text="• مسح المتحركات •",callback_data="/DelGif:"..msg.sender_user_id_},{text="• مسح الملصقات •",callback_data="/DelSticker:"..msg.sender_user_id_}},{{text="• مسح الصور •",callback_data="/DelPhoto:"..msg.sender_user_id_},{text="• مسح الكلمات •",callback_data="/DelTextfilter:"..msg.sender_user_id_}},{{text="• مسح قوائم المنع •",callback_data="/DelAllFilter:"..msg.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..msg.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
-Msg_id = msg.id_/2097152/0.5
-return https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(Filter or Text).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+local inline = {{{text="‹ مسح المتحركات ›",callback_data="/DelGif:"..msg.sender_user_id_},{text="‹ مسح الملصقات ›",callback_data="/DelSticker:"..msg.sender_user_id_}},{{text="‹ مسح الصور ›",callback_data="/DelPhoto:"..msg.sender_user_id_},{text="‹ مسح الكلمات ›",callback_data="/DelTextfilter:"..msg.sender_user_id_}},{{text="‹ مسح قوائم المنع ›",callback_data="/DelAllFilter:"..msg.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..msg.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
+SendInline(msg.chat_id_,Text,nil,inline,msg.id_/2097152/0.5)
 end
 --     Source Antak     --
 if Manager(msg) then
@@ -13036,10 +12850,8 @@ local Text = [[
 ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉
 ᥀︙[Source Channel](https://t.me/TeAmAnTaK)
 ]] 
-keyboard = {} 
-keyboard.inline_keyboard = {{{text="• قفل الدردشه •",callback_data="/lockText:"..msg.sender_user_id_},{text="• فتح الدردشه •",callback_data="/unlockText:"..msg.sender_user_id_}},{{text="• قفل الدخول •",callback_data="/lockjoin:"..msg.sender_user_id_},{text="• فتح الدخول •",callback_data="/unlockjoin:"..msg.sender_user_id_}},{{text="• قفل البوتات •",callback_data="/LockBotList:"..msg.sender_user_id_},{text="• فتح البوتات •",callback_data="/unlockBot:"..msg.sender_user_id_}},{{text="• قفل الاشعارات •",callback_data="/lockTagServr:"..msg.sender_user_id_},{text="• فتح الاشعارات •",callback_data="/unlockTagServr:"..msg.sender_user_id_}},{{text="• قفل التعديل •",callback_data="/lockEditMsgs:"..msg.sender_user_id_},{text="• فتح التعديل •",callback_data="/unlockEditMsgs:"..msg.sender_user_id_}},{{text="• قفل الملصقات •",callback_data="/lockStickers:"..msg.sender_user_id_},{text="• فتح الملصقات •",callback_data="/unlockStickers:"..msg.sender_user_id_}},{{text="• قفل المتحركه •",callback_data="/lockGifs:"..msg.sender_user_id_},{text="• فتح المتحركه •",callback_data="/unlockGifs:"..msg.sender_user_id_}},{{text="• قفل الفيديو •",callback_data="/lockVideos:"..msg.sender_user_id_},{text="• فتح الفيديو •",callback_data="/unlockVideos:"..msg.sender_user_id_}},{{text="• قفل الصور •",callback_data="/unlockPhoto:"..msg.sender_user_id_},{text="• فتح الصور •",callback_data="/unlockPhoto:"..msg.sender_user_id_}},{{text="• قفل التوجيه •",callback_data="/lockForwards:"..msg.sender_user_id_},{text="• فتح التوجيه •",callback_data="/unlockForwards:"..msg.sender_user_id_}},{{text="• قفل التكرار •",callback_data="/LockSpamList:"..msg.sender_user_id_},{text="• فتح التكرار •",callback_data="/unlockSpam:"..msg.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..msg.sender_user_id_},{text="• القائمه الرئيسيه •",callback_data="/HelpList:"..msg.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
-Msg_id = msg.id_/2097152/0.5
-return https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(locklist or Text).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+local inline = {{{text="‹ قفل الدردشه ›",callback_data="/lockText:"..msg.sender_user_id_},{text="‹ فتح الدردشه ›",callback_data="/unlockText:"..msg.sender_user_id_}},{{text="‹ قفل الدخول ›",callback_data="/lockjoin:"..msg.sender_user_id_},{text="‹ فتح الدخول ›",callback_data="/unlockjoin:"..msg.sender_user_id_}},{{text="‹ قفل البوتات ›",callback_data="/LockBotList:"..msg.sender_user_id_},{text="‹ فتح البوتات ›",callback_data="/unlockBot:"..msg.sender_user_id_}},{{text="‹ قفل الاشعارات ›",callback_data="/lockTagServr:"..msg.sender_user_id_},{text="‹ فتح الاشعارات ›",callback_data="/unlockTagServr:"..msg.sender_user_id_}},{{text="‹ قفل التعديل ›",callback_data="/lockEditMsgs:"..msg.sender_user_id_},{text="‹ فتح التعديل ›",callback_data="/unlockEditMsgs:"..msg.sender_user_id_}},{{text="‹ قفل الملصقات ›",callback_data="/lockStickers:"..msg.sender_user_id_},{text="‹ فتح الملصقات ›",callback_data="/unlockStickers:"..msg.sender_user_id_}},{{text="‹ قفل المتحركه ›",callback_data="/lockGifs:"..msg.sender_user_id_},{text="‹ فتح المتحركه ›",callback_data="/unlockGifs:"..msg.sender_user_id_}},{{text="‹ قفل الفيديو ›",callback_data="/lockVideos:"..msg.sender_user_id_},{text="‹ فتح الفيديو ›",callback_data="/unlockVideos:"..msg.sender_user_id_}},{{text="‹ قفل الصور ›",callback_data="/unlockPhoto:"..msg.sender_user_id_},{text="‹ فتح الصور ›",callback_data="/unlockPhoto:"..msg.sender_user_id_}},{{text="‹ قفل التوجيه ›",callback_data="/lockForwards:"..msg.sender_user_id_},{text="‹ فتح التوجيه ›",callback_data="/unlockForwards:"..msg.sender_user_id_}},{{text="‹ قفل التكرار ›",callback_data="/LockSpamList:"..msg.sender_user_id_},{text="‹ فتح التكرار ›",callback_data="/unlockSpam:"..msg.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..msg.sender_user_id_},{text="‹ القائمه الرئيسيه ›",callback_data="/HelpList:"..msg.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
+SendInline(msg.chat_id_,Text,nil,inline,msg.id_/2097152/0.5)
 end end
 --     Source Antak     --
 if Manager(msg) then
@@ -13052,10 +12864,8 @@ local Text = [[
 ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉
 ᥀︙[Source Channel](https://t.me/TeAmAnTaK)
 ]] 
-keyboard = {} 
-keyboard.inline_keyboard = {{{text="• تعطيل الايدي بالصوره •",callback_data="/LockIdPhoto:"..msg.sender_user_id_},{text="• تفعيل الايدي بالصوره •",callback_data="/UnLockIdPhoto:"..msg.sender_user_id_}},{{text="• تعطيل الايدي •",callback_data="/LockId:"..msg.sender_user_id_},{text="• تفعيل الايدي •",callback_data="/UnLockId:"..msg.sender_user_id_}},{{text="• تعطيل الرابط •",callback_data="/LockGpLinks:"..msg.sender_user_id_},{text="• تفعيل الرابط •",callback_data="/UnLockGpLinks:"..msg.sender_user_id_}},{{text="• تعطيل الرابط انلاين •",callback_data="/LockGpLinksinline:"..msg.sender_user_id_},{text="• تفعيل الرابط انلاين •",callback_data="/UnLockGpLinksinline:"..msg.sender_user_id_}},{{text="• تعطيل الترحيب •",callback_data="/LockWelcome:"..msg.sender_user_id_},{text="• تفعيل الترحيب •",callback_data="/UnLockWelcome:"..msg.sender_user_id_}},{{text="• تعطيل الردود المطور •",callback_data="/LockAllRed:"..msg.sender_user_id_},{text="• تفعيل الردود المطور •",callback_data="/UnLockAllRed:"..msg.sender_user_id_}},{{text="• تعطيل ردود المدير •",callback_data="/LockGpRed:"..msg.sender_user_id_},{text="• تفعيل ردود المدير •",callback_data="/UnLockGpRed:"..msg.sender_user_id_}},{{text="• تعطيل نزلني •",callback_data="/LockDelMe:"..msg.sender_user_id_},{text="• تفعيل نزلني •",callback_data="/UnLockDelMe:"..msg.sender_user_id_}},{{text="• تعطيل اطردني •",callback_data="/LockKickMe:"..msg.sender_user_id_},{text="• تفعيل اطردني •",callback_data="/UnLockKickMe:"..msg.sender_user_id_}},{{text="• تعطيل الحظر •",callback_data="/LockKickBan:"..msg.sender_user_id_},{text="• تفعيل الحظر •",callback_data="/UnLockKickBan:"..msg.sender_user_id_}},{{text="• تعطيل الرفع •",callback_data="/LockProSet:"..msg.sender_user_id_},{text="• تفعيل الرفع •",callback_data="/UnLockProSet:"..msg.sender_user_id_}},{{text="• تعطيل الالعاب •",callback_data="/LockGames:"..msg.sender_user_id_},{text="• تفعيل الالعاب •",callback_data="/UnLockGames:"..msg.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..data.sender_user_id_},{text="• القائمه الرئيسيه •",callback_data="/HelpList:"..data.sender_user_id_}},{{text = '• TeAm Antak •',url="t.me/TeAmAnTaK"}}}
-Msg_id = msg.id_/2097152/0.5
-return https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(order or Text).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+local inline = {{{text="‹ تعطيل الايدي بالصوره ›",callback_data="/LockIdPhoto:"..msg.sender_user_id_},{text="‹ تفعيل الايدي بالصوره ›",callback_data="/UnLockIdPhoto:"..msg.sender_user_id_}},{{text="‹ تعطيل الايدي ›",callback_data="/LockId:"..msg.sender_user_id_},{text="‹ تفعيل الايدي ›",callback_data="/UnLockId:"..msg.sender_user_id_}},{{text="‹ تعطيل الرابط ›",callback_data="/LockGpLinks:"..msg.sender_user_id_},{text="‹ تفعيل الرابط ›",callback_data="/UnLockGpLinks:"..msg.sender_user_id_}},{{text="‹ تعطيل الرابط انلاين ›",callback_data="/LockGpLinksinline:"..msg.sender_user_id_},{text="‹ تفعيل الرابط انلاين ›",callback_data="/UnLockGpLinksinline:"..msg.sender_user_id_}},{{text="‹ تعطيل الترحيب ›",callback_data="/LockWelcome:"..msg.sender_user_id_},{text="‹ تفعيل الترحيب ›",callback_data="/UnLockWelcome:"..msg.sender_user_id_}},{{text="‹ تعطيل الردود المطور ›",callback_data="/LockAllRed:"..msg.sender_user_id_},{text="‹ تفعيل الردود المطور ›",callback_data="/UnLockAllRed:"..msg.sender_user_id_}},{{text="‹ تعطيل ردود المدير ›",callback_data="/LockGpRed:"..msg.sender_user_id_},{text="‹ تفعيل ردود المدير ›",callback_data="/UnLockGpRed:"..msg.sender_user_id_}},{{text="‹ تعطيل نزلني ›",callback_data="/LockDelMe:"..msg.sender_user_id_},{text="‹ تفعيل نزلني ›",callback_data="/UnLockDelMe:"..msg.sender_user_id_}},{{text="‹ تعطيل اطردني ›",callback_data="/LockKickMe:"..msg.sender_user_id_},{text="‹ تفعيل اطردني ›",callback_data="/UnLockKickMe:"..msg.sender_user_id_}},{{text="‹ تعطيل الحظر ›",callback_data="/LockKickBan:"..msg.sender_user_id_},{text="‹ تفعيل الحظر ›",callback_data="/UnLockKickBan:"..msg.sender_user_id_}},{{text="‹ تعطيل الرفع ›",callback_data="/LockProSet:"..msg.sender_user_id_},{text="‹ تفعيل الرفع ›",callback_data="/UnLockProSet:"..msg.sender_user_id_}},{{text="‹ تعطيل الالعاب ›",callback_data="/LockGames:"..msg.sender_user_id_},{text="‹ تفعيل الالعاب ›",callback_data="/UnLockGames:"..msg.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..data.sender_user_id_},{text="‹ القائمه الرئيسيه ›",callback_data="/HelpList:"..data.sender_user_id_}},{{text='‹ TeAm Antak ›',url="t.me/TeAmAnTaK"}}}
+SendInline(msg.chat_id_,Text,nil,inline,msg.id_/2097152/0.5)
 end end
 --     Source Antak     --
 if Cleaner(msg) then
@@ -13065,10 +12875,8 @@ local Media = DevRio:get(Antak..'Rio:Media')
 local Text = [[
 *᥀︙اليك ازرار مسح الميديا*
 ]] 
-keyboard = {} 
-keyboard.inline_keyboard = {{{text="• مسح الميديا •",callback_data="/DelMedia:"..msg.sender_user_id_},{text="• مسح الاغاني •",callback_data="/DelMusic:"..msg.sender_user_id_}},{{text="• مسح الرسائل المعدله •",callback_data="/DelMsgEdit:"..msg.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..msg.sender_user_id_}}}
-Msg_id = msg.id_/2097152/0.5
-return https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(Media or Text).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+local inline = {{{text="‹ مسح الميديا ›",callback_data="/DelMedia:"..msg.sender_user_id_},{text="‹ مسح الاغاني ›",callback_data="/DelMusic:"..msg.sender_user_id_}},{{text="‹ مسح الرسائل المعدله ›",callback_data="/DelMsgEdit:"..msg.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..msg.sender_user_id_}}}
+SendInline(msg.chat_id_,Text,nil,inline,msg.id_/2097152/0.5)
 end end end
 --     Source Antak     --
 if text == "غادر" and SudoBot(msg) then
@@ -13076,10 +12884,8 @@ local Leave = DevRio:get(Antak..'Rio:Leave')
 local Text = [[
 *᥀︙هل انت متأكد من طرد البوت ؟*
 ]] 
-keyboard = {} 
-keyboard.inline_keyboard = {{{text="• نعم •",callback_data="/LeaveBot:"..msg.sender_user_id_},{text="• لا •",callback_data="/NoLeaveBot:"..msg.sender_user_id_}}}
-Msg_id = msg.id_/2097152/0.5
-return https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(Leave or Text).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+local inline = {{{text="‹ نعم ›",callback_data="/LeaveBot:"..msg.sender_user_id_},{text="‹ لا ›",callback_data="/NoLeaveBot:"..msg.sender_user_id_}}}
+SendInline(msg.chat_id_,Text,nil,inline,msg.id_/2097152/0.5)
 end
 --     Source Antak     --
 if text == "تحديث" and SecondSudo(msg) then
@@ -13087,20 +12893,18 @@ local Source = DevRio:get(Antak..'Rio:Source')
 local Text = [[
 *᥀︙اليك ازرار تحديث السورس والملفات*
 ]] 
-keyboard = {} 
-keyboard.inline_keyboard = {{{text="• تحديث السورس •",callback_data="/UpdateSource:"..msg.sender_user_id_},{text="• تحديث الملفات •",callback_data="/UpdateFile:"..msg.sender_user_id_}},{{text="• اخفاء الكليشه •",callback_data="/HideHelpList:"..msg.sender_user_id_}}}
-Msg_id = msg.id_/2097152/0.5
-return https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(Source or Text).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+local inline = {{{text="‹ تحديث السورس ›",callback_data="/UpdateSource:"..msg.sender_user_id_},{text="‹ تحديث الملفات ›",callback_data="/UpdateFile:"..msg.sender_user_id_}},{{text="‹ اخفاء الكليشه ›",callback_data="/HideHelpList:"..msg.sender_user_id_}}}
+SendInline(msg.chat_id_,Text,nil,inline,msg.id_/2097152/0.5)
 end
 --     Source Antak     --
-if text == 'تفعيل اليوتيوب' and Manager(msg) then  
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل اليوتيوب بنجاح'
+if text =='تفعيل اليوتيوب' and Manager(msg) then  
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تفعيل اليوتيوب بنجاح'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:del(Antak.."Rio:WhyTube"..msg.chat_id_) 
 return false  
 end
-if text == 'تعطيل اليوتيوب' and Manager(msg) then  
-local AntakTeam = '᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل اليوتيوب بنجاح'
+if text =='تعطيل اليوتيوب' and Manager(msg) then  
+local AntakTeam ='᥀︙اهلا عزيزي ↫ '..RioRank(msg)..' \n᥀︙تم تعطيل اليوتيوب بنجاح'
 riomoned(msg.chat_id_, msg.sender_user_id_, msg.id_, AntakTeam, 14, string.len(msg.sender_user_id_))
 DevRio:set(Antak.."Rio:WhyTube"..msg.chat_id_,true) 
 return false  
@@ -13112,23 +12916,20 @@ https.request('http://ccccxcc.ml/Antak/YtAnTak.php?Put=Search&TokenBot='..TokenB
 end
 --     Source Antak     --
 if SecondSudo(msg) then
-if text == "تحديث السورس" and ChCheck(msg) or text == "تحديث سورس" and ChCheck(msg) or text == "↫ تحديث السورس ᥀" and ChCheck(msg) then 
+if text == "تحديث السورس" and SourceCh(msg) or text == "تحديث سورس" and SourceCh(msg) or text == "↫ تحديث السورس ᥀" and SourceCh(msg) then 
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙جاري تحديث سورس انتاك', 1, 'md') 
-os.execute('rm -rf Antak-Fatime.lua.lua') 
-os.execute('wget https://raw.githubusercontent.com/TeAm-AnTaK-Fatima/Antak/master/Antak-Fatime.lua') 
-dofile('Antak-Fatime.lua') 
 io.popen("rm -rf ../.telegram-cli/*")
 print("\27[31;47m\n          ( تم تحديث السورس )          \n\27[0;34;49m\n") 
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙تم التحديث الى الاصدار الجديد', 1, 'md') 
 end
-if text == 'تحديث البوت' and ChCheck(msg) or text == '↫ تحديث ᥀' and ChCheck(msg) then  
+if text =='تحديث البوت' and SourceCh(msg) or text =='↫ تحديث ᥀' and SourceCh(msg) then  
 dofile('Antak-Fatime.lua') 
 io.popen("rm -rf ../.telegram-cli/*")
 print("\27[31;47m\n        ( تم تحديث ملفات البوت )        \n\27[0;34;49m\n") 
 Dev_Rio(msg.chat_id_, msg.id_, 1, "᥀︙تم تحديث ملفات البوت", 1, "md")
 end
 --     Source Antak     --
-if text == 'نقل الاحصائيات' and ChCheck(msg) or text == '↫ نقل الاحصائيات ᥀' and ChCheck(msg) then
+if text =='نقل الاحصائيات' and ChCheck(msg) or text =='↫ نقل الاحصائيات ᥀' and ChCheck(msg) then
 local Users = DevRio:smembers(Antak.."User_Bot")
 local Groups = DevRio:smembers(Antak..'Chek:Groups')
 local Sudos = DevRio:smembers(Antak.."Sudo:User")
@@ -13182,8 +12983,8 @@ send(msg.chat_id_, msg.id_,'᥀︙تم نقل ↫ '..#Groups..' مجموعه\n�
 end
 end
 --     Source Antak     --
-if text == 'الملفات' and ChCheck(msg) and SecondSudo(msg) then
-Files = '\n᥀︙الملفات المفعله في البوت ↫ ⤈ \n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n'
+if text =='الملفات' and SourceCh(msg) and SecondSudo(msg) then
+Files ='\n᥀︙الملفات المفعله في البوت ↫ ⤈ \n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n'
 i = 0
 for v in io.popen('ls Files'):lines() do
 if v:match(".lua$") then
@@ -13192,11 +12993,11 @@ Files = Files..i..'~ : `'..v..'`\n'
 end
 end
 if i == 0 then
-Files = '᥀︙لا توجد ملفات في البوت'
+Files ='᥀︙لا توجد ملفات في البوت'
 end
 send(msg.chat_id_, msg.id_,Files)
 end
-if text and (text == "متجر الملفات" or text == 'المتجر' or text == '↫  المتجر ᥀') and ChCheck(msg) and SecondSudo(msg) then
+if text and (text == "متجر الملفات" or text =='المتجر' or text =='↫  المتجر ᥀') and SourceCh(msg) and SecondSudo(msg) then
 local Get_Files, res = https.request("https://raw.githubusercontent.com/AntakTeam8/AntakFiles/master/getfile.json")
 if res == 200 then
 local Get_info, res = pcall(JSON.decode,Get_Files);
@@ -13222,11 +13023,11 @@ else
 send(msg.chat_id_, msg.id_,"᥀︙لا يوجد اتصال من الـapi") 
 end
 end
-if text == "مسح جميع الملفات" and ChCheck(msg) and SecondSudo(msg) or text == "حذف جميع الملفات" and ChCheck(msg) and SecondSudo(msg) then
+if text == "مسح جميع الملفات" and SourceCh(msg) and SecondSudo(msg) or text == "حذف جميع الملفات" and SourceCh(msg) and SecondSudo(msg) then
 os.execute("rm -fr Files/*")
 send(msg.chat_id_,msg.id_,"᥀︙تم حذف جميع الملفات المفعله")
 end
-if text and text:match("^(تعطيل ملف) (.*)(.lua)$") and ChCheck(msg) and SecondSudo(msg) then
+if text and text:match("^(تعطيل ملف) (.*)(.lua)$") and SourceCh(msg) and SecondSudo(msg) then
 local FileGet = {string.match(text, "^(تعطيل ملف) (.*)(.lua)$")}
 local FileName = FileGet[2]..'.lua'
 local GetJson, Res = https.request("https://raw.githubusercontent.com/AntakTeam8/AntakFiles/master/AntakFiles/"..FileName)
@@ -13238,7 +13039,7 @@ else
 send(msg.chat_id_, msg.id_,"᥀︙لا يوجد ملف بهذا الاسم") 
 end
 end
-if text and text:match("^(تفعيل ملف) (.*)(.lua)$") and ChCheck(msg) and SecondSudo(msg) then
+if text and text:match("^(تفعيل ملف) (.*)(.lua)$") and SourceCh(msg) and SecondSudo(msg) then
 local FileGet = {string.match(text, "^(تفعيل ملف) (.*)(.lua)$")}
 local FileName = FileGet[2]..'.lua'
 local GetJson, Res = https.request("https://raw.githubusercontent.com/AntakTeam8/AntakFiles/master/AntakFiles/"..FileName)
@@ -13254,30 +13055,30 @@ end
 return false
 end
 --     Source Antak     --
-if text and (text == 'حذف معلومات الترحيب' or text == 'مسح معلومات الترحيب') and SecondSudo(msg) and ChCheck(msg) then    
+if text and (text =='حذف معلومات الترحيب' or text =='مسح معلومات الترحيب') and SecondSudo(msg) and ChCheck(msg) then    
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙تم حذف معلومات الترحيب', 1, 'md')   
 DevRio:del(Antak..'Rio:Text:BotWelcome')
 DevRio:del(Antak..'Rio:Photo:BotWelcome')
 return false
 end 
-if text and (text == 'تفعيل ترحيب البوت' or text == 'تفعيل معلومات الترحيب' or text == '↫ تفعيل ترحيب البوت ᥀') and SecondSudo(msg) and ChCheck(msg) then    
+if text and (text =='تفعيل ترحيب البوت' or text =='تفعيل معلومات الترحيب' or text =='↫ تفعيل ترحيب البوت ᥀') and SecondSudo(msg) and ChCheck(msg) then    
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙تم تفعيل الترحيب عند اضافة البوت في المجموعه', 1, 'md')   
 DevRio:del(Antak..'Rio:Lock:BotWelcome')
 return false
 end 
-if text and (text == 'تعطيل ترحيب البوت' or text == 'تعطيل معلومات الترحيب' or text == '↫ تعطيل ترحيب البوت ᥀') and SecondSudo(msg) and ChCheck(msg) then    
+if text and (text =='تعطيل ترحيب البوت' or text =='تعطيل معلومات الترحيب' or text =='↫ تعطيل ترحيب البوت ᥀') and SecondSudo(msg) and ChCheck(msg) then    
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙تم تعطيل الترحيب عند اضافة البوت في المجموعه', 1, 'md')   
 DevRio:set(Antak..'Rio:Lock:BotWelcome',true)
 return false
 end 
-if text and (text == 'تغير معلومات الترحيب' or text == 'تغيير معلومات الترحيب' or text == '↫ تغير معلومات الترحيب ᥀') and SecondSudo(msg) and ChCheck(msg) then    
+if text and (text =='تغير معلومات الترحيب' or text =='تغيير معلومات الترحيب' or text =='↫ تغير معلومات الترحيب ᥀') and SecondSudo(msg) and ChCheck(msg) then    
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙ارسل لي نص الترحيب', 1, 'md') 
 DevRio:del(Antak..'Rio:Text:BotWelcome')
 DevRio:del(Antak..'Rio:Photo:BotWelcome')
 DevRio:set(Antak.."Rio:Set:BotWelcome"..msg.sender_user_id_,"Text") 
 return false
 end 
-if text and DevRio:get(Antak.."Rio:Set:BotWelcome"..msg.sender_user_id_) == 'Text' then 
+if text and DevRio:get(Antak.."Rio:Set:BotWelcome"..msg.sender_user_id_) =='Text' then 
 if text and text:match("^الغاء$") then 
 Dev_Rio(msg.chat_id_, msg.id_, 1, "᥀︙تم الغاء الامر", 1, "md") 
 DevRio:del(Antak.."Rio:Set:BotWelcome"..msg.sender_user_id_)   
@@ -13288,7 +13089,7 @@ DevRio:set(Antak.."Rio:Text:BotWelcome",text)
 DevRio:set(Antak.."Rio:Set:BotWelcome"..msg.sender_user_id_,"Photo") 
 return false 
 end 
-if DevRio:get(Antak.."Rio:Set:BotWelcome"..msg.sender_user_id_) == 'Photo' then 
+if DevRio:get(Antak.."Rio:Set:BotWelcome"..msg.sender_user_id_) =='Photo' then 
 if text and text:match("^الغاء$") then 
 Dev_Rio(msg.chat_id_, msg.id_, 1, "᥀︙تم حفظ النص والغاء حفظ صورة الترحيب", 1, "md") 
 DevRio:del(Antak.."Rio:Set:BotWelcome"..msg.sender_user_id_)    
@@ -13329,7 +13130,7 @@ Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙تم تغيير كليشة الاشتر
 end
 if text and text:match("^↫ تغير كليشه الاشتراك ᥀$") and Sudo(msg)  or text and text:match("^تغيير كليشه الاشتراك$") and Sudo(msg) then  
 DevRio:setex(Antak.."textch:user"..msg.chat_id_.."" .. msg.sender_user_id_, 300, true)   
-local text = '᥀︙حسنا ارسل كليشة الاشتراك الجديده'  
+local text ='᥀︙حسنا ارسل كليشة الاشتراك الجديده'  
 Dev_Rio(msg.chat_id_, msg.id_, 1,text, 1, 'md') 
 end
 if text == "حذف كليشه الاشتراك الاجباري" or text == "↫ حذف كليشه الاشتراك ᥀" then  
@@ -13340,7 +13141,7 @@ DevRio:del(Antak..'Rio:ChText')
 textt = "᥀︙تم حذف كليشة الاشتراك الاجباري"
 Dev_Rio(msg.chat_id_, msg.id_, 1,textt, 1, 'md') 
 end end
-if text == 'كليشه الاشتراك' or text == 'جلب كليشه الاشتراك' or text == '↫ كليشه الاشتراك ᥀' then
+if text =='كليشه الاشتراك' or text =='جلب كليشه الاشتراك' or text =='↫ كليشه الاشتراك ᥀' then
 if not SecondSudo(msg) then
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙للمطور الاساسي فقط ', 1, 'md')
 else
@@ -13357,37 +13158,35 @@ else
 User = GetInfo.result.invite_link
 end
 Text = "*᥀︙عذرا لاتستطيع استخدام البوت !\n᥀︙عليك الاشتراك في القناة اولا :*"
-keyboard = {} 
-keyboard.inline_keyboard = {{{text=GetInfo.result.title,url=User}}} 
-Msg_id = msg.id_/2097152/0.5
-https.request("https://api.telegram.org/bot"..TokenBot..'/sendMessage?chat_id='..msg.chat_id_..'&text=' .. URL.escape(Text).."&reply_to_message_id="..Msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
+local inline = {{{text=GetInfo.result.title,url=User}}} 
+SendInline(msg.chat_id_,Text,nil,inline,msg.id_/2097152/0.5)
 else
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙لم يتم تعيين قناة الاشتراك الاجباري \n᥀︙ارسل ↫ تعيين قناة الاشتراك للتعيين ', 1, 'md')
 end end end end
 --     Source Antak     --
-if text == 'القناة' and ChCheck(msg) or text == 'قناة السورس' and ChCheck(msg) or text == 'قناه السورس' and ChCheck(msg) or text == 'قنات السورس' and ChCheck(msg) or text == '↫ قناة السورس ᥀' and ChCheck(msg) then 
+if text =='القناة' and SourceCh(msg) or text =='قناة السورس' and SourceCh(msg) or text =='قناه السورس' and SourceCh(msg) or text =='قنات السورس' and SourceCh(msg) or text =='↫ قناة السورس ᥀' and SourceCh(msg) then 
 Text = [[
 ᥀︙[قناة السورس](https://t.me/TeAmAnTaK)
 ]]
 keyboard = {} 
-keyboard.inline_keyboard = {{{text = '᥀ قناة السورس',url="t.me/TeAmAnTaK"}}}
+keyboard.inline_keyboard = {{{text='‹ قناة السورس ›',url="t.me/TeAmAnTaK"}}}
 local msg_id = msg.id_/2097152/0.5
 https.request("https://api.telegram.org/bot"..TokenBot..'/sendPhoto?chat_id=' .. msg.chat_id_ .. '&photo=https://t.me/TeAmAnTaK&caption=' .. URL.escape(Text).."&reply_to_message_id="..msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 return false
 end
 --     Source Antak     --
-if text == "مبرمج السورس" and ChCheck(msg) or text == "مطور السورس" and ChCheck(msg) or text == "وين المبرمج" and ChCheck(msg) or text == "المبرمج" and ChCheck(msg) or text == "↫ مبرمج السورس ᥀" and ChCheck(msg) then 
+if text == "مبرمج السورس" and SourceCh(msg) or text == "مطور السورس" and SourceCh(msg) or text == "وين المبرمج" and SourceCh(msg) or text == "المبرمج" and SourceCh(msg) or text == "↫ مبرمج السورس ᥀" and SourceCh(msg) then 
 Text = [[
 ᥀︙[مبرمج السورس](https://t.me/lTllTT)
 ]]
 keyboard = {} 
-keyboard.inline_keyboard = {{{text = '᥀ مبرمج السورس',url="t.me/lTllTT"}}}
+keyboard.inline_keyboard = {{{text='‹ مبرمج السورس ›',url="t.me/lTllTT"}}}
 local msg_id = msg.id_/2097152/0.5
 https.request("https://api.telegram.org/bot"..TokenBot..'/sendPhoto?chat_id=' .. msg.chat_id_ .. '&photo=https://t.me/lTllTT&caption=' .. URL.escape(Text).."&reply_to_message_id="..msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 return false
 end
 --     Source Antak     --
-if text == 'معلومات السيرفر' or text == 'السيرفر' or text == '↫ السيرفر ᥀' then 
+if text =='معلومات السيرفر' or text =='السيرفر' or text =='↫ السيرفر ᥀' then 
 if not RioSudo(msg) then
 Dev_Rio(msg.chat_id_, msg.id_, 1, '᥀︙للمطور الاساسي فقط ', 1, 'md')
 else
@@ -13417,19 +13216,19 @@ local text = result.content_.text_ or result.content_.caption_
 local Text = result.content_.text_
 if DevRio:get(Antak..'Rio:Lock:EditMsgs'..msg.chat_id_) and not Text and not RioConstructor(result) then
 DeleteMessage(msg.chat_id_,{[0] = data.message_id_})
-Media = 'الميديا'
-if result.content_.ID == "MessagePhoto" then Media = 'الصوره'
-elseif result.content_.ID == "MessageVideo" then Media = 'الفيديو'
-elseif result.content_.ID == "MessageAnimation" then Media = 'المتحركه'
+Media ='الميديا'
+if result.content_.ID == "MessagePhoto" then Media ='الصوره'
+elseif result.content_.ID == "MessageVideo" then Media ='الفيديو'
+elseif result.content_.ID == "MessageAnimation" then Media ='المتحركه'
 end
 tdcli_function ({ID = "GetUser",user_id_ = result.sender_user_id_},function(arg,dp) 
-local rioname = '᥀︙العضو ↫ ['..dp.first_name_..'](tg://user?id='..dp.id_..')'
-local rioid = '᥀︙ايديه ↫ `'..dp.id_..'`'
-local riotext = '᥀︙قام بالتعديل على '..Media
-local riotxt = '┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n᥀︙تعالو يامشرفين اكو مخرب'
+local rioname ='᥀︙العضو ↫ ['..dp.first_name_..'](tg://user?id='..dp.id_..')'
+local rioid ='᥀︙ايديه ↫ `'..dp.id_..'`'
+local riotext ='᥀︙قام بالتعديل على '..Media
+local riotxt ='┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n᥀︙تعالو يامشرفين اكو مخرب'
 tdcli_function ({ID = "GetChannelMembers",channel_id_ = msg.chat_id_:gsub("-100",""),filter_ = {ID = "ChannelMembersAdministrators"},offset_ = 0,limit_ = 100},function(arg,rio) 
 local admins = rio.members_  
-text = '\n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n'
+text ='\n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n'
 for i=0 , #admins do 
 if not rio.members_[i].bot_info_ then
 tdcli_function ({ID = "GetUser",user_id_ = admins[i].user_id_},function(arg,data) 
@@ -13459,7 +13258,7 @@ local text = msg.content_.text_
 local GetMsgPin = DevRio:get(Antak..'Rio:PinnedMsgs'..msg.chat_id_)
 if GetMsgPin ~= nil then
 if text == GetMsgPin then
-tdcli_function ({ID = "PinChannelMessage",channel_id_ = msg.chat_id_:gsub('-100',''),message_id_ = msg.id_,disable_notification_ = 0},function(arg,dp) if dp.ID == 'Ok' then;DevRio:del(Antak..'Rio:PinnedMsgs'..msg.chat_id_);end;end,nil)   
+tdcli_function ({ID = "PinChannelMessage",channel_id_ = msg.chat_id_:gsub('-100',''),message_id_ = msg.id_,disable_notification_ = 0},function(arg,dp) if dp.ID =='Ok' then;DevRio:del(Antak..'Rio:PinnedMsgs'..msg.chat_id_);end;end,nil)   
 elseif (msg.content_.sticker_) then 
 if GetMsgPin == msg.content_.sticker_.sticker_.persistent_id_ then
 tdcli_function ({ID = "PinChannelMessage",channel_id_ = msg.chat_id_:gsub('-100',''),message_id_ = msg.id_,disable_notification_ = 0},function(arg,dp) DevRio:del(Antak..'Rio:PinnedMsgs'..msg.chat_id_) end,nil)   
