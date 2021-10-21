@@ -837,7 +837,7 @@ function riomoned(chat_id, user_id, msg_id, text, offset, length) local tt = Dev
 function SourceCh(msg) 
 local url,res = https.request('http://api-david.ml/Antak/SourceCh.php?id='..msg.sender_user_id_)
 data = JSON.decode(url)
-if data.ChatMember.David ~= true then
+if data.ChatMember.Antak ~= true then
 Var = false
 Text = "*᥀︙عذرا لاتستطيع استخدام البوت !\n᥀︙عليك الاشتراك في قناة السورس اولا :*"
 local inline = {{{text="‹ TeAm Antak ›",url="t.me/F333F"}}} 
