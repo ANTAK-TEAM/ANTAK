@@ -1293,7 +1293,7 @@ EditMsg(Chat_Id2, Msg_Id2, '᥀︙لا تستطيع حظر ↫ '..IdRank(dp.id_,
 else
 ChatKick(data.chat_id_, dp.id_)
 DevRio:sadd(Antak..'Rio:Ban:'..data.chat_id_, dp.id_)
-EditMsg(Chat_Id2, Msg_Id2,'᥀︙العضو ↫ ['..dp.first_name_..'](t.me/'..(dp.username_ or 'F333F')..')\n᥀︙تم حظره')
+EditMsg(Chat_Id2, Msg_Id2,'᥀︙العضو ↫ ['..dp.first_name_..'](t.me/'..(dp.username_ or 'TeAmAnTaK')..')\n᥀︙تم حظره')
 end
 end
 end,nil)
