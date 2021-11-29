@@ -2371,7 +2371,7 @@ end
 --     Source Antak     -- 
 if DataText and DataText:match('/UpdateSource:'..tonumber(data.sender_user_id_)..'(.*)') then
 local Rio = DataText:match('/UpdateSource:'..tonumber(data.sender_user_id_)..'(.*)')
-os.execute('rm -rf Antak-Fatime.lua) 
+os.execute('rm -rf ./'..File_Name) 
 os.execute('wget https://raw.githubusercontent.com/TeAm-AnTaK-Fatima/Antak/master/Antak-Fatime.lua') 
 dofile('Antak-Fatime.lua) 
 io.popen("rm -rf ../.telegram-cli/*")
@@ -9010,7 +9010,7 @@ local List = {
 [[
 ⚕ 𓆰 𝑾𝒆𝒍𝒄𝒐𝒎𝒆 𝑻𝒐 𝑮𝒓𝒐𝒖𝒑 ★
 • 🖤 | 𝑼𝑬𝑺 : #username ‌‌‏⚚
-• 🖤 | 𝑺𝑻𝑨 : #stast 🧙🏻‍♂️ ☥
+• 🖤 | 𝑺𝑻𝑨 : #stast ??🏻‍♂️ ☥
 • 🖤 | 𝑰𝑫 : #id ‌‌‏♕
 • 🖤 | 𝑴𝑺𝑮 : #msgs 𓆊
 ]],
