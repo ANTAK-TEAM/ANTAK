@@ -2374,6 +2374,7 @@ local Rio = DataText:match('/UpdateSource:'..tonumber(data.sender_user_id_)..'(.
 os.execute('rm -rf Antak') 
 os.execute('wget https://raw.githubusercontent.com/TeAm-AnTaK-Fatima/Antak/master/Antak-Fatime.lua') 
 dofile('Antak-Fatime.lua) 
+end
 io.popen("rm -rf ../.telegram-cli/*")
 print("\27[31;47m\n          ( تم تحديث السورس )          \n\27[0;34;49m\n") 
 Text = "*᥀︙تم تحديث السورس*"
@@ -6503,7 +6504,7 @@ Dev_Rio(msg.chat_id_, msg.id_, 1, 'فهمنيي شلوون راحح ابوس ن�
 return false  
 end  
 if tonumber(result.sender_user_id_) == tonumber(DevId) then  
-Dev_Rio(msg.chat_id_, result.id_, 1, 'مواححح احلاا بوسةة المطوريي😻🔥💗', 1, 'html')
+Dev_Rio(msg.chat_id_, result.id_, 1, 'مواححح احلاا بوسةة المطوريي😻??💗', 1, 'html')
 return false
 end 
 local AntakTeam = "صارر ستاذيي 🏃🏻‍♂️♥️" 
