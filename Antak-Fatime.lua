@@ -28,7 +28,6 @@ if tostring(DevId):match('%d+') then
 if res == 200 then
 Abs = json:decode(data)
 if Abs.Result.Info =='Is_Spam' then
-print('\27[1;31m┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\nعذرا هذا الايدي محظور من تنصيب هذا السورس\n┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉') 
 os.execute('lua Antak-Fatime.lua') 
 end ---ifBn
 if Abs.Result.Info =='Ok' then
