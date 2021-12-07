@@ -3695,6 +3695,8 @@ return false
 end
 --     Source Antak     --
 if text == "المطور" or text == "مطور" or text == "↫  المطور ᥀" then
+local Check = https.request('https://api.telegram.org/bot'..TokenBot..'/getChat?chat_id='..DevRio:get(Antak.."Rio:ChId"))
+
 local GetInfo = JSON.decode(Check)
 local DevCh1 = GetInfo.result.username
 local DevText = DevRio:get(Antak.."DevText")
